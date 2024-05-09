@@ -67,14 +67,14 @@
 					매표마감 : 17:00 <br>
 					- 매표 마감시간은 17:00이오며,<br> 입장마감 <br>
 					시간은 17:30까지입니다. <br><br>
-					<button class="btn btn-outline-warning" style="margin-top:5px">자세히보기</button>
+					<a class="btn btn-outline-warning" style="margin-top:5px" href="detail">자세히보기</a>
 				</div>
 				<div id="main2">
 					<h3>이용요금</h3><br>
 					<h4>성인    &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;45000원</h4>
 					<h4>청소년·경로 &nbsp;&nbsp;&nbsp;43000원</h4>
 					<h4>어린이    &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40000원</h4> <br>
-					<button class="btn btn-outline-info" style="margin-top:15px">자세히보기</button>
+					<a class="btn btn-outline-info" style="margin-top:15px">자세히보기</a>
 				</div>
 			</div> 
 		</div>
