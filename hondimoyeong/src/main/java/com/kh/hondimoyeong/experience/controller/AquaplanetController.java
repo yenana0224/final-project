@@ -12,7 +12,7 @@ public class AquaplanetController {
 		return "experience/aquaplanet";
 	}
 	
-	@GetMapping("detail")
+	@GetMapping("aquadetail")
 	public String aquadetail() {
 		return "experience/aquadetail";
 	}
