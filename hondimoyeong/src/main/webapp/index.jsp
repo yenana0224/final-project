@@ -76,6 +76,10 @@
 		 </div>
 	</div>
 	
+	<div id="temporary">
+		<a href="admin/course">관리자페이지-코스</a>
+	</div>
+	
 	
 	<jsp:include page ="WEB-INF/views/common/footer.jsp" />
 
