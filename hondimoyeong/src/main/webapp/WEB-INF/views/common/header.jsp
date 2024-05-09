@@ -154,7 +154,7 @@
                         <ul id="submenu"  style="padding-top: 20px;">
                             <li><a href="#">귤따기 체험</a></li>
                             <li><a href="#">한라산 예약</a></li>
-                            <li><a href="#">아쿠아리움 예약</a></li>
+                            <li><a href="aqua">아쿠아리움 예약</a></li>
                         </ul>
                     </li>
                     <li><a href="#">이벤트</a></li>

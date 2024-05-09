@@ -44,13 +44,13 @@
 		width : 1200px;
 		height : auto;
 		margin : auto;
-		margin-top : 100px;
-		margin-bottom: 500px;
+		
+		margin-bottom: 550px;
 	}
 	#ex{
 		margin-top:100px;
 		height:100%;
-		width:50%;
+		width:51%;
 		margin:auto;
 	}
 
