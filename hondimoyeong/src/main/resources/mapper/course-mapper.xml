@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="courseMapper">
+
+	<resultMap type="course" id="courseResultSet">
+		<result column="COURSE_INDEX" property="courseIndex"/>
+		<result column="COURSE_NO" property="courseNo"/>
+		<result column="COURSE_NAME" property="courseName" />
+		<result column="START_END" property="startEnd" />
+		<result column="TAKE_TIME" property="takeTime" />
+		<result column="DISTANCE" property="distance" />
+		<result column="CONTENT" property="content" />
+	</resultMap>
+
+
+  <select id="allCourseList" resultMap="courseResultSet">
+ 	   SELECT
+			  COURSE.COURSE_INDEX,
+			  COURSE_NO,
+			  COURSE_NAME
+		 FROM
+		 	  COURSE
+		 LEFT
+		 JOIN
+		 	  COURSE_FILE ON (COURSE.COURSE_INDEX = COURSE_FILE.COURSE_INDEX)
+		ORDER 
+		   BY 
+		      COURSE_INDEX ASC 
+  </select>
+  
+
+  	<update id="loadFromApi" parameterType="java.util.List">
+			BEGIN
+				<foreach collection ="list" item="item" separator=" ">
+				MERGE 
+			     INTO 
+				   	  COURSE C
+				USING
+				 	  DUAL ON
+					 (
+					 C.COURSE_NAME = #{item.courseName}
+					 )
+				WHEN 
+					 NOT MATCHED THEN
+			       INSERT
+					(
+					 COURSE_INDEX,
+					 COURSE_NO,
+					 COURSE_NAME,
+					 START_END,
+					 TAKE_TIME,
+				 	 DISTANCE,
+					 CONTENT
+					)
+			    VALUES
+					(
+					SEQ_COURSE_NO.NEXTVAL,
+					#{item.courseNo},
+					#{item.courseName},
+					#{item.startEnd},
+					#{item.takeTime},
+					#{item.distance},
+					'입력된 내용이 없습니다'
+					);	 	
+			</foreach>		
+	END;	
+	</update>
+
+</mapper>
