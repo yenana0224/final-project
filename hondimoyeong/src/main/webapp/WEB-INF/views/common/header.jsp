@@ -143,7 +143,9 @@
         </div>
         <div id="header-middle">
             <div id="header-logo">
-                <img src="resources/image/logo.png" id="logo">
+            	<a href="${ path }">
+                	<img src="resources/image/logo.png" id="logo">
+                </a>
             </div>
             
             <div id="header-menu">
