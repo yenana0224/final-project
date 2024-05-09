@@ -65,7 +65,7 @@
 	<div id="oa">
 		<div id="ex">
 		    <div id='ex1'>
-		   		<a><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW0GjSWAmm8TzVHGI5Hu8s9dghuMBrU_5GvA&s"></a>
+		   		<a href="hanlasan"><img src="resources/image/han.jpg"></a>
 		    </div>
 		    <div id='ex2'>
 		    	<a href="aqua"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaKUXqbAlMJq-P1psHmMJ1KoEuZSfoDNSyQ&s"></a>
