@@ -48,6 +48,7 @@
 		background-image:url('https://www.aquaplanet.co.kr/images/common/use_price_blue_sea.jpg');
 		color:white;
 		padding-top:20px;
+		padding-bottom:30px;
 	}
 	
 </style>
@@ -58,11 +59,12 @@
 
 	<div id="businesstime">
 		<div id="business1">
-			<h1>이용시간·요금안내</h2>
+			<h1>이용시간·요금안내</h1>
 			<div id="playtime">
 				<h2>운영시간</h2>
 				연중 무휴
 				<h2>09:30 - 18:00</h2>
+				※ 매표 마감시간은 17:00이며, 입장 마감시간은17:30이오니 이용에 참고 부탁드립니다.
 			</div>
 		</div>
 		<div id="business2">
@@ -129,6 +131,7 @@
 		</div>
 		<div id="business3">
 			<h2>이용요금</h2>
+			<b>개인요금</b>
 			 <table  class="table table-bordered">
 			    <thead>
 			      <tr>
@@ -154,6 +157,21 @@
 			        <td>경로(1959년생 이하)</td>
 			        <td>43000원</td>
 			      </tr>
+			    </tbody>
+			</table>
+			<br>
+			<b>연간이용권</b>
+			<table>
+				<thead>
+			      <tr>
+			        <th style="width:50%">연간이용권 상품</th>
+			        <th>요금</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>연간이용권 AQ권<br>아쿠아리움(수족관)</td>
+			        <td>120,000원</td>
 			    </tbody>
 			</table>
 		</div>
