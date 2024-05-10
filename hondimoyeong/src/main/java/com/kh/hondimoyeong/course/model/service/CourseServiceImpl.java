@@ -27,6 +27,12 @@ public class CourseServiceImpl implements CourseService{
 	public int loadFromApi(List<Course> list) {
 		return courseRepository.loadFromApi(sqlSession, list);
 	}
+
+	@Override
+	public Course courseDetail(int courseIndex) {
+		return courseRepository.courseDetail(sqlSession, courseIndex);
+	}
+	
 	
 	
 

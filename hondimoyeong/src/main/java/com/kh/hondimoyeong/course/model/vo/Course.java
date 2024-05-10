@@ -1,5 +1,7 @@
 package com.kh.hondimoyeong.course.model.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,7 @@ public class Course {
 	private String takeTime;
 	private String distance;
 	private String content;
+	private List<CourseFile> files;
 	
 	
 }
