@@ -100,18 +100,21 @@
 				<select id="changeaqua">
 					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
 				</select>
+				<a>
 				<select id="changeaqua">
-					<option value="제주입장권_대소공통">제주입장권_대소공통</option>
+					<option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
 				</select>
-				<div id="aquaprice">
-					<button id="-">-</button>
-					<span id="span1">${ price }</span>
-					<button id="+">+</button>
+				</a>
+				
+				<div id="aquaprice" >
+					<button id="sub">-</button>
+					<span id="span1">${ price }</span>원
+					<button id="add">+</button>
 				</div>
 				
 				
 				<br><br>
-				<button id="btn1" class="btn btn-outline-info">확인</button>
+				<button id="btn1" class="btn btn-outline-info">예매하기</button>
 		</div>
 	</div>
 	
@@ -126,22 +129,35 @@
 	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 	document.getElementById("Date").setAttribute("min", today);
 	
+	
+	
 	$(function(){
 		$('#btn1').click(function() {
 			var dateString = $("#Date").val();
 			var timeString = $('#changeaqua').children('option:selected').text();
-			var category = ${ category};
 			console.log(dateString);
 			console.log(timeString);
-			console.log($category);
 		});
-		$('#-').click() =>{
-			$('#span1').text( ) - 36000;
-		}
 		
-		$('#+').click() => {
+		 
+		
+//		$('#op1').click(function() {
+//			$('#aquaprice').show();
+//			console.log('h2')
+//		});
+		
+		
+		
+		
+		$('#sub').click(function(){
+			var aa = $('#aquaprice').children('#span1').text();
+			console.log(aa);
 			
-		}
+		});
+		
+		$('#add').click(function(){
+			
+		});
 		
 		
 	});
