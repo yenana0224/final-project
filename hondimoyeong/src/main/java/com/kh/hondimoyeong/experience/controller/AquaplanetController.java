@@ -16,5 +16,10 @@ public class AquaplanetController {
 	public String aquadetail() {
 		return "experience/aquadetail";
 	}
+	
+	@GetMapping("aquareserve")
+	public String aquareserve() {
+		return "experience/aquareserve";
+	}
 
 }

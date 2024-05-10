@@ -74,7 +74,12 @@
 					<h4>성인    &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;45000원</h4>
 					<h4>청소년·경로 &nbsp;&nbsp;&nbsp;43000원</h4>
 					<h4>어린이    &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40000원</h4> <br>
-					<a class="btn btn-outline-info" style="margin-top:15px">예매하기</a>
+					<form action="aquareserve" method="get">
+						<button class="btn btn-outline-info"  style="margin-top:15px">예매하기</button>
+						<input type="hidden" name="category" value="aq">
+					</form>
+					
+					
 				</div>
 			</div> 
 		</div>

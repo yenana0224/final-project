@@ -40,7 +40,7 @@
 	<div id="form">
 		<div id="gul">
 			<div  id="mainimg">
-				<a class="btn btn-outline-warning" style="margin-top:15px">예매하기 하러 가기~</a>
+				<a class="btn btn-outline-warning" style="margin-top:15px">예매하기 하러 가기</a>
 			</div> 
 		</div>
 	</div>
