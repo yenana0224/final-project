@@ -45,6 +45,10 @@
     background-color: #FF6600
 }
 
+#aquaprice{
+	font-size:20px;
+}
+
 </style>
     
 </head>
@@ -96,7 +100,17 @@
 				<select id="changeaqua">
 					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
 				</select>
+				<select id="changeaqua">
+					<option value="제주입장권_대소공통">제주입장권_대소공통</option>
+				</select>
+				<div id="aquaprice">
+					<button id="-">-</button>
+					<span id="span1">${ price }</span>
+					<button id="+">+</button>
+				</div>
 				
+				
+				<br><br>
 				<button id="btn1" class="btn btn-outline-info">확인</button>
 		</div>
 	</div>
@@ -116,10 +130,24 @@
 		$('#btn1').click(function() {
 			var dateString = $("#Date").val();
 			var timeString = $('#changeaqua').children('option:selected').text();
-			console.log(dateString)
+			var category = ${ category};
+			console.log(dateString);
 			console.log(timeString);
-		})
+			console.log($category);
+		});
+		$('#-').click() =>{
+			$('#span1').text( ) - 36000;
+		}
+		
+		$('#+').click() => {
+			
+		}
+		
+		
 	});
+	
+	
+	
 	</script>
 
 	<jsp:include page ="../common/footer.jsp" />

@@ -1,6 +1,7 @@
 package com.kh.hondimoyeong.experience.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +19,9 @@ public class AquaplanetController {
 	}
 	
 	@GetMapping("aquareserve")
-	public String aquareserve() {
+	public String aquareserve(String category, int price, Model model) {
+		model.addAttribute("category", category);
+		model.addAttribute("price", price);
 		return "experience/aquareserve";
 	}
 
