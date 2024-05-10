@@ -12,4 +12,6 @@ public interface CourseService {
 	
 	int loadFromApi(List<Course> list);
 	
+	Course courseDetail(int courseIndex);
+	
 }

@@ -19,4 +19,8 @@ public class CourseRepository {
 	public int loadFromApi(SqlSessionTemplate sqlSession, List<Course> list) {
 		return sqlSession.insert("courseMapper.loadFromApi", list);
 	}
+	
+	public Course courseDetail(SqlSessionTemplate sqlSession, int courseIndex) {
+		return sqlSession.selectOne("courseMapper.courseDetail", courseIndex);
+	}
 }
