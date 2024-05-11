@@ -181,7 +181,7 @@
             <div class="header_top_menu">
                 <a href="#">로그인</a>
                 <a href="#">회원가입</a>
-                <a href="/views/cs/csList.html">고객센터</a>
+                <a href="cs">고객센터</a>
             </div>
         </div>
         <div class="header_mid">
@@ -194,7 +194,7 @@
             <div class="header_menu">
                 <ul class="navi">
                     <li><a href="#">올레길</a></li>
-                    <li><a href="/views/accompany/accompanyList.html">혼디모영</a></li>
+                    <li><a href="accompany">혼디모영</a></li>
                     <li><a href="#">프로그램</a>
                         <ul class="submenu"  style="padding-top: 20px;">
                             <li><a href="#">귤따기 체험</a></li>
@@ -202,8 +202,8 @@
                             <li><a href="aqua">아쿠아리움 예약</a></li>
                         </ul>
                     </li>
-                    <li><a href="">이벤트</a></li>
-                    <li><a href="/views/review/reviewList.html">리뷰</a></li>
+                    <li><a href="event">이벤트</a></li>
+                    <li><a href="review">리뷰</a></li>
                 </ul>
             </div>
         </div>
