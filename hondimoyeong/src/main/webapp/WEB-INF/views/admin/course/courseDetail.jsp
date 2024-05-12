@@ -92,8 +92,9 @@
                 <td class="infomation">${course.takeTime}</td>
                 <td class="part" rowspan="2">스탬프</td>
                 <td rowspan="2" class="infomation">
-                    
-                    <img id="stamp" src="">
+                
+                <span>파일없음</span>
+
                     
                 </td>
             </tr>
@@ -142,7 +143,7 @@
     $(() => {
     	
     	$('#update').click(()=> {
-    		location.href="update?courseIndex="+${course.courseIndex};
+    		location.href="update/"+${course.courseIndex};
     	})
     })
     

@@ -97,5 +97,46 @@
 		    C.COURSE_INDEX = #{courseIndex}
 	
 	</select>
+	
+	<update id="updateCourse" parameterType="course">
+	UPDATE
+		  COURSE
+	   SET
+	   	  CONTENT = #{content}
+	WHERE
+		  COURSE_INDEX = #{courseIndex}
+	</update>
+	
+	
+	<update id="updateStamp" parameterType="courseFile">
+	MERGE
+	 INTO
+	  	 COURSE_FILE F
+	USING
+		 DUAL 
+	   ON
+		 (F.COURSE_INDEX = #{courseIndex}
+		  AND
+		  F.FILE_LEVEL = #{fileLevel}
+		  )
+	WHEN
+		 NOT MATCHED THEN
+		 INSERT
+		 (
+		 FILE_NO,
+		 COURSE_INDEX,
+		 ORIGIN_NAME,
+		 CHANGE_NAME,
+		 FILE_LEVEL
+		 )
+		 VALUES
+		 (
+		 SEQ_COURSE_IMG_NO.NEXTVAL,
+		 #{courseIndex},
+		 #{originName},
+		 #{changeName},
+		 #{fileLevel}
+		 )
+	</update>
 
 </mapper>

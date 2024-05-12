@@ -13,6 +13,6 @@ public class CourseFile {
 	private int courseIndex;
 	private String originName;
 	private String changeName;
-	private int filelevel;
+	private int fileLevel;
 	
 }
