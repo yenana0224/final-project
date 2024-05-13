@@ -139,23 +139,27 @@
 			console.log(timeString);
 		});
 		
-		 
-		
-//		$('#op1').click(function() {
-//			$('#aquaprice').show();
-//			console.log('h2')
-//		});
-		
-		
 		
 		
 		$('#sub').click(function(){
 			var aa = $('#aquaprice').children('#span1').text();
 			console.log(aa);
 			
+			newPrice = aa - 36000;
+			
+		    document.getElementById("span1").textContent = newPrice;
+			
+			
 		});
 		
 		$('#add').click(function(){
+			
+			var bb = $('#aquaprice').children('#span1').text();
+			console.log(bb);
+			
+			newPrice = 36000 + bb;
+			
+		    document.getElementById("span1").textContent = newPrice;
 			
 		});
 		
