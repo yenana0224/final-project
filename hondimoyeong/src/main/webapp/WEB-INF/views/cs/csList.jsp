@@ -183,6 +183,7 @@
         width: 1200px;
         padding-bottom: 40px;
         border-top: 1px solid lightgray;
+        margin-top: 60px;
     }
 
     .cs_faq_box{
@@ -277,16 +278,6 @@
             <button class="cs_menu_faq">FAQ</button>
         </div>
 
-        <div class="cs_search">
-            <form action="#" class="cs_searchForm">
-                <select name="search" class="cs_search_select">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
-                </select>
-                <input type="text" class="cs_search_input" placeholder="검색어를 입력해 주세요.">
-                <button type="submit" class="cs_search_btn">검색</button>
-            </form>
-        </div>
 
         <div class="cs_board"> <!-- 공지사항 게시판 -->
                 <div class="cs_board_top">
