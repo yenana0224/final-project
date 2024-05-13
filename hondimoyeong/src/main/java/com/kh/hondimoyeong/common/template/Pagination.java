@@ -1,4 +1,4 @@
-package com.kh.hondimoyeong.common;
+package com.kh.hondimoyeong.common.template;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 
