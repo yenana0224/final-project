@@ -143,6 +143,13 @@
 </head>
 <body>
 	<c:set var="path" value="${ pageContext.request.contextPath }" scope="session"/>
+	
+	<c:if test="${ not empty alertMsg }">
+        <script>
+            alert('${ alertMsg }');
+        </script>
+        <c:remove var="alertMsg" scope="session" />
+    </c:if>
 
     <div class="header">
         <div class="header_top">

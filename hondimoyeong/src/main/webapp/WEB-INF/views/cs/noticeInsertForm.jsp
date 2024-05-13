@@ -95,6 +95,7 @@
 
         <div class="insert_box">
             <form action="insert.notice" method="post">
+		    	<input type="hidden" name="userNo" value="1" />
 				<table class="tb_input">
 					<tbody>
 						<tr>

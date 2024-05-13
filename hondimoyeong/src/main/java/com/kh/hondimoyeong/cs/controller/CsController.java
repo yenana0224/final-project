@@ -40,12 +40,12 @@ public class CsController {
 		}
 		return mv;
 	}
-	
-	@RequestMapping("update.notice")
-	public String updateNotice() {
-		return "cs/noticeUpdateForm";
+
+	@RequestMapping("enrollForm.notice")
+	public String enrollFormNotice() {
+		return "cs/noticeInsertForm";
 	}
-	
+
 	@RequestMapping("insert.notice")
 	public String insert(Notice notice, HttpSession session, Model model) {
 		if(noticeService.insertNotice(notice) > 0) {
@@ -55,7 +55,11 @@ public class CsController {
 			model.addAttribute("alertMsg", "공지사항 등록 실패했습니다.");
 			return "notice/noticeInsertForm";
 		}
-		
+	}
+	
+	@RequestMapping("update.notice")
+	public String updateNotice() {
+		return "cs/noticeUpdateForm";
 	}
 	
 	

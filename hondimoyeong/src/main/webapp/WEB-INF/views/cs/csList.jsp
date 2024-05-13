@@ -291,6 +291,8 @@
 
 <jsp:include page="../common/header.jsp"/>
 
+
+
     <div id="container">
         <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
 
@@ -318,7 +320,7 @@
                     <c:forEach var="notice" items="${ notice }">
                         <tr class="noticeList">
                             <td class="cs_table_small">${ notice.noticeNo }</td>
-                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
+                            <td class="cs_table_mid">${ notice.noticeTitle } ${ notice.userNo }</td>
                             <td class="cs_table_small">${ notice.count }</td>
                             <td class="cs_table_small">${ notice.createDate }</td>
                         </tr>
@@ -468,10 +470,11 @@
     	})
     	
     	function insertNotice(){
-			location.href = '${ path }/insert.notice';
+			location.href = '${ path }/enrollForm.notice';
     	}
-        
-        
+    	
+    	
+
     </script>
 
 </body>

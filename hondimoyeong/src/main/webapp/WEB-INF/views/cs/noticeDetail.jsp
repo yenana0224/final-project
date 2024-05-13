@@ -145,7 +145,7 @@
         </div>
 
         <div class="detail_btn_box" align="center">
-            <button class="hdmy_detail_btn">목록</button>
+            <button class="hdmy_detail_btn" onclick="noticeList();">목록</button>
             <button class="hdmy_detail_btn" onclick="updateNotice();">수정</button>
             <button class="hdmy_detail_btn">삭제</button>
         </div>
