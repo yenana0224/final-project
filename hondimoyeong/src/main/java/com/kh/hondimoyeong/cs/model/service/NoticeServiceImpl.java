@@ -32,6 +32,16 @@ public class NoticeServiceImpl implements NoticeService{
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return noticeRepository.selectList(sqlSession, rowBounds);
 	}
+
+	@Override
+	public int increaseCount(int noticeNo) {
+		return noticeRepository.increaseCount(sqlSession, noticeNo);
+	}
+
+	@Override
+	public Notice selectNotice(int noticeNo) {
+		return noticeRepository.selectNotice(sqlSession, noticeNo);
+	}
 	
 
 }

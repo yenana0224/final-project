@@ -181,7 +181,7 @@
             <div class="header_top_menu">
                 <a href="login">로그인</a>
                 <a href="insertForm">회원가입</a>
-                <a href="cs">고객센터</a>
+                <a href="list.notice">고객센터</a>
             </div>
         </div>
         <div class="header_mid">

@@ -11,4 +11,8 @@ public interface NoticeService {
 
 	List<Notice> selectList(PageInfo pi);
 
+	int increaseCount(int noticeNo);
+
+	Notice selectNotice(int noticeNo);
+
 }

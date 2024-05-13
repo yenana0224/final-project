@@ -16,7 +16,15 @@ public class NoticeRepository {
 	}
 
 	public List<Notice> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
-		return sqlSession.selectList("noticeMapper.selectList", rowBounds);
+		return sqlSession.selectList("noticeMapper.selectList", null, rowBounds);
+	}
+
+	public int increaseCount(SqlSessionTemplate sqlSession, int noticeNo) {
+		return sqlSession.update("noticeMapper.increaseCount", noticeNo);
+	}
+
+	public Notice selectNotice(SqlSessionTemplate sqlSession, int noticeNo) {
+		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNo);
 	}
 
 }

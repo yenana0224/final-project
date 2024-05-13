@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 <style>
     /* content */
     #container{
@@ -165,18 +168,37 @@
     }
 
     /* 페이징바 */
-    .btn-outline-secondary{
-        width: 40px;
-        height: 40px;
-        border: none;
-        background-color: #ececec;
-        color: #272727;
-        border-radius: 10px;
+    .hdmy-board_page{
+    	width: 1200px;
     }
+    
+     .pagination {
+     	width:fit-content;
+     	margin: 0 auto;
+     	margin-top: 40px;
+     	margin-bottom: 40px;
+     }
+     
+     .page-item.active .page-link {
+     	background-color: #FF9843 !important;
+     	border: 1px solid #FF9843 !important;
+     	color: #FFFFFF !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     }
+     
+     .page-link {
+     	color: #292929 !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     	margin-right: 10px;
+     }
+     
+     .page-item:last-child .page-link, .page-item:first-child .page-link {
+     	border-radius: 10px !important;
+     }
+     
 
-    .btn-outline-secondary:hover{
-        background-color: #FF9843;
-    }
 
     /* FAQ */
     .cs_faq{
@@ -271,7 +293,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">
-        <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
+        <div class="cs_title"><a class="cs_title_a">고객센터 </a></div>
 
         <div class="cs_menu" align="center">
             <button class="cs_menu_notice">공지사항</button>
@@ -294,55 +316,50 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="notice" items="${ notice }">
                         <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내 <a href="noticeDetail">디테일</a></td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
+                            <td class="cs_table_small">${ notice.noticeNo }</td>
+                            <td class="cs_table_mid">${ notice.noticeTitle }<a href="noticeDetail">디테일</a></td>
+                            <td class="cs_table_small">${ notice.count }</td>
+                            <td class="cs_table_small">${ notice.createDate }</td>
                         </tr>
-                        <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내</td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내</td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내</td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내</td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="cs_table_small">1</td>
-                            <td class="cs_table_mid">제주올레 12코스 엉알길 구간 임시우회 안내</td>
-                            <td class="cs_table_small">20</td>
-                            <td class="cs_table_small">24/05/11</td>
-                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 
             </div>
             <div class="hdmy-board_page"> <!-- 페이징바 -->
-                <div class="paging-area" align="center" style="margin:30px 0px;">
-                    <button class="btn btn-outline-secondary"> < </button>
-                    <button class="btn btn-outline-secondary">1</button>
-                    <button class="btn btn-outline-secondary">2</button>
-                    <button class="btn btn-outline-secondary">3</button>
-                    <button class="btn btn-outline-secondary">4</button>
-                    <button class="btn btn-outline-secondary"> > </button>
-                </div>
+               	<ul class="pagination">
+               	
+               	<c:choose>
+               		<c:when test="${ pageInfo.currentPage eq 1 }">
+				  		<li class="page-item disabled"><a class="page-link"> < </a></li>
+				  	</c:when>
+				  	<c:otherwise>
+				  		<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+				  	</c:otherwise>
+				</c:choose>
+				
+				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+					<c:choose>
+						<c:when test="${ p eq pageInfo.currentPage }">
+							<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<c:choose>
+				    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+				        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+				    </c:when>
+				    <c:otherwise>
+				        <li class="page-item disabled"><a class="page-link"> > </a></li>
+				    </c:otherwise>
+				</c:choose>			
+				</ul>
             </div>
         </div>
 
