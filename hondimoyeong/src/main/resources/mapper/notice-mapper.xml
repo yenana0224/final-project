@@ -52,6 +52,20 @@
 		   AND
 		      STATUS = 'Y'
 	</update>
+	
+	<select id="selectNotice" parameterType="_int" resultMap="noticeResultSet">
+		SELECT
+		      NOTICE_NO,
+		      NOTICE_TITLE,
+		      NOTICE_CONTENT,
+			  TO_CHAR (CREATE_DATE, 'YYYY/MM/DD') as "CREATE_DATE",
+		      COUNT,
+		      STATUS
+		  FROM
+		      NOTICE
+		 WHERE
+		      NOTICE_NO = #{noticeNo}
+	</select>
 
 
 

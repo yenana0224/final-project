@@ -113,6 +113,8 @@
         background-color: #FF9843;
         color: #ffffff;
         margin-right: 10px;
+        cursor: pointer;
+        line-height: 35px;
     }
 </style>
 </head>
@@ -127,32 +129,19 @@
         <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
 
         <div class="cs_menu" align="center">
-            <button class="cs_menu_notice">공지사항</button>
+            <button class="cs_menu_notice" onclick="noticeList();">공지사항</button>
             <button class="cs_menu_faq">FAQ</button>
         </div>
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
-            <div class="detail_title"><span>제주올레 12코스 엉알길 구간 임시우회 안내</span></div>
+            <div class="detail_title"><span>${ notice.noticeTitle }</span></div>
             <div class="detail_info">
-                <div class="detail_info1"><a>24/05/11 &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : 200</a></div>
+                <div class="detail_info1"><a>${ notice.createDate } &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${ notice.count }</a></div>
             </div>
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용  공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
-                공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 공지사항 내용 
+            <p class="detail_content_p">${ notice.noticeContent }</p> 
         </div>
 
         <div class="detail_btn_box" align="center">
@@ -163,6 +152,25 @@
     </div> <!-- container 끝 -->
 
 <jsp:include page="../common/footer.jsp"/>
+
+<script>
+	$(function(){
+		$('.hdmy_detail_btn').click(function(){
+			location.href='${ path }/list.notice?page=1';
+		});
+	})
+	
+	function noticeList(){
+		location.href='${ path }/list.notice?page=1';
+	}
+
+
+
+
+
+
+</script>
+
 
 </body>
 </html>

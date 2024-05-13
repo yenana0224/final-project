@@ -255,7 +255,6 @@
 
     .cs_faq_a{
         width: 1200px;
-        /* border: 1px solid red; */
         overflow: auto;
         padding: 20px 0;
         border-bottom: 1px solid lightgray;
@@ -293,7 +292,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">
-        <div class="cs_title"><a class="cs_title_a">고객센터 </a></div>
+        <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
 
         <div class="cs_menu" align="center">
             <button class="cs_menu_notice">공지사항</button>
@@ -317,17 +316,17 @@
                     </thead>
                     <tbody>
                     <c:forEach var="notice" items="${ notice }">
-                        <tr class="list">
+                        <tr class="noticeList">
                             <td class="cs_table_small">${ notice.noticeNo }</td>
-                            <td class="cs_table_mid">${ notice.noticeTitle }<a href="noticeDetail">디테일</a></td>
+                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
                             <td class="cs_table_small">${ notice.count }</td>
                             <td class="cs_table_small">${ notice.createDate }</td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                
-            </div>
+            </div>         
+            
             <div class="hdmy-board_page"> <!-- 페이징바 -->
                	<ul class="pagination">
                	
@@ -459,7 +458,16 @@
                 $('.cs_menu_faq').css({'background-color' : '#FF9843', 'color' : '#ffffff'});
                 $('.cs_menu_notice').css({'background-color' : '#ececec', 'color' : '#272727'});
             });
-        })
+        });
+        
+        
+    	$(function(){
+    		$('.table-hover > tbody > tr').click(function(){
+    			location.href = 'detail.notice?noticeNo='+$(this).children().eq(0).text();
+    		});
+    	})
+        
+        
     </script>
 
 </body>

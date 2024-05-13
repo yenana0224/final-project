@@ -139,38 +139,6 @@
             background-color: rgba(255, 255, 255, 0.815);
         }
     
-        /* footer */
-        .footer{
-            width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            padding-left: 20px;
-            margin-top: 40px;
-            border-top: 1px solid lightgray;
-        }
-    
-        .footer_box{
-            width: 1200px;
-        }
-    
-        .footer_logo{
-            width: 230px;
-            margin-bottom: 20px;
-        }
-    
-        .footer_content{
-            font-size: 15px;
-            padding-left: 10px;
-        }
-    
-        /* content */
-        #container{
-            width: 1200px;
-            height: auto;
-            margin: 0 auto;
-        }
-    
     </style>
 </head>
 <body>
