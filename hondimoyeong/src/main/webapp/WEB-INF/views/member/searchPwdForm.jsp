@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>비밀번호 찾기</title>
+
+
     <style>
-        
             div{
                 box-sizing : border-box;
                 background-color: #ffffff;
-            }
+            }            
 
             #wrap{
                 width: 1200px;
@@ -27,78 +28,59 @@
                 border-radius: 20px;
             }
             
-            #loginTitle     
+            #box-title     
             {
                 width: 390px;
                 height: 100px;
                 padding-top: 35px;
-                text-align: center; 
+                text-align: center;
                 border-radius: 20px;
                 background-color: #FFF2D7;
             }
 
-            #idBox, #pwBox     
+            .input-box     
             {
                 width: 390px;
-                height: 75px;
+                height: 65px;
+                padding-top: 5px;
                 padding-left: 70px;
-                margin-top: 10px;
-                background-color: #FFF2D7;
-            }
-            .fontBox
-            {
-                width: 280px;
-                height: 30px;
                 background-color: #FFF2D7;
             }
 
-            .inputBox
-            {
-                width: 280px;
-                height: 36px;
-                background-color: #FFF2D7;
-            }
-
-            .buttonBox   
+            #box-button   
             {
                 width: 390px;
                 height: 50px;
                 padding-left: 70px;
                 background-color: #FFF2D7;
-                margin-top: 5px;
+                margin-top: 7px;
             }
 
-            #linkBox   
-            {
-                width: 390px;
-                height: 30px;
-                padding-left: 100px;
-                background-color: #FFF2D7;
-            }
+
             
-            .inputBox > .form-control{
+           div > .form-control{
                 width: 260px;
-                height: 36px;
+                height: 30px;
                 border: none;
-                border-radius: 9px;
+                border-radius: 8px;
                 padding-left: 10px;
                 border: 1px solid #e2e2e2;
             }
 
-            p{
+            div > p{
                 margin: 0 auto;
                 padding-bottom: 5px;
             }
             
-            #linkBox > a{
+            a{
                 display: inline-block;
                 margin: 0 auto;
                 text-decoration: none; 
-                color: #000000;  
-                font-size: 12px; 
+                color: rgb(0, 0, 0);  
+                font-size: 11px; 
             }
 
-            #loginButton{
+           div > button{
                 width: 260px;
                 height: 40px;
                 border-radius: 10px;
@@ -108,38 +90,46 @@
                 cursor: pointer; 
                 font-size: 14px;
                 font-weight: bolder;
-                margin-top: 3px;
+                margin-top: px;
             }
-    </style>        
-    
+
+
+
+
+
+
+    </style>    
 </head>
 <body>
-    
+
     <jsp:include page="../common/header.jsp"/>
     
     <div id="wrap">
         <div id="content">
-            <div id="loginTitle">
-                <h4>로그인</h4>
+            <div id="box-title">
+                <h4>비밀번호 찾기</h4>
             </div>
-            <div id="idBox">
-                <div class="fontBox">아이디</div>
-                <div class="inputBox"><input type="text" class="form-control" name="userId"></div>
+            <div class="input-box">
+                <p>아이디</p>
+                <input type="text" class="form-control" name="userId">
             </div>
-            <div id="pwBox">
-                <div class="fontBox">비밀번호</div>
-                <div class="inputBox"><input type="password" class="form-control" name="userPwd"></div>
+            <div class="input-box">
+                <p>이름</p>
+                <input type="text" class="form-control" name="userName">
             </div>
-            <div class="buttonBox">
-                <button type="submit" id="loginButton">로그인</button>
+            <div class="input-box">
+                <p>이메일</p>
+                <input type="text" class="form-control" name="userEmail">
             </div>
-            <div id="linkBox">
-                <a href="insertForm">회원가입</a> | <a href="searchIdForm">아이디 찾기</a> | <a href="searchPwdForm">비밀번호 찾기</a>
+            <div id="box-button">
+                <button type="submit">비밀번호 찾기</button>
             </div>
         </div>
     </div>
     
-	<jsp:include page="../common/footer.jsp"/>
+    <jsp:include page="../common/footer.jsp"/>
+
+
 
 </body>
 </html>

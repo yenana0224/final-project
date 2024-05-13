@@ -16,11 +16,10 @@
 
             #wrap{ 
                 width: 1200px;
-                height: 800px;
+                height: 600px;
                 margin: 0 auto;
             }
 
-            /*회원가입 전체 박스*/
             #content{ 
                 width: 500px;
                 height: 600px;
@@ -31,7 +30,6 @@
             }
 
 
-             /*회원가입 박스*/ 
             #signupTitle  
             {
                 width: 490px;
@@ -42,7 +40,6 @@
                 background-color: #FFF2D7;
             }
             
-            /*아이디 박스*/
             #idBox    
             {
                 width: 284px;
@@ -53,7 +50,6 @@
                 float: left;                
             }
 
-            /*중복확인 박스*/
             #idCheckButton 
             { 
                 width: 130px;
@@ -64,7 +60,6 @@
                 margin-left: 5px;
             }
             
-            /*비밀번호~연락처 박스*/ 
             #pwBox, #pwConfirmBox, #nameBox, #emailBox, #phoneBox    
             {
                 width: 490px;
@@ -75,7 +70,6 @@
                 
             }
 
-            /*회원가입 버튼 박스*/
             #signupButton    
             {
                 width: 490px;
@@ -85,7 +79,6 @@
                 margin-top: 5px;
             }
             
-            /*비밀번호~연락처 인풋박스*/
            div> .form-control{ 
                 width: 260px;
                 height: 30px;
@@ -95,7 +88,6 @@
                 border: 1px solid #e2e2e2;
             }
 
-            /*아이디 인풋박스*/
             .form-control-id{ 
                 width: 170px;
                 height: 30px;
@@ -112,7 +104,6 @@
                 color: rgb(51, 51, 51);
             }
            
-            /*버튼 스타일*/
             #signupButton > button { 
                 width: 260px;
                 height: 40px;
@@ -126,12 +117,11 @@
                 margin-top: 3px;
             }
 
-            /* 중복확인 버튼 스타일 */
             #idCheckButton > button{
                 width: 80px;
                 height: 30px;
-                text-align: 35px; /*텍스트 가로중앙 */
-                line-height: 30px; /*텍스트 세로중앙 */
+                text-align: 35px; 
+                line-height: 30px; 
                 border-radius: 8px;
                 background-color: #FF9843; 
                 color: #ffffff; 
