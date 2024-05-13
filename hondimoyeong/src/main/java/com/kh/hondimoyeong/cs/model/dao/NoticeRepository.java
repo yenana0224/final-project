@@ -27,4 +27,8 @@ public class NoticeRepository {
 		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNo);
 	}
 
+	public int insertNotice(SqlSessionTemplate sqlSession, Notice notice) {
+		return sqlSession.insert("noticeMapper.insertNotice", notice);
+	}
+
 }

@@ -41,9 +41,14 @@ public class CsController {
 		return mv;
 	}
 	
+	@RequestMapping("update.notice")
+	public String updateNotice() {
+		return "cs/noticeUpdateForm";
+	}
+	
 	@RequestMapping("insert.notice")
 	public String insert(Notice notice, HttpSession session, Model model) {
-		if(noticeService.insert(notice) > 0) {
+		if(noticeService.insertNotice(notice) > 0) {
 			session.setAttribute("alertMsg", "공지사항이 등록 되었습니다.");
 			return "redirect:list.notice";
 		} else {

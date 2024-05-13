@@ -145,9 +145,9 @@
         </div>
 
         <div class="detail_btn_box" align="center">
-            <div class="hdmy_detail_btn">목록</div>
-            <div class="hdmy_detail_btn">수정</div>
-            <div class="hdmy_detail_btn">삭제</div>
+            <button class="hdmy_detail_btn">목록</button>
+            <button class="hdmy_detail_btn" onclick="updateNotice();">수정</button>
+            <button class="hdmy_detail_btn">삭제</button>
         </div>
     </div> <!-- container 끝 -->
 
@@ -164,6 +164,9 @@
 		location.href='${ path }/list.notice?page=1';
 	}
 
+	function updateNotice(){
+		location.href = '${ path }/insert.notice';
+	}
 
 
 

@@ -302,7 +302,7 @@
 
         <div class="cs_board"> <!-- 공지사항 게시판 -->
                 <div class="cs_board_top">
-                    <div class="cs_board_top_btn"><button class="cs_btn">글쓰기</button></div>
+                    <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
                 </div>
             <div class="cs_board_content">
                 <table class="table table-hover">
@@ -466,6 +466,10 @@
     			location.href = 'detail.notice?noticeNo='+$(this).children().eq(0).text();
     		});
     	})
+    	
+    	function insertNotice(){
+			location.href = '${ path }/insert.notice';
+    	}
         
         
     </script>
