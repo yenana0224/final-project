@@ -11,10 +11,14 @@
  	<typeAliases>
  		<typeAlias type="com.kh.hondimoyeong.course.model.vo.Course" alias="course"/>
  		<typeAlias type="com.kh.hondimoyeong.course.model.vo.CourseFile" alias="courseFile" />
+ 		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Notice" alias="notice" />
+ 		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Question" alias="question" />
+ 		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Answer" alias="answer" />
  	</typeAliases>
 
 	<mappers>
 		<mapper resource="mapper/course-mapper.xml"/>
+		<mapper resource="mapper/notice-mapper.xml"/>
 	</mappers>
  	
  </configuration>
