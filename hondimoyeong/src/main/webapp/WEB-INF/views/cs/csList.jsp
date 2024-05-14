@@ -320,7 +320,7 @@
                     <c:forEach var="notice" items="${ notice }">
                         <tr class="noticeList">
                             <td class="cs_table_small">${ notice.noticeNo }</td>
-                            <td class="cs_table_mid">${ notice.noticeTitle } ${ notice.userNo }</td>
+                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
                             <td class="cs_table_small">${ notice.count }</td>
                             <td class="cs_table_small">${ notice.createDate }</td>
                         </tr>

@@ -115,7 +115,14 @@
         margin-right: 10px;
         cursor: pointer;
         line-height: 35px;
+        text-decoration: none;
     }
+    
+    .hdmy_detail_btn:hover {
+  		text-decoration: none;
+    	color: #FFFFFF;
+    }
+    
 </style>
 </head>
 <body>
@@ -146,7 +153,7 @@
 
         <div class="detail_btn_box" align="center">
             <button class="hdmy_detail_btn" onclick="noticeList();">목록</button>
-            <button class="hdmy_detail_btn" onclick="updateNotice();">수정</button>
+            <a class="hdmy_detail_btn" href="update.notice?noticeNo=${ requestScoppe.notice.noticeNo }">수정</a>
             <button class="hdmy_detail_btn">삭제</button>
         </div>
     </div> <!-- container 끝 -->
@@ -154,6 +161,8 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <script>
+
+
 	$(function(){
 		$('.hdmy_detail_btn').click(function(){
 			location.href='${ path }/list.notice?page=1';
@@ -165,7 +174,7 @@
 	}
 
 	function updateNotice(){
-		location.href = '${ path }/insert.notice';
+		location.href = '${ path }/updateForm.notice?noticeNo=${notice.noticeNo}';
 	}
 
 

@@ -94,21 +94,23 @@
         <div class="notice_insert_title"><span>공지사항 작성</span></div>
 
         <div class="insert_box">
-            <form action="insert.notice" method="post">
+            <form action="update.notice" method="post">
+            <input type="hidden" name="noticeNo" value="${ notice.noticeNo }" />
+            
 				<table class="tb_input">
 					<tbody>
 						<tr>
 							<th>* 제목</th>
-							<td><input type="text" name="title" class="input_title" value="제목"/></td>
+							<td><input type="text" name="noticeTitle" class="input_title" value="제목"/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="input_content" name="contents">내용</textarea></td>
+							<td><textarea class="input_content" name="noticeContent">내용</textarea></td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn">등록</button>
+                    <button class="hdmy_detail_btn" type="button">등록</button>
                     <button class="hdmy_detail_btn" type="submit">취소</button>
                 </div>
             </form>

@@ -44,8 +44,13 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int insertNotice(Notice notice) {
-		return noticeRepository.insertNotice(sqlSession, notice);
+	public int insert(Notice notice) {
+		return noticeRepository.insert(sqlSession, notice);
+	}
+
+	@Override
+	public int update(Notice notice) {
+		return noticeRepository.update(sqlSession, notice);
 	}
 	
 

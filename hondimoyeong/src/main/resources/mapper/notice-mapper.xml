@@ -67,7 +67,7 @@
 		      NOTICE_NO = #{noticeNo}
 	</select>
 	
-	<insert id="insertNotice" parameterType="notice">
+	<insert id="insert" parameterType="notice">
 		INSERT
 		  INTO
 		  	  NOTICE
@@ -86,6 +86,17 @@
 	   		  )
 	</insert>
 
+	<update id="update" parameterType="notice">
+		UPDATE
+		      NOTICE
+		   SET
+		      NOTICE_TITLE = #{noticeTitle},
+		      NOTICE_CONTENT = #{noticeContent}
+		 WHERE
+		      NOTICE_NO = #{noticeNo}
+		   AND
+		      STATUS = 'Y'
+	</update>
 
 
 </mapper>
