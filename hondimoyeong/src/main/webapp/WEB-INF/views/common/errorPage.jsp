@@ -10,7 +10,7 @@
 
 	<jsp:include page ="header.jsp" />
 		
-		에러 페이지
+		<h1>${ errorMsg }</h1>
 
 	<jsp:include page ="footer.jsp" />
 

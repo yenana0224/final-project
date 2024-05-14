@@ -52,6 +52,27 @@ public class NoticeServiceImpl implements NoticeService{
 	public int update(Notice notice) {
 		return noticeRepository.update(sqlSession, notice);
 	}
+
+	@Override
+	public int delete(int noticeNo) {
+		return noticeRepository.delete(sqlSession, noticeNo);
+	}
+
+	@Override
+	public List<Notice> search(String keyword, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return noticeRepository.search(sqlSession, keyword, rowBounds);
+	}
+
+	@Override
+	public int selectSearchCount(String keyword) {
+		return noticeRepository.searchCount(sqlSession, keyword);
+	}
+
+
+
+
 	
 
 }

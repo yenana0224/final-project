@@ -19,4 +19,11 @@ public interface NoticeService {
 
 	int update(Notice notice);
 
+	int delete(int noticeNo);
+
+	List<Notice> search(String keyword, PageInfo pi);
+
+	int selectSearchCount(String keyword);
+
+
 }

@@ -91,7 +91,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">
-        <div class="notice_insert_title"><span>공지사항 작성</span></div>
+        <div class="notice_insert_title"><span>공지사항 수정</span></div>
 
         <div class="insert_box">
             <form action="update.notice" method="post">
@@ -101,17 +101,17 @@
 					<tbody>
 						<tr>
 							<th>* 제목</th>
-							<td><input type="text" name="noticeTitle" class="input_title" value="제목"/></td>
+							<td><input type="text" name="noticeTitle" class="input_title" value="${ notice.noticeTitle }"/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="input_content" name="noticeContent">내용</textarea></td>
+							<td><textarea class="input_content" name="noticeContent">${ notice.noticeContent }</textarea></td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="button">등록</button>
-                    <button class="hdmy_detail_btn" type="submit">취소</button>
+                    <button class="hdmy_detail_btn" type="submit">등록</button>
+                    <button class="hdmy_detail_btn" type="button" onclick="noticeList();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
@@ -119,6 +119,11 @@
 
 <jsp:include page="../common/footer.jsp"/>
 
+<script>
+	function noticeList(){
+		location.href='${ path }/list.notice?page=1';
+	}
+</script>
 
 </body>
 </html>

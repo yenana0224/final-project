@@ -66,7 +66,7 @@
     }
 
     .cs_searchForm{
-        width: 620px;
+        width: 520px;
         margin: 0 auto;
     }
 
@@ -300,6 +300,14 @@
             <button class="cs_menu_notice">공지사항</button>
             <button class="cs_menu_faq">FAQ</button>
         </div>
+        
+        <div class="cs_search">
+            <form action="search.notice" class="cs_searchForm" method="get">
+            	<input type="hidden" name="page" value="1">
+                <input type="text" class="cs_search_input" placeholder="검색어를 입력해 주세요." name="keyword" value="${ requestScope.keyword }">
+                <button type="submit" class="cs_search_btn">검색</button>
+            </form>
+        </div>
 
 
         <div class="cs_board"> <!-- 공지사항 게시판 -->
@@ -332,34 +340,66 @@
             <div class="hdmy-board_page"> <!-- 페이징바 -->
                	<ul class="pagination">
                	
-               	<c:choose>
-               		<c:when test="${ pageInfo.currentPage eq 1 }">
-				  		<li class="page-item disabled"><a class="page-link"> < </a></li>
-				  	</c:when>
-				  	<c:otherwise>
-				  		<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
-				  	</c:otherwise>
-				</c:choose>
-				
-				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-					<c:choose>
-						<c:when test="${ p eq pageInfo.currentPage }">
-							<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				
-				<c:choose>
-				    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-				        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
-				    </c:when>
-				    <c:otherwise>
-				        <li class="page-item disabled"><a class="page-link"> > </a></li>
-				    </c:otherwise>
-				</c:choose>			
+     				<c:choose>
+               			<c:when test="${ empty keyword }">
+               				<c:choose>
+               					<c:when test="${ pageInfo.currentPage eq 1 }">
+               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+               					</c:when>
+								<c:otherwise>
+						  			<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+						  		</c:otherwise>
+               				</c:choose>
+               				
+               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+								<c:choose>
+									<c:when test="${ p eq pageInfo.currentPage }">
+										<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							
+							<c:choose>
+							    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+							        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+							    </c:when>
+							    <c:otherwise>
+							        <li class="page-item disabled"><a class="page-link"> > </a></li>
+							    </c:otherwise>
+							</c:choose>
+               			</c:when>
+               			
+               			<c:otherwise>
+               			    <c:choose>
+               					<c:when test="${ pageInfo.currentPage eq 1 }">
+               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+               					</c:when>
+								<c:otherwise>
+						  			<li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+						  		</c:otherwise>
+               				</c:choose>
+               				
+               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+								<li class="page-item"><a class="page-link" href="search.notice?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+							</c:forEach>
+							
+							<c:choose>
+							    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+							        <li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+							    </c:when>
+							    <c:otherwise>
+							        <li class="page-item disabled"><a class="page-link"> > </a></li>
+							    </c:otherwise>
+							</c:choose>
+							
+               			</c:otherwise>
+               	
+               		</c:choose>
+               	
+               	
 				</ul>
             </div>
         </div>
@@ -450,6 +490,7 @@
             $('.cs_menu_notice').click(() => {
                 $('.cs_board').show();
                 $('.cs_faq').hide();
+                $('.cs_search').show();
                 $('.cs_menu_faq').css({'background-color' : '#ececec', 'color' : '#272727'});
                 $('.cs_menu_notice').css({'background-color' : '#FF9843', 'color' : '#ffffff'});
             })
@@ -457,6 +498,7 @@
             $('.cs_menu_faq').click(() => {
                 $('.cs_faq').show();
                 $('.cs_board').hide();
+                $('.cs_search').hide();
                 $('.cs_menu_faq').css({'background-color' : '#FF9843', 'color' : '#ffffff'});
                 $('.cs_menu_notice').css({'background-color' : '#ececec', 'color' : '#272727'});
             });

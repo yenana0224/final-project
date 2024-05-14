@@ -118,11 +118,10 @@
         text-decoration: none;
     }
     
-    .hdmy_detail_btn:hover {
-  		text-decoration: none;
+    .hdmy_detail_btn:hover{
+    	text-decoration: none;
     	color: #FFFFFF;
     }
-    
 </style>
 </head>
 <body>
@@ -152,10 +151,14 @@
         </div>
 
         <div class="detail_btn_box" align="center">
-            <button class="hdmy_detail_btn" onclick="noticeList();">목록</button>
-            <a class="hdmy_detail_btn" href="update.notice?noticeNo=${ requestScoppe.notice.noticeNo }">수정</a>
-            <button class="hdmy_detail_btn">삭제</button>
+            <a class="hdmy_detail_btn noticeListBtn"">목록</a>
+            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
         </div>
+        
+		<form action="" id="postForm" method="post">
+		    <input type="hidden" name="noticeNo" value="${ notice.noticeNo }"/>
+		</form>
     </div> <!-- container 끝 -->
 
 <jsp:include page="../common/footer.jsp"/>
@@ -164,7 +167,7 @@
 
 
 	$(function(){
-		$('.hdmy_detail_btn').click(function(){
+		$('.noticeListBtn').click(function(){
 			location.href='${ path }/list.notice?page=1';
 		});
 	})
@@ -173,8 +176,14 @@
 		location.href='${ path }/list.notice?page=1';
 	}
 
-	function updateNotice(){
-		location.href = '${ path }/updateForm.notice?noticeNo=${notice.noticeNo}';
+	function postSubmit(num){
+		if(num == 0){
+			$('#postForm').attr('action', 'updateForm.notice').submit();
+		}
+		else{
+			$('#postForm').attr('action', 'delete.notice').submit();
+		}
+		
 	}
 
 

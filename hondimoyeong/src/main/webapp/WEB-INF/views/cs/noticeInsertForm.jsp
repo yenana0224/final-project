@@ -109,8 +109,8 @@
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn">등록</button>
-                    <button class="hdmy_detail_btn" type="submit">취소</button>
+                    <button class="hdmy_detail_btn" type="submit">등록</button>
+                    <button class="hdmy_detail_btn" type="button" onclick="noticeList();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
@@ -118,6 +118,11 @@
 
 <jsp:include page="../common/footer.jsp"/>
 
+<script>
+	function noticeList(){
+		location.href='${ path }/list.notice?page=1';
+	}
+</script>
 
 </body>
 </html>

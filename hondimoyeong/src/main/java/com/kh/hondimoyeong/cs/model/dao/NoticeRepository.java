@@ -35,4 +35,16 @@ public class NoticeRepository {
 		return sqlSession.update("noticeMapper.update", notice);
 	}
 
+	public int delete(SqlSessionTemplate sqlSession, int noticeNo) {
+		return sqlSession.update("noticeMapper.delete", noticeNo);
+	}
+
+	public List<Notice> search(SqlSessionTemplate sqlSession, String keyword, RowBounds rowBounds) {
+		return sqlSession.selectList("noticeMapper.search", keyword, rowBounds);
+	}
+
+	public int searchCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("noticeMapper.searchCount", keyword);
+	}
+
 }

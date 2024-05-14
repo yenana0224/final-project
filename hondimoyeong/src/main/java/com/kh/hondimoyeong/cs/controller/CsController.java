@@ -1,10 +1,13 @@
 package com.kh.hondimoyeong.cs.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +19,10 @@ import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.cs.model.service.NoticeService;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class CsController {
 	
 	@Autowired
@@ -61,7 +67,7 @@ public class CsController {
 	
 	@PostMapping("updateForm.notice")
 	public ModelAndView updateForm(int noticeNo, ModelAndView mv) {
-		mv.addObject(noticeService.selectNotice(noticeNo)).setViewName("cs/noticeUpdateForm");
+		mv.addObject("notice", noticeService.selectNotice(noticeNo)).setViewName("cs/noticeUpdateForm");
 		return mv;
 	}
 	
@@ -76,5 +82,30 @@ public class CsController {
 		}
 	}
 	
+	@RequestMapping("delete.notice")
+	public String delete(int noticeNo, HttpSession session) {
+		if(noticeService.delete(noticeNo) > 0) {
+			session.setAttribute("alertMsg", "게시글 삭제 성공했습니다.");
+			return "redirect:list.notice";
+			
+		} else {
+			session.setAttribute("alertMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+
+	@GetMapping("search.notice")
+	public String search(@RequestParam(value="keyword") String keyword,
+						 @RequestParam(value="page", defaultValue="1") int page, Model model) {
+		
+		int totalCount = noticeService.selectSearchCount(keyword);
+		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
+		List<Notice> search = noticeService.search(keyword, pi);
+		model.addAttribute("pageInfo", pi);
+		model.addAttribute("notice", search);
+		model.addAttribute("keyword", keyword);
+		
+		return "cs/csList";
+	}
 	
 }
