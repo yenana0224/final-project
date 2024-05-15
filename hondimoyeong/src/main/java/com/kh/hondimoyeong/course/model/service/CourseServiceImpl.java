@@ -30,6 +30,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public Course courseDetail(int courseIndex) {
 		return courseRepository.courseDetail(sqlSession, courseIndex);
 	}
@@ -44,6 +45,11 @@ public class CourseServiceImpl implements CourseService{
 		return courseRepository.updateStamp(sqlSession, stamp);
 	}
 	
+=======
+	public Course selectCourse(int courseIndex) {
+		return courseRepository.selectCourse(sqlSession, courseIndex);
+	}
+>>>>>>> Stashed changes
 	
 	
 

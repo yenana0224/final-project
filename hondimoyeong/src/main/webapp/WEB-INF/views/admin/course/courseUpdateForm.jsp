@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< Updated upstream
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+>>>>>>> Stashed changes
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< Updated upstream
 <title>디테일</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
@@ -152,6 +157,23 @@
         
     </div>
 
+=======
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="./updateCourse" method="post" enctype="multipart/form-data">
+		<h4>${course.courseIndex }</h4>
+		<h4>${course.courseNo }</h4>
+		<h4>${course.courseName }</h4>
+		<h4>${course.startEnd }</h4>
+		<textarea name="content"> ${course.content} </textarea>
+		<input type="file" name="stamp">
+		<input type="file" name="map">
+		
+		<button type="submit">확인</button>
+	</form>
+>>>>>>> Stashed changes
 
 </body>
 </html>

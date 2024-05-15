@@ -11,9 +11,13 @@ public interface CourseService {
 	
 	int loadFromApi(List<Course> list);
 	
+<<<<<<< Updated upstream
 	Course courseDetail(int courseIndex);
 	
 	int updateCourse(Course course);
 	
 	int updateStamp(CourseFile stamp);
+=======
+	Course selectCourse(int courseIndex);
+>>>>>>> Stashed changes
 }

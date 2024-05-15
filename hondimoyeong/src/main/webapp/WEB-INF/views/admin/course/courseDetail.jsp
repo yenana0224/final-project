@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< Updated upstream
 <title>디테일</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
@@ -76,6 +77,10 @@
             text-align: center;
         }
     </style>
+=======
+<title>코스상세페이지</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+>>>>>>> Stashed changes
 </head>
 <body>
     
@@ -151,5 +156,32 @@
     
 
 
+	<h4>${course.courseIndex }</h4>
+	<h4>${course.courseNo }</h4>
+	<h4>${course.courseName }</h4>
+	<h4>${course.startEnd }</h4>
+	<h4>${course.content }</h4>
+	
+
+	<c:forEach var="file" items="${ files }">
+		<c:choose>
+			<c:when test="${ file.fileleve eq 1 }">
+				<h4> 스탬프 : ${file.changeName } </h4>
+			</c:when>
+			
+		</c:choose>			
+	</c:forEach>
+	
+	<button id="update-btn">수정하기</button>
+	
+	<script>
+		
+		$('#update-btn').click(() => {
+			location.href="update/"+${course.courseIndex};
+		})
+	
+	</script>
+	
+	
 </body>
 </html>

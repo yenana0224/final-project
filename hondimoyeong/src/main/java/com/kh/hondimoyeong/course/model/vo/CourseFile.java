@@ -8,11 +8,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseFile {
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	private int fileNo;
 	private int courseIndex;
 	private String originName;
 	private String changeName;
+<<<<<<< Updated upstream
 	private int fileLevel;
+=======
+	private int filelevel;
+>>>>>>> Stashed changes
 	
 }

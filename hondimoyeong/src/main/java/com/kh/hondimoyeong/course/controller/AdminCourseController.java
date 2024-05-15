@@ -14,12 +14,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< Updated upstream
 import org.springframework.web.multipart.MultipartFile;
+=======
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+>>>>>>> Stashed changes
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hondimoyeong.course.model.service.CourseServiceImpl;
 import com.kh.hondimoyeong.course.model.vo.Course;
+<<<<<<< Updated upstream
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
+=======
+>>>>>>> Stashed changes
 
 @Controller
 public class AdminCourseController {
@@ -36,6 +43,7 @@ public class AdminCourseController {
 	@GetMapping("admin/course/{courseIndex}")
 	public ModelAndView courseDetail(@PathVariable int courseIndex,
 									 ModelAndView mv) {
+<<<<<<< Updated upstream
 		
 		mv.addObject("course", courseService.courseDetail(courseIndex)).setViewName("admin/course/courseDetail");
 		return mv;
@@ -46,11 +54,24 @@ public class AdminCourseController {
 									Model model) {
 		
 		model.addAttribute("course", courseService.courseDetail(courseIndex));
+=======
+	
+		mv.addObject("course", courseService.selectCourse(courseIndex)).setViewName("admin/course/courseDetail");
+
+		return mv;
+	}
+
+	@GetMapping("admin/course/update/{courseIndex}")
+	public String courseUpdateForm(@PathVariable int courseIndex,
+									Model model) {
+		model.addAttribute("course", courseService.selectCourse(courseIndex));
+>>>>>>> Stashed changes
 		
 		return "admin/course/courseUpdateForm";
 	}
 	
 	@PostMapping("admin/course/update/updateCourse")
+<<<<<<< Updated upstream
 	public String courseUpdate(Course course,
 							   MultipartFile stamp,
 							   MultipartFile detailMap,
@@ -108,5 +129,13 @@ public class AdminCourseController {
 	}
 	
 	
+=======
+	public void courseUpdate(Course course,
+							 MultipartHttpServletRequest multiRequest) {
+		System.out.println(course.getContent());
+		System.out.println(image);
+
+	}
+>>>>>>> Stashed changes
 
 }

@@ -21,6 +21,7 @@ public class CourseRepository {
 		return sqlSession.insert("courseMapper.loadFromApi", list);
 	}
 	
+<<<<<<< Updated upstream
 	public Course courseDetail(SqlSessionTemplate sqlSession, int courseIndex) {
 		return sqlSession.selectOne("courseMapper.courseDetail", courseIndex);
 	}
@@ -31,5 +32,9 @@ public class CourseRepository {
 	
 	public int updateStamp(SqlSessionTemplate sqlSession, CourseFile stamp) {
 		return sqlSession.insert("courseMapper.updateStamp", stamp);
+=======
+	public Course selectCourse(SqlSessionTemplate sqlSession, int courseIndex) {
+		return sqlSession.selectOne("courseMapper.selectCourse", courseIndex);
+>>>>>>> Stashed changes
 	}
 }
