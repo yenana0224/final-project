@@ -12,7 +12,6 @@
 		<result column="TAKE_TIME" property="takeTime" />
 		<result column="DISTANCE" property="distance" />
 		<result column="CONTENT" property="content" />
-<<<<<<< Updated upstream
 		<collection property="files" resultMap="courseFileResultSet" />
 	</resultMap>
 	
@@ -21,9 +20,6 @@
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
 		<result column="FILE_LEVEL" property="fileLevel" />
-=======
-		<collection property="files" resultMap="courseResultSet" />
->>>>>>> Stashed changes
 	</resultMap>
 
 	<resultMap type="courseFile" id="courseFileResultSet">
@@ -88,7 +84,6 @@
 	END;	
 	</update>
 	
-<<<<<<< Updated upstream
 	<select id="courseDetail" parameterType="_int" resultMap="courseResultSet">
 	  SELECT 
 			C.COURSE_INDEX,
@@ -151,27 +146,5 @@
 		 #{fileLevel}
 		 )
 	</update>
-=======
-	<select id="selectCourse" parameterType="_int" resultMap="courseResultSet">
-	SELECT
-	      C.COURSE_INDEX,
-	      COURSE_NO,
-	      COURSE_NAME,
-	      START_END,
-	      TAKE_TIME,
-	      DISTANCE,
-	      CONTENT,
-	      ORIGIN_NAME,
-	      CHANGE_NAME,
-	      FILE_LEVEL
-	 FROM
-	      COURSE C
-	 LEFT
-	 JOIN
-	      COURSE_FILE F ON (C.COURSE_INDEX = F.COURSE_INDEX)
-	WHERE
-	      C.COURSE_INDEX = #{courseIndex}
-	</select>
->>>>>>> Stashed changes
 
 </mapper>

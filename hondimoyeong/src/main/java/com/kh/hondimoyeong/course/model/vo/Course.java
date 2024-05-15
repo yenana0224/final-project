@@ -2,11 +2,8 @@ package com.kh.hondimoyeong.course.model.vo;
 
 import java.util.List;
 
-<<<<<<< Updated upstream
 import org.springframework.web.multipart.MultipartFile;
 
-=======
->>>>>>> Stashed changes
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,10 +21,4 @@ public class Course {
 	private String distance;
 	private String content;
 	private List<CourseFile> files;
-<<<<<<< Updated upstream
-
-=======
-	
-	
->>>>>>> Stashed changes
 }
