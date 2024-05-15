@@ -25,6 +25,7 @@ public class KakaoPayController {
     public String kakaoPay(){
        // log.info("kakaoPay post.....................");
 
+		
         return "redirect:" + kakaoPay.kakaoPayReady();
     }
 
