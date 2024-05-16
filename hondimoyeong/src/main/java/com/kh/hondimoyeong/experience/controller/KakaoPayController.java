@@ -29,7 +29,6 @@ public class KakaoPayController {
 	
 	private KakaoPayVo kakaopayVo;
 	
-	private Experience experience;
 	
 	@GetMapping("kakaop")
 	public String kakaop() {
@@ -39,14 +38,18 @@ public class KakaoPayController {
 	}
 	
 	@PostMapping("kakaoPay")
-    public String kakaoPay(String experienceDate, String experienceTime, int price, int people, String category, Model model, HttpSession session){
+    public String kakaoPay(String experienceDate, String experienceTime, String price, int people, String category, Model model, HttpSession session){
         log.info("kakaoPay post.....................");
+        Experience experience = new Experience();
         
         experience.setExperienceDate(experienceDate);
         experience.setExperienceTime(experienceTime);
         experience.setPrice(price);
         experience.setExperiencePeople(people);
         experience.setCategory(category);
+        
+        System.out.println(experience);
+        
 		model.addAttribute("Experience", experience);
         
         return "redirect:" + kakaoPay.kakaoPayReady(experience);
