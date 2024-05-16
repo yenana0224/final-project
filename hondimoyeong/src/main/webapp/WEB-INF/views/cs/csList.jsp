@@ -293,179 +293,179 @@
         /* border: 1px solid red; */
     }
     
-    .tab {
-		display: flex;
-		align-items: center;
-		padding: 1rem;
-	}
-	.cs_menu_tap {
-		
-	    width: 150px;
-	    height: 60px;
-	    border: none;
-	    border-radius: 20px;
-	    font-size: 20px;
-	    font-weight: bold;
-	    color: #292929;
-	    margin-right: 20px;
-	  	background-color: #ececec;
-	}
-	.cs_menu_tap.active {
-		display: inline-block;
-		border: 1px solid #FF9843;
-		background-color: #FF9843;
-		color: #fff;
-	}
-	.tab_content-wrapper {
-		padding: 1rem
-	}
-	.tab_content {
-		display: none;
-	}
-	.tab_content.active {
-		display: block;
-	}
-
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.cs_menu_tap {
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #292929;
+    margin-right: 20px;
+  	background-color: #ececec;
+}
+.cs_menu_tap.active {
+  display: inline-block;
+  border: 1px solid #FF9843;
+  background-color: #FF9843;
+  color: #fff;
+}
+.tab_content-wrap {
+  padding: 1rem
+}
+.tab_content {
+  display: none;
+}
+.tab_content.active {
+  display: block;
+}
 
 </style>
 </head>
+
 <body>
 <jsp:include page="../common/header.jsp"/>
 
-<jsp:include page="tabtest.jsp"/>
+
     <div id="container">
         <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
-        
-        <div class="cs_menu">
+
+		<div class="cs_menu" align="center">
 		  <button class="cs_menu_tap active" id="tab1">공지사항</button>
 		  <button class="cs_menu_tap" id="tab2">FAQ</button>
 		</div>
-
-<!--
-        <div class="cs_menu" align="center">
-            <button class="cs_menu_notice active">공지사항</button>
-            <button class="cs_menu_faq">FAQ</button>
-        </div>
--->    
-        <div class="cs_board active"> <!-- 공지사항 게시판 -->
-	        <div class="cs_search">
-	            <form action="search.notice" class="cs_searchForm" method="get">
-	            	<input type="hidden" name="page" value="1">
-	                <input type="text" class="cs_search_input" placeholder="검색어를 입력해 주세요." name="keyword" value="${ requestScope.keyword }">
-	                <button type="submit" class="cs_search_btn">검색</button>
-	            </form>
-	        </div>
-                <div class="cs_board_top">
-                    <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
-                </div>
-            <div class="cs_board_content">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="cs_table_small">번호</th>
-                            <th class="cs_table_mid">제목</th>
-                            <th class="cs_table_small">조회수</th>
-                            <th class="cs_table_small">날짜</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:choose>
-                    	<c:when test="${ empty notice }">
-                    		<td colspan="4" class="noNotice">검색 결과가 없습니다.</td>
-                    	</c:when>
-                    	<c:otherwise>
-		                    <c:forEach var="notice" items="${ notice }">
-		                        <tr class="noticeList">
-		                            <td class="cs_table_small">${ notice.noticeNo }</td>
-		                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
-		                            <td class="cs_table_small">${ notice.count }</td>
-		                            <td class="cs_table_small">${ notice.createDate }</td>
-		                        </tr>
-		                    </c:forEach>
-                    	</c:otherwise>
-                    </c:choose>
-                    </tbody>
-                </table>
-            </div>         
-            
-            <div class="hdmy-board_page"> <!-- 페이징바 -->
-               	<ul class="pagination">
-     				<c:choose>
-               			<c:when test="${ empty keyword }">
-               				<c:choose>
-               					<c:when test="${ pageInfo.currentPage eq 1 }">
-               						<li class="page-item disabled"><a class="page-link"> < </a></li>
-               					</c:when>
-								<c:otherwise>
-						  			<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
-						  		</c:otherwise>
-               				</c:choose>
-               				
-               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-								<c:choose>
-									<c:when test="${ p eq pageInfo.currentPage }">
-										<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							
-							<c:choose>
-							    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-							        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
-							    </c:when>
-							    <c:otherwise>
-							        <li class="page-item disabled"><a class="page-link"> > </a></li>
-							    </c:otherwise>
-							</c:choose>
-               			</c:when>
-               			
-               			<c:otherwise>
-               			    <c:choose>
-               					<c:when test="${ pageInfo.currentPage eq 1 }">
-               						<li class="page-item disabled"><a class="page-link"> < </a></li>
-               					</c:when>
-								<c:otherwise>
-						  			<li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
-						  		</c:otherwise>
-               				</c:choose>
-               				
-               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-								<li class="page-item"><a class="page-link" href="search.notice?page=${ p }&keyword=${ keyword }">${ p }</a></li>
-							</c:forEach>
-							
-							<c:choose>
-							    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-							        <li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
-							    </c:when>
-							    <c:otherwise>
-							        <li class="page-item disabled"><a class="page-link"> > </a></li>
-							    </c:otherwise>
-							</c:choose>
-               			</c:otherwise>
-               		</c:choose>
-				</ul>
-            </div>
-        </div>
-
-        <div class="cs_faq" style="display: none;"> <!-- FAQ 게시판 -->
-           	<c:forEach var="faq" items="${ faqList }">
-	            <div class="cs_faq_box">
-		                <div class="cs_faq_q">
-		                    <div class="faq_q_icon">Q</div>
-		                    <div class="faq_q_content">${ faq.questionContent }</div>
-		                    <div class="faq_icon">+</div>
-		                </div>
-	
-	                <div class="cs_faq_a">
-	                    <div class="faq_a_icon">A</div>
-	                    <div class="faq_a_content">${ faq.answerContent }</div>
+        
+	<!-- 탭 내용 영역 -->
+	<div class="tab_content-wrapper">
+		<div id="tab1" class="tab_content active">
+	        <div class="cs_board active"> <!-- 공지사항 게시판 -->
+		        <div class="cs_search">
+		            <form action="search.notice" class="cs_searchForm" method="get">
+		            	<input type="hidden" name="page" value="1">
+		                <input type="text" class="cs_search_input" placeholder="검색어를 입력해 주세요." name="keyword" value="${ requestScope.keyword }">
+		                <button type="submit" class="cs_search_btn">검색</button>
+		            </form>
+		        </div>
+	                <div class="cs_board_top">
+	                    <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
 	                </div>
+	            <div class="cs_board_content">
+	                <table class="table table-hover">
+	                    <thead>
+	                        <tr>
+	                            <th class="cs_table_small">번호</th>
+	                            <th class="cs_table_mid">제목</th>
+	                            <th class="cs_table_small">조회수</th>
+	                            <th class="cs_table_small">날짜</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    <c:choose>
+	                    	<c:when test="${ empty notice }">
+	                    		<td colspan="4" class="noNotice">검색 결과가 없습니다.</td>
+	                    	</c:when>
+	                    	<c:otherwise>
+			                    <c:forEach var="notice" items="${ notice }">
+			                        <tr class="noticeList">
+			                            <td class="cs_table_small">${ notice.noticeNo }</td>
+			                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
+			                            <td class="cs_table_small">${ notice.count }</td>
+			                            <td class="cs_table_small">${ notice.createDate }</td>
+			                        </tr>
+			                    </c:forEach>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                    </tbody>
+	                </table>
+	            </div>         
+	            
+	            <div class="hdmy-board_page"> <!-- 페이징바 -->
+	               	<ul class="pagination">
+	     				<c:choose>
+	               			<c:when test="${ empty keyword }">
+	               				<c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+									<c:choose>
+										<c:when test="${ p eq pageInfo.currentPage }">
+											<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:when>
+	               			
+	               			<c:otherwise>
+	               			    <c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+									<li class="page-item"><a class="page-link" href="search.notice?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:otherwise>
+	               		</c:choose>
+					</ul>
 	            </div>
-            </c:forEach>
-        </div>
+	        </div>
+		</div>
+		
+		<div id="tab2" class="tab_content">
+	        <div class="cs_faq"> <!-- FAQ 게시판 -->
+	           	<c:forEach var="faq" items="${ faqList }">
+		            <div class="cs_faq_box">
+			                <div class="cs_faq_q">
+			                    <div class="faq_q_icon">Q</div>
+			                    <div class="faq_q_content">${ faq.questionContent }</div>
+			                    <div class="faq_icon">+</div>
+			                </div>
+		
+		                <div class="cs_faq_a">
+		                    <div class="faq_a_icon">A</div>
+		                    <div class="faq_a_content">${ faq.answerContent }</div>
+		                </div>
+		            </div>
+	            </c:forEach>
+	        </div>
+		</div>
+	</div>
         
         
         
@@ -474,6 +474,29 @@
 <jsp:include page="../common/footer.jsp"/>
 
     <script>
+    
+    	
+    const tabItem = document.querySelectorAll(".cs_menu_tap");
+    const tabContent = document.querySelectorAll(".tab_content");
+
+    tabItem.forEach((item, index) => {
+      item.addEventListener("click", (e) => {
+        tabItem.forEach((item) => {
+          item.classList.remove("active");
+        });
+        tabItem[index].classList.add("active");
+        
+        const tabItemId = String(item.id);
+        tabContent.forEach((item, index) => {
+          item.classList.remove("active");
+
+          const tabContentId = String(item.id);
+          if(tabContentId === tabItemId) {
+            tabContent[index].classList.add("active");
+          }
+        });
+      });
+    });
     
 	
 		function insertNotice(){
@@ -507,39 +530,7 @@
                 });
             });
         });
-		
-		
-		
-		
-		/*
-        $(() => {
-            $('.cs_menu_notice').click(() => {
-                $('.cs_board').show();
-                $('.cs_faq').hide();
-                $('.cs_menu_faq').css({'background-color' : '#ececec', 'color' : '#272727'});
-                $('.cs_menu_notice').css({'background-color' : '#FF9843', 'color' : '#ffffff'});
-            });
-
-            $('.cs_menu_faq').click(() => {
-                $('.cs_faq').show();
-                $('.cs_board').hide();
-                $('.cs_menu_faq').css({'background-color' : '#FF9843', 'color' : '#ffffff'});
-                $('.cs_menu_notice').css({'background-color' : '#ececec', 'color' : '#272727'});
-            });
-        });
-
-        $(document).ready(function() {
-            hidePagination(); 
-            
-	        function hidePagination() {
-	            if ($('.noNotice').length !== 0) {
-	                $('.hdmy-board_page').hide();
-	            } else {
-	                $('.hdmy-board_page').show();
-	            }
-	        }
-        });
-        */
+        
     	
     </script>
 
