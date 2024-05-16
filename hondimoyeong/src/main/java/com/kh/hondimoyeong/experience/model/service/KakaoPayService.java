@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +24,7 @@ import lombok.extern.java.Log;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@CrossOrigin("*")
 @Log
 public class KakaoPayService {
     private static final String Host = "https://open-api.kakaopay.com/online/v1/payment/ready";
