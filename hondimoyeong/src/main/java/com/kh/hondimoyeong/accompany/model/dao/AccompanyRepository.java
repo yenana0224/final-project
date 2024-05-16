@@ -19,4 +19,8 @@ public class AccompanyRepository {
 		return sqlSession.selectList("accompanyMapper.selectAll", null, rowBounds);
 	}
 
+	public List<Accompany> findRecruiting(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("accompanyMapper.findRecruiting");
+	}
+
 }

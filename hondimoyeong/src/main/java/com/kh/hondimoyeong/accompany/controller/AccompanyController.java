@@ -31,4 +31,6 @@ public class AccompanyController {
 	public String accompanyDetail() {
 		return "accompany/accompanyDetail";
 	}
+	
+	
 }

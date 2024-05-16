@@ -34,4 +34,9 @@ public class AccompanyServiceImpl implements AccompanyService {
 		return accompanyRepository.selectAll(sqlSession, rowBounds);
 	}
 
+	@Override
+	public List<Accompany> findRecruiting() {
+		return accompanyRepository.findRecruiting(sqlSession);
+	}
+
 }

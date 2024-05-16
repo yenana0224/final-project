@@ -233,7 +233,7 @@
 
         <div class="hdmy-board">
             <div class="hdmy-board_top">
-                <div class="hdmy-board_top-align"><a href="#">모집중</a> | <a href="#">날짜순</a></div>
+                <div class="hdmy-board_top-align"><a class="accompanyIng">모집중</a> | <a href="#">날짜순</a></div>
                 
                 <c:if test="${ !empty loginUser }">
                 	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
@@ -241,6 +241,18 @@
             </div>
 
             <div class="hdmy-board_content">
+            
+           	    <table class="ajaxTest">
+			        <thead>
+			            <tr>
+			                <th>제목</th>
+			                <th>내용</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        </tbody>
+			    </table>
+            
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -279,74 +291,102 @@
             </div>
         </div> <!-- hdmy-board -->
         
-	            <div class="hdmy-board_page"> <!-- 페이징바 -->
-	               	<ul class="pagination">
-	     				<c:choose>
-	               			<c:when test="${ empty keyword }">
-	               				<c:choose>
-	               					<c:when test="${ pageInfo.currentPage eq 1 }">
-	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
-	               					</c:when>
-									<c:otherwise>
-							  			<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage - 1 }"> < </a></li>
-							  		</c:otherwise>
-	               				</c:choose>
-	               				
-	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-									<c:choose>
-										<c:when test="${ p eq pageInfo.currentPage }">
-											<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="accompany?page=${ p }">${ p }</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								
-								<c:choose>
-								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								        <li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage + 1 }"> > </a></li>
-								    </c:when>
-								    <c:otherwise>
-								        <li class="page-item disabled"><a class="page-link"> > </a></li>
-								    </c:otherwise>
-								</c:choose>
-	               			</c:when>
-	               			
-	               			<c:otherwise>
-	               			    <c:choose>
-	               					<c:when test="${ pageInfo.currentPage eq 1 }">
-	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
-	               					</c:when>
-									<c:otherwise>
-							  			<li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
-							  		</c:otherwise>
-	               				</c:choose>
-	               				
-	               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-									<li class="page-item"><a class="page-link" href="search.accompany?page=${ p }&keyword=${ keyword }">${ p }</a></li>
-								</c:forEach>
-								
-								<c:choose>
-								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								        <li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
-								    </c:when>
-								    <c:otherwise>
-								        <li class="page-item disabled"><a class="page-link"> > </a></li>
-								    </c:otherwise>
-								</c:choose>
-	               			</c:otherwise>
-	               		</c:choose>
-					</ul>
-	            </div>
-	        </div>
+        <div class="hdmy-board_page"> <!-- 페이징바 -->
+			<ul class="pagination">
+    			<c:choose>
+              		<c:when test="${ empty keyword }">
+              			<c:choose>
+              				<c:when test="${ pageInfo.currentPage eq 1 }">
+              					<li class="page-item disabled"><a class="page-link"> < </a></li>
+              				</c:when>
+							<c:otherwise>
+					  			<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+					  		</c:otherwise>
+              			</c:choose>
+              				
+              			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+						<c:choose>
+							<c:when test="${ p eq pageInfo.currentPage }">
+								<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="accompany?page=${ p }">${ p }</a></li>
+							</c:otherwise>
+						</c:choose>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+							</c:when>
+						    <c:otherwise>
+						        <li class="page-item disabled"><a class="page-link"> > </a></li>
+						    </c:otherwise>
+						</c:choose>
+              		</c:when>
+              			
+              		<c:otherwise>
+              			<c:choose>
+              				<c:when test="${ pageInfo.currentPage eq 1 }">
+              					<li class="page-item disabled"><a class="page-link"> < </a></li>
+              				</c:when>
+							<c:otherwise>
+					  			<li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+					  		</c:otherwise>
+              			</c:choose>
+              				
+              			<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+							<li class="page-item"><a class="page-link" href="search.accompany?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+						</c:forEach>
+						
+						<c:choose>
+						    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+						        <li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+						    </c:when>
+							<c:otherwise>
+								<li class="page-item disabled"><a class="page-link"> > </a></li>
+							</c:otherwise>
+						</c:choose>
+              		</c:otherwise>
+              	</c:choose>
+			</ul>
 		</div>
-    </div> <!-- container -->
+	</div>
 
 <jsp:include page="../common/footer.jsp"/>
 
 <script>
+$(function(){
+    // 모집중 링크 클릭 시 실행되는 함수
+    $(document).on('click', '.accompanyIng', function(){
+        $.ajax({
+            url: 'companions',
+            type: 'get',
+            success: function(result){
+                // 기존 table-hover의 tbody 내용 삭제
+                $('.table-hover tbody').empty();
+                
+                let value = '';
+                
+                // 결과를 받아서 tbody에 추가
+                for(let i in result){
+                    value += '<tr>'
+                           + '<td>' + result[i].accompanyNo +'</td>'
+                           + '<td>' + result[i].userName +'</td>'
+                           + '<td>' + result[i].courseName +'</td>'
+                           + '<td>' + result[i].accompanyDate +'</td>'
+                           + '<td>' + result[i].createDate +'</td>'
+                           + '<td></td></tr>';
+                }
+                
+                $('.table-hover tbody').append(value);
+                $('.ajaxTest').show(); // 테이블 보이기
+            }
+        });
+    });
+});
 
+		
 
 </script>
 
