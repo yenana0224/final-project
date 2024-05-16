@@ -3,7 +3,10 @@ package com.kh.hondimoyeong.cs.model.service;
 import java.util.List;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.cs.model.vo.Answer;
+import com.kh.hondimoyeong.cs.model.vo.Faq;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
+import com.kh.hondimoyeong.cs.model.vo.Question;
 
 public interface NoticeService {
 
@@ -24,6 +27,10 @@ public interface NoticeService {
 	List<Notice> search(String keyword, PageInfo pi);
 
 	int selectSearchCount(String keyword);
+
+	// FAQ
+	List<Faq> faqList();
+
 
 
 }

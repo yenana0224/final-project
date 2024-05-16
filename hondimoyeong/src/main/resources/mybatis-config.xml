@@ -14,6 +14,7 @@
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Notice" alias="notice" />
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Question" alias="question" />
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Answer" alias="answer" />
+ 		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Faq" alias="faq" />
  	</typeAliases>
 
 	<mappers>
