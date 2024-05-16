@@ -34,6 +34,8 @@ public class KakaoPayController {
 	@GetMapping("kakaop")
 	public String kakaop() {
 		return "experience/kakaop";
+		
+		
 	}
 	
 	@PostMapping("kakaoPay")
