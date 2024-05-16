@@ -14,6 +14,7 @@ public class Accompany {
 	private int accompanyNo;
 	private int userNo;
 	private int courseNo;
+	private String courseName;
 	private String accompanyDate;
 	private String accompanyTitle;
 	private String accompanyContent;

@@ -6,10 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.hondimoyeong.cs.model.vo.Answer;
 import com.kh.hondimoyeong.cs.model.vo.Faq;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
-import com.kh.hondimoyeong.cs.model.vo.Question;
 
 @Repository
 public class NoticeRepository {

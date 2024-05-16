@@ -16,7 +16,7 @@ public class AccompanyController {
 	@Autowired
 	private AccompanyService accompanyService;
 	
-	@RequestMapping("accompany")
+	@RequestMapping("list.accompany")
 	public String selectAll(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		
 		PageInfo pi = Pagination.getPageInfo(accompanyService.selectListCount(), page, 10, 5);

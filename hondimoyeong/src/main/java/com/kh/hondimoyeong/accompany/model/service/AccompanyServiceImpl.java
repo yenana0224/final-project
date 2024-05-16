@@ -5,11 +5,14 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.accompany.model.dao.AccompanyRepository;
 import com.kh.hondimoyeong.accompany.model.vo.Accompany;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 
+
+@Service
 public class AccompanyServiceImpl implements AccompanyService {
 
 
