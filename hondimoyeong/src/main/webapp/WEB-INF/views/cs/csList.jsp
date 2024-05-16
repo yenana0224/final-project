@@ -352,7 +352,9 @@
 		            </form>
 		        </div>
 	                <div class="cs_board_top">
-	                    <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
+	                	<c:if test="${ sessionScope.loginUser.status == 'A' }">
+	                    	<div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
+	                    </c:if>
 	                </div>
 	            <div class="cs_board_content">
 	                <table class="table table-hover">
@@ -400,7 +402,7 @@
 	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
 									<c:choose>
 										<c:when test="${ p eq pageInfo.currentPage }">
-											<li class="page-item active test"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+											<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
