@@ -46,7 +46,7 @@
         }
     
         .header_top_menu a{
-            width: 80px;
+            width: 100px;
             text-decoration: none;
             font-size: 15px;
             font-weight: bold;
@@ -54,6 +54,12 @@
             float: right; /* float을 right로 설정 */
             margin-left: 10px; /* 간격 조정 */
         }
+        
+        .header_top_menu label{
+        	padding-left:750px; 
+        }
+        
+                
     
         .header_top_menu a:hover{
             color: #FF9843;
@@ -154,9 +160,29 @@
     <div class="header">
         <div class="header_top">
             <div class="header_top_menu">
-                <a href="login">로그인</a>
-                <a href="insertForm">회원가입</a>
-                <a href="list.notice">고객센터</a>
+            
+                <c:choose>
+	           		<c:when test="${ empty sessionScope.loginUser }">
+		                <!-- 로그인 전 -->
+		                <a href="login">로그인</a>
+		                <a href="insertForm">회원가입</a>
+		                <a href="list.notice">고객센터</a>
+	                </c:when>
+				    <c:otherwise>
+				        <!-- 로그인 후 -->
+				        <label>${ sessionScope.loginUser.userName }님 환영합니다!</label> 
+				        <a href="logout.member">로그아웃</a>
+				        <c:choose>
+				            <c:when test="${ sessionScope.loginUser.status == 'A' }">
+				                <a href="adminPage">관리자페이지</a>
+				            </c:when>
+				            <c:when test="${ sessionScope.loginUser.status == 'C' }">
+				                <a href="mypage.member">마이페이지</a>
+				            </c:when>
+				        </c:choose>
+           		 	</c:otherwise>
+                </c:choose>              
+
             </div>
         </div>
         <div class="header_mid">
