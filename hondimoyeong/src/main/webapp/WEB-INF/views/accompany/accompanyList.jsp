@@ -224,59 +224,22 @@
                     	<c:forEach var="accompany" items="${ accompany }">
 	                        <tr class="list">
 	                            <td class="hdmy-table_small">${ accompany.accompanyNo }</td>
-	                            <td class="hdmy-table_mid">24/05/19</td>
-	                            <td class="hdmy-table_small">1코스</td>
-	                            <td>봉보로봉 동행하실 분 <a href="accompanyDetail">디테일</a></td>
-	                            <td class="hdmy-table_small">희주봉</td>
-	                            <td class="hdmy-table_small">3/4</td>
-	                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
+	                            <td class="hdmy-table_mid">${ accompany.createDate }</td>
+	                            <td class="hdmy-table_small">${ accompany.courseName }</td>
+	                            <td>${ accompany.accompanyTitle }<a href="accompanyDetail">디테일</a></td>
+	                            <td class="hdmy-table_small">${ accompany.userName }</td>
+	                            <td class="hdmy-table_small">${ accompany.accompanyNum } / ${ accompany.accompanyPeople }</td>
+	                            
+	                            <c:choose>
+	                            	<c:when test="${ accompany.accompanyNum ge accompany.accompanyPeople }">
+	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
+	                            	</c:otherwise>
+	                            </c:choose>
 	                        </tr>
                         </c:forEach>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -292,12 +255,15 @@
                 <button class="btn btn-outline-secondary"> > </button>
             </div>
         </div>
-
-
-
     </div> <!-- container -->
 
 <jsp:include page="../common/footer.jsp"/>
+
+<script>
+
+
+</script>
+
 
 </body>
 </html>
