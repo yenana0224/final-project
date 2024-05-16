@@ -11,6 +11,6 @@
 <h1>카카오 페이 테스트</h1>
 <form method="post" action="kakaoPay">
     <button type="submit">결제하기</button>
-
+</form>
 </body>
 </html>
