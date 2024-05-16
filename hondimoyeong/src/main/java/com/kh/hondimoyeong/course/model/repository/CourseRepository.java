@@ -32,4 +32,12 @@ public class CourseRepository {
 	public int updateStamp(SqlSessionTemplate sqlSession, CourseFile stamp) {
 		return sqlSession.insert("courseMapper.updateStamp", stamp);
 	}
+	
+	public int updateDetailMap(SqlSessionTemplate sqlSession, CourseFile detailMap) {
+		return sqlSession.insert("courseMapper.updateDetailMap", detailMap);
+	}
+	
+	public int updatePhoto(SqlSessionTemplate sqlSession, List<CourseFile> photoList) {
+		return sqlSession.insert("courseMapper.updatePhoto", photoList);
+	}
 }

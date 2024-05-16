@@ -43,6 +43,18 @@ public class CourseServiceImpl implements CourseService{
 	public int updateStamp(CourseFile stamp) {
 		return courseRepository.updateStamp(sqlSession, stamp);
 	}
+
+	@Override
+	public int updateDetailMap(CourseFile detailMap) {
+		return courseRepository.updateDetailMap(sqlSession, detailMap);
+	}
+
+	@Override
+	public int updatePhoto(List<CourseFile> photoList) {
+		return courseRepository.updatePhoto(sqlSession, photoList);
+	}
+	
+	
 	
 	
 	

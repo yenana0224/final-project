@@ -3,6 +3,7 @@ package com.kh.hondimoyeong.course.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class AdminCourseController {
 									 ModelAndView mv) {
 		
 		mv.addObject("course", courseService.courseDetail(courseIndex)).setViewName("admin/course/courseDetail");
+		
+		System.out.println(courseService.courseDetail(courseIndex));
+		
 		return mv;
 	}
 	
@@ -71,16 +75,41 @@ public class AdminCourseController {
 				courseService.updateStamp(stampImg);
 			}
 			
-			/*
+
 			if(!detailMap.getOriginalFilename().equals("")) {
-				CourseFile detailMap = new CourseFile();
-			}
-			*/
+				CourseFile detailMapImg = new CourseFile();
+				detailMapImg.setCourseIndex(courseIndex);
+				detailMapImg.setOriginName(detailMap.getOriginalFilename());
+				detailMapImg.setChangeName(saveDetailMap(detailMap, session));
+				detailMapImg.setFileLevel(2);
 				
+				courseService.updateDetailMap(detailMapImg);
+			}
+			
+			//System.out.println(photo);
+			
+			
+			List<CourseFile> photoList = new ArrayList<CourseFile>();
+			
+			for(int i = 0; i < photo.size(); i++) {
+				
+				if(!photo.get(i).getOriginalFilename().equals("")) {
+					//System.out.println(photo.get(i).getOriginalFilename());
+					CourseFile photoImg = new CourseFile();
+					photoImg.setCourseIndex(courseIndex);
+					photoImg.setOriginName(photo.get(i).getOriginalFilename());
+					photoImg.setChangeName(savePhoto(photo.get(i), session));
+					photoImg.setFileLevel(3);
+					
+					photoList.add(photoImg);
+				}
+			}
+					
+			if(!photoList.isEmpty()) {
+				courseService.updatePhoto(photoList);				
+			}
 		}
-		
-		
-		
+
 		return "redirect:/admin/course/"+course.getCourseIndex();
 	}
 	
@@ -89,10 +118,10 @@ public class AdminCourseController {
 		String originName = stamp.getOriginalFilename();
 		String ext = originName.substring(originName.lastIndexOf("."));
 		String currentTime = new SimpleDateFormat("yyyyMMdd").format(new Date());
-		int randomNum = (int)Math.random() * 90000 + 10000;
+		int randomNum = (int)(Math.random() * 90000) + 10000;
 		
 		String changeName = currentTime + randomNum + ext;
-		String savePath = session.getServletContext().getRealPath("/resources/course/stamp");
+		String savePath = session.getServletContext().getRealPath("/resources/course/stamp/");
 		
 		
 		try {
@@ -106,6 +135,46 @@ public class AdminCourseController {
 		
 		return "resource/course/stamp/" + changeName;
 	}
+	
+	public String saveDetailMap(MultipartFile detailMap, HttpSession session) {
+		String originName = detailMap.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."));
+		String currentTime = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		int randomNum = (int) (Math.random() * 90000) + 10000;
+		String changeName = currentTime + randomNum + ext;
+		String savePath = session.getServletContext().getRealPath("/resources/course/detailMap/");
+		
+		try {
+			detailMap.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "resource/course/detailMap/" + changeName;
+	}
+	
+	public String savePhoto(MultipartFile photo, HttpSession session) {
+		String originName = photo.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."));
+		String currentTime = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		int randomNum = (int)(Math.random() * 90000) + 10000;
+		String changeName = currentTime + randomNum + ext;
+		String savePath = session.getServletContext().getRealPath("/resources/course/photo/");
+		
+		try {
+			photo.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "resource/course/photo/" + changeName;
+	}
+	
+	
 	
 	
 
