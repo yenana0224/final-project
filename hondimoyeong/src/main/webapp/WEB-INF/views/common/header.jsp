@@ -36,13 +36,18 @@
             width: 1200px;
             padding-top: 20px;
             padding-bottom: 20px;
-            /* border: 1px solid red; */
         }
     
         .header_top_menu{
             width: 1200px;
             height: 30px;
-            /* border: 1px solid saddlebrown; */
+        }
+        
+        .header_menubar{
+        	width: 500px;
+        	height:auto;
+        	float: right;
+        	text-align: right;
         }
     
         .header_top_menu a{
@@ -51,15 +56,8 @@
             font-size: 15px;
             font-weight: bold;
             color: black;
-            float: right; /* float을 right로 설정 */
-            margin-left: 10px; /* 간격 조정 */
+            margin-left: 10px;
         }
-        
-        .header_top_menu label{
-        	padding-left:750px; 
-        }
-        
-                
     
         .header_top_menu a:hover{
             color: #FF9843;
@@ -160,29 +158,34 @@
     <div class="header">
         <div class="header_top">
             <div class="header_top_menu">
-            
                 <c:choose>
 	           		<c:when test="${ empty sessionScope.loginUser }">
 		                <!-- 로그인 전 -->
-		                <a href="login">로그인</a>
-		                <a href="insertForm">회원가입</a>
-		                <a href="list.notice">고객센터</a>
+		                <div class="header_menubar">
+			                <a href="login">로그인</a>
+			                <a href="insertForm">회원가입</a>
+			                <a href="list.notice">고객센터</a>
+		                </div>
 	                </c:when>
 				    <c:otherwise>
 				        <!-- 로그인 후 -->
-				        <label>${ sessionScope.loginUser.userName }님 환영합니다!</label> 
-				        <a href="logout.member">로그아웃</a>
-				        <c:choose>
-				            <c:when test="${ sessionScope.loginUser.status == 'A' }">
-				                <a href="adminPage">관리자페이지</a>
-				            </c:when>
-				            <c:when test="${ sessionScope.loginUser.status == 'C' }">
-				                <a href="mypage.member">마이페이지</a>
-				            </c:when>
-				        </c:choose>
+				        <div class="header_menubar">
+					        <label><b>${ sessionScope.loginUser.userName }</b>님 환영합니다!</label> 
+
+					        <c:choose>
+					            <c:when test="${ sessionScope.loginUser.status == 'A' }">
+					                <a href="adminPage">관리자페이지</a>
+					            </c:when>
+					            
+					            <c:when test="${ sessionScope.loginUser.status == 'C' }">
+					                <a href="mypage.member">마이페이지</a>
+					            </c:when>
+					        </c:choose>
+					        <a href="list.notice">고객센터</a>
+					        <a href="logout.member">로그아웃</a>
+						</div>
            		 	</c:otherwise>
                 </c:choose>              
-
             </div>
         </div>
         <div class="header_mid">
