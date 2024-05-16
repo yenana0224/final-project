@@ -114,7 +114,7 @@
 				
 				
 				<br><br>
-					<input type="hidden" id="category" name="category" value="aq">
+					<input type="hidden" id="category" name="category" value="아쿠아리움">
 					<button  id="btn1" class="btn btn-outline-info">예매하기</button>
 					
 		</div>
@@ -151,7 +151,7 @@
 			
 			
 				$.ajax({
-					url : 'kakaoPay',
+					url : 'kakaop',
 					type : 'post',
 					data : {
 						experienceDate : dateString,

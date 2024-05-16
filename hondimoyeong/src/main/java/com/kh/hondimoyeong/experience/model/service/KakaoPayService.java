@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.KakaoPayVo;
 import com.kh.hondimoyeong.experience.model.vo.Reserve;
 
@@ -32,7 +33,7 @@ public class KakaoPayService {
     private Reserve reserve;
     
 
-    public String kakaoPayReady() {
+    public String kakaoPayReady(Experience experience) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -50,9 +51,9 @@ public class KakaoPayService {
         params.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
         params.put("partner_order_id", "1002"); // 주문 번호
         params.put("partner_user_id", "gogumaaa"); // 회원 아이디
-        params.put("item_name", "비둘기"); // 상품 명
-        params.put("quantity", "1"); // 상품 수량
-        params.put("total_amount", "20000"); // 상품 가격
+        params.put("item_name", experience.getCategory()); // 상품 명 카테고리
+        params.put("quantity", String.valueOf(experience.getExperiencePeople())); // 상품 수량
+        params.put("total_amount", experience.getPrice()); // 상품 가격
         params.put("tax_free_amount", "100"); // 상품 비과세 금액
         params.put("approval_url", "http://localhost:8024/hondimoyeong/kakaoPaySuccess"); // 성공시 url
         params.put("fail_url", "http://localhost:8024/fail"); // 실패시 url

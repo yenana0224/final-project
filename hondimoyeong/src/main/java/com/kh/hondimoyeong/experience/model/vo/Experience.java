@@ -10,7 +10,7 @@ public class Experience {
 	private String category;
 	private String experienceDate;
 	private String experienceTime;
-	private int price;
+	private String price;
 	private int experiencePeople;
 	private int userNo;
 	
