@@ -234,7 +234,10 @@
         <div class="hdmy-board">
             <div class="hdmy-board_top">
                 <div class="hdmy-board_top-align"><a href="#">모집중</a> | <a href="#">날짜순</a></div>
-                <div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                
+                <c:if test="${ !empty loginUser }">
+                	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                </c:if>
             </div>
 
             <div class="hdmy-board_content">
