@@ -156,7 +156,7 @@
 	            </div>
 	            <div id="phoneBox">
 	                <p>연락처</p>
-	                <input type="text" class="form-control" placeholder="-없이 숫자만 입력" name="phone" required>
+	                <input type="text" class="form-control" name="phone" required>
 	            </div>
 	            <div id="signupButton">
 	                <button type="submit" id="joinBtn" disabled>가입하기</button>
