@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -217,15 +220,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분 <a href="accompanyDetail">디테일</a></td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-                        </tr>
+                    
+                    	<c:forEach var="accompany" items="${ accompany }">
+	                        <tr class="list">
+	                            <td class="hdmy-table_small">${ accompany.accompanyNo }</td>
+	                            <td class="hdmy-table_mid">24/05/19</td>
+	                            <td class="hdmy-table_small">1코스</td>
+	                            <td>봉보로봉 동행하실 분 <a href="accompanyDetail">디테일</a></td>
+	                            <td class="hdmy-table_small">희주봉</td>
+	                            <td class="hdmy-table_small">3/4</td>
+	                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
+	                        </tr>
+                        </c:forEach>
                         <tr class="list">
                             <td class="hdmy-table_small">1</td>
                             <td class="hdmy-table_mid">24/05/19</td>
