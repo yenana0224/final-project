@@ -180,6 +180,37 @@
         width: 110px;
         text-align: center;
     }
+    
+    /* 페이징바 */
+    .hdmy-board_page{
+    	width: 1200px;
+    }
+    
+     .pagination {
+     	width:fit-content;
+     	margin: 0 auto;
+     	margin-top: 40px;
+     	margin-bottom: 40px;
+     }
+     
+     .page-item.active .page-link {
+     	background-color: #FF9843 !important;
+     	border: 1px solid #FF9843 !important;
+     	color: #FFFFFF !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     }
+     
+     .page-link {
+     	color: #292929 !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     	margin-right: 10px;
+     }
+     
+     .page-item:last-child .page-link, .page-item:first-child .page-link {
+     	border-radius: 10px !important;
+     }
 </style>
 </head>
 <body>
@@ -203,7 +234,10 @@
         <div class="hdmy-board">
             <div class="hdmy-board_top">
                 <div class="hdmy-board_top-align"><a href="#">모집중</a> | <a href="#">날짜순</a></div>
-                <div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                
+                <c:if test="${ !empty loginUser }">
+                	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                </c:if>
             </div>
 
             <div class="hdmy-board_content">
@@ -224,80 +258,98 @@
                     	<c:forEach var="accompany" items="${ accompany }">
 	                        <tr class="list">
 	                            <td class="hdmy-table_small">${ accompany.accompanyNo }</td>
-	                            <td class="hdmy-table_mid">24/05/19</td>
-	                            <td class="hdmy-table_small">1코스</td>
-	                            <td>봉보로봉 동행하실 분 <a href="accompanyDetail">디테일</a></td>
-	                            <td class="hdmy-table_small">희주봉</td>
-	                            <td class="hdmy-table_small">3/4</td>
-	                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
+	                            <td class="hdmy-table_mid">${ accompany.createDate }</td>
+	                            <td class="hdmy-table_small">${ accompany.courseName }</td>
+	                            <td>${ accompany.accompanyTitle }<a href="accompanyDetail">디테일</a></td>
+	                            <td class="hdmy-table_small">${ accompany.userName }</td>
+	                            <td class="hdmy-table_small">${ accompany.accompanyNum } / ${ accompany.accompanyPeople }</td>
+	                            
+	                            <c:choose>
+	                            	<c:when test="${ accompany.accompanyNum ge accompany.accompanyPeople }">
+	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
+	                            	</c:otherwise>
+	                            </c:choose>
 	                        </tr>
                         </c:forEach>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status">마감</td>
-                        </tr>
-                        <tr class="list">
-                            <td class="hdmy-table_small">1</td>
-                            <td class="hdmy-table_mid">24/05/19</td>
-                            <td class="hdmy-table_small">1코스</td>
-                            <td>봉보로봉 동행하실 분</td>
-                            <td class="hdmy-table_small">희주봉</td>
-                            <td class="hdmy-table_small">3/4</td>
-                            <td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
         </div> <!-- hdmy-board -->
         
-        <div class="hdmy-board_page">
-            <div class="paging-area" align="center" style="margin:30px 0px;">
-                <button class="btn btn-outline-secondary"> < </button>
-                <button class="btn btn-outline-secondary">1</button>
-                <button class="btn btn-outline-secondary">2</button>
-                <button class="btn btn-outline-secondary">3</button>
-                <button class="btn btn-outline-secondary">4</button>
-                <button class="btn btn-outline-secondary"> > </button>
-            </div>
-        </div>
-
-
-
+	            <div class="hdmy-board_page"> <!-- 페이징바 -->
+	               	<ul class="pagination">
+	     				<c:choose>
+	               			<c:when test="${ empty keyword }">
+	               				<c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+									<c:choose>
+										<c:when test="${ p eq pageInfo.currentPage }">
+											<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="accompany?page=${ p }">${ p }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:when>
+	               			
+	               			<c:otherwise>
+	               			    <c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+									<li class="page-item"><a class="page-link" href="search.accompany?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:otherwise>
+	               		</c:choose>
+					</ul>
+	            </div>
+	        </div>
+		</div>
     </div> <!-- container -->
 
 <jsp:include page="../common/footer.jsp"/>
+
+<script>
+
+
+</script>
+
 
 </body>
 </html>
