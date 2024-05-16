@@ -134,7 +134,7 @@
                     <img class="icon-box" src="resources/image/icon6.png">
                 </div>
                 <div id="buttonBox">
-                    <div id="mypageBtn"><a href="#" id="mypageBtn-font">개인정보수정</a></div>
+                    <div id="mypageBtn"><a href="myPageUpdate" id="mypageBtn-font">개인정보수정</a></div>
                     <div id="mypageBtn"><a href="#" id="mypageBtn-font">예매내역</a></div>
                     <div id="mypageBtn"><a href="#" id="mypageBtn-font">내가 쓴 글</a></div>
                     <div id="mypageBtn"><a href="#" id="mypageBtn-font">동행모임</a></div>
