@@ -177,7 +177,7 @@
 				                <a href="adminPage">관리자페이지</a>
 				            </c:when>
 				            <c:when test="${ sessionScope.loginUser.status == 'C' }">
-				                <a href="mypage.member">마이페이지</a>
+				                <a href="myPage">마이페이지</a>
 				            </c:when>
 				        </c:choose>
            		 	</c:otherwise>

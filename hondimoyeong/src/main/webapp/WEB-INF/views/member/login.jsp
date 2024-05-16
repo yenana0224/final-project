@@ -140,7 +140,7 @@
             </div>
             </form>
             <div id="linkBox">
-                <a href="#">회원가입</a> | <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
+                <a href="insertForm">회원가입</a> | <a href="searchIdForm">아이디 찾기</a> | <a href="searchPwdForm">비밀번호 찾기</a>
             </div>
         </div>
     </div>
