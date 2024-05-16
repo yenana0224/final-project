@@ -8,15 +8,16 @@
 <resultMap type="accompany" id="accompanyResultSet">
 	<result column="ACCOMPANY_NO" property="accompanyNo"/>
 	<result column="USER_NO" property="userNo"/>
-	<result column="COURSE_NO" property="courseNo"/>
-	<result column="COURSE_NAME" property="courseName"/>
+	<result column="USER_NAME" property="userName"/>
+	<result column="C_COURSE_NO" property="courseName"/>
 	<result column="ACCOMPANY_DATE" property="accompanyDate"/>
 	<result column="WITH_TITLE" property="accompanyTitle"/>
 	<result column="WITH_CONTENT" property="accompanyContent"/>
 	<result column="CREATE_DATE" property="createDate"/>
 	<result column="COUNT" property="count"/>
 	<result column="STATUS" property="status"/>
-	<result column="accompanyPeople" property="ACCOMPANY_PEOPLE"/>
+	<result column="ACCOMPANY_PEOPLE" property="accompanyPeople"/>
+	<result column="ACCOMPANY_NUM" property="accompanyNum"/>
 </resultMap>
 
 	<select id="selectListCount" resultType="_int">
@@ -31,25 +32,43 @@
 	
 	<select id="selectAll" resultMap="accompanyResultSet">
 		SELECT
-		      ACCOMPANY_NO,
-		      USER_NO,
-		      COURSE_NAME,
-		      ACCOMPANY_DATE,
-		      WITH_TITLE,
-		      WITH_CONTENT,
-		      CREATE_DATE,
-		      COUNT,
-		      STATUS,
-		      ACCOMPANY_PEOPLE
+		      A.ACCOMPANY_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO AS C_COURSE_NO,
+		      A.ACCOMPANY_DATE,
+		      A.WITH_TITLE,
+		      A.WITH_CONTENT,
+		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.ACCOMPANY_PEOPLE,
+		      COUNT(B.USER_NO) AS ACCOMPANY_NUM
 		  FROM
 		      ACCOMPANY A
 		  JOIN
-		      COURSE ON (A.COURSE_NO = COURSE_INDEX)
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		  JOIN
+		      MEMBER M USING (USER_NO)
+		  LEFT
+		  JOIN
+		      ACCOMPANY_BRIDGE B ON (A.ACCOMPANY_NO = B.ACCOMPANY_NO)
 		 WHERE
 		      A.STATUS = 'Y'
-		 ORDER
+		 GROUP
 		    BY
-		      ACCOMPANY_NO DESC
+		      A.ACCOMPANY_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO,
+		      A.ACCOMPANY_DATE,
+		      A.WITH_TITLE,
+		      A.WITH_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.ACCOMPANY_PEOPLE
+		ORDER
+		   BY
+		     A.ACCOMPANY_NO DESC
 	</select>
 
 

@@ -13,6 +13,7 @@ public class Accompany {
 	
 	private int accompanyNo;
 	private int userNo;
+	private String userName;
 	private int courseNo;
 	private String courseName;
 	private String accompanyDate;
@@ -22,5 +23,7 @@ public class Accompany {
 	private int count;
 	private String status;
 	private int accompanyPeople;
+	
+	private int accompanyNum; // 신청인원
 
 }
