@@ -138,7 +138,7 @@
         </div>
 
         <div class="btn-area">
-            <button>목록으로</button>
+            <button id="back">목록으로</button>
         </div>
     </div>
     
@@ -150,6 +150,10 @@
     	
     	$('#update').click(()=> {
     		location.href="update/"+${course.courseIndex};
+    	})
+    	
+    	$('#back').click(() => {
+    		location.href="/hondimoyeong/admin/course";
     	})
     })
     
