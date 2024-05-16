@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 	
+	// 화면
+	
+	
 	// 로그인
 	@RequestMapping("login")
 	public String login() {
@@ -28,6 +31,13 @@ public class LoginController {
 	@RequestMapping("searchPwdForm")
 	public String searchPwdForm() {
 		return "member/searchPwdForm";
+	}
+	
+	
+	// 마이페이지 메인
+	@RequestMapping("myPage")
+	public String myPage() {
+		return "member/myPage";
 	}
 	
 	

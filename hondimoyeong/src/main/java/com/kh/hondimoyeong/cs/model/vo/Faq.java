@@ -9,13 +9,15 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Answer {
+public class Faq {
 	
-	private int answerNo;
 	private int questionNo;
-	private String answerContent;
+	private String questionContent;
 	private String createDate;
 	private String status;
 	private int userNo;
+	
+	private int questionAnswerNo;
+	private String answerContent;
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.cs.model.service.NoticeService;
+import com.kh.hondimoyeong.cs.model.vo.Faq;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,9 @@ public class CsController {
 	public String selectAll(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		
 		PageInfo pi = Pagination.getPageInfo(noticeService.selectListCount(), page, 10, 5);
+		
+		List<Faq> faqList = noticeService.faqList();
+		model.addAttribute("faqList", faqList);
 		
 		model.addAttribute("notice", noticeService.selectList(pi));
 		model.addAttribute("pageInfo", pi);
