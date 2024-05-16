@@ -77,6 +77,7 @@
 					<form action="aquareserve" method="get">
 						<button class="btn btn-outline-info"  style="margin-top:15px">예매하기</button>
 						<input type="hidden" name="category" value="aq">
+						<input type="hidden" name="price" id="price" value="36000">
 					</form>
 					
 					

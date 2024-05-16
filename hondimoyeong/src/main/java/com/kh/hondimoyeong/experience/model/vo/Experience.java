@@ -9,7 +9,8 @@ public class Experience {
 	private int expericeNo;
 	private String category;
 	private String experienceDate;
-	private int price;
+	private String experienceTime;
+	private String price;
 	private int experiencePeople;
 	private int userNo;
 	
