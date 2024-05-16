@@ -15,6 +15,16 @@
 	<result column="USER_NO" property="userNo"/>
 </resultMap>
 
+<resultMap type="faq" id="faqResultSet">
+    <result column="Q_NO" property="questionNo"/>
+    <result column="Q_CONTENT" property="questionContent"/>
+    <result column="Q_CREATE_DATE" property="createDate"/>
+    <result column="Q_STATUS" property="status"/>
+    <result column="Q_USER_NO" property="userNo"/>
+    <result column="A_Q_NO" property="questionAnswerNo"/>
+    <result column="A_CONTENT" property="answerContent"/>
+</resultMap>
+
 	<select id="selectListCount" resultType="_int">
 		SELECT
 		      COUNT(*)
@@ -135,6 +145,27 @@
 		   AND
 		      NOTICE_TITLE LIKE '%' || #{keyword} || '%'
 		      
+	</select>
+	
+	
+	<!-- FAQ -->
+	<select id="faqList" resultMap="faqResultSet">
+		SELECT
+		    Q.Q_NO AS Q_NO,
+		    Q.Q_CONTENT AS Q_CONTENT,
+		    Q.CREATE_DATE AS Q_CREATE_DATE,
+		    Q.STATUS AS Q_STATUS,
+		    Q.USER_NO AS Q_USER_NO,
+		    A.A_Q_NO AS A_Q_NO,
+		    A.A_CONTENT AS A_CONTENT
+		FROM
+		    FAQ_Q Q
+		LEFT JOIN
+		    FAQ_A A ON Q.Q_NO = A.A_Q_NO
+		WHERE
+		    Q.STATUS = 'Y'
+		ORDER BY
+		    Q.Q_NO DESC
 	</select>
 
 </mapper>
