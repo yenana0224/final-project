@@ -23,7 +23,7 @@ import lombok.extern.java.Log;
 @Transactional
 @Log
 public class KakaoPayService {
-    private static final String Host = "https://open-api.kakaopay.com";
+    private static final String Host = "https://open-api.kakaopay.com/online/v1/payment/ready";
     private static final String devkey = "DEVCE517BBAF3A98F3BD12990853FA33292E0A7D";
 
 
@@ -36,18 +36,18 @@ public class KakaoPayService {
 
         // Server Request Header : 서버 요청 헤더
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "SECRET_KEY " + devkey); // 어드민 키
+        headers.add("Authorization", "SECRET_KEY " + devkey); // 어드민 키
         //headers.add("Accept", "application/json");
         //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-        headers.set("Content-type", "application/json");
+        headers.add("Content-type", "application/json");
 
 
         // Server Request Body : 서버 요청 본문
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
-        params.put("partner_order_id", "1001"); // 주문 번호
-        params.put("partner_user_id", "goguma"); // 회원 아이디
+        params.put("partner_order_id", "1002"); // 주문 번호
+        params.put("partner_user_id", "gogumaaa"); // 회원 아이디
         params.put("item_name", "비둘기"); // 상품 명
         params.put("quantity", "1"); // 상품 수량
         params.put("total_amount", "20000"); // 상품 가격
@@ -60,16 +60,14 @@ public class KakaoPayService {
         HttpEntity<Map<String, String>> body = new HttpEntity<Map<String, String>>(params, headers);
 
         try {
-           reserve = restTemplate.postForObject(new URI(Host + "/online/v1/payment/ready"), body, Reserve.class);
+           reserve = restTemplate.postForObject(new URI(Host), body, Reserve.class);
 
            //HttpEntity<Reserve> reserve = restTemplate.exchange(new URI(Host + "/online/v1/payment/ready"), HttpMethod.POST, body, Reserve.class);
            
-           //log.info(""+ reserve);
-            System.out.println(body);
-            System.out.println(reserve);
-        
+           log.info(""+ reserve);
+           System.out.println(reserve);
             
-            return reserve.toString();
+           return reserve.getNext_redirect_pc_url();
             
 
         } catch (RestClientException e) {
@@ -79,4 +77,13 @@ public class KakaoPayService {
         }
         return "/pay";
     }
+    
+    public String kakaopayVo() {
+    	
+    }
+    
+    
+    
+    
+    
 }
