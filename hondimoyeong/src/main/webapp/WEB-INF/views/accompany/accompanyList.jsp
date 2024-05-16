@@ -180,6 +180,37 @@
         width: 110px;
         text-align: center;
     }
+    
+    /* 페이징바 */
+    .hdmy-board_page{
+    	width: 1200px;
+    }
+    
+     .pagination {
+     	width:fit-content;
+     	margin: 0 auto;
+     	margin-top: 40px;
+     	margin-bottom: 40px;
+     }
+     
+     .page-item.active .page-link {
+     	background-color: #FF9843 !important;
+     	border: 1px solid #FF9843 !important;
+     	color: #FFFFFF !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     }
+     
+     .page-link {
+     	color: #292929 !important;
+     	font-weight: bold;
+     	border-radius: 10px;
+     	margin-right: 10px;
+     }
+     
+     .page-item:last-child .page-link, .page-item:first-child .page-link {
+     	border-radius: 10px !important;
+     }
 </style>
 </head>
 <body>
@@ -245,16 +276,68 @@
             </div>
         </div> <!-- hdmy-board -->
         
-        <div class="hdmy-board_page">
-            <div class="paging-area" align="center" style="margin:30px 0px;">
-                <button class="btn btn-outline-secondary"> < </button>
-                <button class="btn btn-outline-secondary">1</button>
-                <button class="btn btn-outline-secondary">2</button>
-                <button class="btn btn-outline-secondary">3</button>
-                <button class="btn btn-outline-secondary">4</button>
-                <button class="btn btn-outline-secondary"> > </button>
-            </div>
-        </div>
+	            <div class="hdmy-board_page"> <!-- 페이징바 -->
+	               	<ul class="pagination">
+	     				<c:choose>
+	               			<c:when test="${ empty keyword }">
+	               				<c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+									<c:choose>
+										<c:when test="${ p eq pageInfo.currentPage }">
+											<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="accompany?page=${ p }">${ p }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:when>
+	               			
+	               			<c:otherwise>
+	               			    <c:choose>
+	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
+	               					</c:when>
+									<c:otherwise>
+							  			<li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+							  		</c:otherwise>
+	               				</c:choose>
+	               				
+	               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+									<li class="page-item"><a class="page-link" href="search.accompany?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+								</c:forEach>
+								
+								<c:choose>
+								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
+								        <li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+								    </c:when>
+								    <c:otherwise>
+								        <li class="page-item disabled"><a class="page-link"> > </a></li>
+								    </c:otherwise>
+								</c:choose>
+	               			</c:otherwise>
+	               		</c:choose>
+					</ul>
+	            </div>
+	        </div>
+		</div>
     </div> <!-- container -->
 
 <jsp:include page="../common/footer.jsp"/>
