@@ -14,16 +14,14 @@
 
     <style>
             div{
-                /* border : 1px solid red;  */
                 box-sizing : border-box;
                 background-color: #ffffff;
             }          
         
             #wrap{
                 width: 1200px;
-                height: 1000px;
+                height: 800px;
                 margin: 0 auto;
-                border : 1px solid red;
                 position: relative; 
             }
 
@@ -31,9 +29,9 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 650px;
+                height: 680px;
                 margin: 0 auto;
-                margin-top: 300px;
+                margin-top: 200px;
                 /* background-color: #FFF2D7; */
                 border-radius: 20px;
                 border : 4px solid #FF9843; 
@@ -88,7 +86,7 @@
                         
 
             /*아이디~연락처 인풋박스 테두리*/
-            .form-control{ 
+            div > .form-control{ 
                 width: 260px;
                 height: 30px;
                 border: none;
@@ -98,7 +96,7 @@
             }
 
 
-            h5{
+            div > p {
                 margin: 0 auto;
                 font-size: 14px;
                 font-weight: bold;
@@ -107,19 +105,6 @@
             }
             
 
-            /*버튼 스타일*/
-            button{ 
-                width: 260px;
-                height: 40px;
-                border-radius: 8px;
-                background-color: #FF9843; 
-                color: #ffffff; 
-                border: none; 
-                cursor: pointer; 
-                font-size: 14px;
-                font-weight: bolder;
-                margin-top: 3px;
-            }
             
             /*회원가입 버튼 박스*/
             #signupButton    
@@ -131,11 +116,43 @@
                 margin-top: 5px;
                 /* border: 1px solid rgb(204, 0, 160); */
             }                                 
+            .btn-a{
+                width: 80px;
+                height: 35px;
+                background-color: #FF9843;
+                border: 0;
+                border-radius: 10px;
+                margin-top: 10px;
+                color: #ffffff;
+                font-size: 12px;
+                margin-right: 5px;
 
+            }
 
+            .btn-b{
+                width: 80px;
+                height: 35px;
+                background-color: #9e9e9e;
+                border: 0;
+                border-radius: 10px;
+                margin-top: 10px;
+                margin-right: 5px;
+                color: #ffffff;
+                font-size: 12px;
+            }
 
+            .btn-c{
+                width: 80px;
+                height: 35px;
+                background-color: #ff7373;
+                border: 0;
+                border-radius: 10px;
+                margin-top: 10px;
+                color: #ffffff;
+                font-size: 12px;
+                margin-right: 5px;
 
-
+            }
     </style>    
 </head>
 <body>
@@ -148,41 +165,44 @@
             <div id="detailBox">
                 <form action="insert.member" method="post">
 	                <div class="input-box"> 
-	                    <h5>이름</h5>
+	                    <p>이름</p>
 	                    <input type="text" class="form-control" name="userName" value="유나킴" readonly > 
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>아이디</h5>
+	                    <p>아이디</p>
 	                    <input type="text" class="form-control" name="userId" value="nananakim" readonly>
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>비밀번호</h5>
+	                    <p>비밀번호</p>
 	                    <input type="password" class="form-control" name="userPwd" value="1234">
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>비밀번호 재확인</h5>
+	                    <p>비밀번호 재확인</p>
 	                    <input type="password" class="form-control" name="userPwd" value="1234"> 
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>이메일</h5>
+	                    <p>이메일</p>
 	                    <input type="text" class="form-control" name="userEmail" value="abc@naver.com"> 
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>연락처</h5>
+	                    <p>연락처</p>
 	                    <input type="text" class="form-control" name="userPhone" value="010-1234-5678"> 
 	                </div>
 	                <div class="input-box"> 
-	                    <h5>가입일</h5>
+	                    <p>가입일</p>
 	                    <input type="text" class="form-control" name="joinDate" value="2024-05-05" readonly> 
 	                </div>
 	                <div id="signupButton">
-	                    <button type="submit">완료</button>
+	                    <button type="submit" class="btn-a">수정완료</button>
+	                    <button type="button" class="btn-c">회원탈퇴</button>
+	                    <button type="button" class="btn-b">목록</button>
 	                </div>
                 </form>
             </div>               
         </div>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
+
 
 
 </body>
