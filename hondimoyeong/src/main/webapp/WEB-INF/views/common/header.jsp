@@ -178,7 +178,7 @@
 					            </c:when>
 					            
 					            <c:when test="${ sessionScope.loginUser.status == 'C' }">
-					                <a href="mypage.member">마이페이지</a>
+					                <a href="myPage">마이페이지</a>
 					            </c:when>
 					        </c:choose>
 					        <a href="list.notice">고객센터</a>
