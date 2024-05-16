@@ -1,10 +1,14 @@
 package com.kh.hondimoyeong.member.model.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter 
+@ToString 
+@NoArgsConstructor
 public class Member {
 	
 	private int userNo;  		//회원 고유번호

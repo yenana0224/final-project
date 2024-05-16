@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,6 +111,7 @@
                 font-weight: bolder;
                 margin-top: 3px;
             }
+            
     </style>        
     
 </head>
@@ -122,6 +124,7 @@
             <div id="loginTitle">
                 <h4>로그인</h4>
             </div>
+            <form action="login.member" method="post">
             <div id="idBox">
                 <div class="fontBox">아이디</div>
                 <div class="inputBox"><input type="text" class="form-control" name="userId"></div>
@@ -130,16 +133,31 @@
                 <div class="fontBox">비밀번호</div>
                 <div class="inputBox"><input type="password" class="form-control" name="userPwd"></div>
             </div>
+            
+            
             <div class="buttonBox">
                 <button type="submit" id="loginButton">로그인</button>
             </div>
+            </form>
             <div id="linkBox">
-                <a href="insertForm">회원가입</a> | <a href="searchIdForm">아이디 찾기</a> | <a href="searchPwdForm">비밀번호 찾기</a>
+                <a href="#">회원가입</a> | <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
             </div>
         </div>
     </div>
     
 	<jsp:include page="../common/footer.jsp"/>
+
+
+	<!-- 로그인 실패 시 알림창 띄워주기 -->
+    <script type="text/javascript">
+        window.onload = function() {
+            var errorMsg = '<c:out value="${errorMsg}" />';
+            if (errorMsg) {
+                alert(errorMsg);
+            }
+        }
+    </script>
+
 
 </body>
 </html>
