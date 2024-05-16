@@ -94,9 +94,12 @@
                 <td class="part" rowspan="2">스탬프</td>
                 <td rowspan="2" class="infomation">
                 
-                <span>파일없음</span>
-
-                    
+                	<c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 1 }">
+                			<img alt="스탬프" src="${file.changeName}">
+                		</c:if>
+                	</c:forEach>
+                   
                 </td>
             </tr>
             <tr>
@@ -110,22 +113,33 @@
             <tr>
                 <td class="part">상세지도</td>
                 <td class="infomation" colspan="5">
-                    <img src="" alt="">
+                    <c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 2 }">
+                			<img alt="상세지도" scr="${file.changeName}">
+                		</c:if>
+                	</c:forEach>
                 </td>
             </tr>
-            <tr>
-                <td class="part" rowspan="3">코스사진</td>
-                <td class="part"> 사진 1 </td>
-                <td class="infomation" colspan="4"> OriginalName </td>
-            </tr>
-            <tr>
-                <td class="part"> 사진 2 </td>
-                <td class="infomation" colspan="4"> OriginalName </td>
-            </tr>
-            <tr>
-                <td class="part"> 사진 3 </td>
-                <td class="infomation" colspan="4"> 첨부파일이 없습니다 </td>
-            </tr>
+            
+            <c:forEach var="file" items="${course.files}">
+               <c:if test="${file.fileLevel eq 3 }">
+               </c:if>
+            </c:forEach>
+                			
+	            <tr>
+	                <td class="part" rowspan="3">코스사진</td>
+	                <td class="part"> 사진 1 </td>
+	                <td class="infomation" colspan="4"> OriginalName </td>
+	            </tr>
+	            <tr>
+	                <td class="part"> 사진 2 </td>
+	                <td class="infomation" colspan="4"> OriginalName </td>
+	            </tr>
+	            <tr>
+	                <td class="part"> 사진 3 </td>
+	                <td class="infomation" colspan="4"> 첨부파일이 없습니다 </td>
+	            </tr>
+
         </table>
 
         <div class="btn-area">
