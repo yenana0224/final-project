@@ -94,8 +94,6 @@
 			<h1>제주입장권</h1>
 			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>
 			
-			
-			
 				<input type="date" id="Date">
 				<select id="changeaqua">
 					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
@@ -103,25 +101,29 @@
 				<a>
 				<select id="changeaqua">
 					<option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
+					
 				</select>
 				</a>
 				
 				<div id="aquaprice" >
-					<button id="sub">-</button>
-					<span id="span1">${ price }</span>원
-					<button id="add">+</button>
+					<button id="sub" class="btn btn-outline-danger">-</button>
+					<span id="span1" style="width:120px">${ price }</span>원
+					<button id="add" class="btn btn-outline-primary">+</button>&nbsp;
+					<span id="person1" >1</span>명
 				</div>
 				
 				
 				<br><br>
-				<button id="btn1" class="btn btn-outline-info">예매하기</button>
+					<input type="hidden" id="category" name="category" value="aq">
+					<button  id="btn1" class="btn btn-outline-info">예매하기</button>
+					
 		</div>
 	</div>
 	
 	
 	
 	
-		<script>
+	<script>
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
 	// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
 	var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
@@ -133,38 +135,68 @@
 	
 	$(function(){
 		$('#btn1').click(function() {
+			
+			
 			var dateString = $("#Date").val();
 			var timeString = $('#changeaqua').children('option:selected').text();
+			var price = $('#aquaprice').children('#span1').text()
+			var person = $('#aquaprice').children('#person1').text()
+			var category = $('#category').val();
+
 			console.log(dateString);
 			console.log(timeString);
-		});
+			console.log(price);
+			console.log(person);
+			console.log(category);
+			
+			
+				$.ajax({
+					url : 'kakaoPay',
+					type : 'post',
+					data : {
+						experienceDate : dateString,
+						experienceTime : timeString,
+						price : price,
+						people : person,
+						category : category
+					}
+				});
+			
+			
+			});
+		})
+	
+	
 		
 		
 		
 		$('#sub').click(function(){
-			var aa = $('#aquaprice').children('#span1').text();
-			console.log(aa);
-			
-			newPrice = aa - 36000;
-			
-		    document.getElementById("span1").textContent = newPrice;
-			
-			
+			var num = $('#aquaprice').children('#span1').text();
+			var person = $('#aquaprice').children('#person1').text();
+			newPrice = num - 36000;
+			newperson = Number(person) - 1;
+			if(newPrice > 0){
+				document.getElementById("span1").textContent = newPrice;
+				document.getElementById("person1").textContent = newperson
+			}			
 		});
 		
 		$('#add').click(function(){
 			
-			var bb = $('#aquaprice').children('#span1').text();
-			console.log(bb);
-			
-			newPrice = 36000 + bb;
-			
+			var num = $('#aquaprice').children('#span1').text();
+			var person = $('#aquaprice').children('#person1').text();
+			newPrice = 36000 + Number(num);
+			newperson = Number(person) + 1;
 		    document.getElementById("span1").textContent = newPrice;
-			
+		    document.getElementById("person1").textContent = newperson
 		});
 		
+	
 		
-	});
+		
+	
+	
+	
 	
 	
 	
