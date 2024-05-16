@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,32 +94,42 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
 
-    <div id="container">
-        <div class="notice_insert_title"><span>공지사항 수정</span></div>
-
-        <div class="insert_box">
-            <form action="update.notice" method="post">
-            <input type="hidden" name="noticeNo" value="${ notice.noticeNo }" />
-            
-				<table class="tb_input">
-					<tbody>
-						<tr>
-							<th>* 제목</th>
-							<td><input type="text" name="noticeTitle" class="input_title" value="${ notice.noticeTitle }"/></td>
-						</tr>
-						<tr>
-							<th>* 내용</th>
-							<td><textarea class="input_content" name="noticeContent">${ notice.noticeContent }</textarea></td>
-						</tr>
-					</tbody>
-				</table>
-                <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">등록</button>
-                    <button class="hdmy_detail_btn" type="button" onclick="noticeList();">취소</button>
-                </div>
-            </form>
-        </div> <!-- inset_box -->
-    </div>
+	<c:choose>
+		<c:when test="${ sessionScope.loginUser.status == 'A' }">
+		    <div id="container">
+		        <div class="notice_insert_title"><span>공지사항 수정</span></div>
+		
+		        <div class="insert_box">
+		            <form action="update.notice" method="post">
+		            <input type="hidden" name="noticeNo" value="${ notice.noticeNo }" />
+		            
+						<table class="tb_input">
+							<tbody>
+								<tr>
+									<th>* 제목</th>
+									<td><input type="text" name="noticeTitle" class="input_title" value="${ notice.noticeTitle }"/></td>
+								</tr>
+								<tr>
+									<th>* 내용</th>
+									<td><textarea class="input_content" name="noticeContent">${ notice.noticeContent }</textarea></td>
+								</tr>
+							</tbody>
+						</table>
+		                <div class="detail_btn_box" align="center">
+		                    <button class="hdmy_detail_btn" type="submit">등록</button>
+		                    <button class="hdmy_detail_btn" type="button" onclick="noticeList();">취소</button>
+		                </div>
+		            </form>
+		        </div> <!-- inset_box -->
+		    </div>
+		</c:when>
+		<c:otherwise>
+			<script>
+				alert('관리자만 수정 가능합니다.');
+				location.href = '${ path }/list.notice?page=1';
+			</script>
+		</c:otherwise>
+	</c:choose>
 
 <jsp:include page="../common/footer.jsp"/>
 

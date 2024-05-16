@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.KakaoPayVo;
 import com.kh.hondimoyeong.experience.model.vo.Reserve;
 
@@ -32,7 +33,7 @@ public class KakaoPayService {
     private Reserve reserve;
     
 
-    public String kakaoPayReady() {
+    public String kakaoPayReady(Experience experience) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 

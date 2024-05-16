@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.cs.model.dao.NoticeRepository;
-import com.kh.hondimoyeong.cs.model.vo.Answer;
 import com.kh.hondimoyeong.cs.model.vo.Faq;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
-import com.kh.hondimoyeong.cs.model.vo.Question;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{

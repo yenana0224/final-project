@@ -24,5 +24,7 @@ public class AquaplanetController {
 		model.addAttribute("price", price);
 		return "experience/aquareserve";
 	}
+	
+	
 
 }

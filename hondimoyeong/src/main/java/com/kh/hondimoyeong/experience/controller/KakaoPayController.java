@@ -1,5 +1,7 @@
 package com.kh.hondimoyeong.experience.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hondimoyeong.experience.model.service.KakaoPayService;
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.KakaoPayVo;
 
 import lombok.RequiredArgsConstructor;
@@ -26,20 +29,27 @@ public class KakaoPayController {
 	
 	private KakaoPayVo kakaopayVo;
 	
-	
-	
+	private Experience experience;
 	
 	@GetMapping("kakaop")
 	public String kakaop() {
 		return "experience/kakaop";
+		
+		
 	}
 	
 	@PostMapping("kakaoPay")
-    public String kakaoPay(){
+    public String kakaoPay(String experienceDate, String experienceTime, int price, int people, String category, Model model, HttpSession session){
         log.info("kakaoPay post.....................");
-
-		
-        return "redirect:" + kakaoPay.kakaoPayReady();
+        
+        experience.setExperienceDate(experienceDate);
+        experience.setExperienceTime(experienceTime);
+        experience.setPrice(price);
+        experience.setExperiencePeople(people);
+        experience.setCategory(category);
+		model.addAttribute("Experience", experience);
+        
+        return "redirect:" + kakaoPay.kakaoPayReady(experience);
     }
 	
 	@GetMapping("/kakaoPaySuccess")
