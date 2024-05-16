@@ -93,18 +93,16 @@
                 <td class="infomation">${course.takeTime}</td>
                 <td class="part" rowspan="2">스탬프</td>
                 <td rowspan="2" class="infomation">
-                
                 	<c:forEach var="file" items="${course.files}">
                 		<c:if test="${file.fileLevel eq 1 }">
                 			<img alt="스탬프" src="${file.changeName}">
                 		</c:if>
                 	</c:forEach>
-                   
                 </td>
             </tr>
             <tr>
                 <td class="part">코스이름</td>
-                <td colspan="3" class="infomation">${course.courseName }</td>
+                <td colspan="3" class="infomation">${course.courseName}</td>
             </tr>
             <tr>
                 <td class="part">코스설명</td>
@@ -115,30 +113,23 @@
                 <td class="infomation" colspan="5">
                     <c:forEach var="file" items="${course.files}">
                 		<c:if test="${file.fileLevel eq 2 }">
-                			<img alt="상세지도" scr="${file.changeName}">
+                			<img alt="상세지도" src="${file.changeName}">
                 		</c:if>
                 	</c:forEach>
                 </td>
             </tr>
+
+            <tr>
+                <td class="part" rowspan="4">코스사진</td>
+            </tr>
             
             <c:forEach var="file" items="${course.files}">
-               <c:if test="${file.fileLevel eq 3 }">
-               </c:if>
-            </c:forEach>
-                			
-	            <tr>
-	                <td class="part" rowspan="3">코스사진</td>
-	                <td class="part"> 사진 1 </td>
-	                <td class="infomation" colspan="4"> OriginalName </td>
-	            </tr>
-	            <tr>
-	                <td class="part"> 사진 2 </td>
-	                <td class="infomation" colspan="4"> OriginalName </td>
-	            </tr>
-	            <tr>
-	                <td class="part"> 사진 3 </td>
-	                <td class="infomation" colspan="4"> 첨부파일이 없습니다 </td>
-	            </tr>
+	               <c:if test="${file.fileLevel eq 3 }">
+	               	<tr>    
+		                <td class="infomation" colspan="4"> ${ file.originName } </td>
+					</tr>
+	               </c:if>
+		    </c:forEach>
 
         </table>
 

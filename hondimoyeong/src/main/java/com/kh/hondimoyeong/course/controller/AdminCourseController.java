@@ -39,9 +39,6 @@ public class AdminCourseController {
 									 ModelAndView mv) {
 		
 		mv.addObject("course", courseService.courseDetail(courseIndex)).setViewName("admin/course/courseDetail");
-		
-		System.out.println(courseService.courseDetail(courseIndex));
-		
 		return mv;
 	}
 	
