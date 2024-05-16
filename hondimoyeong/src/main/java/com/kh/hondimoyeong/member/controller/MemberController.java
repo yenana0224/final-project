@@ -26,7 +26,6 @@ public class MemberController {
    // 로그인
    @RequestMapping("login.member")
    public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
-      System.out.println(member);
       Member loginUser = memberService.login(member);
       
       if(loginUser != null && bcryptPasswordEncoder.matches(member.getUserPwd(), loginUser.getUserPwd())) {
@@ -69,23 +68,7 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping("idCheck.member")
 	public String idCheck(String checkId) {
-		//System.out.println(checkId);
-		
-		
 		int count = memberService.idCheck(checkId);
-		// NNNNN / NNNNY
-		
-		/*
-		
-		if(count > 0) { // 이미 존재하는 아이디
-			return "NNNNN";
-		} else {
-			return "NNNNY";
-		}
-		*/
-		//return "";
-		
-		//return count > 0 ? "NNNNN" : "NNNNY";
 		return memberService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
 	
