@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,7 +65,7 @@ public class MemberController {
 	}
 	
 
-	
+	// 회원가입 시 아이디 중복 체크
 	@ResponseBody
 	@GetMapping("idCheck.member")
 	public String idCheck(String checkId) {
@@ -74,8 +75,50 @@ public class MemberController {
 	
 	
 	
+	// 회원정보수정
+	@RequestMapping("update.member")
+	public String update(Member member, Model model, HttpSession session) {
+		if(memberService.update(member) > 0) {
+			
+			session.setAttribute("loginUser", memberService.login(member));
+			
+			//session에 일회성 알람문구 띄워주기
+			session.setAttribute("alertMsg", "정보 수정에 성공했습니다!");
+			return "redirect:myPage";
+			
+		} else { 
+			model.addAttribute("errorMsg", "정보 수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
 	
 	
+	// 회원탈퇴
+	@RequestMapping("delete.member")
+	public String delete(String userPwd, HttpSession session) {
+		
+		Member loginUser = ((Member)session.getAttribute("loginUser"));
+		
+		String encPwd = loginUser.getUserPwd();
+		
+		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+			
+			if(memberService.delete(loginUser) > 0 ) {
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "탈퇴성공");
+				return "redirect:/";
+			} else {
+				session.setAttribute("alertMsg", "탈퇴실패");
+				return "common/errorPage";
+			}
+		} else {
+			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "redirect:mypage.member";
+		}
+		
+		
+		
+	}
 	
 	
 	
