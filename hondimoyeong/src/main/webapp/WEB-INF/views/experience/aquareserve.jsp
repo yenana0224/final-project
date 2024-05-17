@@ -173,7 +173,7 @@
 					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
 					
 					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="people" value="1"><!-- 5 -->
+					<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
 					
 				</div>
 				

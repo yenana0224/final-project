@@ -38,7 +38,7 @@
 		        #{ experienceDivide},
 		        #{ price},
 		        #{ experiencePeople},
-		        #{ userNo},
+		        #{ userNo}
 		        )
     
 		
