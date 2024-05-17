@@ -138,6 +138,17 @@
 		   BY
 		     A.COMPANION_DATE ASC
 	</select>
+	
+	<update id="increaseCount" parameterType="_int">
+	UPDATE
+	      COMPANION
+	   SET
+	      COUNT = COUNT + 1
+	 WHERE
+	      COMPANION_NO = #{companionNo}
+	   AND
+	      STATUS = 'Y'
+	</update>
 
 
 </mapper>

@@ -16,7 +16,13 @@ public interface CompanionService {
 
 	List<Companion> findCompanion();
 
+	List<Companion> sortCompanion(PageInfo pi);
+
 	List<Companion> sort(PageInfo pi);
+
+	int increaseCount(int companionNo);
+
+	List<Companion> detailCompanion(int companionNo);
 
 
 }

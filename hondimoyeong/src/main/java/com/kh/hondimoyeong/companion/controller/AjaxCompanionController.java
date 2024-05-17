@@ -19,4 +19,6 @@ public class AjaxCompanionController {
 	public String findCompanion() {
 		return new Gson().toJson(companionService.findCompanion());
 	}
+	
 }
+
