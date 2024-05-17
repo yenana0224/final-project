@@ -2,9 +2,8 @@ package com.kh.hondimoyeong.course.model.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.kh.hondimoyeong.course.model.vo.Course;
+import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
 public interface CourseService {
 
@@ -14,4 +13,11 @@ public interface CourseService {
 	
 	Course courseDetail(int courseIndex);
 	
+	int updateCourse(Course course);
+	
+	int updateStamp(CourseFile stamp);
+	
+	int updateDetailMap(CourseFile detailMap);
+	
+	int updatePhoto(List<CourseFile> photoList);
 }
