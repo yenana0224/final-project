@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>인덱스</title>
     
@@ -198,7 +197,7 @@
             <div class="header_menu">
                 <ul class="navi">
                     <li><a href="#">올레길</a></li>
-                    <li><a href="accompany">혼디모영</a></li>
+                    <li><a href="companion">혼디모영</a></li>
                     <li><a href="#">프로그램</a>
                         <ul class="submenu"  style="padding-top: 20px;">
                             <li><a href="#">귤따기 체험</a></li>
