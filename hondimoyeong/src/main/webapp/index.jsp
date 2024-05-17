@@ -60,13 +60,19 @@
     }
 
     #course-datail{
-        width: 300px;
+        width: 380px;
         height: 180px;
         background-color: rgba(255, 255, 255, 0.606);
         position: absolute;
         z-index: 10;
         right : 280px;
-        top : 200px;
+        top : 230px;
+    }
+    
+    h4, h5 {
+    	padding : 5px;
+    	text-align : center;
+    	font-size : smaller;
     }
 
     #whole-course{
@@ -121,9 +127,8 @@
 		 </div>
 		 
 		<div id ="jeju-island">
-			<div id="ollemap">
-		        	
-		    </div>
+			<div id="ollemap"></div>
+			<div id="content-area"></div>
 		        
 		    <div id="whole-course">
 		        <h3>코스 한 눈에 보기</h3>
@@ -136,10 +141,6 @@
 	</div>
 
 
-
-	
-
-    
     <script>
     	$.ajax({
     		url : 'mainCourse',
@@ -153,7 +154,7 @@
     					continue;
     				}
     				
-    				btn += '<button class="course-btn" id="' + data[i].courseName
+    				btn += '<button class="course-btn" id="' + data[i].courseIndex
 			 		   + '" onclick="content(this);">'
 			 		   + data[i].courseNo + '</button>';    				   
     			}
@@ -164,8 +165,28 @@
     	});
     	
     	function content(button){
-    		const url = "resources/course/island/"+ (button.id) +".PNG"
-    		$('#ollemap').html('<img src="'+ url + '">');
+    		
+    		$.ajax({
+    			url : 'selectCourse',
+    			data : {courseIndex : (button.id)},
+    			success : (data) => {
+    				let content = '';
+    				
+    	    		const url = "resources/course/island/"+ (data.courseIndex) +".PNG"
+
+    	    		content += '<div id="course-datail">'
+    	    				 + '<h4>' + data.courseNo + '</h4>'
+    						 + '<h5>' + data.startEnd + '</h5>'
+    						 + '<h5>' + data.takeTime + '</h5>'
+    						 + '<h5>' + data.distance + '</h5>'
+    						 + '</div>'
+    				
+	    			
+    	    		$('#ollemap').html(content + '<img src="'+ url + '">');		 
+    			}
+
+    		})
+
     	}
 
     </script>

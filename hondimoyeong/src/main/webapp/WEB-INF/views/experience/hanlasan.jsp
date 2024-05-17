@@ -70,7 +70,11 @@
 				</div>
 				<div id="main2">
 					<h3>한라산 등산 예매하기</h3>
-					<a class="btn btn-outline-success" style="margin-top:15px">예매하기</a>
+					
+					<form action="hanreserve" method="get">
+						<button class="btn btn-outline-success" style="margin-top:15px">탐방하기</button>
+						<input type="hidden" name="price" id="price" value="36000">
+					</form>
 					<br>
 				</div>
 			</div> 
