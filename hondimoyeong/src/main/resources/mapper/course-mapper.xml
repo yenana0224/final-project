@@ -16,6 +16,7 @@
 	</resultMap>
 	
 	<resultMap type="courseFile" id="courseFileResultSet">
+		<result column="FILE_NO" property="fileNo" />
 		<result column="COURSE_INDEX" property="courseIndex" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
@@ -27,7 +28,8 @@
  	   SELECT
 			  COURSE.COURSE_INDEX,
 			  COURSE_NO,
-			  COURSE_NAME
+			  COURSE_NAME,
+			  FILE_LEVEL
 		 FROM
 		 	  COURSE
 		 LEFT
@@ -97,5 +99,120 @@
 		    C.COURSE_INDEX = #{courseIndex}
 	
 	</select>
+	
+	<update id="updateCourse" parameterType="course">
+	UPDATE
+		  COURSE
+	   SET
+	   	  CONTENT = #{content}
+	WHERE
+		  COURSE_INDEX = #{courseIndex}
+	</update>
+	
+	
+	<update id="updateStamp" parameterType="courseFile">
+	MERGE
+	 INTO
+	  	 COURSE_FILE F
+	USING
+		 DUAL 
+	   ON
+		 (F.COURSE_INDEX = #{courseIndex}
+		  AND
+		  F.FILE_LEVEL = #{fileLevel}
+		  )
+	WHEN
+		MATCHED THEN
+		UPDATE
+		   SET
+			  F.ORIGIN_NAME = #{originName},
+			  F.CHANGE_NAME = #{changeName}
+		   	
+	WHEN
+		 NOT MATCHED THEN
+		 INSERT
+		 (
+		 FILE_NO,
+		 COURSE_INDEX,
+		 ORIGIN_NAME,
+		 CHANGE_NAME,
+		 FILE_LEVEL
+		 )
+		 VALUES
+		 (
+		 SEQ_COURSE_IMG_NO.NEXTVAL,
+		 #{courseIndex},
+		 #{originName},
+		 #{changeName},
+		 #{fileLevel}
+		 )
+	</update>
+	
+	<update id="updateDetailMap" parameterType="courseFile">
+	MERGE
+	 INTO
+	 	 COURSE_FILE F
+	USING
+		 DUAL
+	   ON
+	   	 (F.COURSE_INDEX = #{courseIndex}
+	   	  AND
+	   	  F.FILE_LEVEL = #{fileLevel}
+	   	 )
+	 WHEN
+	 	 MATCHED THEN
+	 	 UPDATE
+	 	    SET
+	 	       F.ORIGIN_NAME = #{originName},
+	 	       F.CHANGE_NAME = #{changeName}
+	 WHEN	
+	 	 NOT MATCHED THEN
+	 	 INSERT
+	 	 (
+	 	 FILE_NO,
+	 	 COURSE_INDEX,
+	 	 ORIGIN_NAME,
+	 	 CHANGE_NAME,
+	 	 FILE_LEVEL
+	 	 )	       
+	 	 VALUES
+	 	 (
+	 	 SEQ_COURSE_IMG_NO.NEXTVAL,
+	 	 #{courseIndex},
+	 	 #{originName},
+	 	 #{changeName},
+	 	 #{fileLevel}	 	 
+	 	 )      
+	</update>
+	
+	<insert id="updatePhoto" parameterType="java.util.List">
+	
+	INSERT
+	  INTO
+	  	  COURSE_FILE
+	  	  (
+	  	  FILE_NO,
+	  	  COURSE_INDEX,
+	  	  ORIGIN_NAME,
+	  	  CHANGE_NAME,
+	  	  FILE_LEVEL
+	  	  )
+	SELECT
+		  SEQ_COURSE_IMG_NO.NEXTVAL,
+		  A.*
+	  FROM
+	  	  (
+			<foreach collection="list" item="item" separator="UNION ALL ">
+			SELECT
+				#{item.courseIndex},
+				#{item.originName},
+				#{item.changeName},
+				#{item.fileLevel}  
+			FROM
+				DUAL
+			</foreach>	  	  
+	  	  ) A
+
+	</insert>
 
 </mapper>

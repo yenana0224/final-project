@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>디테일</title>
+<title>코스상세페이지</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
     <style>
 
         *{
@@ -76,6 +76,7 @@
             text-align: center;
         }
     </style>
+
 </head>
 <body>
     
@@ -92,38 +93,44 @@
                 <td class="infomation">${course.takeTime}</td>
                 <td class="part" rowspan="2">스탬프</td>
                 <td rowspan="2" class="infomation">
-                    
-                    <img id="stamp" src="">
-                    
+                	<c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 1 }">
+                			<img id="stamp" src="${pageContext.request.contextPath }/${file.changeName}">
+                		</c:if>
+                	</c:forEach>
                 </td>
             </tr>
             <tr>
                 <td class="part">코스이름</td>
-                <td colspan="3" class="infomation">${course.courseName }</td>
+                <td colspan="3" class="infomation">${course.courseName}</td>
             </tr>
             <tr>
                 <td class="part">코스설명</td>
-                <td class="infomation" colspan="5">${course.content }</td>
+                <td class="infomation" colspan="5">${course.content}</td>
             </tr>
             <tr>
                 <td class="part">상세지도</td>
                 <td class="infomation" colspan="5">
-                    <img src="" alt="">
+                    <c:forEach var="file" items="${course.files}">
+                		<c:if test="${file.fileLevel eq 2 }">
+                			<img src="${pageContext.request.contextPath }/${file.changeName}">
+                		</c:if>
+                	</c:forEach>
                 </td>
             </tr>
+
             <tr>
-                <td class="part" rowspan="3">코스사진</td>
-                <td class="part"> 사진 1 </td>
-                <td class="infomation" colspan="4"> OriginalName </td>
+                <td class="part" rowspan="4">코스사진</td>
             </tr>
-            <tr>
-                <td class="part"> 사진 2 </td>
-                <td class="infomation" colspan="4"> OriginalName </td>
-            </tr>
-            <tr>
-                <td class="part"> 사진 3 </td>
-                <td class="infomation" colspan="4"> 첨부파일이 없습니다 </td>
-            </tr>
+            
+            <c:forEach var="file" items="${course.files}">
+	               <c:if test="${file.fileLevel eq 3 }">
+	               	<tr>    
+		                <td class="infomation" colspan="4"> ${ file.originName } </td>
+					</tr>
+	               </c:if>
+		    </c:forEach>
+
         </table>
 
         <div class="btn-area">
@@ -131,7 +138,7 @@
         </div>
 
         <div class="btn-area">
-            <button>목록으로</button>
+            <button id="back">목록으로</button>
         </div>
     </div>
     
@@ -142,13 +149,17 @@
     $(() => {
     	
     	$('#update').click(()=> {
-    		location.href="update?courseIndex="+${course.courseIndex};
+    		location.href="update/"+${course.courseIndex};
+    	})
+    	
+    	$('#back').click(() => {
+    		location.href="/hondimoyeong/admin/course";
     	})
     })
     
     </script>
     
-
-
+	
+	
 </body>
 </html>

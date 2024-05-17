@@ -352,7 +352,7 @@
 		            </form>
 		        </div>
 	                <div class="cs_board_top">
-	                	<c:if test="${ sessionScope.loginUser.status == 'A' }">
+	                	<c:if test="${sessionScope.loginUser.status == 'A'}">
 	                    	<div class="cs_board_top_btn"><button class="cs_btn" onclick="insertNotice();">글쓰기</button></div>
 	                    </c:if>
 	                </div>
@@ -368,16 +368,16 @@
 	                    </thead>
 	                    <tbody>
 	                    <c:choose>
-	                    	<c:when test="${ empty notice }">
+	                    	<c:when test="${empty notice}">
 	                    		<td colspan="4" class="noNotice">검색 결과가 없습니다.</td>
 	                    	</c:when>
 	                    	<c:otherwise>
-			                    <c:forEach var="notice" items="${ notice }">
+			                    <c:forEach var="notice" items="${notice}">
 			                        <tr class="noticeList">
-			                            <td class="cs_table_small">${ notice.noticeNo }</td>
-			                            <td class="cs_table_mid">${ notice.noticeTitle }</td>
-			                            <td class="cs_table_small">${ notice.count }</td>
-			                            <td class="cs_table_small">${ notice.createDate }</td>
+			                            <td class="cs_table_small">${notice.noticeNo}</td>
+			                            <td class="cs_table_mid">${notice.noticeTitle}</td>
+			                            <td class="cs_table_small">${notice.count}</td>
+			                            <td class="cs_table_small">${notice.createDate}</td>
 			                        </tr>
 			                    </c:forEach>
 	                    	</c:otherwise>
@@ -389,30 +389,30 @@
 	            <div class="hdmy-board_page"> <!-- 페이징바 -->
 	               	<ul class="pagination">
 	     				<c:choose>
-	               			<c:when test="${ empty keyword }">
+	               			<c:when test="${empty keyword}">
 	               				<c:choose>
-	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               					<c:when test="${pageInfo.currentPage eq 1}">
 	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
 	               					</c:when>
 									<c:otherwise>
-							  			<li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+							  			<li class="page-item"><a class="page-link" href="list.notice?page=${pageInfo.currentPage - 1}"> < </a></li>
 							  		</c:otherwise>
 	               				</c:choose>
 	               				
-	               				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+	               				<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="p">
 									<c:choose>
-										<c:when test="${ p eq pageInfo.currentPage }">
-											<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+										<c:when test="${p eq pageInfo.currentPage}">
+											<li class="page-item active"><a class="page-link" href="list.notice?page=${p}">${p}</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+											<li class="page-item"><a class="page-link" href="list.notice?page=${p}">${ p }</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 								
 								<c:choose>
-								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								        <li class="page-item"><a class="page-link" href="list.notice?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+								    <c:when test="${pageInfo.currentPage lt pageInfo.maxPage}">
+								        <li class="page-item"><a class="page-link" href="list.notice?page=${pageInfo.currentPage + 1}"> > </a></li>
 								    </c:when>
 								    <c:otherwise>
 								        <li class="page-item disabled"><a class="page-link"> > </a></li>
@@ -422,21 +422,21 @@
 	               			
 	               			<c:otherwise>
 	               			    <c:choose>
-	               					<c:when test="${ pageInfo.currentPage eq 1 }">
+	               					<c:when test="${pageInfo.currentPage eq 1}">
 	               						<li class="page-item disabled"><a class="page-link"> < </a></li>
 	               					</c:when>
 									<c:otherwise>
-							  			<li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+							  			<li class="page-item"><a class="page-link" href="search.notice?page=${pageInfo.currentPage - 1}&keyword=${keyword}"> < </a></li>
 							  		</c:otherwise>
 	               				</c:choose>
 	               				
-	               				<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-									<li class="page-item"><a class="page-link" href="search.notice?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+	               				<c:forEach var="p" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+									<li class="page-item"><a class="page-link" href="search.notice?page=${p}&keyword=${keyword}">${p}</a></li>
 								</c:forEach>
 								
 								<c:choose>
-								    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								        <li class="page-item"><a class="page-link" href="search.notice?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+								    <c:when test="${pageInfo.currentPage lt pageInfo.maxPage}">
+								        <li class="page-item"><a class="page-link" href="search.notice?page=${pageInfo.currentPage + 1}&keyword=${keyword}"> > </a></li>
 								    </c:when>
 								    <c:otherwise>
 								        <li class="page-item disabled"><a class="page-link"> > </a></li>
@@ -451,17 +451,17 @@
 		
 		<div id="tab2" class="tab_content">
 	        <div class="cs_faq"> <!-- FAQ 게시판 -->
-	           	<c:forEach var="faq" items="${ faqList }">
+	           	<c:forEach var="faq" items="${faqList}">
 		            <div class="cs_faq_box">
 			                <div class="cs_faq_q">
 			                    <div class="faq_q_icon">Q</div>
-			                    <div class="faq_q_content">${ faq.questionContent }</div>
+			                    <div class="faq_q_content">${faq.questionContent}</div>
 			                    <div class="faq_icon">+</div>
 			                </div>
 		
 		                <div class="cs_faq_a">
 		                    <div class="faq_a_icon">A</div>
-		                    <div class="faq_a_content">${ faq.answerContent }</div>
+		                    <div class="faq_a_content">${faq.answerContent}</div>
 		                </div>
 		            </div>
 	            </c:forEach>
