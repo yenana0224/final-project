@@ -27,7 +27,7 @@
                PHONE,   
                EMAIL,   
                STATUS,      
-               TO_CHAR(ENROLL_DATE,'YYYY-MM-DD')
+               TO_CHAR(ENROLL_DATE,'YYYY-MM-DD') AS ENROLL_DATE
             FROM
                MEMBER
           WHERE
@@ -35,7 +35,6 @@
             AND
                 (STATUS = 'A' OR STATUS = 'C')
     </select>
-
 
 	<!-- 회원가입 -->
 	<insert id="insert" parameterType="member">
@@ -61,7 +60,6 @@
 				)
 	</insert>
 
-
 	<!-- 아이디 중복 체크용 쿼리문 -->
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT
@@ -71,6 +69,50 @@
 		WHERE
 			USER_ID = #{ checkId }
 	</select>
+
+	<!-- 회원정보수정 -->
+	<update id="update" parameterType="member">
+		UPDATE
+			MEMBER
+		SET
+			USER_NAME = #{userName},
+			EMAIL = #{email},
+			PHONE = #{phone}
+		WHERE
+			USER_ID = #{userId}
+	</update>
+	
+	<!-- 회원 탈퇴 관련 쿼리문 -->
+	<update id="delete" parameterType="member">
+		UPDATE
+			MEMBER
+		SET
+			STATUS = 'D',
+			MODIFY_DATE = SYSDATE
+		WHERE
+			USER_ID = #{userId}
+	</update>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
 
 
 
