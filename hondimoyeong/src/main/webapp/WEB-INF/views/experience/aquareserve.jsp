@@ -20,6 +20,8 @@
 }
 
     #reserve{
+    	padding-top : 20px;
+    	padding-left : 15px;
         width: 1200px;
         height: 600px;
         margin: auto;
@@ -27,8 +29,8 @@
     }
 
     #a{
-        width: 600px;
-        height: 600px;
+        width: 50%;
+        height: 100%;
         float : left;
         border : 1px solid blue;
     }
@@ -50,7 +52,7 @@
 
     #b{
         width: 580px;
-        height: 600px;
+        height: 100%;
         float : left;
         border : 1px solid forestgreen;
     }
@@ -183,7 +185,7 @@
 				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
 				
 				<button type="submit"  id="btn1" class="btn btn-outline-warning">
-					<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+					 <img src="resources/image/kakao.png" style="width:90px; height:30px;">
 				</button>
 				</form>
 					
