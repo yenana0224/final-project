@@ -1,5 +1,7 @@
 package com.kh.hondimoyeong.companion.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
+import com.kh.hondimoyeong.companion.model.vo.Companion;
 
 @Controller
 public class CompanionController {
@@ -20,7 +23,6 @@ public class CompanionController {
 	public String selectAll(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		
 		PageInfo pi = Pagination.getPageInfo(companionService.selectListCount(), page, 10, 5);
-		
 		model.addAttribute("companion", companionService.selectAll(pi));
 		model.addAttribute("pageInfo", pi);
 		
@@ -30,6 +32,18 @@ public class CompanionController {
 	@RequestMapping("companionDetail")
 	public String companionDetail() {
 		return "companion/companionDetail";
+	}
+	
+	@RequestMapping("sort.companion")
+	public String sortCompanion(@RequestParam(value="page", defaultValue="1") int page, Model model) {
+		
+		int totalCount = companionService.sortCompanionCount();
+		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
+		List<Companion> sort = companionService.sort(pi);
+		model.addAttribute("sortPage", pi);
+		model.addAttribute("companion", sort);
+		
+		return "companion/companionList";
 	}
 	
 	

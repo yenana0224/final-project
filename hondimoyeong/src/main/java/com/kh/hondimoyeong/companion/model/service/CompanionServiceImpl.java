@@ -38,6 +38,18 @@ public class CompanionServiceImpl implements CompanionService {
 	public List<Companion> findCompanion() {
 		return companionRepository.findCompanion(sqlSession);
 	}
+
+	@Override
+	public int sortCompanionCount() {
+		return companionRepository.sortCompanionCount(sqlSession);
+	}
+
+	@Override
+	public List<Companion> sort(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return companionRepository.sort(sqlSession, rowBounds);
+	}
 	
 
 

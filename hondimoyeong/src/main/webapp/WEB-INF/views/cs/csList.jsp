@@ -405,7 +405,7 @@
 											<li class="page-item active"><a class="page-link" href="list.notice?page=${p}">${p}</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="list.notice?page=${p}">${ p }</a></li>
+											<li class="page-item"><a class="page-link" href="list.notice?page=${p}">${p}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -431,7 +431,14 @@
 	               				</c:choose>
 	               				
 	               				<c:forEach var="p" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-									<li class="page-item"><a class="page-link" href="search.notice?page=${p}&keyword=${keyword}">${p}</a></li>
+	               					<c:choose>
+	               						<c:when test="${p eq pageInfo.currentPage}">
+	               							<li class="page-item active"><a class="page-link" href="search.notice?page=${p}&keyword=${keyword}">${p}</a></li>
+	               						</c:when>
+	               						<c:otherwise>
+											<li class="page-item"><a class="page-link" href="search.notice?page=${p}&keyword=${keyword}">${p}</a></li>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 								
 								<c:choose>
