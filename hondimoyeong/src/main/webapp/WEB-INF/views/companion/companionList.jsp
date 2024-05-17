@@ -236,7 +236,7 @@
                 </div>
                 
                 <c:if test="${ !empty loginUser }">
-                	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                	<div class="hdmy-board_top-btn"><button class="hdmy-btn" onclick="insertCompanion();">글쓰기</button></div>
                 </c:if>
             </div>
 
@@ -268,11 +268,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
                     	<c:forEach var="companion" items="${ companion }">
 	                        <tr class="list">
+		    					<td style="display:none">${ companion.companionNo }</td>
 	                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
 	                            <td class="hdmy-table_small">${ companion.courseName }</td>
-	                            <td>${ companion.companionTitle }<a href="companionDetail">디테일</a></td>
+	                            <td>${ companion.companionTitle }</td>
 	                            <td class="hdmy-table_small">${ companion.userName }</td>
 	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
 	                            
@@ -389,6 +391,18 @@
 		        });
 		    });
 		});
+		
+        
+    	$(function(){
+    		$('.table-hover > tbody > tr').click(function(){
+    			location.href = 'detail.companion?companionNo='+$(this).children().eq(0).text();
+    		});
+    	});
+    	
+		function insertCompanion(){
+			location.href = '${ path }/insert.companion';
+		}
+	
 	</script>
 
 

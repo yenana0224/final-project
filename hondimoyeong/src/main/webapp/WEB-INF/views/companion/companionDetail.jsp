@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +27,7 @@
         text-align: center;
         font-size: 20px;
         font-weight: bold;
-        color: #ffffff;
+        color: #000000;
         margin-bottom: 30px;
     }
 
@@ -188,7 +191,16 @@
         background-color: #FF9843;
         color: #ffffff;
         margin-right: 10px;
+        cursor: pointer;
+        line-height: 35px;
+        text-decoration: none;
     }
+    
+    .hdmy_detail_btn:hover{
+    	text-decoration: none;
+    	color: #FFFFFF;
+    }
+    
 </style>
 
 </head>
@@ -198,7 +210,7 @@
 
     <div id="container">
         <div class="detail_top">
-            <a>1코스</a> | <a>동행 날짜 : 5/19 (일)</a> | <a>인원 : 4 / 5 [모집중]</a>
+            <a>${companion.courseName}</a> | <a>동행 날짜 : ${companion.companionDate}</a> | <a>인원 : ${companion.companionNum} / ${companion.companionPeople} [모집중]</a>
         </div>
 
         <div class="detail_courseImg">
@@ -207,9 +219,9 @@
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
             <div class="detail_box_left"> <!-- 제목, 작성자 감싸는 div -->
-                <div class="detail_title"><span>봉보로봉과 함께 하실 분 선착순 1명</span></div>
+                <div class="detail_title"><span>${companion.courseName}</span></div>
                 <div class="detail_info">
-                    <div class="detail_info1"><a>작성자 : 희주봉 &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : 200</a></div>
+                    <div class="detail_info1"><a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a></div>
                 </div>
             </div>
 
@@ -219,7 +231,7 @@
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">테스트<br>테스트임<br>테스트</p>
+            <p class="detail_content_p">${companion.companionContent}</p>
         </div>
 
         <div class="detail_reply_title">
@@ -258,13 +270,39 @@
         </div>
 
         <div class="detail_btn_box" align="center">
-            <div class="hdmy_detail_btn">목록</div>
-            <div class="hdmy_detail_btn">수정</div>
-            <div class="hdmy_detail_btn">삭제</div>
+            <a class="hdmy_detail_btn detailBtn">목록</a>
+            <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
+	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
+            </c:if>
         </div>
+        
+        <form action="" id="postForm" method="post">
+		    <input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
+		</form>
 
     </div> <!-- 내용 박스 끝 -->
 
-<jsp:include page="../common/footer.jsp"/>
+	<jsp:include page="../common/footer.jsp"/>
+
+	<script>
+		$(function(){
+			$('.detailBtn').click(function(){
+				location.href='${ path }/companion?page=1';
+			});
+		});
+		
+		function postSubmit(num){
+			if(num == 0){
+				$('#postForm').attr('action', 'updateForm.companion').submit();
+			}
+			else{
+				$('#postForm').attr('action', 'delete.companion').submit();
+			}
+			
+		}
+	</script>
+
+
 </body>
 </html>

@@ -14,7 +14,10 @@ import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class CompanionController {
 	
 	@Autowired
@@ -56,8 +59,12 @@ public class CompanionController {
 		} else {
 			mv.addObject("errorMsg", "실패").setViewName("common/errorPage");
 		}
-		
 		return mv;
+	}
+	
+	@RequestMapping("insert.companion")
+	public String insert() {
+		return "companion/companionInsertForm";
 	}
 	
 	

@@ -22,7 +22,7 @@ public interface CompanionService {
 
 	int increaseCount(int companionNo);
 
-	List<Companion> detailCompanion(int companionNo);
+	Companion detailCompanion(int companionNo);
 
 
 }

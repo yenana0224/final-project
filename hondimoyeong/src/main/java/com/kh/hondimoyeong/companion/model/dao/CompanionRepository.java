@@ -35,8 +35,8 @@ public class CompanionRepository {
 		return sqlSession.update("companionMapper.increaseCount", companionNo);
 	}
 
-	public List<Companion> detailCompanion(SqlSessionTemplate sqlSession, int companionNo) {
-		return sqlSession.selectList("companionMapper.detailCompanion", companionNo);
+	public Companion detailCompanion(SqlSessionTemplate sqlSession, int companionNo) {
+		return sqlSession.selectOne("companionMapper.detailCompanion", companionNo);
 	}
 
 }

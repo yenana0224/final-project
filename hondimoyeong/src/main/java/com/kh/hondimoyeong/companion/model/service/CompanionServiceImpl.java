@@ -64,7 +64,7 @@ public class CompanionServiceImpl implements CompanionService {
 	}
 
 	@Override
-	public List<Companion> detailCompanion(int companionNo) {
+	public Companion detailCompanion(int companionNo) {
 		return companionRepository.detailCompanion(sqlSession, companionNo);
 	}
 
