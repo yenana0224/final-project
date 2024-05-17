@@ -1,4 +1,4 @@
-package com.kh.hondimoyeong.accompany.model.service;
+package com.kh.hondimoyeong.companion.model.service;
 
 import java.util.List;
 
@@ -7,36 +7,38 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.hondimoyeong.accompany.model.dao.AccompanyRepository;
-import com.kh.hondimoyeong.accompany.model.vo.Accompany;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.companion.model.dao.CompanionRepository;
+import com.kh.hondimoyeong.companion.model.vo.Companion;
 
 
 @Service
-public class AccompanyServiceImpl implements AccompanyService {
+public class CompanionServiceImpl implements CompanionService {
 
 
 	@Autowired
-	private AccompanyRepository accompanyRepository;
+	private CompanionRepository companionRepository;
 		
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public int selectListCount() {
-		return accompanyRepository.selectListCount(sqlSession);
+		return companionRepository.selectListCount(sqlSession);
 	}
 
 	@Override
-	public List<Accompany> selectAll(PageInfo pi) {
+	public List<Companion> selectAll(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return accompanyRepository.selectAll(sqlSession, rowBounds);
+		return companionRepository.selectAll(sqlSession, rowBounds);
 	}
 
 	@Override
-	public List<Accompany> findRecruiting() {
-		return accompanyRepository.findRecruiting(sqlSession);
+	public List<Companion> findCompanion() {
+		return companionRepository.findCompanion(sqlSession);
 	}
+	
+
 
 }

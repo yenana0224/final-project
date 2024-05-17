@@ -1,4 +1,4 @@
-package com.kh.hondimoyeong.accompany.model.vo;
+package com.kh.hondimoyeong.companion.model.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,21 +9,21 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Accompany {
+public class Companion {
 	
-	private int accompanyNo;
+	private int companionNo;
 	private int userNo;
 	private String userName;
 	private int courseNo;
 	private String courseName;
-	private String accompanyDate;
-	private String accompanyTitle;
-	private String accompanyContent;
+	private String companionDate;
+	private String companionTitle;
+	private String companionContent;
 	private String createDate;
 	private int count;
 	private String status;
-	private int accompanyPeople;
+	private int companionPeople;
 	
-	private int accompanyNum; // 신청인원
+	private int companionNum; // 신청인원
 
 }

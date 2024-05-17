@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,8 +131,6 @@
 
 
 <jsp:include page="../common/header.jsp"/>
-
-
     <div id="container">
 
         <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
@@ -140,27 +141,28 @@
         </div>
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
-            <div class="detail_title"><span>${ notice.noticeTitle }</span></div>
+            <div class="detail_title"><span>${notice.noticeTitle}</span></div>
             <div class="detail_info">
-                <div class="detail_info1"><a>${ notice.createDate } &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${ notice.count }</a></div>
+                <div class="detail_info1"><a>${notice.createDate} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${notice.count}</a></div>
             </div>
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">${ notice.noticeContent }</p> 
+            <p class="detail_content_p">${notice.noticeContent}</p> 
         </div>
 
         <div class="detail_btn_box" align="center">
             <a class="hdmy_detail_btn noticeListBtn"">목록</a>
-            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
-            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
+            <c:if test="${sessionScope.loginUser.status == 'A'}">
+	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
+            </c:if>
         </div>
         
 		<form action="" id="postForm" method="post">
-		    <input type="hidden" name="noticeNo" value="${ notice.noticeNo }"/>
+		    <input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
 		</form>
     </div> <!-- container 끝 -->
-
 <jsp:include page="../common/footer.jsp"/>
 
 <script>

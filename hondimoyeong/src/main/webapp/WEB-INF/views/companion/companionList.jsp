@@ -233,7 +233,7 @@
 
         <div class="hdmy-board">
             <div class="hdmy-board_top">
-                <div class="hdmy-board_top-align"><a class="accompanyIng">모집중</a> | <a href="#">날짜순</a></div>
+                <div class="hdmy-board_top-align"><a class="companionIng">모집중</a> | <a href="#">날짜순</a></div>
                 
                 <c:if test="${ !empty loginUser }">
                 	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
@@ -267,17 +267,17 @@
                     </thead>
                     <tbody>
                     
-                    	<c:forEach var="accompany" items="${ accompany }">
+                    	<c:forEach var="companion" items="${ companion }">
 	                        <tr class="list">
-	                            <td class="hdmy-table_small">${ accompany.accompanyNo }</td>
-	                            <td class="hdmy-table_mid">${ accompany.createDate }</td>
-	                            <td class="hdmy-table_small">${ accompany.courseName }</td>
-	                            <td>${ accompany.accompanyTitle }<a href="accompanyDetail">디테일</a></td>
-	                            <td class="hdmy-table_small">${ accompany.userName }</td>
-	                            <td class="hdmy-table_small">${ accompany.accompanyNum } / ${ accompany.accompanyPeople }</td>
+	                            <td class="hdmy-table_small">${ companion.companionNo }</td>
+	                            <td class="hdmy-table_mid">${ companion.createDate }</td>
+	                            <td class="hdmy-table_small">${ companion.courseName }</td>
+	                            <td>${ companion.companionTitle }<a href="companionDetail">디테일</a></td>
+	                            <td class="hdmy-table_small">${ companion.userName }</td>
+	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
 	                            
 	                            <c:choose>
-	                            	<c:when test="${ accompany.accompanyNum ge accompany.accompanyPeople }">
+	                            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
 	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
 	                            	</c:when>
 	                            	<c:otherwise>
@@ -300,7 +300,7 @@
               					<li class="page-item disabled"><a class="page-link"> < </a></li>
               				</c:when>
 							<c:otherwise>
-					  			<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage - 1 }"> < </a></li>
+					  			<li class="page-item"><a class="page-link" href="companion?page=${ pageInfo.currentPage - 1 }"> < </a></li>
 					  		</c:otherwise>
               			</c:choose>
               				
@@ -310,14 +310,14 @@
 								<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="accompany?page=${ p }">${ p }</a></li>
+								<li class="page-item"><a class="page-link" href="companion?page=${ p }">${ p }</a></li>
 							</c:otherwise>
 						</c:choose>
 						</c:forEach>
 						
 						<c:choose>
 							<c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								<li class="page-item"><a class="page-link" href="accompany?page=${ pageInfo.currentPage + 1 }"> > </a></li>
+								<li class="page-item"><a class="page-link" href="companion?page=${ pageInfo.currentPage + 1 }"> > </a></li>
 							</c:when>
 						    <c:otherwise>
 						        <li class="page-item disabled"><a class="page-link"> > </a></li>
@@ -331,17 +331,17 @@
               					<li class="page-item disabled"><a class="page-link"> < </a></li>
               				</c:when>
 							<c:otherwise>
-					  			<li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
+					  			<li class="page-item"><a class="page-link" href="search.companion?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
 					  		</c:otherwise>
               			</c:choose>
               				
               			<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-							<li class="page-item"><a class="page-link" href="search.accompany?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+							<li class="page-item"><a class="page-link" href="search.companion?page=${ p }&keyword=${ keyword }">${ p }</a></li>
 						</c:forEach>
 						
 						<c:choose>
 						    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-						        <li class="page-item"><a class="page-link" href="search.accompany?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
+						        <li class="page-item"><a class="page-link" href="search.companion?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
 						    </c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"> > </a></li>
@@ -358,7 +358,7 @@
 <script>
 $(function(){
     // 모집중 링크 클릭 시 실행되는 함수
-    $(document).on('click', '.accompanyIng', function(){
+    $(document).on('click', '.companionIng', function(){
         $.ajax({
             url: 'companions',
             type: 'get',
@@ -371,10 +371,10 @@ $(function(){
                 // 결과를 받아서 tbody에 추가
                 for(let i in result){
                     value += '<tr>'
-                           + '<td>' + result[i].accompanyNo +'</td>'
+                           + '<td>' + result[i].companionNo +'</td>'
                            + '<td>' + result[i].userName +'</td>'
                            + '<td>' + result[i].courseName +'</td>'
-                           + '<td>' + result[i].accompanyDate +'</td>'
+                           + '<td>' + result[i].companionDate +'</td>'
                            + '<td>' + result[i].createDate +'</td>'
                            + '<td></td></tr>';
                 }
