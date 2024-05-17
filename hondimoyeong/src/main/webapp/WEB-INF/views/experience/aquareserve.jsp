@@ -151,7 +151,7 @@
 					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
 					
 					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="people" value="1"><!-- 5 -->
+					<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
 					
 				</div>
 				
@@ -209,7 +209,7 @@
 			console.log( $('input[name=experienceDate]').val() );
 			console.log( $('input[name=experienceTime]').val() );
 			console.log( $('input[name=experienceDivide]').val() );
-			console.log( $('input[name=people]').val() );
+			console.log( $('input[name=experiencePeople]').val() );
 			console.log( $('input[name=price]').val() );
 			console.log( $('input[name=category]').val() );
 		
