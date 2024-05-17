@@ -17,7 +17,7 @@ public class ReserveServiceImpl  implements ReserveService{
 	private ReserveRepository reserveRepository;
 
 	@Override
-	public Experience insertReserve(Experience experience) {
+	public int insertReserve(Experience experience) {
 		return reserveRepository.insertReserve(sqlSession, experience);
 	}
 	

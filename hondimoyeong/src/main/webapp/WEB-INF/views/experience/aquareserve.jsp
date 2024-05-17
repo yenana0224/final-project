@@ -13,50 +13,97 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 <style>
-#reserve{
-	width:1200px;
-	height:600px;
-	margin:auto;
+*{
+	box-sizing : border-box;
+	margin : 0;
 	border:1px solid red;
 }
-#a{
-	padding-top:20px;
-	padding-left:20px;
-	width:50%;
-	height:92%;
-	border:1px solid red;
-  	display: inline-block;
-}
-#b{
-	width:47%;
-	height:100%;
-	display: inline-block;
+
+    #reserve{
+    	padding-top : 20px;
+    	padding-left : 15px;
+        width: 1200px;
+        height: 600px;
+        margin: auto;
+        border : 1px solid black;
+    }
+
+    #a{
+        width: 50%;
+        height: 100%;
+        float : left;
+        border : 1px solid blue;
+    }
+
+    #title{
+        width: 500px;
+        height: 80px;
+        margin: 30px;
+        border : 1px solid red;
+    }
+
+    #select-area{
+        width : 500px;
+        height: 450px;
+        margin : 30px;
+        border : 1px solid black;
+
+    }
+
+    #b{
+        width: 580px;
+        height: 100%;
+        float : left;
+        border : 1px solid forestgreen;
+    }
+
+    #b > img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .discount{
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        width: 60px;
+        height: 60px;
+        line-height: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: 900;
+        color: #fff;
+        background-color: #FF6600
+    }
+
+    #paybtn{
+        width: 90px;
+        height: 40px;
+    }
+
+	#paybtn > img {
+		width : 100%;
+		height : 100%;
+		
+	}
 	
-}
-
-#imgg{
-	width:100%;
-	height:100%;
-
-}
-
-.discount{
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    line-height: 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 900;
-    color: #fff;
-    background-color: #FF6600
-}
-
-#aquaprice{
-	font-size:20px;
-}
+	.discount{
+	    right: 0;
+	    bottom: 0;
+	    text-align: center;
+	    width: 60px;
+	    height: 60px;
+	    line-height: 20px;
+	    border-radius: 10px;
+	    font-size: 18px;
+	    font-weight: 900;
+	    color: #fff;
+	    background-color: #FF6600
+	}
+	
+	#aquaprice{
+		font-size:20px;
+	}
 
 </style>
     
@@ -89,13 +136,6 @@
         dateElement.setAttribute("min", date);
     </script>
 </body>--%>
-
-
-
-
-
-
-	
 
 	
 	<div id="reserve">
@@ -135,7 +175,7 @@
 					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
 					
 					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="people" value="1"><!-- 5 -->
+					<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
 					
 				</div>
 				
@@ -145,7 +185,7 @@
 				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
 				
 				<button type="submit"  id="btn1" class="btn btn-outline-warning">
-					<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+					 <img src="resources/image/kakao.png" style="width:90px; height:30px;">
 				</button>
 				</form>
 					
@@ -155,7 +195,6 @@
 		</div>
 		
 	</div>
-	
 	
 	
 	
@@ -193,7 +232,7 @@
 			console.log( $('input[name=experienceDate]').val() );
 			console.log( $('input[name=experienceTime]').val() );
 			console.log( $('input[name=experienceDivide]').val() );
-			console.log( $('input[name=people]').val() );
+			console.log( $('input[name=experiencePeople]').val() );
 			console.log( $('input[name=price]').val() );
 			console.log( $('input[name=category]').val() );
 		

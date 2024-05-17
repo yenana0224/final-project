@@ -42,17 +42,10 @@ public class KakaoPayController {
 	}
 	
 	@PostMapping("kakaoPay")
-    public String kakaoPay(String experienceDate, String experienceTime, String experienceDivide, String price, int people, String category, Model model, HttpSession session){
+    public String kakaoPay(Experience experience, Model model, HttpSession session){
         log.info("kakaoPay post.....................");
-        Experience experience = new Experience();
         
-        experience.setExperienceDate(experienceDate);
-        experience.setExperienceTime(experienceTime);
-        experience.setPrice(price);
-        experience.setExperiencePeople(people);
-        experience.setCategory(category);
-        experience.setExperienceDivide(experienceDivide);
-        //experience.setUserNo(session.get);
+        experience.setUserNo(1);
         
         System.out.println(experience);
         
