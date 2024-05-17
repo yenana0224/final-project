@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- jQuery 라이브러리 -->
+<!-- jQuery 라이브러리 -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -113,38 +112,14 @@
 
 	<jsp:include page ="../common/header.jsp" />
 	
-	<%-- 
-	<c:choose>
-		<c:when test="${ empty sessionScope.loginuser }">
-			
-		</c:when>
-		<c:otherwise>
-		
-		</c:otherwise>	
-	</c:choose>
-	
-	
-	
-<body>
-    <div>
-        <input type="datetime-local" id="dateTimeLocal">
-    </div>
-
-    <script>
-        let dateElement = document.getElementById('dateTimeLocal');
-        let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -7);
-        dateElement.value = date;
-        dateElement.setAttribute("min", date);
-    </script>
-</body>--%>
 
 
 	
 	
 	<div id="reserve">
 		<div id="a">
-			<h1>제주입장권</h1>
-			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>
+			<h1>한라산 탐방</h1>
+			<!--<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>-->
 			
 			
 			

@@ -17,6 +17,11 @@ public class HanlasanController {
 		return "experience/handetail";
 	}    
 	
+	@GetMapping("hanreserve")
+	public String hanreserve() {
+		return "experience/hanreserve";
+	}
+	
 	 
 	
 
