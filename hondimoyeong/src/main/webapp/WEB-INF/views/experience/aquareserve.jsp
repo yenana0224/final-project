@@ -140,11 +140,13 @@
 				</div>
 				
 				
-				<br><br>
+				<br>
 				
 				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
 				
-				<button type="submit"  id="btn1" class="btn btn-outline-info">예매하기</button>
+				<button type="submit"  id="btn1" class="btn btn-outline-warning">
+					<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+				</button>
 				</form>
 					
 		</div>
