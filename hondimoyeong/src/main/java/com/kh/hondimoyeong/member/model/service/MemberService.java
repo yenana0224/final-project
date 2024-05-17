@@ -13,4 +13,18 @@ public interface MemberService {
 
 	// 아이디 중복체크
 	int idCheck(String checkId);
+	
+	// 회원정보수정(UPDATE)
+	int update(Member member);
+	
+	// 회원탈퇴(UPDATE)
+	int delete(Member member);
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -29,7 +29,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 680px;
+                height: 580px;
                 margin: 0 auto;
                 margin-top: 200px;
                 /* background-color: #FFF2D7; */
@@ -67,7 +67,7 @@
             #detailBox
             {
                 width: 700px;
-                height: 560px;
+                height: 480px;
                 margin-left: 50px;
                 padding-top: 25px;
                 padding-left: 110px;
@@ -96,7 +96,7 @@
             }
 
 
-            div > p {
+            div > p, label {
                 margin: 0 auto;
                 font-size: 14px;
                 font-weight: bold;
@@ -135,7 +135,7 @@
                 background-color: #9e9e9e;
                 border: 0;
                 border-radius: 10px;
-                margin-top: 10px;
+                margin-top: 15px;
                 margin-right: 5px;
                 color: #ffffff;
                 font-size: 12px;
@@ -163,45 +163,76 @@
 
             <div id="titleBox">개인정보 수정</div>
             <div id="detailBox">
-                <form action="insert.member" method="post">
+                <form action="update.member" method="post">
 	                <div class="input-box"> 
 	                    <p>이름</p>
-	                    <input type="text" class="form-control" name="userName" value="유나킴" readonly > 
+	                    <input type="text" class="form-control" name="userName" value="${ sessionScope.loginUser.userName }"> 
 	                </div>
 	                <div class="input-box"> 
 	                    <p>아이디</p>
-	                    <input type="text" class="form-control" name="userId" value="nananakim" readonly>
-	                </div>
-	                <div class="input-box"> 
-	                    <p>비밀번호</p>
-	                    <input type="password" class="form-control" name="userPwd" value="1234">
-	                </div>
-	                <div class="input-box"> 
-	                    <p>비밀번호 재확인</p>
-	                    <input type="password" class="form-control" name="userPwd" value="1234"> 
+	                    <input type="text" class="form-control" name="userId" value="${ sessionScope.loginUser.userId }" readonly>
 	                </div>
 	                <div class="input-box"> 
 	                    <p>이메일</p>
-	                    <input type="text" class="form-control" name="userEmail" value="abc@naver.com"> 
+	                    <input type="text" class="form-control" name="email" value="${ sessionScope.loginUser.email }"> 
 	                </div>
 	                <div class="input-box"> 
 	                    <p>연락처</p>
-	                    <input type="text" class="form-control" name="userPhone" value="010-1234-5678"> 
+	                    <input type="text" class="form-control" name="phone" value="${ sessionScope.loginUser.phone }"> 
 	                </div>
 	                <div class="input-box"> 
 	                    <p>가입일</p>
-	                    <input type="text" class="form-control" name="joinDate" value="2024-05-05" readonly> 
+	                    <input type="text" class="form-control" name="enrollDate" value="${ sessionScope.loginUser.enrollDate }" readonly> 
 	                </div>
 	                <div id="signupButton">
-	                    <button type="submit" class="btn-a">수정완료</button>
-	                    <button type="button" class="btn-c">회원탈퇴</button>
-	                    <button type="button" class="btn-b">목록</button>
+	                    <button type="submit" class="btn-a">수정하기</button>
+	                    <button type="button" class="btn-c" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
+	                    <button type="button" class="btn-b" onclick="location.href='myPage';">목록</button>
 	                </div>
                 </form>
             </div>               
         </div>
     </div>
+    
+    
+    <!-- 회원탈퇴 버튼 클릭 시 보여질 Modal -->
+    <div class="modal fade" id="deleteForm">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">회원탈퇴</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form action="delete.member" method="post">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div align="center">
+			                            탈퇴 후 복구가 불가능합니다. <br>
+			                            정말로 탈퇴 하시겠습니까? <br>
+                        </div>
+                        <br>
+                            <label for="userPwd">비밀번호 입력 : </label>
+                            <input type="password" class="form-control" placeholder="비밀번호를 입력해 주세요." id="userPwd" name="userPwd"> <br>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer" align="center">
+                        <button type="submit" class="btn-c">탈퇴하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
 	<jsp:include page="../common/footer.jsp"/>
+	
+	
+
+    
+    
+    
 
 
 

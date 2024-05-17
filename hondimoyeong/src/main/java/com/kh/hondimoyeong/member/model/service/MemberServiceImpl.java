@@ -28,10 +28,22 @@ public class MemberServiceImpl implements MemberService {
 	public int insert(Member member) {
 		return memberRepository.insert(sqlSession, member);
 	}
-
+	
+	// 회원가입 시 아이디 중복 체크
 	@Override
 	public int idCheck(String checkId) {
 		return memberRepository.idCheck(sqlSession, checkId);
+	}
+
+	// 회원정보수정
+	@Override
+	public int update(Member member) {
+		return memberRepository.update(sqlSession, member);
+	}
+
+	@Override
+	public int delete(Member member) {
+		return memberRepository.delete(sqlSession, member);
 	}
 	
 
