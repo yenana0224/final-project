@@ -19,5 +19,12 @@ public class AjaxMainController {
 	public String mainCourse() {
 		return new Gson().toJson(courseService.allCourseList());
 	}
+	
+	@GetMapping(value="selectCourse", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String selectCourse(int courseIndex) {
+	
+		return new Gson().toJson(courseService.courseDetail(courseIndex));
+	}
 
 }
