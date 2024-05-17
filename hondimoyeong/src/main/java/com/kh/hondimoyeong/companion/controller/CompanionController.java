@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
@@ -40,10 +41,23 @@ public class CompanionController {
 		int totalCount = companionService.sortCompanionCount();
 		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
 		List<Companion> sort = companionService.sort(pi);
+		
 		model.addAttribute("sortPage", pi);
 		model.addAttribute("companion", sort);
 		
 		return "companion/companionList";
+	}
+	
+	@RequestMapping("detail.companion")
+	public ModelAndView detail(int companionNo, ModelAndView mv) {
+		
+		if(companionService.increaseCount(companionNo) > 0) {
+			mv.addObject("companion", companionService.detailCompanion(companionNo)).setViewName("companion/companionDetail");
+		} else {
+			mv.addObject("errorMsg", "실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 	
 	

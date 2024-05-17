@@ -14,14 +14,12 @@
         width: 1200px;
         height: auto;
         margin: 0 auto;
-        /* border: 1px solid darkcyan; */
     }
 
     .hdmy_title{
         width: 1200px;
         text-align: center;
         margin-bottom: 40px;
-        /* border: 1px solid red; */
     }
 
     .hdmy_title_a{
@@ -39,7 +37,6 @@
     .hdmy_search{
         width: 1200px;
         margin-bottom: 30px;
-        /* border: 1px solid red; */
     }
 
     .hdmy_searchForm{
@@ -84,7 +81,6 @@
         height: 42px;
         margin: 0 auto;
         margin-bottom: 10px;
-        /* border: 1px solid darkblue; */
     }
 
     .hdmy-board_top-align{
@@ -169,7 +165,6 @@
     .hdmy-table_small{
         width: 90px;
         text-align: center;
-        /* border: 1px solid red; */
     }
 
     .hdmy-table_status{
@@ -236,9 +231,8 @@
         <div class="hdmy-board">
             <div class="hdmy-board_top">
                 <div class="hdmy-board_top-align">
-                	<a href="companion">전체</a> | 
-	                <a class="sortCompanion" href="sort.companion">모집중</a> | 
-	                <a href="#">날짜순</a>
+                	<a class="sortCompanionList" href="companion">전체</a> | 
+					<a class="sortCompanion" href="sort.companion">모집중</a> 
                 </div>
                 
                 <c:if test="${ !empty loginUser }">
@@ -340,13 +334,13 @@
 					            <li class="page-item"><a class="page-link" href="sort.companion?page=${ sortPage.currentPage - 1 }"> < </a></li>
 					        </c:otherwise>
 					    </c:choose>
-							<c:forEach begin="${sortPage.startPage}" end="${sortPage.endPage}" var="s">
+							<c:forEach begin="${sortPage.startPage}" end="${sortPage.endPage}" var="p">
 						    <c:choose>
-						        <c:when test="${s eq sortPage.currentPage}">
-						            <li class="page-item active"><a class="page-link" href="sort.companion?page=${s}">${s}</a></li>
+						        <c:when test="${p eq sortPage.currentPage}">
+						            <li class="page-item active"><a class="page-link" href="sort.companion?page=${p}">${p}</a></li>
 						        </c:when>
 						        <c:otherwise>
-						            <li class="page-item"><a class="page-link" href="sort.companion?page=${s}">${s}</a></li>
+						            <li class="page-item"><a class="page-link" href="sort.companion?page=${p}">${p}</a></li>
 						        </c:otherwise>
 						    </c:choose>
 						</c:forEach>
@@ -364,39 +358,38 @@
 		</div>
 	</div>
 
-<jsp:include page="../common/footer.jsp"/>
-
-<script>
-	$(function(){
-	    // 모집중 링크 클릭 시 실행되는 함수
-	    $(document).on('click', '.sortCompanion', function(){
-	        $.ajax({
-	            url: 'companions',
-	            type: 'get',
-	            success: function(result){
-	                // 기존 table-hover의 tbody 내용 삭제
-	                $('.table-hover tbody').empty();
-	                
-	                let value = '';
-	                
-	                // 결과를 받아서 tbody에 추가
-	                for(let i in result){
-	                    value += '<tr>'
-	                           + '<td class="hdmy-table_mid">' + result[i].companionDate +'</td>'
-	                           + '<td class="hdmy-table_small">' + result[i].courseName +'</td>'
-	                           + '<td>' + result[i].companionTitle +'</td>'
-	                           + '<td class="hdmy-table_small">' + result[i].userName +'</td>'
-	                           + '<td class="hdmy-table_small">' + result[i].companionNum + '/' + result[i].companionPeople + '</td>'
-	                           + '<td class="hdmy-table_status" style="color: #FF9843"> 모집중 </td>'
-	                           + '</tr>';
-	                }
-	                $('.table-hover tbody').append(value);
-	                $('.companions').show(); // 테이블 보이기
-	            }
-	        });
-	    });
-	});
-</script>
+	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+		$(function(){
+		    // 모집중 링크 클릭 시 실행되는 함수
+		    $(document).on('click', '.sortCompanion', function(){
+		        $.ajax({
+		            url: 'companions',
+		            type: 'get',
+		            success: function(result){
+		                // 기존 tbody 내용 삭제
+		                $('.table-hover tbody').empty();
+		                
+		                let value = '';
+		                
+		                for(let i in result){
+		                    value += '<tr>'
+		                           + '<td class="hdmy-table_mid">' + result[i].companionDate +'</td>'
+		                           + '<td class="hdmy-table_small">' + result[i].courseName +'</td>'
+		                           + '<td>' + result[i].companionTitle +'</td>'
+		                           + '<td class="hdmy-table_small">' + result[i].userName +'</td>'
+		                           + '<td class="hdmy-table_small">' + result[i].companionNum + '/' + result[i].companionPeople + '</td>'
+		                           + '<td class="hdmy-table_status" style="color: #FF9843"> 모집중 </td>'
+		                           + '</tr>';
+		                }
+		                $('.table-hover tbody').append(value);
+		                $('.companions').show();
+		            }
+		        });
+		    });
+		});
+	</script>
 
 
 </body>

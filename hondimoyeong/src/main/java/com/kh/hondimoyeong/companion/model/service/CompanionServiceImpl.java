@@ -45,11 +45,29 @@ public class CompanionServiceImpl implements CompanionService {
 	}
 
 	@Override
+	public List<Companion> sortCompanion(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return companionRepository.sort(sqlSession, rowBounds);
+	}
+
+	@Override
 	public List<Companion> sort(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return companionRepository.sort(sqlSession, rowBounds);
 	}
+
+	@Override
+	public int increaseCount(int companionNo) {
+		return companionRepository.increaseCount(sqlSession, companionNo);
+	}
+
+	@Override
+	public List<Companion> detailCompanion(int companionNo) {
+		return companionRepository.detailCompanion(sqlSession, companionNo);
+	}
+
 	
 
 
