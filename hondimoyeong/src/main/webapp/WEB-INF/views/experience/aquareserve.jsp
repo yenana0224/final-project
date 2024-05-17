@@ -18,61 +18,90 @@
 	margin : 0;
 	border:1px solid red;
 }
-#reserve{
-	width:1200px;
-	height:600px;
-	margin:auto;
+
+    #reserve{
+        width: 1200px;
+        height: 600px;
+        margin: auto;
+        border : 1px solid black;
+    }
+
+    #a{
+        width: 600px;
+        height: 600px;
+        float : left;
+        border : 1px solid blue;
+    }
+
+    #title{
+        width: 500px;
+        height: 80px;
+        margin: 30px;
+        border : 1px solid red;
+    }
+
+    #select-area{
+        width : 500px;
+        height: 450px;
+        margin : 30px;
+        border : 1px solid black;
+
+    }
+
+    #b{
+        width: 580px;
+        height: 600px;
+        float : left;
+        border : 1px solid forestgreen;
+    }
+
+    #b > img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .discount{
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        width: 60px;
+        height: 60px;
+        line-height: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: 900;
+        color: #fff;
+        background-color: #FF6600
+    }
+
+    #paybtn{
+        width: 90px;
+        height: 40px;
+    }
+
+	#paybtn > img {
+		width : 100%;
+		height : 100%;
+		
+	}
 	
-}
-#a{
-	padding-top:20px;
-	padding-left:20px;
-	width:50%;
-	height:92%;
-	border:1px solid red;
-  	display: inline-block;
-}
-#b{
-	width:47%;
-	height:100%;
-	display: inline-block;
+	.discount{
+	    right: 0;
+	    bottom: 0;
+	    text-align: center;
+	    width: 60px;
+	    height: 60px;
+	    line-height: 20px;
+	    border-radius: 10px;
+	    font-size: 18px;
+	    font-weight: 900;
+	    color: #fff;
+	    background-color: #FF6600
+	}
 	
-}
-
-#btn1{
-	width : 90px;
-	height : 30px;
-}
-
-#btn1 > img {
-	width : 100%;
-	height : 100%;
-	
-}
-
-#imgg{
-	width:100%;
-	height:100%;
-
-}
-
-.discount{
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    line-height: 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 900;
-    color: #fff;
-    background-color: #FF6600
-}
-
-#aquaprice{
-	font-size:20px;
-}
+	#aquaprice{
+		font-size:20px;
+	}
 
 </style>
     
@@ -106,16 +135,11 @@
     </script>
 </body>--%>
 
-
-
-
-
-
-	
-
 	
 	<div id="reserve">
+
 		<div id="a">
+
 			<h1>제주입장권</h1>
 			<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>
 			
@@ -170,8 +194,74 @@
 			<img id="imgg" src='resources/image/유미의세포들.jpg' />
 		</div>
 		
+
+
+            <div id="title">
+                <h1>제주입장권</h1>
+                <span ><b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b></span>
+                <span class="discount">18%</span><br><br>
+            </div>
+
+            <div id="select-area">
+                
+                <form method="post" action="kakaoPay">
+                
+                    <input type="date" name="experienceDate" id="Date"><!-- 1 -->
+                                
+                    <select id="changeaqua1">
+                        <option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
+                    </select>
+                    
+                    <input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 2 -->
+                    
+                    
+                    <select id="changeaqua2">
+                        <option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
+                    </select>
+                    
+                    <input type="hidden" name="experienceDivide" value="제주입장권_대소공통"><!-- 3 -->
+                    
+                    
+                    <div id="aquaprice" >
+                    
+                        <!-- 빼기 버튼 -->
+                        <button type="button" id="sub" class="btn btn-outline-danger">-</button>
+                        
+                        <span id="span1" style="width:120px">${ price }</span>원
+                        <input type="hidden" name="price" id="price" value="36000"><!-- 4 -->
+                        
+                        <!-- 더하기 버튼 -->
+                        <button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
+                        
+                        <span id="person1" >1</span>명
+                        <input type="hidden" id="person1-val" name="people" value="1"><!-- 5 -->
+                        
+                    </div>
+                    
+                    
+                    <br>
+                    
+                    <input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
+                    
+                    <button type="submit" id="paybtn">
+                        <img src="resources/image/kakao.png">
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div id="b">
+            <img src='resources/image/유미의세포들.jpg' />
+        </div>
+
+
+
+
 	</div>
-	
 	
 	
 	
