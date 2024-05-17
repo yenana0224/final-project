@@ -14,21 +14,30 @@
     
 <style>
 #reserve{
-	widht:1200px;
+	width:1200px;
 	height:600px;
+	margin:auto;
 	border:1px solid red;
 }
 #a{
 	padding-top:20px;
 	padding-left:20px;
-	width:1200px;
-	height:100%;
-	margin:auto;
+	width:50%;
+	height:92%;
 	border:1px solid red;
-	
+  	display: inline-block;
 }
 #b{
-	height:100px;
+	width:47%;
+	height:100%;
+	display: inline-block;
+	
+}
+
+#imgg{
+	width:100%;
+	height:100%;
+
 }
 
 .discount{
@@ -96,23 +105,22 @@
 			
 			
 			
-			<form action="kakaoPay">
+			<form method="post" action="kakaoPay">
 			
-				<input type="date" id="Date"><!-- 1 -->
+				<input type="date" name="experienceDate" id="Date"><!-- 1 -->
 				
-				<select id="changeaqua">
+				<select id="changeaqua1">
 					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
 				</select>
 				
 				<input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 2 -->
 				
-				<a>
-				<select id="changeaqua">
+				
+				<select id="changeaqua2">
 					<option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
-					
 				</select>
-				</a>
-				<input type="hidden" name="experienceDate" value="제주입장권_대소공통"><!-- 3 -->
+				
+				<input type="hidden" name="experienceDivide" value="제주입장권_대소공통"><!-- 3 -->
 				
 				
 				<div id="aquaprice" >
@@ -121,25 +129,31 @@
 					<button type="button" id="sub" class="btn btn-outline-danger">-</button>
 					
 					<span id="span1" style="width:120px">${ price }</span>원
-					<input type="hidden" name="price" id="price"><!-- 4 -->
+					<input type="hidden" name="price" id="price" value="36000"><!-- 4 -->
 					
 					<!-- 더하기 버튼 -->
 					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
 					
 					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="people"><!-- 5 -->
+					<input type="hidden" id="person1-val" name="people" value="1"><!-- 5 -->
 					
 				</div>
 				
 				
 				<br><br>
 				
+				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
 				
 				<button type="submit"  id="btn1" class="btn btn-outline-info">예매하기</button>
 				</form>
 					
 		</div>
+		<div id="b">
+			<img id="imgg" src='resources/image/유미의세포들.jpg' />
+		</div>
+		
 	</div>
+	
 	
 	
 	
@@ -151,39 +165,36 @@
 	// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
 	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 	document.getElementById("Date").setAttribute("min", today);
+	
 	let num = 1;
 	let price = $('#aquaprice').children('#span1').text();
 	
 	
 	$(function(){
-		$('#btn1').click(function() {
+		$('#btn1').click(() => {
 			
 			
 			var dateString = $("#Date").val();
-			var timeString = $('#changeaqua').children('option:selected').text();
+			var timeString = $('#changeaqua1').children('option:selected').text();
+			var divideString = $('#changeaqua2').children('option:selected').text();
 			var price = $('#aquaprice').children('#span1').text()
 			var person = $('#aquaprice').children('#person1').text()
 			var category = $('#category').val();
-
+			/*
 			console.log(dateString);
 			console.log(timeString);
+			console.log(divideString);
 			console.log(price);
 			console.log(person);
 			console.log(category);
-			
-			/*
-				$.ajax({
-					url : 'kakaoPay',
-					type : 'post',
-					data : {
-						experienceDate : dateString,
-						experienceTime : timeString,
-						price : price,
-						people : person,
-						category : category
-					}
-				});
-			*/
+			*/	
+			console.log( $('input[name=experienceDate]').val() );
+			console.log( $('input[name=experienceTime]').val() );
+			console.log( $('input[name=experienceDivide]').val() );
+			console.log( $('input[name=people]').val() );
+			console.log( $('input[name=price]').val() );
+			console.log( $('input[name=category]').val() );
+		
 			
 			});
 		})
@@ -246,7 +257,7 @@
 			$('#aquaprice').children('#person1').text(num);
 			
 			$('#person1-val').val(Number(num));
-			console.log($('#person1-val').val());
+			//console.log($('#person1-val').val());
 			
 			
 			price = $('#aquaprice').children('#span1').text()
@@ -255,7 +266,7 @@
 			$('#price').val(Number(price));
 			
 			
-			console.log($('#price').val())
+			//console.log($('#price').val())
 			
 			
 			
