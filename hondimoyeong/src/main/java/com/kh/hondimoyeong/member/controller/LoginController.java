@@ -47,6 +47,20 @@ public class LoginController {
 	}
 	
 	
+	// 마이페이지 - 예매내역
+	@RequestMapping("reservationList")
+	public String reservationList() {
+		return "member/reservationList";
+	}
+	
+	
+	// 마이페이지 - 내가 쓴 글 게시판
+	@RequestMapping("boardList")
+	public String boardList() {
+		return "member/boardList";
+	}
+	
+	
 	
 	
 }
