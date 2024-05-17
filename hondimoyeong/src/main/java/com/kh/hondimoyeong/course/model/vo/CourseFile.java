@@ -8,11 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseFile {
-
 	private int fileNo;
 	private int courseIndex;
 	private String originName;
 	private String changeName;
-	private int filelevel;
+	private int fileLevel;
 	
 }

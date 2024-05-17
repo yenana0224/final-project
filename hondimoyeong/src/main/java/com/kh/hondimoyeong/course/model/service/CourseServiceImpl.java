@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.course.model.repository.CourseRepository;
 import com.kh.hondimoyeong.course.model.vo.Course;
+import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -32,6 +33,28 @@ public class CourseServiceImpl implements CourseService{
 	public Course courseDetail(int courseIndex) {
 		return courseRepository.courseDetail(sqlSession, courseIndex);
 	}
+
+	@Override
+	public int updateCourse(Course course) {
+		return courseRepository.updateCourse(sqlSession, course);
+	}
+
+	@Override
+	public int updateStamp(CourseFile stamp) {
+		return courseRepository.updateStamp(sqlSession, stamp);
+	}
+
+	@Override
+	public int updateDetailMap(CourseFile detailMap) {
+		return courseRepository.updateDetailMap(sqlSession, detailMap);
+	}
+
+	@Override
+	public int updatePhoto(List<CourseFile> photoList) {
+		return courseRepository.updatePhoto(sqlSession, photoList);
+	}
+	
+	
 	
 	
 	
