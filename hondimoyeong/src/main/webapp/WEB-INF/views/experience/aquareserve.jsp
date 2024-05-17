@@ -13,11 +13,16 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 <style>
+*{
+	box-sizing : border-box;
+	margin : 0;
+	border:1px solid red;
+}
 #reserve{
 	width:1200px;
 	height:600px;
 	margin:auto;
-	border:1px solid red;
+	
 }
 #a{
 	padding-top:20px;
@@ -31,6 +36,17 @@
 	width:47%;
 	height:100%;
 	display: inline-block;
+	
+}
+
+#btn1{
+	width : 90px;
+	height : 30px;
+}
+
+#btn1 > img {
+	width : 100%;
+	height : 100%;
 	
 }
 
@@ -144,8 +160,8 @@
 				
 				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
 				
-				<button type="submit"  id="btn1" class="btn btn-outline-warning">
-					<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+				<button type="submit" id="btn1" class="btn btn-outline-warning">
+					<img src="resources/image/kakao.png">
 				</button>
 				</form>
 					
