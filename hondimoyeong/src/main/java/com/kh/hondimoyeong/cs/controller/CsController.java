@@ -105,6 +105,7 @@ public class CsController {
 		int totalCount = noticeService.selectSearchCount(keyword);
 		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
 		List<Notice> search = noticeService.search(keyword, pi);
+		
 		model.addAttribute("pageInfo", pi);
 		model.addAttribute("notice", search);
 		model.addAttribute("keyword", keyword);

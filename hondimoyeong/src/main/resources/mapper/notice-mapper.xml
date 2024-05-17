@@ -39,7 +39,7 @@
 		      NOTICE_NO,
 		      NOTICE_TITLE,
 		      NOTICE_CONTENT,
-		      TO_CHAR (CREATE_DATE, 'YYYY/MM/DD') as "CREATE_DATE",
+		      TO_CHAR (CREATE_DATE, 'YY/MM/DD') as "CREATE_DATE",
 		      COUNT,
 		      STATUS,
 		      USER_NO
@@ -68,7 +68,7 @@
 		      NOTICE_NO,
 		      NOTICE_TITLE,
 		      NOTICE_CONTENT,
-			  TO_CHAR (CREATE_DATE, 'YYYY/MM/DD') as "CREATE_DATE",
+			  TO_CHAR (CREATE_DATE, 'YY/MM/DD') as "CREATE_DATE",
 		      COUNT,
 		      STATUS
 		  FROM
@@ -122,7 +122,7 @@
 		      NOTICE_NO,
 		      NOTICE_TITLE,
 		      COUNT,
-			  TO_CHAR (CREATE_DATE, 'YYYY/MM/DD') as "CREATE_DATE"
+			  TO_CHAR (CREATE_DATE, 'YY/MM/DD') as "CREATE_DATE"
 		  FROM
 		      NOTICE
 		 WHERE

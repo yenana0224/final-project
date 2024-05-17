@@ -28,6 +28,7 @@
         font-size: 35px;
         font-weight: bold;
         color: #272727;
+        cursor: pointer;
     }
 
     .hdmy_title_a:hover{
@@ -104,6 +105,7 @@
 
     .hdmy-board_top-align a:hover{
         color: #FF9843;
+        text-decoration: none;
     }
 
     .hdmy-board_top-btn{
@@ -218,7 +220,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">  <!-- 전체 박스 -->
-        <div class="hdmy_title"><a class="hdmy_title_a">혼디모영</a></div>
+        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영</a></div>
 
         <div class="hdmy_search">
             <form action="#" class="hdmy_searchForm">
@@ -233,7 +235,11 @@
 
         <div class="hdmy-board">
             <div class="hdmy-board_top">
-                <div class="hdmy-board_top-align"><a class="companionIng">모집중</a> | <a href="#">날짜순</a></div>
+                <div class="hdmy-board_top-align">
+                	<a href="companion">전체</a> | 
+	                <a class="sortCompanion" href="sort.companion">모집중</a> | 
+	                <a href="#">날짜순</a>
+                </div>
                 
                 <c:if test="${ !empty loginUser }">
                 	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
@@ -242,21 +248,23 @@
 
             <div class="hdmy-board_content">
             
-           	    <table class="ajaxTest">
-			        <thead>
-			            <tr>
-			                <th>제목</th>
-			                <th>내용</th>
-			            </tr>
-			        </thead>
-			        <tbody>
-			        </tbody>
+            	<!-- 모집중 -->
+           	    <table class="companions"> 
+			        <thead></thead>
+			        <tbody></tbody>
+			    </table>
+			    
+			    <!-- 날짜순 -->
+           	    <table class="companions"> 
+			        <thead></thead>
+			        <tbody></tbody>
 			    </table>
             
+            
+				<!-- 전체 목록 -->
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="hdmy-table_small">번호</th>
                             <th class="hdmy-table_mid">동행 날짜</th>
                             <th class="hdmy-table_small">코스</th>
                             <th>제목</th>
@@ -266,11 +274,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                    
                     	<c:forEach var="companion" items="${ companion }">
 	                        <tr class="list">
-	                            <td class="hdmy-table_small">${ companion.companionNo }</td>
-	                            <td class="hdmy-table_mid">${ companion.createDate }</td>
+	                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
 	                            <td class="hdmy-table_small">${ companion.courseName }</td>
 	                            <td>${ companion.companionTitle }<a href="companionDetail">디테일</a></td>
 	                            <td class="hdmy-table_small">${ companion.userName }</td>
@@ -294,7 +300,7 @@
         <div class="hdmy-board_page"> <!-- 페이징바 -->
 			<ul class="pagination">
     			<c:choose>
-              		<c:when test="${ empty keyword }">
+              		<c:when test="${ not empty pageInfo.endPage }">
               			<c:choose>
               				<c:when test="${ pageInfo.currentPage eq 1 }">
               					<li class="page-item disabled"><a class="page-link"> < </a></li>
@@ -307,7 +313,7 @@
               			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
 						<c:choose>
 							<c:when test="${ p eq pageInfo.currentPage }">
-								<li class="page-item active"><a class="page-link" href="list.notice?page=${ p }">${ p }</a></li>
+								<li class="page-item active"><a class="page-link" href="companion?page=${ p }">${ p }</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link" href="companion?page=${ p }">${ p }</a></li>
@@ -326,27 +332,32 @@
               		</c:when>
               			
               		<c:otherwise>
-              			<c:choose>
-              				<c:when test="${ pageInfo.currentPage eq 1 }">
-              					<li class="page-item disabled"><a class="page-link"> < </a></li>
-              				</c:when>
-							<c:otherwise>
-					  			<li class="page-item"><a class="page-link" href="search.companion?page=${ pageInfo.currentPage - 1 }&keyword=${ keyword }"> < </a></li>
-					  		</c:otherwise>
-              			</c:choose>
-              				
-              			<c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-							<li class="page-item"><a class="page-link" href="search.companion?page=${ p }&keyword=${ keyword }">${ p }</a></li>
+					    <c:choose>
+					        <c:when test="${ sortPage.currentPage eq 1 }">
+					            <li class="page-item disabled"><a class="page-link"> < </a></li>
+					        </c:when>
+					        <c:otherwise>
+					            <li class="page-item"><a class="page-link" href="sort.companion?page=${ sortPage.currentPage - 1 }"> < </a></li>
+					        </c:otherwise>
+					    </c:choose>
+							<c:forEach begin="${sortPage.startPage}" end="${sortPage.endPage}" var="s">
+						    <c:choose>
+						        <c:when test="${s eq sortPage.currentPage}">
+						            <li class="page-item active"><a class="page-link" href="sort.companion?page=${s}">${s}</a></li>
+						        </c:when>
+						        <c:otherwise>
+						            <li class="page-item"><a class="page-link" href="sort.companion?page=${s}">${s}</a></li>
+						        </c:otherwise>
+						    </c:choose>
 						</c:forEach>
-						
-						<c:choose>
-						    <c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-						        <li class="page-item"><a class="page-link" href="search.companion?page=${ pageInfo.currentPage + 1 }&keyword=${ keyword }"> > </a></li>
-						    </c:when>
-							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link"> > </a></li>
-							</c:otherwise>
-						</c:choose>
+					    <c:choose>
+					        <c:when test="${ sortPage.currentPage lt sortPage.maxPage }">
+					            <li class="page-item"><a class="page-link" href="sort.companion?page=${ sortPage.currentPage + 1 }"> > </a></li>
+					        </c:when>
+					        <c:otherwise>
+					            <li class="page-item disabled"><a class="page-link"> > </a></li>
+					        </c:otherwise>
+					    </c:choose>
               		</c:otherwise>
               	</c:choose>
 			</ul>
@@ -356,38 +367,35 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <script>
-$(function(){
-    // 모집중 링크 클릭 시 실행되는 함수
-    $(document).on('click', '.companionIng', function(){
-        $.ajax({
-            url: 'companions',
-            type: 'get',
-            success: function(result){
-                // 기존 table-hover의 tbody 내용 삭제
-                $('.table-hover tbody').empty();
-                
-                let value = '';
-                
-                // 결과를 받아서 tbody에 추가
-                for(let i in result){
-                    value += '<tr>'
-                           + '<td>' + result[i].companionNo +'</td>'
-                           + '<td>' + result[i].userName +'</td>'
-                           + '<td>' + result[i].courseName +'</td>'
-                           + '<td>' + result[i].companionDate +'</td>'
-                           + '<td>' + result[i].createDate +'</td>'
-                           + '<td></td></tr>';
-                }
-                
-                $('.table-hover tbody').append(value);
-                $('.ajaxTest').show(); // 테이블 보이기
-            }
-        });
-    });
-});
-
-		
-
+	$(function(){
+	    // 모집중 링크 클릭 시 실행되는 함수
+	    $(document).on('click', '.sortCompanion', function(){
+	        $.ajax({
+	            url: 'companions',
+	            type: 'get',
+	            success: function(result){
+	                // 기존 table-hover의 tbody 내용 삭제
+	                $('.table-hover tbody').empty();
+	                
+	                let value = '';
+	                
+	                // 결과를 받아서 tbody에 추가
+	                for(let i in result){
+	                    value += '<tr>'
+	                           + '<td class="hdmy-table_mid">' + result[i].companionDate +'</td>'
+	                           + '<td class="hdmy-table_small">' + result[i].courseName +'</td>'
+	                           + '<td>' + result[i].companionTitle +'</td>'
+	                           + '<td class="hdmy-table_small">' + result[i].userName +'</td>'
+	                           + '<td class="hdmy-table_small">' + result[i].companionNum + '/' + result[i].companionPeople + '</td>'
+	                           + '<td class="hdmy-table_status" style="color: #FF9843"> 모집중 </td>'
+	                           + '</tr>';
+	                }
+	                $('.table-hover tbody').append(value);
+	                $('.companions').show(); // 테이블 보이기
+	            }
+	        });
+	    });
+	});
 </script>
 
 

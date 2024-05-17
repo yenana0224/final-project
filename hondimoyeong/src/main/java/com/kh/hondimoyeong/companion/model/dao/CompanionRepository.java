@@ -23,4 +23,12 @@ public class CompanionRepository {
 		return sqlSession.selectList("companionMapper.findCompanion");
 	}
 
+	public int sortCompanionCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("companionMapper.sortCompanionCount");
+	}
+
+	public List<Companion> sort(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
+		return sqlSession.selectList("companionMapper.findCompanion", null, rowBounds);
+	}
+
 }

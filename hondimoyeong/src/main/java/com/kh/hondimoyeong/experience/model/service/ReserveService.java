@@ -6,6 +6,6 @@ import com.kh.hondimoyeong.experience.model.vo.Reserve;
 public interface ReserveService {
 
 	// 결제하기
-	Experience insertReserve(Experience experience);
+	int insertReserve(Experience experience);
 	
 }
