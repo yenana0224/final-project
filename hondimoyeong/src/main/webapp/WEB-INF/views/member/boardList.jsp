@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>리뷰 게시판</title>
+    <title>내 글 목록</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -13,27 +13,28 @@
 
     <style>
             div{
+                /* border : 1px solid red;  */
                 box-sizing : border-box;
                 background-color: #ffffff;
             }          
         
-            #wrap{
+            #wrap{ 
                 width: 1200px;
                 height: 1000px;
                 margin: 0 auto;
-                position: relative; 
+                position: relative;
             }
 
 
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 780px;
+                height: 900px;
                 margin: 0 auto;
-                margin-top: 200px;
+                margin-top: 150px;
                 border-radius: 20px;
                 border : 4px solid #FF9843; 
-                position: relative;
+                position: relative; 
             }
 
            
@@ -42,9 +43,9 @@
                 width: 130px;
                 height: 150px;
                 background-color: transparent;
-                position: absolute;
+                position: absolute; 
                 top: -130px;
-                left: 2%; 
+                left: 2%;
             }
 
             /*타이틀 박스*/
@@ -69,23 +70,6 @@
                 padding-top: 25px;
             }
            
-            #btnBox{
-                width: 400px;
-                height: 40px;
-                display: inline-block; 
-                margin-left: 230px; 
-                position: absolute;
-                top: -60px; 
-                left: 2%; 
-            }
-
-            /*버튼테두리박스*/
-            .box1{
-                width: 130px;
-                height: 50px;
-                float: left;
-                margin-right: 50px;
-            }
 
             .mnbtn{
                 width: 130px;
@@ -98,14 +82,7 @@
                 border: 0;
             }
 
-            .mnbtn:hover{
-                width: 130px;
-                height: 40px;
-                border-radius: 10px;
-                background-color: #9e9e9e; 
-                color: #ffffff;
-            }
-            th{
+            tr > th{
                 background-color: #fee2bd; 
                 text-align: center;
             }
@@ -136,6 +113,58 @@
             .page-item:last-child .page-link, .page-item:first-child .page-link {
                 border-radius: 10px !important;
             }
+            #btnBox{
+                width: 100px;
+                height: 40px;
+                display: inline-block; 
+                margin-left: 660px; 
+                position: absolute;
+                top: 150px; 
+                left: 2%; 
+                /* border : 1px solid red; */
+            }
+            .mnbtn{
+                width: 85px;
+                height: 38px;
+                border-radius: 15px;
+                background-color: #FF9843; 
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 14px;
+                border: 0;
+            }
+
+            #find { /*검색창*/
+              width: 300px;
+              height: 37px;
+              border-radius: 15px;
+              border: 1px solid lightgray;
+              font-size: 15px;
+              margin-right: 5px;
+              padding-left: 20px;
+              padding-right: 20px;
+            }
+            #searchBox{
+              width: 790px;
+              height: 60px;
+              padding-left: 200px;
+              margin-top: 5px;
+              margin-bottom: 40px;
+              /* border: 1px solid rgb(228, 73, 248); */
+            }
+            .searchBtn{
+                width: 75px;
+                height: 36px;
+                border-radius: 15px;
+                background-color: #FF9843; 
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 14px;
+                border: 0;
+                padding-top: 5px;
+            }
+
+
 
 
     </style>    
@@ -145,80 +174,73 @@
     <div id="wrap">
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-            <div id="btnBox">
-                <div class="box1"><button class="mnbtn" type="button">리뷰 게시판</button></div>
-                <div class="box1"><button class="mnbtn" type="button">동행 게시판</button></div>
-            </div>
-            <div id="titleBox">리뷰 게시판</div>
+
+            <div id="titleBox">내 글 목록</div>
             <div id="detailBox">
+              <div id="searchBox">
+              <input type="search" id="find">
+              <button class="searchBtn" type="button">검색</button>
+              </div>
+              <div id="btnBox">
+                <div class="box1"><button class="mnbtn" onclick="location.href='boardEnrollForm';">글쓰기</button></div>
+              </div>
                 <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th style="width: 60px;">번호</th>
-                        <th style="width: 100px;">코스</th>
-                        <th style="width: 400px;">제목</th>
-                        <th style="width: 150px;">작성일</th>
+                        <th>카테고리</th>
+                        <th>제목</th>
+                        <th>날짜</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~~~~~~~~~~~~~</td>
+                        <td>문의</td>
+                        <td>문의인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>신고</td>
+                        <td>신고인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>문의</td>
+                        <td>문의인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>신고</td>
+                        <td>신고인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>문의</td>
+                        <td>문의인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>신고</td>
+                        <td>신고인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>문의</td>
+                        <td>문의인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>신고</td>
+                        <td>신고인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>문의</td>
+                        <td>문의인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                       <tr>
-                        <td>1</td>
-                        <td>1코스</td>
-                        <td>1코스 리뷰~~</td>
+                        <td>신고</td>
+                        <td>신고인데용</td>
                         <td>2024-05-13</td>
                       </tr>
                     </tbody>
@@ -232,10 +254,6 @@
                     <li class="page-item"><a class="page-link" href="#"> > </a></li>
                   </ul>                 
                 </div>
-
-
-
-
             </div>
         </div>
 	<jsp:include page="../common/footer.jsp"/>

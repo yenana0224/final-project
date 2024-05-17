@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LoginController {
+public class MemberViewController {
 	
 	// 화면
 	
@@ -54,11 +54,29 @@ public class LoginController {
 	}
 	
 	
-	// 마이페이지 - 내가 쓴 글 게시판
+	// 마이페이지 - 내가 쓴 글 게시판 리스트
 	@RequestMapping("boardList")
 	public String boardList() {
 		return "member/boardList";
 	}
+	
+	
+	// 마이페이지 - 글 등록 폼
+	@RequestMapping("boardEnrollForm")
+	public String boardEnrollForm() {
+		return "member/boardEnrollForm";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

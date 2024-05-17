@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,97 +14,13 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 <style>
-*{
-	box-sizing : border-box;
-	margin : 0;
-	border:1px solid red;
+
+
+.table{
+	width:1200px;
+	height:800px;
 }
-
-    #reserve{
-    	padding-top : 20px;
-    	padding-left : 15px;
-        width: 1200px;
-        height: 600px;
-        margin: auto;
-        border : 1px solid black;
-    }
-
-    #a{
-        width: 50%;
-        height: 100%;
-        float : left;
-        border : 1px solid blue;
-    }
-
-    #title{
-        width: 500px;
-        height: 80px;
-        margin: 30px;
-        border : 1px solid red;
-    }
-
-    #select-area{
-        width : 500px;
-        height: 450px;
-        margin : 30px;
-        border : 1px solid black;
-
-    }
-
-    #b{
-        width: 580px;
-        height: 100%;
-        float : left;
-        border : 1px solid forestgreen;
-    }
-
-    #b > img{
-        width: 100%;
-        height: 100%;
-    }
-
-    .discount{
-        right: 0;
-        bottom: 0;
-        text-align: center;
-        width: 60px;
-        height: 60px;
-        line-height: 20px;
-        border-radius: 10px;
-        font-size: 18px;
-        font-weight: 900;
-        color: #fff;
-        background-color: #FF6600
-    }
-
-    #paybtn{
-        width: 90px;
-        height: 40px;
-    }
-
-	#paybtn > img {
-		width : 100%;
-		height : 100%;
-		
-	}
-	
-	.discount{
-	    right: 0;
-	    bottom: 0;
-	    text-align: center;
-	    width: 60px;
-	    height: 60px;
-	    line-height: 20px;
-	    border-radius: 10px;
-	    font-size: 18px;
-	    font-weight: 900;
-	    color: #fff;
-	    background-color: #FF6600
-	}
-	
-	#aquaprice{
-		font-size:20px;
-	}
+   
 
 </style>
     
@@ -112,78 +29,116 @@
 
 	<jsp:include page ="../common/header.jsp" />
 	
+				<form>
+					<div class="table">
+                        <table>
+                            <colgroup>
+                                <col style="width:25%;">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th>탐방로 선택</th>
+                                <td>
+                                    <div class="form-group">                                    
+                                        <div class="select_wrap">                                        
+                                        <select name="courseSeq" id="courseSeq" class="form-control">
+                                        	<option value="" selected="selected">선택</option>                                        
+	                                        	<option value="성판악 코스">성판악 코스</option>
+	                                        	<option value="관음사 코스">관음사 코스</option>
+                                        	                                       
+                                        </select>
+                                        </div>
+                                        <a href="#" class="btn btn-black" data-toggle="modal" data-target="#tambang_info" title="자세히 보기" onclick="detailView();return false;">자세히 보기</a>
+                                    </div>
+                                </td>
 
-
+                            </tr>
+                            <tr>
+                                <th>탐방날짜</th>
+                                <td>
+                                    <div class="form-group input_wrap_row">
+                                        <input type="date" name="experienceDate" id="Date">
+                                    </div>
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>탐방 시작 시간</th>
+                                <td>
+	                                <div class="visitTmArea select_wrap">
+		                                <select name="" id="visitTm" class="form-control" onchange="coursePerson();">
+			                                <option value="">선택</option>
+			                                <option value="05:00 ~ 08:00">05:00 ~ 08:00</option>
+			                                <option value="8:01 ~ 10:00">8:01 ~ 10:00</option>
+			                                <option value="10:00~13:00">10:00~13:00</option>
+		                                </select>
+	                                </div>
+	                                
+                                	 <div>
+                                    	 (탐방 예약 시간이 지나면 예약부도 처리 됩니다)
+                                    </div>
+                                </td>
+                            </tr>        
+                            
+                            
+                            <tr>
+                                <th>예약자</th>
+                                <td>${ sessionScope.loginUser.memberName }</td>
+                            </tr>
+                            
+                            
+                            
+                            <c:choose>
+								<c:when test="${ empty sessionScope.loginUser}"><br>
+									
+								</c:when>
+								<c:otherwise>
+									<tr>
+		                                <th>예약자</th>
+		                                <td>${ sessionScope.loginUser.memberName }</td>
+		                            </tr>
+								</c:otherwise>
+							</c:choose>
+                            <tr>
+                                <th>탐방인원</th>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="select_wrap">
+                                            <select name="cmpaCnt" id="cmpaCnt" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                
+                                            </select>
+                                        </div>
+                                        	명
+                                        <span id="current_num" class="visible-xs-block visible-sm-block visible-md-inline visible-lg-inline"></span>
+                                        <span id="num_info" class="text-blue visible-xs-block visible-sm-block visible-md-block visible-lg-inline"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>주의사항</th>
+                                <td>
+                                    <ul class="bul">
+                                        <li>탐방 제한 페널티 제도를 적용하고 있습니다. 예약 후 취소 없이 탐방하지 않으면 1회 3개월, 2회 1년간 예약할 수 없습니다. 미리 탐방 시간 변경 및 탐방 예약취소를 하여 불이익을 당하지 않도록 하시기 바랍니다.</li>
+                                        <li>탐방 예약 시 제대로 마무리 안되면 예약 대기로 되며, 1일 후 자동 취소되오니 예약 완료 바랍니다.</li>
+                                        <li>정상 코스인 성판악 탐방로와 관음사 탐방로는 예약하셔야 하며, 그 외 코스는 예약 없이 탐방 가능합니다.</li>
+                                        <li>절기마다 입산 통제 시간이 있으며, 하산 시간도 있으니 참고하시기 바랍니다.<br> • 동 절 기 05:00~12:00 입산 가능(진달래밭 통제소, 삼각봉 대피소에서 12:00 탐방 통제), 정상 하산 13:30 하산 <br> • 춘추절기 05:00~12:30 입산 가능(진달래밭 통제소, 삼각봉 대피소에서 12:30 탐방 통제), 정상 하산 14:00 하산 <br> • 하 절 기 05:00~13:00 입산 가능(진달래밭 통제소, 삼각봉 대피소에서 13:00 탐방 통제), 정상 하산 14:30 하산 <br> ※ 동절기 11월~2월, 춘추절기 3~4월, 9~10월, 하절기 5~8월, <br> 2024년 7월 1일 탐방시간 전면 변경 한라산국립공원홈페이지 -&gt; 열림마당 -&gt; 공지사항에서 확인하시기 바랍니다.</li>
+                                        <li>탐방객의 성명, 생년월일, 연락처를 정확히 입력하시고, 추가 정보변경은 불가합니다.</li>
+                                        <li>탐방객 정보 중복입력시 관리자의 직권으로 예약이 취소될 수 있습니다.</li>
+                                        <li>탐방 시작 시간 이전 예약취소 가능</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                        </form>
+                    </div>
 	
 	
-	<div id="reserve">
-		<div id="a">
-			<h1>한라산 탐방</h1>
-			<!--<b>아쿠아리움 + 오션아레나 공연 + 유미의 세포들 특별전 &nbsp;&nbsp;</b><span class="discount">18%</span><br><br>-->
-			
-			
-			
-			<form method="post" action="kakaoPay">
-			
-				<input type="date" name="experienceDate" id="Date"><!-- 1 -->
-				
-				<select id="changeaqua1">
-					<option value="종일(09:30 - 18:00)">종일(09:30 - 18:00)</option>
-				</select>
-				
-				<input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 2 -->
-				
-				
-				<select id="changeaqua2">
-					<option id="op1" value="제주입장권_대소공통">제주입장권_대소공통</option>
-				</select>
-				
-				<input type="hidden" name="experienceDivide" value="제주입장권_대소공통"><!-- 3 -->
-				
-				
-				<div id="aquaprice" >
-				
-					<!-- 빼기 버튼 -->
-					<button type="button" id="sub" class="btn btn-outline-danger">-</button>
-					
-					<span id="span1" style="width:120px">${ price }</span>원
-					<input type="hidden" name="price" id="price" value="36000"><!-- 4 -->
-					
-					<!-- 더하기 버튼 -->
-					<button type="button" id="add" class="btn btn-outline-primary">+</button>&nbsp;
-					
-					<span id="person1" >1</span>명
-					<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
-					
-				</div>
-				
-				
-				<br>
-				
-				<input type="hidden" id="category" name="category" value="아쿠아리움"><!-- 6 -->
-
-
-				<c:choose>
-					<c:when test="${ empty sessionScope.loginUser}"><br>
-						<h3>결제를 하기 위해선 로그인 해야 합니다. <a class="btn btn-outline-warning" href="login">로그인하러가기</a></h3>
-					</c:when>
-					<c:otherwise>
-						<button type="submit"  id="btn1" class="btn btn-outline-warning">
-							<img src="resources/image/kakao.png" style="width:90px; height:30px;">
-					   </button>
-					</c:otherwise>
-				</c:choose>
-				</form>
-				
-				
-
-					
-		</div>
-		<div id="b">
-			<img id="imgg" src='resources/image/유미의세포들.jpg' />
-		</div>
-		
-	</div>
 	
 	
 	
@@ -196,111 +151,7 @@
 	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 	document.getElementById("Date").setAttribute("min", today);
 	
-	let num = 1;
-	let price = $('#aquaprice').children('#span1').text();
 	
-	
-	$(function(){
-		$('#btn1').click(() => {
-			
-			
-			var dateString = $("#Date").val();
-			var timeString = $('#changeaqua1').children('option:selected').text();
-			var divideString = $('#changeaqua2').children('option:selected').text();
-			var price = $('#aquaprice').children('#span1').text()
-			var person = $('#aquaprice').children('#person1').text()
-			var category = $('#category').val();
-			/*
-			console.log(dateString);
-			console.log(timeString);
-			console.log(divideString);
-			console.log(price);
-			console.log(person);
-			console.log(category);
-			*/	
-			console.log( $('input[name=experienceDate]').val() );
-			console.log( $('input[name=experienceTime]').val() );
-			console.log( $('input[name=experienceDivide]').val() );
-			console.log( $('input[name=experiencePeople]').val() );
-			console.log( $('input[name=price]').val() );
-			console.log( $('input[name=category]').val() );
-		
-			
-			});
-		})
-	
-	
-		
-		
-		
-		$('#sub').click(function(){
-			//var num = $('#aquaprice').children('#span1').text();
-			var person = $('#aquaprice').children('#person1').text();
-			newPrice = Number(price) - 36000;
-			newperson = Number(person) - 1;
-			document.getElementById("span1").textContent = newPrice;
-			document.getElementById("person1").textContent = newperson
-			
-			
-			num = $('#aquaprice').children('#person1').text();
-			$('#aquaprice').children('#person1').text(num);
-			
-			$('#person1-val').val(Number(num));
-			console.log($('#person1-val').val());
-			
-			
-			price = $('#aquaprice').children('#span1').text()
-			$('#aquaprice').children('#span1').text(price)
-			
-			$('#price').val(Number(price));
-			
-			
-			console.log($('#price').val())
-			
-			 if (newPrice <= 36000 ) {
-			        newPrice = 36000;
-			        document.getElementById("person1").textContent = 1;
-			    }
-
-			    // 새로운 값을 HTML 요소에 업데이트
-			    $('#aquaprice').children('#span1').text(newPrice);
-			    $('#aquaprice').children('#person1').text(newPerson);
-
-			    // 숨겨진 입력 필드 업데이트
-			    $('#person1-val').val(newPerson);
-			    $('#price').val(newPrice);
-			
-			
-			
-						
-		});
-		
-		$('#add').click(function(){
-			var person = $('#aquaprice').children('#person1').text();
-			newPrice = 36000 + Number(price);
-			newperson = Number(person) + 1;
-		    document.getElementById("span1").textContent = newPrice;
-		    document.getElementById("person1").textContent = newperson
-	
-			// num = $('#aquaprice').children('#span1').text();
-			num = $('#aquaprice').children('#person1').text();
-			$('#aquaprice').children('#person1').text(num);
-			
-			$('#person1-val').val(Number(num));
-			//console.log($('#person1-val').val());
-			
-			
-			price = $('#aquaprice').children('#span1').text()
-			$('#aquaprice').children('#span1').text(price)
-			
-			$('#price').val(Number(price));
-			
-			
-			//console.log($('#price').val())
-			
-			
-			
-		});
 		
 	
 		
