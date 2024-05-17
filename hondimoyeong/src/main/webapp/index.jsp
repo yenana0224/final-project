@@ -110,7 +110,7 @@
 	
 		<div id="ex">
 		    <div class="reservation">
-		   		<img src="resources/image/han.jpg" onclick="location.href='hanrasan'">
+		   		<img src="resources/image/han.jpg" onclick="location.href='hanlasan'">
 		    </div>
 		    <div class="reservation">
 		    	<img onclick="location.href='aqua'"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaKUXqbAlMJq-P1psHmMJ1KoEuZSfoDNSyQ&s">
