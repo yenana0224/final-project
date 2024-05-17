@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="experienceMapper">
+
+   <resultMap type="experience" id="experienceResultSet">
+      <result column="EXPERIENCE_NO" property="experienceNo" />
+      <result column="CATEGORY" property="category" />
+      <result column="EXPERIENCE_DATE" property="experienceDate" />
+      <result column="EXPERIENCE_TIME" property="experienceTime" />
+      <result column="EXPERIENCE_DIVIDE" property="experienceDivide" />
+      <result column="PRICE" property="price" />
+      <result column="EXPERIENCE_PEOPLE" property="experiencePeople" />
+      <result column="USER_NO" property="userNo" />
+   </resultMap>
+
+	<insert id="insertReserve" parameterType="experience">
+	
+	</insert>
+
+
+</mapper>
