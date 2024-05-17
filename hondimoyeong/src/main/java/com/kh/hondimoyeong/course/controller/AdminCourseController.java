@@ -130,7 +130,7 @@ public class AdminCourseController {
 		}
 		
 		
-		return "resource/course/stamp/" + changeName;
+		return "resources/course/stamp/" + changeName;
 	}
 	
 	public String saveDetailMap(MultipartFile detailMap, HttpSession session) {
@@ -149,7 +149,7 @@ public class AdminCourseController {
 			e.printStackTrace();
 		}
 		
-		return "resource/course/detailMap/" + changeName;
+		return "resources/course/detailMap/" + changeName;
 	}
 	
 	public String savePhoto(MultipartFile photo, HttpSession session) {
@@ -168,7 +168,7 @@ public class AdminCourseController {
 			e.printStackTrace();
 		}
 		
-		return "resource/course/photo/" + changeName;
+		return "resources/course/photo/" + changeName;
 	}
 	
 	

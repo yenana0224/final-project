@@ -95,7 +95,7 @@
                 <td rowspan="2" class="infomation">
                 	<c:forEach var="file" items="${course.files}">
                 		<c:if test="${file.fileLevel eq 1 }">
-                			<img alt="스탬프" src="${file.changeName}">
+                			<img id="stamp" src="resources/course/stamp/2024051711810.png">
                 		</c:if>
                 	</c:forEach>
                 </td>
@@ -106,14 +106,14 @@
             </tr>
             <tr>
                 <td class="part">코스설명</td>
-                <td class="infomation" colspan="5">${course.content }</td>
+                <td class="infomation" colspan="5">${course.content}</td>
             </tr>
             <tr>
                 <td class="part">상세지도</td>
                 <td class="infomation" colspan="5">
                     <c:forEach var="file" items="${course.files}">
                 		<c:if test="${file.fileLevel eq 2 }">
-                			<img alt="상세지도" src="${file.changeName}">
+                			<img src="resources/course/detailMap/2024051639416.jpg">
                 		</c:if>
                 	</c:forEach>
                 </td>

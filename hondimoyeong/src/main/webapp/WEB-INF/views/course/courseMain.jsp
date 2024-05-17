@@ -33,7 +33,7 @@
             width: 920px;
             height: 650px;
             margin: auto;
-            background-image: url(https://d2ur7st6jjikze.cloudfront.net/content_photos/1153_original_1612833304.jpg?1612833304);
+            background-image: url(resources/course/island/기본.PNG);
             background-size: cover;
             background-repeat: no-repeat;
             position: relative;
@@ -59,11 +59,13 @@
            width: 1000px;
            margin: auto; 
            text-align: center;
-           padding: 20px ;
+           padding: 20px;
+           margin-top : 50px;
         }
 
         #btn-area{
             margin: auto;
+            margin-bottom : 40px;
         }
 
         h3{
@@ -104,17 +106,35 @@
         </div>
 
         <div id="ollemap">
-            <img src="resources/course/island/기본.PNG" alt="제주도지도">
+        	
         </div>
         
         <div id="whole-course">
             <h3>코스 한 눈에 보기</h3>
             <div id="btn-area">
             	<c:forEach var="item" items="${list}">
-            		<button class="course-btn">${item.courseNo}</button>
+            		<c:if test="${ item.courseName ne '온평-표선(B)' && item.courseName ne '한림-고내(B)' }">
+            			<button class="course-btn" id="${item.courseName}" onclick="content(this);">${item.courseNo}</button>
+            		</c:if>
             	</c:forEach>
             </div>
         </div>
+        
+        <script>
+
+        	function content(button){
+        		
+        		//console.log(button.id);
+        		
+        		const url = "resources/course/island/"+ (button.id) +".PNG"
+        		
+        		$('#ollemap').html('<img src="'+ url + '">');
+        		
+        	}
+
+        </script>
+        
+        
     </div>
 	
 	<jsp:include page="../common/footer.jsp"/>
