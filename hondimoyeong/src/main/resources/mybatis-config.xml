@@ -14,7 +14,7 @@
  		
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Notice" alias="notice" />
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Faq" alias="faq" />
- 		<typeAlias type="com.kh.hondimoyeong.accompany.model.vo.Accompany" alias="accompany" />
+ 		<typeAlias type="com.kh.hondimoyeong.companion.model.vo.Companion" alias="companion" />
  		
  		<typeAlias type="com.kh.hondimoyeong.member.model.vo.Member" alias="member"/>
  	</typeAliases>
@@ -23,7 +23,7 @@
 		<mapper resource="mapper/course-mapper.xml"/>
 		<mapper resource="mapper/notice-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>		
-		<mapper resource="mapper/accompany-mapper.xml"/>
+		<mapper resource="mapper/companion-mapper.xml"/>
 	</mappers>
  	
  </configuration>

@@ -40,6 +40,13 @@ public class LoginController {
 		return "member/myPage";
 	}
 	
+	// 마이페이지 - 개인정보수정
+	@RequestMapping("myPageUpdate")
+	public String myPageUpdate() {
+		return "member/myPageUpdate";
+	}
+	
+	
 	
 	
 }

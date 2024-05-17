@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +24,7 @@ import lombok.extern.java.Log;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@CrossOrigin("*")
 @Log
 public class KakaoPayService {
     private static final String Host = "https://open-api.kakaopay.com/online/v1/payment/ready";
@@ -51,7 +53,7 @@ public class KakaoPayService {
         params.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
         params.put("partner_order_id", "1002"); // 주문 번호
         params.put("partner_user_id", "gogumaaa"); // 회원 아이디
-        params.put("item_name", experience.getCategory()); // 상품 명 카테고리
+        params.put("item_name", experience.getCategory()); // 상품 명 : 카테고리
         params.put("quantity", String.valueOf(experience.getExperiencePeople())); // 상품 수량
         params.put("total_amount", experience.getPrice()); // 상품 가격
         params.put("tax_free_amount", "100"); // 상품 비과세 금액

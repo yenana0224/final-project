@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="companionMapper">
+
+<resultMap type="companion" id="companionResultSet">
+	<result column="COMPANION_NO" property="companionNo"/>
+	<result column="USER_NO" property="userNo"/>
+	<result column="USER_NAME" property="userName"/>
+	<result column="COURSE_NO" property="courseName"/>
+	<result column="COMPANION_DATE" property="companionDate"/>
+	<result column="COMPANION_TITLE" property="companionTitle"/>
+	<result column="COMPANION_CONTENT" property="companionContent"/>
+	<result column="CREATE_DATE" property="createDate"/>
+	<result column="COUNT" property="count"/>
+	<result column="A_STATUS" property="status"/>
+	<result column="COMPANION_PEOPLE" property="companionPeople"/>
+	<result column="COMPANION_NUM" property="companionNum"/>
+</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		SELECT
+		      COUNT(*)
+		  FROM
+		      COMPANION
+		 WHERE
+			  STATUS = 'Y'
+	</select>
+	
+	
+	<select id="selectAll" resultMap="companionResultSet">
+		SELECT
+		      A.COMPANION_NO AS COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO AS COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS AS STATUS,
+		      A.COMPANION_PEOPLE,
+		      COUNT(B.USER_NO) AS COMPANION_NUM
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		  JOIN
+		      MEMBER M USING (USER_NO)
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		 WHERE
+		      A.STATUS = 'Y'
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.COMPANION_PEOPLE
+		ORDER
+		   BY
+		     A.COMPANION_NO DESC
+	</select>
+	
+	<select id="findCompanion" resultMap="companionResultSet">
+		SELECT
+		      A.COMPANION_NO AS COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO AS COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS AS STATUS,
+		      A.COMPANION_PEOPLE,
+		      COUNT(B.USER_NO) AS COMPANION_NUM
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		  JOIN
+		      MEMBER M USING (USER_NO)
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		 WHERE
+		      A.STATUS = 'Y'
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.COMPANION_PEOPLE
+		ORDER
+		   BY
+		     A.COMPANION_NO DESC
+	</select>
+
+
+</mapper>
