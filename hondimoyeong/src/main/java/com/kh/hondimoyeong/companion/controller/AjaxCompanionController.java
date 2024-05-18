@@ -16,8 +16,8 @@ public class AjaxCompanionController {
 	CompanionService companionService;
 	
 	@GetMapping
-	public String findCompanion() {
-		return new Gson().toJson(companionService.findCompanion());
+	public String sortCompanions() {
+		return new Gson().toJson(companionService.sortCompanions());
 	}
 	
 }

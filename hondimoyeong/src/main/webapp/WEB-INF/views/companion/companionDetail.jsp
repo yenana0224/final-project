@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>혼디모영 : ${ companion.companionTitle }</title>
 
 <style>
     /* content */
@@ -219,7 +219,7 @@
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
             <div class="detail_box_left"> <!-- 제목, 작성자 감싸는 div -->
-                <div class="detail_title"><span>${companion.courseName}</span></div>
+                <div class="detail_title"><span>${companion.companionTitle}</span></div>
                 <div class="detail_info">
                     <div class="detail_info1"><a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a></div>
                 </div>
@@ -278,7 +278,7 @@
         </div>
         
         <form action="" id="postForm" method="post">
-		    <input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
+		    <input type="hidden" name="companionNo" value="${companion.companionNo}"/>
 		</form>
 
     </div> <!-- 내용 박스 끝 -->
@@ -292,12 +292,13 @@
 			});
 		});
 		
+		
 		function postSubmit(num){
 			if(num == 0){
-				$('#postForm').attr('action', 'updateForm.companion').submit();
+				$('#postForm').attr('action', 'updateForm.cmp').submit();
 			}
 			else{
-				$('#postForm').attr('action', 'delete.companion').submit();
+				$('#postForm').attr('action', 'delete.cmp').submit();
 			}
 			
 		}

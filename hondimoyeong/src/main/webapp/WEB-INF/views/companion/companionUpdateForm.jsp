@@ -110,6 +110,7 @@
 	    line-height: 35px;
 	}
 
+	
 </style>
 </head>
 <body>
@@ -120,8 +121,8 @@
         <div class="notice_insert_title"><span>혼디모영!</span></div>
 
         <div class="insert_box">
-            <form action="insert.cmp" method="post">
-            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+            <form action="update.cmp" method="post">
+            	<input type="hidden" name="companionNo" value="${ companion.companionNo }"/>
 				<table class="tb_input">
 					<tbody>
                         <tr>
@@ -162,20 +163,28 @@
 						</tr>
 						<tr>
 							<th>* 동행 날짜</th>
-							<td><input type="date" name="companionDate" class="date_input" required/></td>
+							<td>
+								<input type="date" name="companionDate" class="date_input" required/>
+							</td>
 						</tr>
                         <tr>
 							<th>* 모집 인원</th>
-							<td><input type="number" min="1" max="10" name="companionPeople" class="people_input" required/>
-                                <a class="input_info">* 최소 1명, 최대 10명 선택해 주세요.</a></td>
+							<td>
+								<input type="number" min="1" max="10" name="companionPeople" class="people_input" value="${companion.companionPeople}"required/>
+                                <a class="input_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
+                            </td>
 						</tr>
                         <tr>
 							<th>* 제목</th>
-							<td><input type="text" name="companionTitle" class="hdmy_input" required/></td>
+							<td>
+								<input type="text" name="companionTitle" class="hdmy_input" value="${companion.companionTitle}" required/>
+							</td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="input_content" name="companionContent"></textarea></td>
+							<td>
+								<textarea class="input_content" name="companionContent">${companion}</textarea>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -188,7 +197,6 @@
     </div>
     
     <jsp:include page="../common/footer.jsp"/>
-    
 
 </body>
 </html>

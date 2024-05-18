@@ -1,6 +1,7 @@
 package com.kh.hondimoyeong.companion.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,8 +20,8 @@ public class CompanionRepository {
 		return sqlSession.selectList("companionMapper.selectAll", null, rowBounds);
 	}
 
-	public List<Companion> findCompanion(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("companionMapper.findCompanion");
+	public List<Companion> sortCompanions(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("companionMapper.sortCompanions");
 	}
 
 	public int sortCompanionCount(SqlSessionTemplate sqlSession) {
@@ -28,15 +29,35 @@ public class CompanionRepository {
 	}
 
 	public List<Companion> sort(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
-		return sqlSession.selectList("companionMapper.findCompanion", null, rowBounds);
+		return sqlSession.selectList("companionMapper.sortCompanions", null, rowBounds);
 	}
 
 	public int increaseCount(SqlSessionTemplate sqlSession, int companionNo) {
 		return sqlSession.update("companionMapper.increaseCount", companionNo);
 	}
 
-	public Companion detailCompanion(SqlSessionTemplate sqlSession, int companionNo) {
-		return sqlSession.selectOne("companionMapper.detailCompanion", companionNo);
+	public Companion selectCompanion(SqlSessionTemplate sqlSession, int companionNo) {
+		return sqlSession.selectOne("companionMapper.selectCompanion", companionNo);
+	}
+
+	public int insert(SqlSessionTemplate sqlSession, Companion companion) {
+		return sqlSession.insert("companionMapper.insert", companion);
+	}
+
+	public int searchCount(SqlSessionTemplate sqlSession, Map<String, String> searchMap) {
+		return sqlSession.selectOne("companionMapper.searchCount", searchMap);
+	}
+
+	public List<Companion> search(SqlSessionTemplate sqlSession, Map<String, String> searchMap, RowBounds rowBounds) {
+		return sqlSession.selectList("companionMapper.search", searchMap, rowBounds);
+	}
+
+	public int update(SqlSessionTemplate sqlSession, Companion companion) {
+		return sqlSession.update("companionMapper.update", companion);
+	}
+
+	public int delete(SqlSessionTemplate sqlSession, int companionNo) {
+		return sqlSession.update("companionMapper.delete", companionNo);
 	}
 
 }

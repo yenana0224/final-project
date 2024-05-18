@@ -1,6 +1,7 @@
 package com.kh.hondimoyeong.companion.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
@@ -14,7 +15,7 @@ public interface CompanionService {
 	// 정렬
 	int sortCompanionCount();
 
-	List<Companion> findCompanion();
+	List<Companion> sortCompanions();
 
 	List<Companion> sortCompanion(PageInfo pi);
 
@@ -22,7 +23,18 @@ public interface CompanionService {
 
 	int increaseCount(int companionNo);
 
-	Companion detailCompanion(int companionNo);
+	Companion selectCompanion(int companionNo);
+
+	int insert(Companion companion);
+
+	// 검색
+	int searchCount(Map<String, String> searchMap);
+
+	List<Companion> search(Map<String, String> searchMap, PageInfo pi);
+
+	int update(Companion companion);
+
+	int delete(int companionNo);
 
 
 }
