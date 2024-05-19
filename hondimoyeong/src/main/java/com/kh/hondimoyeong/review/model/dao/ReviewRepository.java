@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
+import com.kh.hondimoyeong.review.model.vo.ReviewImg;
 
 @Repository
 public class ReviewRepository {
@@ -43,6 +44,14 @@ public class ReviewRepository {
 
 	public int insertComment(SqlSessionTemplate sqlSession, ReviewComment reviewComment) {
 		return sqlSession.insert("reviewMapper.insertComment", reviewComment);
+	}
+
+	public List<ReviewImg> selectReviewImgs(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectList("reviewMapper.selectReviewImgs", reviewNo);
+	}
+
+	public List<ReviewComment> selectCommentCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("reviewMapper.selectCommentCount");
 	}
 
 }

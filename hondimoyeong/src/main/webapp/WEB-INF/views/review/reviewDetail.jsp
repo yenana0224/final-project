@@ -334,8 +334,9 @@
 
         <div class="detail_content">
             <p class="detail_content_p">${review.reviewContent}</p>
-            <img src="/resources/image/aqua.jpg" class="content_img">
-            <img src="/resources/image/aqua.jpg" class="content_img">
+	        <c:forEach var="img" items="${review.reviewImgs}">
+	            <img src="${img.changeName}" class="content_img"/>
+			</c:forEach>
         </div>
 
         <div class="detail_reply_title">

@@ -12,6 +12,7 @@ import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.review.model.dao.ReviewRepository;
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
+import com.kh.hondimoyeong.review.model.vo.ReviewImg;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -64,6 +65,16 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int insertComment(ReviewComment reviewComment) {
 		return reviewRepository.insertComment(sqlSession, reviewComment);
+	}
+
+	@Override
+	public List<ReviewImg> selectReviewImgs(int reviewNo) {
+		return reviewRepository.selectReviewImgs(sqlSession, reviewNo);
+	}
+
+	@Override
+	public List<ReviewComment> selectCommentCount() {
+		return reviewRepository.selectCommentCount(sqlSession);
 	}
 
 }

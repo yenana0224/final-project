@@ -157,6 +157,10 @@
         text-align: center;
     }
     
+    .commentCount{
+    	color: #FF9843;
+    }
+    
     .star{
     	color: #FF9843;
     }
@@ -212,7 +216,6 @@
                 <button type="submit" class="review_search_btn">검색</button>
             </form>
         </div>
-        
         <c:if test="${ not empty condition }">
         	<script>
         		$(function(){
@@ -243,7 +246,14 @@
                     	<tr class="list">
 	                        <td class="hdmy-table_small">${r.reviewNo}</td>
 	                        <td class="hdmy-table_small">${r.courseName}</td>
-	                        <td>${r.reviewTitle}</td>
+					        <c:choose>
+					            <c:when test="${r.commentCount == 0}">
+					                <td>${r.reviewTitle}</td>
+					            </c:when>
+					            <c:otherwise>
+					                <td>${r.reviewTitle} <a class="commentCount">[${r.commentCount}]</a></td>
+					            </c:otherwise>
+					        </c:choose>
 	                        <td class="hdmy-table_mid star" data-rating="${r.reviewStar}"></td>
 	                        <td class="hdmy-table_small">${r.userName}</td>
 	                        <td class="hdmy-table_small">${r.createDate}</td>

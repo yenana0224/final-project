@@ -9,16 +9,12 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ReviewComment {
+public class ReviewImg {
 	
-	private int commentNo;
+	private int reviewImgNo;
 	private int reviewNo;
-	private String commentContent;
-	private String status;
-	private String createDate;
-	private int userNo;
-	private String userName;
-	private int commentCount;
-	
+	private String originName;
+	private String changeName;
+	private int fileLevel;
 
 }
