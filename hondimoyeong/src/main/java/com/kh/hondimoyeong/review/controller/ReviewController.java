@@ -7,14 +7,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.review.model.service.ReviewService;
 import com.kh.hondimoyeong.review.model.vo.Review;
+import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 
 @Controller
 public class ReviewController {
@@ -61,6 +66,22 @@ public class ReviewController {
 		model.addAttribute("searchPage", pi);
 		
 		return "review/reviewList";
+	}
+	
+	
+	/**
+	 * 댓글 ajax
+	 */
+	@ResponseBody
+	@GetMapping(value="comment", produces="application/json; charset=UTF-8")
+	public String selectComment(int reviewNo) {
+		return new Gson().toJson(reviewService.selectComment(reviewNo));
+	}
+	
+	@ResponseBody
+	@PostMapping("comment")
+	public String ajaxInsertComment(ReviewComment reviewComment) {
+		return reviewService.insertComment(reviewComment) > 0 ? "success" : "fail";
 	}
 
 }

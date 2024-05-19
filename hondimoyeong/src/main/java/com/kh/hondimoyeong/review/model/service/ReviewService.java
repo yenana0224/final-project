@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.review.model.vo.Review;
+import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 
 public interface ReviewService {
 
@@ -19,5 +20,9 @@ public interface ReviewService {
 	int increaseCount(int reviewNo);
 
 	Review selectReview(int reviewNo);
+
+	List<ReviewComment> selectComment(int reviewNo);
+
+	int insertComment(ReviewComment reviewComment);
 
 }

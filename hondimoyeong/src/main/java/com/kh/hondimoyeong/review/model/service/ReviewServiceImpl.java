@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.review.model.dao.ReviewRepository;
 import com.kh.hondimoyeong.review.model.vo.Review;
+import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -53,6 +54,16 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public Review selectReview(int reviewNo) {
 		return reviewRepository.selectReview(sqlSession, reviewNo);
+	}
+
+	@Override
+	public List<ReviewComment> selectComment(int reviewNo) {
+		return reviewRepository.selectComment(sqlSession, reviewNo);
+	}
+
+	@Override
+	public int insertComment(ReviewComment reviewComment) {
+		return reviewRepository.insertComment(sqlSession, reviewComment);
 	}
 
 }

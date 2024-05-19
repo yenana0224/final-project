@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 디테일</title>
+<title>리뷰 : ${review.reviewTitle}</title>
 
 <style>
     /* content */
@@ -113,6 +115,11 @@
         font-size: 20px;
         font-weight: bold;
     }
+    
+    .detail_right_star{
+    	color: #FF9843;
+    	text-align: right;
+    }
 
     /* 본문 */
     .detail_content{
@@ -144,13 +151,48 @@
         border-bottom: 1px solid lightgray;
         background-color: #ececec;
         padding-left: 20px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+    }
+        
+    .comment_write{
+    	width:1200px;
+    }
+    
+    .commentContent{
+    	width: 1090px;
+    	height: 90px;
+    	resize: none;
+    	border: 1px solid lightgray;
+    	border-radius: 10px;
+    	padding: 10px;
+    	outline: none;
+    	float: left;
+    	margin-right: 20px;
+    }
+
+    .comment_btn{
+    	width:90px;
+    	height: 90px;
+    	text-align: center;
+    	line-height: 85px;
+    	float:left;
+    	background-color: #FF9843;
+    	color: #fff;
+    	border-radius: 10px;
+    	font-weight: bold;
+    	border: none;
     }
 
     .detail_reply{
         width: 1200px;
         height: auto;
         margin: 0 auto;
+    }
+    
+    .detail_reply_box{
+    	width: 1200px;
+    	height: 110px;
+    	border-bottom: 1px solid lightgray;
     }
 
     .detail_reply_content{
@@ -163,7 +205,6 @@
 
     .detail_reply_left{
         width: 1100px;
-        padding-top: 15px;
         padding-bottom: 10px;
         float: left;
     }
@@ -172,6 +213,7 @@
         font-size: 17px;
         font-weight: bold;
         margin-bottom: 10px;
+        margin-top: 15px;
     }
 
     .detail_reply_p{
@@ -206,7 +248,43 @@
         background-color: #FF9843;
         color: #ffffff;
         margin-right: 10px;
+        cursor: pointer;
+        line-height: 35px;
+        text-decoration: none;
     }
+    
+    .hdmy_detail_btn:hover{
+    	text-decoration: none;
+    	color: #FFFFFF;
+    }
+    
+    /* 별점*/
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 26px;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
 
 </style>
 </head>
@@ -215,9 +293,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">
-        <div class="detail_top">
-            <a class="detail_top">리뷰 게시판</a>
-        </div>
+        <div class="detail_top"><a class="detail_top" href="review">리뷰 게시판</a></div>
 
         <div class="detail_course">${review.courseName}</div>
 
@@ -234,7 +310,25 @@
             </div>
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
-                <div class="detail_right_btn">${review.reviewStar}</div>
+                <div class="detail_right_star">
+                <!-- 아아 
+				 	<form class="mb-3" name="myform" id="myform" method="post">
+					<fieldset>
+						<input type="radio" name="reviewStar" value="5" id="rate1"><label
+							for="rate1">★</label>
+						<input type="radio" name="reviewStar" value="4" id="rate2"><label
+							for="rate2">★</label>
+						<input type="radio" name="reviewStar" value="3" id="rate3"><label
+							for="rate3">★</label>
+						<input type="radio" name="reviewStar" value="2" id="rate4"><label
+							for="rate4">★</label>
+						<input type="radio" name="reviewStar" value="1" id="rate5"><label
+							for="rate5">★</label>
+					</fieldset>
+					</form>	
+				 -->
+                ${review.reviewStar}
+                </div>
             </div>
         </div>
 
@@ -245,49 +339,119 @@
         </div>
 
         <div class="detail_reply_title">
-            <div class="detail_reply_top"><a>댓글 [2]</a></div>
+            <div class="detail_reply_top"><a>댓글 [<span id="rcount"></span>]</a></div>
         </div>
+        
+        <div class="detail_reply_box">
+			<div class="comment_write"><textarea class="commentContent" name="commentContent"></textarea></div>    
+			<button class="comment_btn" onclick="addComment();">등록</button> 	
+        </div>
+        
+         <!-- 댓글 박스 -->
         <div class="detail_reply">
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 빈정박</a></div>
-                    <div class="detail_reply_p"><p>저요! 혹시 점심 메뉴는 뭔가요?</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
-
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 희주봉</a></div>
-                    <div class="detail_reply_p"><p>뭐 드시고 싶으세요? 맞춰드립니다~!</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
-
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 나유김</a></div>
-                    <div class="detail_reply_p"><p>저도 일정 맞는데 같이 가고싶어요! 신청했습니다!</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
         </div>
 
         <div class="detail_btn_box" align="center">
-            <div class="hdmy_detail_btn">목록</div>
-            <div class="hdmy_detail_btn">수정</div>
-            <div class="hdmy_detail_btn">삭제</div>
+            <div class="hdmy_detail_btn detailBtn">목록</div>
+            <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
+	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
+            </c:if>
         </div>
+        
+        <form action="" id="postForm" method="post">
+		    <input type="hidden" name="companionNo" value="${companion.companionNo}"/>
+		</form>
         
     </div>
 
-<jsp:include page="../common/footer.jsp"/>
+	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+		var userRating = '${review.reviewStar}';
+		var starContainer = document.querySelector('.detail_right_star');
+		var starsHTML = '';
+		for (var i = 0; i < userRating; i++) {
+		    starsHTML += '★ ';
+		}
+		starContainer.innerHTML = starsHTML;
+	
+		function addComment(){
+				$.ajax({
+					url: 'comment',
+					type: 'post',
+					data: {
+						reviewNo : ${review.reviewNo},
+						commentContent : $('.commentContent').val(),
+						userNo: '${sessionScope.loginUser.userNo}',
+						userName : '${sessionScope.loginUser.userName}'
+					},
+					success: function(result){
+						console.log(result);
+						
+						if(result == 'success'){
+							$('.write_content').val('');
+							selectComment();
+						};
+					}
+				});
+		}
+		
+		function selectComment(){
+			$.ajax({
+				url: 'comment',
+				type: 'get',
+				data : {reviewNo : ${review.reviewNo}},
+				success: function(result){
+					let resultStr = '';
+					for(let i in result){
+						resultStr += '<div class="detail_reply_content">'
+								   + '<div class="detail_reply_left">'
+	                    		   + '<div class="detail_reply_write"><a>🍊 ' + result[i].userName + '</a></div>'
+	                    		   + '<div class="detail_reply_p"><p>' + result[i].commentContent + '</p></div>'
+	                			   + '</div>'
+	                			   + '<div class="detail_reply_right">'
+	                			   + '<div class="detail_reply_data"><a>' + result[i].createDate + '</a></div>'
+	                			   + '</div></div>';
+					}
+					$('.detail_reply').html(resultStr);
+    				$('#rcount').text(result.length);
+
+				}
+			});
+		};
+		
+		$(function(){
+			selectComment();
+		});
+		
+		
+		
+		$(function(){
+			$('.detailBtn').click(function(){
+				location.href='${ path }/review?page=1';
+			});
+		});
+		
+		
+		function postSubmit(num){
+			if(num == 0){
+				$('#postForm').attr('action', 'updateForm.rvw').submit();
+			}
+			else{
+				$('#postForm').attr('action', 'delete.rvw').submit();
+			}
+		}
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>
