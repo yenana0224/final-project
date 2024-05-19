@@ -16,7 +16,7 @@
         }
 
         #innerOuter{
-            width: 1000px;
+            width: 1200px;
             height: 1700px;
             margin: auto;
         }
@@ -29,62 +29,30 @@
             margin-bottom: 20px;
         }
 
-        #ollemap{
-            width: 920px;
-            height: 650px;
-            margin: auto;
-            background-image: url(resources/course/island/기본.PNG);
-            background-size: cover;
-            background-repeat: no-repeat;
-            position: relative;
+        #photo{
+            width: 1200px;
+            height: 592px;
+            background-image: url(resources/course/photo/15-23.jpg);
+            position : relative;
         }
 
-        #ollemap > img{
-            width: 100%;
-            height: 100%;
-
-        }
-
-        #course-datail{
-            width: 300px;
-            height: 180px;
-            background-color: rgba(255, 255, 255, 0.606);
-            position: absolute;
-            z-index: 10;
-            right : 280px;
-            top : 200px;
-        }
-
-        #whole-course{
-           width: 1000px;
-           margin: auto; 
-           text-align: center;
-           padding: 20px;
-           margin-top : 50px;
-        }
-
-        #btn-area{
-            margin: auto;
-            margin-bottom : 40px;
-        }
-
-        h3{
-            font-size: 25px;
-            margin-bottom: 20px;
-        }
-
-        .course-btn {
-            margin : 10px;
-            width: 100px;
+        #choose{
+            width: 350px;
             height: 40px;
-            font-size: 20px;
-            color : white;
-            border-radius: 30px;
-            background-color: #ff9843;
+            font-size: 16px;
+            text-align: center;
+            background-color: #f9f9f98c;
             border : none;
+            border-radius: 10px;
         }
 
-
+        #choose-area{
+            width: 1200px;
+            text-align: center;
+            position : absolute;
+            z-index : 5;
+            top : 600px
+        }
 
     </style>
 </head>
@@ -94,6 +62,19 @@
 	<jsp:include page="../common/header.jsp"/>
 
     <div id="innerOuter">
+
+        <div id="photo"></div>
+        <div id="choose-area">
+        <form action="course" method="post">
+            <select id="choose" name="courseIndex">
+                <c:forEach var="course" items="${ list }">
+                	<option value="${course.courseIndex }">${course.courseNo}. ${course.courseName}</option>
+                </c:forEach>
+            </select>
+            <button type="submit">확인</button>
+        </form>    
+        </div>
+
         <div id="explain">
             <p> <span style="font-weight: 700;">올레길</span>은 제주의 해안지역을 따라 <br>
                 골목길, 산길, 들길, 해안길, 오름 등을 연결하여 만든<br>
@@ -104,35 +85,6 @@
 
             <p style="font-size:16px">올레란 큰 길에서 대문까지 이어지는 좁은 골목길을 뜻하는 제주 방언을 말합니다</p>
         </div>
-
-        <div id="ollemap">
-        	
-        </div>
-        
-        <div id="whole-course">
-            <h3>코스 한 눈에 보기</h3>
-            <div id="btn-area">
-            	<c:forEach var="item" items="${list}">
-            		<c:if test="${ item.courseName ne '온평-표선(B)' && item.courseName ne '한림-고내(B)' }">
-            			<button class="course-btn" id="${item.courseName}" onclick="content(this);">${item.courseNo}</button>
-            		</c:if>
-            	</c:forEach>
-            </div>
-        </div>
-        
-        <script>
-
-        	function content(button){
-        		
-        		//console.log(button.id);
-        		
-        		const url = "resources/course/island/"+ (button.id) +".PNG"
-        		
-        		$('#ollemap').html('<img src="'+ url + '">');
-        		
-        	}
-
-        </script>
         
         
     </div>

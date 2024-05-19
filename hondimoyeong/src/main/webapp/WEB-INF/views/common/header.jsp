@@ -194,7 +194,7 @@
             
             <div class="header_menu">
                 <ul class="navi">
-                    <li><a href="course">올레길</a></li>
+                    <li><a href="courses">올레길</a></li>
                     <li><a href="companion">혼디모영</a></li>
                     <li><a href="#">프로그램</a>
                         <ul class="submenu"  style="padding-top: 20px;">
