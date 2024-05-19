@@ -50,4 +50,8 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectReviewImgs", reviewNo);
 	}
 
+	public List<ReviewComment> selectCommentCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("reviewMapper.selectCommentCount");
+	}
+
 }

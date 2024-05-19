@@ -16,6 +16,7 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="USER_NAME" property="userName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="COMMENT_COUNT" property="commentCount"/>
 	</resultMap>
 	
 	<resultMap type="reviewComment" id="reviewCommentResultSet">
@@ -26,6 +27,7 @@
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="USER_NO" property="userNo"/>
 		<result column="USER_NAME" property="userName"/>
+		<result column="COMMENT_COUNT" property="commentCount"/>
 	</resultMap>
 	
 	<resultMap type="reviewImg" id="reviewImgResultSet">
@@ -48,22 +50,33 @@
 	
 	<select id="selectList" resultMap="reviewResultSet">
 		SELECT
+		    R.REVIEW_NO,
+		    C.COURSE_NO AS COURSE_NAME,
+		    USER_NAME,
+		    REVIEW_TITLE,
+		    TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') AS "CREATE_DATE",
+		    COUNT(RC.REPLY_NO) AS COMMENT_COUNT,
+		    R.STATUS,
+		    REVIEW_STAR
+		FROM
+		    REVIEW R
+		JOIN
+		    MEMBER M ON (M.USER_NO = R.USER_NO)
+		JOIN
+		    COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		LEFT JOIN
+		    REVIEW_COMMENT RC ON (R.REVIEW_NO = RC.REVIEW_NO)
+		WHERE
+		    R.STATUS = 'Y'
+		GROUP
+		   BY
 		      R.REVIEW_NO,
-		      C.COURSE_NO AS COURSE_NAME,
+		      C.COURSE_NO,
 		      USER_NAME,
-		      REVIEW_TITLE,
-		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
-		      COUNT,
-		      R.STATUS,
+		      REVIEW_TITLE, 
+		      R.CREATE_DATE, 
+		      R.STATUS, 
 		      REVIEW_STAR
-		  FROM
-		      REVIEW R
-		  JOIN
-		      MEMBER M ON (M.USER_NO = R.USER_NO)
-		  JOIN
-		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
-		 WHERE
-		      R.STATUS = 'Y'
 		 ORDER
 		    BY
 		      R.REVIEW_NO DESC
@@ -204,6 +217,19 @@
 		      REVIEW R ON (R.REVIEW_NO = RI.REVIEW_NO)
 		 WHERE
 		      R.REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<select id="selectCommentCount" resultMap="reviewCommentResultSet">
+		SELECT
+		    R.REVIEW_NO,
+		    R.REVIEW_TITLE,
+		    COUNT(C.REPLY_NO) AS COMMENT_COUNT
+		FROM
+		    REVIEW R
+		LEFT JOIN
+		    REVIEW_COMMENT C ON (R.REVIEW_NO = C.REVIEW_NO)
+		GROUP BY
+		    R.REVIEW_NO, R.REVIEW_TITLE
 	</select>
 
 

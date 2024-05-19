@@ -28,4 +28,6 @@ public interface ReviewService {
 
 	List<ReviewImg> selectReviewImgs(int reviewNo);
 
+	List<ReviewComment> selectCommentCount();
+
 }

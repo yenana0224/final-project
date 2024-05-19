@@ -32,6 +32,9 @@ public class ReviewController {
 	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 10, 5);
 		
+		List<ReviewComment> comment = reviewService.selectCommentCount();
+		
+		model.addAttribute("comment", comment);
 		model.addAttribute("review", reviewService.selectList(pi));
 		model.addAttribute("pageInfo", pi);
 		return "review/reviewList";

@@ -72,4 +72,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.selectReviewImgs(sqlSession, reviewNo);
 	}
 
+	@Override
+	public List<ReviewComment> selectCommentCount() {
+		return reviewRepository.selectCommentCount(sqlSession);
+	}
+
 }
