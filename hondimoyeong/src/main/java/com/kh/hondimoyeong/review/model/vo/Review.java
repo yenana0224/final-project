@@ -1,5 +1,7 @@
 package com.kh.hondimoyeong.review.model.vo;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +24,7 @@ public class Review {
 	private int reviewStar;
 	private int userNo;
 	private String userName;
+	
+	private List<ReviewImg> reviewImgs;
 
 }

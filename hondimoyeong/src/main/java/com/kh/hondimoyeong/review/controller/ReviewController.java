@@ -20,6 +20,7 @@ import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.review.model.service.ReviewService;
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
+import com.kh.hondimoyeong.review.model.vo.ReviewImg;
 
 @Controller
 public class ReviewController {
@@ -35,16 +36,36 @@ public class ReviewController {
 		model.addAttribute("pageInfo", pi);
 		return "review/reviewList";
 	}
-
+	
 	@RequestMapping("detail.rvw")
 	public ModelAndView detail(int reviewNo, ModelAndView mv) {
-		if(reviewService.increaseCount(reviewNo) > 0) {
-			mv.addObject("review", reviewService.selectReview(reviewNo)).setViewName("review/reviewDetail");
+		
+		Review review = reviewService.selectReview(reviewNo);
+		if(review != null) {
+			List<ReviewImg> reviewImgs = reviewService.selectReviewImgs(reviewNo);
+			review.setReviewImgs(reviewImgs);
+			
+			if(reviewService.increaseCount(reviewNo) > 0) {
+				mv.addObject("review", review).setViewName("review/reviewDetail");
+			} else {
+				mv.addObject("errorMsg", "조회 실패").setViewName("common/errorPage");
+			}
 		} else {
-			mv.addObject("errorMsg", "조회 실패했습니다.").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "리뷰 찾을 수 없음").setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
+
+//	@RequestMapping("detail.rvw")
+//	public ModelAndView detail(int reviewNo, ModelAndView mv) {
+//		if(reviewService.increaseCount(reviewNo) > 0) {
+//			mv.addObject("review", reviewService.selectReview(reviewNo)).setViewName("review/reviewDetail");
+//		} else {
+//			mv.addObject("errorMsg", "조회 실패했습니다.").setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}
 	
 	@RequestMapping("search.rvw")
 	public String search(@RequestParam(value="keyword") String keyword,
