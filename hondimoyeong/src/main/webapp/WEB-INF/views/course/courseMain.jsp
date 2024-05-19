@@ -17,7 +17,7 @@
 
         #innerOuter{
             width: 1200px;
-            height: 1700px;
+            height: 1000px;
             margin: auto;
         }
 
@@ -26,7 +26,7 @@
             text-align: center;
             font-size: 23px;
             font-weight: 200;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         #photo{
@@ -53,6 +53,13 @@
             z-index : 5;
             top : 600px
         }
+        
+        #enter{
+        	background-color: #f9f9f98c;
+        	border : none;
+        	border-radius: 5px;
+        	padding : 5px;
+        }
 
     </style>
 </head>
@@ -65,13 +72,13 @@
 
         <div id="photo"></div>
         <div id="choose-area">
-        <form action="course" method="post">
+        <form action="course" method="get">
             <select id="choose" name="courseIndex">
                 <c:forEach var="course" items="${ list }">
                 	<option value="${course.courseIndex }">${course.courseNo}. ${course.courseName}</option>
                 </c:forEach>
             </select>
-            <button type="submit">확인</button>
+            <button id="enter" type="submit">GO</button>
         </form>    
         </div>
 
