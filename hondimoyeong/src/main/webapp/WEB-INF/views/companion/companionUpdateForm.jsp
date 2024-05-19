@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- 필수 JS/CSS { -->
+<link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+<!-- } -->
+</head>
+
+
 <style>
 	/* 컨텐트 */
 	#container{
@@ -46,46 +52,37 @@
 	    font-size: 14px;
 	}
 	
-	.input_title{
+	.title_inp{
 	    width: 650px;
-	    height: 35px;
-	    padding: 7px;
-	    border-radius: 10px;
-	    border: 1px solid #b1b1b1;
-	}
-	
-	.hdmy_input{
-	    width: 650px;
-	    height: 35px;
-	    padding: 7px;
-	    border-radius: 10px;
 	    font-size: 15px;
-	    border: 1px solid #b1b1b1;
 	}
 	
-	.date_input, .course_input, .people_input{
+	.title_inp, .date_inp, .course_inp, .people_inp, .content_inp{
+		height: 40px;
+		border: 1px solid #b1b1b1;
+		outline:none;
+		border-radius: 10px;
+		font-size: 15px;
+		color: #292929;
+		padding: 10px;
+		
+	}
+	
+	.date_inp, .course_inp, .people_inp{
 	    width: 150px;
-	    height: 35px;
-	    padding: 7px;
 	    font-size: 15px;
-	    border-radius: 10px;
-	    border: 1px solid #b1b1b1;
 	}
-	
-	.input_info{
+
+	.people_info{
 	    color: #292929;
-	    padding-left: 10px;
 	    text-decoration: none;
 	    line-height: 0px;
 	}
 	
-	.input_content{
+	.content_inp{
 	    width: 650px;
 	    height: 400px;
 	    resize: none;
-	    border-radius: 10px;
-	    padding: 7px;
-	    border: 1px solid #b1b1b1;
 	}
 	
 	/* 등록 취소 버튼 */
@@ -109,10 +106,8 @@
 	    cursor: pointer;
 	    line-height: 35px;
 	}
-
 	
 </style>
-</head>
 <body>
 
 	<jsp:include page="../common/header.jsp"/>
@@ -128,7 +123,7 @@
                         <tr>
 							<th>* 코스</th>
 							<td>
-                                <select name="courseName" class="course_input">
+                                <select name="courseName" class="course_inp">
                                     <option value="1">1코스</option>
                                     <option value="24">1-1코스</option>
                                     <option value="2">2코스</option>
@@ -164,26 +159,27 @@
 						<tr>
 							<th>* 동행 날짜</th>
 							<td>
-								<input type="date" name="companionDate" class="date_input" required/>
+								<input type="text" name="companionDate" class="datepicker date_inp" value="${companion.companionDate }"/>
+								<jsp:include page="datepicker.jsp"></jsp:include>
 							</td>
 						</tr>
                         <tr>
 							<th>* 모집 인원</th>
 							<td>
-								<input type="number" min="1" max="10" name="companionPeople" class="people_input" value="${companion.companionPeople}"required/>
-                                <a class="input_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
+								<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required/>
+                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
                             </td>
 						</tr>
                         <tr>
 							<th>* 제목</th>
 							<td>
-								<input type="text" name="companionTitle" class="hdmy_input" value="${companion.companionTitle}" required/>
+								<input type="text" name="companionTitle" class="title_inp" value="${companion.companionTitle}" required/>
 							</td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
 							<td>
-								<textarea class="input_content" name="companionContent">${companion}</textarea>
+								<textarea class="content_inp" name="companionContent">${companion.companionContent}</textarea>
 							</td>
 						</tr>
 					</tbody>

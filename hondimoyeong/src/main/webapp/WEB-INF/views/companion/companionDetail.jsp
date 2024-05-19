@@ -27,12 +27,13 @@
         text-align: center;
         font-size: 20px;
         font-weight: bold;
-        color: #000000;
+        color: #fff;
         margin-bottom: 30px;
     }
 
     .detail_top a{
         color: #ffffff;
+        padding:20px;
     }
 
     .detail_courseImg {
@@ -210,7 +211,13 @@
 
     <div id="container">
         <div class="detail_top">
-            <a>${companion.courseName}</a> | <a>동행 날짜 : ${companion.companionDate}</a> | <a>인원 : ${companion.companionNum} / ${companion.companionPeople} [모집중]</a>
+            <a>${companion.courseName}</a>/
+            <a>동행 날짜 : ${companion.companionDate}</a>/
+            <a>인원 : ${companion.companionNum} / ${companion.companionPeople}
+            [<c:choose>
+            	<c:when test="${ companion.companionNum ge companion.companionPeople }">마감</c:when>
+            	<c:otherwise>모집중</c:otherwise>
+            </c:choose>]</a>
         </div>
 
         <div class="detail_courseImg">

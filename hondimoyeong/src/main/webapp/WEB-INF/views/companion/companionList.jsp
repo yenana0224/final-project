@@ -174,7 +174,7 @@
     }
 
     .hdmy-table_mid{
-        width: 110px;
+        width: 120px;
         text-align: center;
     }
     
