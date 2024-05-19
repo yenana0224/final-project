@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 상세</title>
+<title>혼디모영!</title>
 <style>
     /* content */
     #container{

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.review.model.vo.Review;
+import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 
 @Repository
 public class ReviewRepository {
@@ -34,6 +35,14 @@ public class ReviewRepository {
 
 	public Review selectReview(SqlSessionTemplate sqlSession, int reviewNo) {
 		return sqlSession.selectOne("reviewMapper.selectReview", reviewNo);
+	}
+
+	public List<ReviewComment> selectComment(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectList("reviewMapper.selectComment", reviewNo);
+	}
+
+	public int insertComment(SqlSessionTemplate sqlSession, ReviewComment reviewComment) {
+		return sqlSession.insert("reviewMapper.insertComment", reviewComment);
 	}
 
 }

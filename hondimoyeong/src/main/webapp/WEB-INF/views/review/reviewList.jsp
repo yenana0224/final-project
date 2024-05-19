@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 게시판</title>
+<title>혼디모영 리뷰</title>
 
 <style>
     /* content */
@@ -157,6 +157,10 @@
         text-align: center;
     }
     
+    .star{
+    	color: #FF9843;
+    }
+    
     /* 페이징바 */
     .hdmy-board_page{
     	width: 1200px;
@@ -196,7 +200,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">
-        <div class="review_title"><a class="review_title_a">리뷰 게시판</a></div>
+        <div class="review_title"><a class="review_title_a" href="review">리뷰 게시판</a></div>
 
         <div class="review_search">
             <form action="search.rvw" class="review_searchForm">
@@ -239,8 +243,8 @@
                     	<tr class="list">
 	                        <td class="hdmy-table_small">${r.reviewNo}</td>
 	                        <td class="hdmy-table_small">${r.courseName}</td>
-	                        <td>${r.reviewTitle}<a href="detail.rvw">디테일</a>
-	                        <td class="hdmy-table_mid">${r.reviewStar}</td>
+	                        <td>${r.reviewTitle}</td>
+	                        <td class="hdmy-table_mid star" data-rating="${r.reviewStar}"></td>
 	                        <td class="hdmy-table_small">${r.userName}</td>
 	                        <td class="hdmy-table_small">${r.createDate}</td>
 	                        <td class="hdmy-table_small">📂</td>
@@ -285,6 +289,20 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+		// 별점
+	    document.addEventListener("DOMContentLoaded", function () {
+	        var starContainers = document.querySelectorAll('.star');
+	        starContainers.forEach(function (container) {
+	            var rating = container.getAttribute('data-rating');
+	            var starsHTML = '';
+	            for (var i = 0; i < rating; i++) {
+	                starsHTML += '★';
+	            }
+	            container.innerHTML = starsHTML;
+	        });
+	    });
+	    
+		// 상세보기
 		$(function(){
 			$('.table-hover > tbody > tr').click(function(){
 				location.href = 'detail.rvw?reviewNo='+$(this).children().eq(0).text();
