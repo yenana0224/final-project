@@ -1,6 +1,7 @@
 package com.kh.hondimoyeong.review.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,6 +31,28 @@ public class ReviewServiceImpl implements ReviewService {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return reviewRepository.selectList(sqlSession, rowBounds);
+	}
+
+	@Override
+	public int searchCount(Map<String, String> searchMap) {
+		return reviewRepository.searchCount(sqlSession, searchMap);
+	}
+
+	@Override
+	public List<Review> search(Map<String, String> searchMap, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return reviewRepository.search(sqlSession, searchMap, rowBounds);
+	}
+
+	@Override
+	public int increaseCount(int reviewNo) {
+		return reviewRepository.increaseCount(sqlSession, reviewNo);
+	}
+
+	@Override
+	public Review selectReview(int reviewNo) {
+		return reviewRepository.selectReview(sqlSession, reviewNo);
 	}
 
 }

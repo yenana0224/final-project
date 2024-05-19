@@ -1,6 +1,7 @@
 package com.kh.hondimoyeong.review.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +17,23 @@ public class ReviewRepository {
 	}
 
 	public List<Review> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
-		return sqlSession.selectList("reviewMapper.selectList", rowBounds);
+		return sqlSession.selectList("reviewMapper.selectList", null, rowBounds);
+	}
+
+	public int searchCount(SqlSessionTemplate sqlSession, Map<String, String> searchMap) {
+		return sqlSession.selectOne("reviewMapper.searchCount", searchMap);
+	}
+
+	public List<Review> search(SqlSessionTemplate sqlSession, Map<String, String> searchMap, RowBounds rowBounds) {
+		return sqlSession.selectList("reviewMapper.search", searchMap, rowBounds);
+	}
+
+	public int increaseCount(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("reviewMapper.increaseCount", reviewNo);
+	}
+
+	public Review selectReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.selectReview", reviewNo);
 	}
 
 }

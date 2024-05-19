@@ -219,9 +219,7 @@
             <a class="detail_top">리뷰 게시판</a>
         </div>
 
-        <div class="detail_course">
-            1코스
-        </div>
+        <div class="detail_course">${review.courseName}</div>
 
         <div class="detail_courseImg">
             <img src="https://contents.ollepass.org/static/homepage/trail/img/road/road_01_imgmap_pc_2024.jpg" alt="" class="courseImg">
@@ -229,19 +227,19 @@
         
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
             <div class="detail_box_left"> <!-- 제목, 작성자 감싸는 div -->
-                <div class="detail_title"><span>봉보로봉과 함께 하실 분 선착순 1명</span></div>
+                <div class="detail_title"><span>${review.reviewTitle}</span></div>
                 <div class="detail_info">
-                    <div class="detail_info1"><a>작성자 : 희주봉 &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : 200</a></div>
+                    <div class="detail_info1"><a>작성자 : ${review.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${review.count}</a></div>
                 </div>
             </div>
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
-                <div class="detail_right_btn">⭐⭐⭐⭐⭐</div>
+                <div class="detail_right_btn">${review.reviewStar}</div>
             </div>
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">테스트<br>테스트임<br>테스트</p>
+            <p class="detail_content_p">${review.reviewContent}</p>
             <img src="/resources/image/aqua.jpg" class="content_img">
             <img src="/resources/image/aqua.jpg" class="content_img">
         </div>
