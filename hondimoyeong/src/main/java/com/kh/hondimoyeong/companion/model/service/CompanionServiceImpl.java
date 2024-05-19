@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.companion.model.dao.CompanionRepository;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.course.model.vo.Course;
 
 
 @Service
@@ -94,6 +95,11 @@ public class CompanionServiceImpl implements CompanionService {
 	@Override
 	public int delete(int companionNo) {
 		return companionRepository.delete(sqlSession, companionNo);
+	}
+
+	@Override
+	public List<Course> selectCourse(Course course) {
+		return companionRepository.selectCourse(sqlSession, course);
 	}
 
 	

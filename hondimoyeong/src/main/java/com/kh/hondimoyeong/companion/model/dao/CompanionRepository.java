@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.course.model.vo.Course;
 
 @Repository
 public class CompanionRepository {
@@ -58,6 +59,10 @@ public class CompanionRepository {
 
 	public int delete(SqlSessionTemplate sqlSession, int companionNo) {
 		return sqlSession.update("companionMapper.delete", companionNo);
+	}
+
+	public List<Course> selectCourse(SqlSessionTemplate sqlSession, Course course) {
+		return sqlSession.selectList("companionMapper.selectCourse", course);
 	}
 
 }

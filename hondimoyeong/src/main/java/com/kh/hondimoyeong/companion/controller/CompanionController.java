@@ -1,7 +1,5 @@
 package com.kh.hondimoyeong.companion.controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +20,7 @@ import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.course.model.vo.Course;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -67,7 +66,9 @@ public class CompanionController {
 	}
 	
 	@RequestMapping("enrollForm.cmp")
-	public String enrollForm() {
+	public String enrollForm(Model model, Course course) {
+		List<Course> courseList = companionService.selectCourse(course);
+		model.addAttribute("courseList", courseList);
 		return "companion/companionInsertForm";
 	}
 	
@@ -85,7 +86,10 @@ public class CompanionController {
 	}
 	
 	@PostMapping("updateForm.cmp")
-	public ModelAndView updateForm(int companionNo, ModelAndView mv) {
+	public ModelAndView updateForm(int companionNo, ModelAndView mv, Course course) {
+		List<Course> courseList = companionService.selectCourse(course);
+		
+		mv.addObject("courseList", courseList);
 		mv.addObject("companion", companionService.selectCompanion(companionNo)).setViewName("companion/companionUpdateForm");
 		return mv;
 	}

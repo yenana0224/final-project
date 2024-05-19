@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,36 +124,12 @@
                         <tr>
 							<th>* 코스</th>
 							<td>
-                                <select name="courseName" class="course_inp">
-                                    <option value="1">1코스</option>
-                                    <option value="24">1-1코스</option>
-                                    <option value="2">2코스</option>
-                                    <option value="3">3코스-A</option>
-                                    <option value="4">3코스-B</option>
-                                    <option value="5">4코스</option>
-                                    <option value="6">5코스</option>
-                                    <option value="7">6코스</option>
-                                    <option value="8">7코스</option>
-                                    <option value="25">7-1코스</option>
-                                    <option value="9">8코스</option>
-                                    <option value="10">9코스</option>
-                                    <option value="11">10코스</option>
-                                    <option value="26">10-1코스</option>
-                                    <option value="12">11코스</option>
-                                    <option value="13">12코스</option>
-                                    <option value="14">13코스</option>
-                                    <option value="15">14코스</option>
-                                    <option value="27">14-1코스</option>
-                                    <option value="16">15코스-A</option>
-                                    <option value="17">15코스-B</option>
-                                    <option value="18">16코스</option>
-                                    <option value="19">17코스</option>
-                                    <option value="20">18코스</option>
-                                    <option value="28">18-1코스</option>
-                                    <option value="29">18-2코스</option>
-                                    <option value="21">19코스</option>
-                                    <option value="22">20코스</option>
-                                    <option value="23">21코스</option>
+                                <select name="courseNo" class="course_inp">
+                                <c:forEach var="c" items="${ courseList }">
+                                	<option value="${ c.courseIndex }">
+                                		${ c.courseNo }
+                                	</option>
+                                </c:forEach>
                                 </select>
                             </td>
 						</tr>
@@ -172,7 +151,7 @@
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="companionContent"></textarea></td>
+							<td><textarea class="content_inp" name="companionContent">${courseList }</textarea></td>
 						</tr>
 					</tbody>
 				</table>
