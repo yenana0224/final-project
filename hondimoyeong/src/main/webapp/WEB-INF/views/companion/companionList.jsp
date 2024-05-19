@@ -215,7 +215,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">  <!-- 전체 박스 -->
-        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영</a></div>
+        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🧡 </a></div>
 
         <div class="hdmy_search">
             <form action="search.cmp" method="get" class="hdmy_searchForm">
@@ -273,6 +273,7 @@
                             <th class="hdmy-table_small">작성자</th>
                             <th class="hdmy-table_small">인원</th>
                             <th class="hdmy-table_small">상태</th>
+                            <th class="hdmy-table_small">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -285,7 +286,6 @@
 	                            <td>${ companion.companionTitle }</td>
 	                            <td class="hdmy-table_small">${ companion.userName }</td>
 	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
-	                            
 	                            <c:choose>
 	                            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
 	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
@@ -294,6 +294,7 @@
 	                            		<td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
 	                            	</c:otherwise>
 	                            </c:choose>
+	                            <td class="hdmy-table_small">${ companion.count}</td>
 	                        </tr>
                         </c:forEach>
                     </tbody>

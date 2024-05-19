@@ -307,7 +307,6 @@
 			else{
 				$('#postForm').attr('action', 'delete.cmp').submit();
 			}
-			
 		}
 	</script>
 

@@ -114,6 +114,9 @@
 <body>
 
 	<jsp:include page="../common/header.jsp"/>
+	<c:choose>
+		<c:when test="${sessionScope.loginUser.userNo == companion.userNo}">
+	
     <div id="container">
         <div class="notice_insert_title"><span>혼디모영!</span></div>
 
@@ -170,14 +173,27 @@
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn">등록</button>
-                    <button class="hdmy_detail_btn" type="submit">취소</button>
+                    <button class="hdmy_detail_btn" type="submit">등록</button>
+                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
     </div>
-    
+    	</c:when>
+    	<c:otherwise>
+    	<script>
+			alert('작성자만 수정 가능합니다.');
+			location.href = '${ path }/companion?page=1';
+    	</script>
+    	</c:otherwise>
+	</c:choose>
     <jsp:include page="../common/footer.jsp"/>
+    
+    <script>
+    	function backPage(){
+    		location.href = '${path}/companion'
+    	}
+    </script>
 
 </body>
 </html>

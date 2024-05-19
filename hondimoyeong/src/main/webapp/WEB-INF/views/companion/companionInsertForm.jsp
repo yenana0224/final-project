@@ -156,14 +156,20 @@
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn">등록</button>
-                    <button class="hdmy_detail_btn" type="submit">취소</button>
+                    <button class="hdmy_detail_btn" type="submit">수정</button>
+                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
     </div>
     
     <jsp:include page="../common/footer.jsp"/>
+    
+    <script>
+    	 function backPage(){
+    		 loaction.href = '${path}/companion';
+    	 }
+    </script>
     
 
 </body>
