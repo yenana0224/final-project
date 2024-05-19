@@ -15,7 +15,7 @@
 
         #innerOuter{
             width: 1200px;
-            height: 1000px;
+            height: 2000px;
             margin: auto;
         }
         .carousel-inner img {
@@ -37,6 +37,11 @@
             margin: auto;
             margin-top: 40px;
             text-align: left;
+        }
+        
+        .modal-body > img{
+        	width: 100%;
+        	heigth : 100%;
         }
 
 
@@ -85,10 +90,44 @@
             <h4>거리:${course.distance } / 소요시간 : ${course.takeTime }</h4>
             <p>${course.content }</p>
         </div>
-
-        <button>코스 상세보기</button>
+        <br><br>
+        <hr>
+		<br><br>
+		<div class="container">
+		  <h2>코스 상세 지도</h2>
+		  <!-- Button to Open the Modal -->
+		  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+		    	지도보기
+		  </button>
+		
+		  <!-- The Modal -->
+		  <div class="modal fade" id="myModal">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">${course.courseNo }. ${course.courseName }</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		           <img src="${pageContext.request.contextPath }/${ course.files[1].changeName }">
+		        </div>
+		        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+		        </div>
+		        
+		      </div>
+		  </div>
+		  
+		</div>
 
         <div id="kakaomap">
+
 
 
         </div>
