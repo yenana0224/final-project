@@ -28,6 +28,12 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	/**
+	 * 
+	 * @param page
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("review")
 	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 10, 5);
@@ -90,6 +96,11 @@ public class ReviewController {
 		model.addAttribute("searchPage", pi);
 		
 		return "review/reviewList";
+	}
+	
+	@RequestMapping("insertForm.rvw")
+	public String insertForm() {
+		return "review/reviewInsertForm";
 	}
 	
 	

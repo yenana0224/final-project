@@ -225,7 +225,9 @@
         </c:if>
 
         <div class="cs_board_top">
-            <div class="cs_board_top_btn"><button class="cs_btn">글쓰기</button></div>
+        <c:if test="${!empty loginUser}">
+            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">글쓰기</button></div>
+        </c:if>
         </div>
 
         <div class="review_content">
@@ -299,6 +301,9 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+		function insertReview(){
+			location.href = '${ path }/insertForm.rvw';
+		}
 		// 별점
 	    document.addEventListener("DOMContentLoaded", function () {
 	        var starContainers = document.querySelectorAll('.star');
