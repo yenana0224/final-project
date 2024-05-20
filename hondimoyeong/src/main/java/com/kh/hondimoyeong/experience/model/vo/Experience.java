@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Experience {
-	private int expericeNo;
+	private int experienceNo;
 	private String category;
 	private String experienceDate;
 	private String experienceTime;
@@ -16,6 +16,7 @@ public class Experience {
 	private String price;
 	private int experiencePeople;
 	private int userNo;
+	private String userName;
 	
 
 }

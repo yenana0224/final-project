@@ -1,5 +1,8 @@
 package com.kh.hondimoyeong.experience.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +22,8 @@ public class ReserveRepository {
 	}
 	
 	
-	
+	public List<Experience> findAll(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("experienceMapper.findAll");
+	}
 
 }

@@ -1,5 +1,8 @@
 package com.kh.hondimoyeong.experience.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,11 @@ public class ReserveServiceImpl  implements ReserveService{
 	@Override
 	public int insertHan(Experience experience) {
 		return reserveRepository.insertHan(sqlSession, experience);
+	}
+
+	@Override
+	public List<Experience> findAll() {
+		return reserveRepository.findAll(sqlSession);
 	}
 	
 	
