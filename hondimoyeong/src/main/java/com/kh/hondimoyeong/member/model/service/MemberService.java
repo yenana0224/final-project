@@ -1,29 +1,28 @@
 package com.kh.hondimoyeong.member.model.service;
 
+import java.util.List;
+
+import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.cs.model.vo.Customer;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
 public interface MemberService {
 
    
-   // 로그인(SELECT)
-   Member login(Member member);
+    Member login(Member member);
    
-	// 회원가입(INSERT)
 	int insert(Member member);
 
-	// 아이디 중복체크
 	int idCheck(String checkId);
 	
-	// 회원정보수정(UPDATE)
 	int update(Member member);
 	
-	// 회원탈퇴(UPDATE)
 	int delete(Member member);
 	
+	int selectListCount(String category, String keyword, int userNo);
 	
-	
-	
-	
+	List<Customer> selectList(PageInfo pi, String category, String keyword, int userNo);	
+
 	
 	
 	

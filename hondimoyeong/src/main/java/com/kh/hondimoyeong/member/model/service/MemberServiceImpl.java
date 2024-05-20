@@ -1,9 +1,14 @@
 package com.kh.hondimoyeong.member.model.service;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.cs.model.vo.Customer;
 import com.kh.hondimoyeong.member.model.repository.MemberRepository;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
@@ -17,25 +22,21 @@ public class MemberServiceImpl implements MemberService {
    private SqlSessionTemplate sqlSession; 
    
    
-   // 로그인
    @Override
    public Member login(Member member) {
       return memberRepository.login(sqlSession, member);
    }
 
-    // 회원가입
 	@Override
 	public int insert(Member member) {
 		return memberRepository.insert(sqlSession, member);
 	}
 	
-	// 회원가입 시 아이디 중복 체크
 	@Override
 	public int idCheck(String checkId) {
 		return memberRepository.idCheck(sqlSession, checkId);
 	}
 
-	// 회원정보수정
 	@Override
 	public int update(Member member) {
 		return memberRepository.update(sqlSession, member);
@@ -45,12 +46,21 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(Member member) {
 		return memberRepository.delete(sqlSession, member);
 	}
+
+	@Override
+	public int selectListCount(String category, String keyword, int userNo) {
+		return memberRepository.selectListCount(sqlSession, category, keyword, userNo);
+	}
+	
+	@Override
+	public List<Customer> selectList(PageInfo pi, String category, String keyword, int userNo) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return memberRepository.selectList(sqlSession, rowBounds, category, keyword, userNo);
+	}
+	
 	
 
-	
-	
-	
-	
 	
 
 }

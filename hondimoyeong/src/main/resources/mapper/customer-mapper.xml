@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customerMapper">
+
+	<resultMap type="customer" id="customerResultSet">
+		<result column="CS_NO" 		property="customerNo"/>
+		<result column="CS_TITLE" 	property="customerTitle"/>
+		<result column="CS_CONTENT" property="customerContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" 		property="count"/>
+		<result column="STATUS" 	property="status"/>
+		<result column="CATEGORY" 	property="categoryNo"/>
+		<result column="USER_NO" 	property="userNo"/>
+		<result column="USER_NAME" 	property="userName"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT
+			COUNT(*)
+		FROM
+			CUSTOMER_SERVICE
+		WHERE
+			STATUS = 'Y'
+		  AND
+			CATEGORY LIKE #{category}
+		  AND
+		    CS_TITLE LIKE '%'|| #{keyword} ||'%'
+		  AND
+		  	USER_NO = #{userNo}
+	</select>	
+	
+	<select id="selectList" resultMap="customerResultSet">
+        SELECT
+            A.CS_NO,
+            A.CATEGORY,
+            A.CS_TITLE,
+            TO_CHAR(A.CREATE_DATE, 'YYYY-MM-DD') as CREATE_DATE,
+            B.USER_NAME
+        FROM
+            CUSTOMER_SERVICE A
+            LEFT OUTER JOIN MEMBER B
+            	 ON A.USER_NO = B.USER_NO
+        WHERE
+            A.STATUS = 'Y'
+          AND
+			A.CATEGORY LIKE #{category}
+          AND
+            A.CS_TITLE LIKE '%'|| #{keyword} ||'%'
+          AND
+          	A.USER_NO = #{userNo}
+        ORDER BY
+            A.CS_NO DESC
+	</select>	
+
+	
+</mapper>
