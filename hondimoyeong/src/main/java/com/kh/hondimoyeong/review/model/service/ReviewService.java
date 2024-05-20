@@ -37,6 +37,8 @@ public interface ReviewService {
 
 	List<Course> selectCourse(Course course);
 
+	int insertAndGetReviewNo(Review review);
+
 
 
 }
