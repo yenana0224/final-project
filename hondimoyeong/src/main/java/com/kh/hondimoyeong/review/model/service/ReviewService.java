@@ -30,4 +30,6 @@ public interface ReviewService {
 
 	List<ReviewComment> selectCommentCount();
 
+	int insert(Review review);
+
 }

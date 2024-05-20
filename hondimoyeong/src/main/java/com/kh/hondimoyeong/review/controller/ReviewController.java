@@ -1,8 +1,14 @@
 package com.kh.hondimoyeong.review.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -101,6 +108,43 @@ public class ReviewController {
 	@RequestMapping("insertForm.rvw")
 	public String insertForm() {
 		return "review/reviewInsertForm";
+	}
+	
+	@RequestMapping("insert.rvw")
+	public String insert(Review review, MultipartFile upfile, HttpSession session, Model model) {
+		if(!upfile.getOriginalFilename().equals("")) {
+			review.setOriginName(upfile.getOriginalFilename());
+			review.setChangeName(saveFile(upfile, session));
+		}
+		
+		if(reviewService.insert(review) > 0 ) {
+			session.setAttribute("alertMsg", "작성 성공");
+			return "redirect:review";
+		} else {
+			model.addAttribute("errorMsg", "작성 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	public String saveFile(MultipartFile upfile, HttpSession session) {
+		String originName = upfile.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String currentTime = new SimpleDateFormat("yyMMddHHmmss").format(new Date());
+		int ranNum = (int)Math.random() * 90000 + 10000;
+		
+		String changeName = currentTime + ranNum + ext;
+		String savePath = session.getServletContext().getRealPath("/resources/reviewFile/");
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "resources/reviewFile/" + changeName;
 	}
 	
 	

@@ -227,8 +227,8 @@
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="" id="file" style="padding-right: 35px;">
-                                <input type="file" name="" id="file">
+                                <input type="file" name="upfile" id="file" style="padding-right: 35px;">
+                                <input type="file" name="upfile" id="file">
                             </td>
 						</tr>
 					</tbody>
