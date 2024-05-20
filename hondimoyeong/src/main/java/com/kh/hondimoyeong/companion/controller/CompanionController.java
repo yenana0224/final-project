@@ -76,7 +76,6 @@ public class CompanionController {
 	public String insert(Companion companion, HttpSession session, Model model) {
 		
 		if(companionService.insert(companion) > 0) {
-			System.out.println(companion);
 			session.setAttribute("alertMsg", "모집 글이 등록되었습니다!");
 			return "redirect:companion";
 		} else {

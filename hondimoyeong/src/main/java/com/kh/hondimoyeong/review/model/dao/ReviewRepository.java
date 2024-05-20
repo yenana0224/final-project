@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 import com.kh.hondimoyeong.review.model.vo.ReviewImg;
@@ -57,5 +58,14 @@ public class ReviewRepository {
 	public int insert(SqlSessionTemplate sqlSession, Review review) {
 		return sqlSession.insert("reviewMapper.insert", review);
 	}
+
+	public int insertImg(SqlSessionTemplate sqlSession, ReviewImg reviewImg) {
+		return sqlSession.insert("reviewMapper.insertImg", reviewImg);
+	}
+
+	public List<Course> selectCourse(SqlSessionTemplate sqlSession, Course course) {
+		return sqlSession.selectList("reviewMapper.selectCourse", course);
+	}
+
 
 }

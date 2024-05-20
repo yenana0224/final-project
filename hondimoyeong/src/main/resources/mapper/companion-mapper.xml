@@ -5,26 +5,26 @@
   
 <mapper namespace="companionMapper">
 
-<resultMap type="companion" id="companionResultSet">
-	<result column="COMPANION_NO" property="companionNo"/>
-	<result column="USER_NO" property="userNo"/>
-	<result column="USER_NAME" property="userName"/>
-	<result column="COURSE_NO" property="courseNo"/>
-	<result column="COURSE_NANE" property="courseName"/>
-	<result column="COMPANION_DATE" property="companionDate"/>
-	<result column="COMPANION_TITLE" property="companionTitle"/>
-	<result column="COMPANION_CONTENT" property="companionContent"/>
-	<result column="CREATE_DATE" property="createDate"/>
-	<result column="COUNT" property="count"/>
-	<result column="STATUS" property="status"/>
-	<result column="COMPANION_PEOPLE" property="companionPeople"/>
-	<result column="COMPANION_NUM" property="companionNum"/>
-</resultMap>
-
-<resultMap type="course" id="courseResultSet">
-	<result column="COURSE_INDEX" property="courseIndex"/> <!-- 코스 시퀀스 번호 -->
-	<result column="COURSE_NO" property="courseNo"/> <!-- 1코스, 2코스 ... 코스 이름 -->
-</resultMap>
+	<resultMap type="companion" id="companionResultSet">
+		<result column="COMPANION_NO" property="companionNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="COURSE_NO" property="courseNo"/>
+		<result column="COURSE_NANE" property="courseName"/>
+		<result column="COMPANION_DATE" property="companionDate"/>
+		<result column="COMPANION_TITLE" property="companionTitle"/>
+		<result column="COMPANION_CONTENT" property="companionContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="COMPANION_PEOPLE" property="companionPeople"/>
+		<result column="COMPANION_NUM" property="companionNum"/>
+	</resultMap>
+	
+	<resultMap type="course" id="courseResultSet">
+		<result column="COURSE_INDEX" property="courseIndex"/> <!-- 코스 시퀀스 번호 -->
+		<result column="COURSE_NO" property="courseNo"/> <!-- 1코스, 2코스 ... 코스 이름 -->
+	</resultMap>
 
 
 	<select id="selectListCount" resultType="_int">
