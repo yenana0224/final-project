@@ -27,6 +27,10 @@
 		float : left;
 		margin-right : 15px;
 	}
+	
+	.reservation:hover {
+		cursor : pointer;
+	}
 
 	.reservation > img {
 		width: 200px;
