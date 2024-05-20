@@ -25,6 +25,8 @@ public class Review {
 	private int userNo;
 	private String userName;
 	
+	private String originName;
+	private String changeName;
 	private int commentCount;
 	private List<ReviewImg> reviewImgs;
 

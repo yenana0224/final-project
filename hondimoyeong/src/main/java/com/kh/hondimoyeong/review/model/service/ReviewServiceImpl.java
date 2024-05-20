@@ -77,4 +77,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.selectCommentCount(sqlSession);
 	}
 
+	@Override
+	public int insert(Review review) {
+		return reviewRepository.insert(sqlSession, review);
+	}
+
 }
