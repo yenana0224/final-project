@@ -54,4 +54,8 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectCommentCount");
 	}
 
+	public int insert(SqlSessionTemplate sqlSession, Review review) {
+		return sqlSession.insert("reviewMapper.insert", review);
+	}
+
 }
