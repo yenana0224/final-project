@@ -83,6 +83,12 @@
 					<tr>
 						<td>${course.courseNo}</td>
 						<td onclick="location.href='course/${course.courseIndex}'">${course.courseName}</td>
+						<c:if test="${ course.files[0].originName ne '' }">
+							<td> 💾 </td>
+						</c:if>
+						<c:if test="${ course.files[1].originName ne '' }">
+							<td> 💾 </td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

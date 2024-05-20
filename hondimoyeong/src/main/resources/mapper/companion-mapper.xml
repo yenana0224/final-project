@@ -9,7 +9,8 @@
 	<result column="COMPANION_NO" property="companionNo"/>
 	<result column="USER_NO" property="userNo"/>
 	<result column="USER_NAME" property="userName"/>
-	<result column="COURSE_NO" property="courseName"/>
+	<result column="COURSE_NO" property="courseNo"/>
+	<result column="COURSE_NANE" property="courseName"/>
 	<result column="COMPANION_DATE" property="companionDate"/>
 	<result column="COMPANION_TITLE" property="companionTitle"/>
 	<result column="COMPANION_CONTENT" property="companionContent"/>
@@ -20,6 +21,12 @@
 	<result column="COMPANION_NUM" property="companionNum"/>
 </resultMap>
 
+<resultMap type="course" id="courseResultSet">
+	<result column="COURSE_INDEX" property="courseIndex"/> <!-- 코스 시퀀스 번호 -->
+	<result column="COURSE_NO" property="courseNo"/> <!-- 1코스, 2코스 ... 코스 이름 -->
+</resultMap>
+
+
 	<select id="selectListCount" resultType="_int">
 		SELECT
 		      COUNT(*)
@@ -29,13 +36,21 @@
 			  STATUS = 'Y'
 	</select>
 	
+	<select id="selectCourse" resultMap="courseResultSet">
+		SELECT
+			  COURSE_INDEX,
+			  COURSE_NO
+		  FROM
+		  	  COURSE
+	</select>
+	
 	
 	<select id="selectAll" resultMap="companionResultSet">
 		SELECT
 		      A.COMPANION_NO AS COMPANION_NO,
 		      M.USER_NAME,
-		      C.COURSE_NO AS COURSE_NO,
-		      TO_CHAR (A.COMPANION_DATE, 'YY/MM/DD') AS COMPANION_DATE,
+		      C.COURSE_NO AS COURSE_NANE,
+		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
 		      A.COMPANION_TITLE,
 		      A.COMPANION_CONTENT,
 		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
@@ -68,7 +83,7 @@
 		      A.COMPANION_PEOPLE
 		ORDER
 		   BY
-		     A.COMPANION_NO DESC
+		     A.COMPANION_DATE DESC
 	</select>
 	
 	<!-- 정렬 -->
@@ -96,12 +111,12 @@
 		      )
 	</select>
 	
-	<select id="findCompanion" resultMap="companionResultSet">
+	<select id="sortCompanions" resultMap="companionResultSet">
 		SELECT
 		      A.COMPANION_NO AS COMPANION_NO,
 		      M.USER_NAME,
-		      C.COURSE_NO AS COURSE_NO,
-		      TO_CHAR (A.COMPANION_DATE, 'YY/MM/DD') AS COMPANION_DATE,
+		      C.COURSE_NO AS COURSE_NANE,
+		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
 		      A.COMPANION_TITLE,
 		      A.COMPANION_CONTENT,
 		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
@@ -149,6 +164,169 @@
 	   AND
 	      STATUS = 'Y'
 	</update>
+	
+	<select id="selectCompanion" parameterType="_int" resultMap="companionResultSet">
+		SELECT
+		      A.COMPANION_NO AS COMPANION_NO,
+		      M.USER_NO,
+		      M.USER_NAME,
+		      C.COURSE_INDEX AS COURSE_NO,
+		      C.COURSE_NO AS COURSE_NANE,
+		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS AS STATUS,
+		      A.COMPANION_PEOPLE,
+		      COUNT(B.USER_NO) AS COMPANION_NUM
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		  JOIN
+		      MEMBER M ON (M.USER_NO = A.USER_NO)
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		 WHERE
+		      A.COMPANION_NO = #{companionNo}
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      M.USER_NO,
+		      M.USER_NAME,
+		      C.COURSE_INDEX,
+		      C.COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.COMPANION_PEOPLE
+		ORDER
+		   BY
+		     A.COMPANION_DATE DESC
+	</select>
+	
+	<insert id="insert" parameterType="companion">
+		INSERT
+		  INTO
+		      COMPANION
+		      (
+		      COMPANION_NO, 
+		      USER_NO, 
+		      COURSE_NO, 
+		      COMPANION_DATE, 
+		      COMPANION_TITLE, 
+		      COMPANION_CONTENT, 
+		      COMPANION_PEOPLE
+		      )
+		VALUES
+		      (
+		      SEQ_COMPANION_NO.NEXTVAL, 
+		      #{userNo}, 
+		      #{courseNo},
+		      #{companionDate},
+		      #{companionTitle},
+		      #{companionContent}, 
+		      #{companionPeople}
+		      )
+	</insert>
+	
+	<update id="update" parameterType="companion">
+		UPDATE
+			  COMPANION
+		   SET
+		   	  COURSE_NO = #{courseNo},
+		   	  COMPANION_DATE = #{companionDate},
+		   	  COMPANION_TITLE = #{companionTitle},
+		   	  COMPANION_CONTENT = #{companionContent},
+		   	  COMPANION_PEOPLE =#{companionPeople}
+		 WHERE
+		 	  COMPANION_NO = #{companionNo}
+		   AND
+		   	  STATUS = 'Y' 
+	</update>
+	
+	<update id="delete" parameterType="_int">
+		UPDATE
+		      COMPANION
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+		      COMPANION_NO = #{companionNo}
+	</update>
 
+	<select id="searchCount" parameterType="map" resultType="_int">
+	SELECT
+	      COUNT(*)
+	  FROM
+	      COMPANION A
+	  JOIN
+	      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+	 WHERE
+	      A.STATUS = 'Y'
+	 <if test="condition == 'title'">
+	   AND COMPANION_TITLE
+	 </if>
+	 <if test="condition == 'course'">
+	   AND C.COURSE_NO
+	 </if>
+	      LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="search" parameterType="map" resultMap="companionResultSet">
+		SELECT
+		      A.COMPANION_NO AS COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO AS COURSE_NANE,
+		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      TO_CHAR (A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS AS STATUS,
+		      A.COMPANION_PEOPLE,
+		      COUNT(B.USER_NO) AS COMPANION_NUM
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		  JOIN
+		      MEMBER M USING (USER_NO)
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		 WHERE
+		      A.STATUS = 'Y'
+		 <if test="condition == 'title'">
+		   AND COMPANION_TITLE 
+		 </if>
+		 <if test="condition == 'course'">
+		   AND C.COURSE_NO 
+		 </if>
+		  LIKE '%' || #{keyword} || '%'
+		 
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.COMPANION_PEOPLE
+		ORDER
+		   BY
+		     A.COMPANION_DATE DESC
+	</select>
+	
 
+	
+	
 </mapper>

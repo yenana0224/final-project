@@ -14,7 +14,10 @@
  		
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Notice" alias="notice" />
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Faq" alias="faq" />
- 		<typeAlias type="com.kh.hondimoyeong.companion.model.vo.Companion" alias="companion" />
+		<typeAlias type="com.kh.hondimoyeong.companion.model.vo.Companion" alias="companion" /> 
+ 		<typeAlias type="com.kh.hondimoyeong.review.model.vo.Review" alias="review" />
+ 		<typeAlias type="com.kh.hondimoyeong.review.model.vo.ReviewComment" alias="reviewComment" />
+ 		<typeAlias type="com.kh.hondimoyeong.review.model.vo.ReviewImg" alias="reviewImg" />
  		
  		<typeAlias type="com.kh.hondimoyeong.member.model.vo.Member" alias="member"/>
  		
@@ -28,6 +31,7 @@
 		<mapper resource="mapper/member-mapper.xml"/>		
 		<mapper resource="mapper/companion-mapper.xml"/>
 		<mapper resource="mapper/experience-mapper.xml"/>
+		<mapper resource="mapper/review-mapper.xml"/>
 	</mappers>
  	
  </configuration>

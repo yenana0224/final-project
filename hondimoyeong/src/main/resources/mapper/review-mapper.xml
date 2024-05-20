@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reviewMapper">
+
+	<resultMap type="review" id="reviewResultSet">
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="COURSE_NO" property="courseNo"/>
+		<result column="COURSE_NAME" property="courseName"/>
+		<result column="REVIEW_TITLE" property="reviewTitle"/>
+		<result column="REVIEW_CONTENT" property="reviewContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="REVIEW_STAR" property="reviewStar"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="COMMENT_COUNT" property="commentCount"/>
+	</resultMap>
+	
+	<resultMap type="reviewComment" id="reviewCommentResultSet">
+		<result column="REPLY_NO" property="commentNo"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="REPLY_CONTENT" property="commentContent"/>
+		<result column="STATUS" property="status"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="COMMENT_COUNT" property="commentCount"/>
+	</resultMap>
+	
+	<resultMap type="reviewImg" id="reviewImgResultSet">
+		<result column="REVIEW_IMG_NO" property="reviewImgNo"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT
+		      COUNT(*)
+		  FROM
+		      REVIEW
+		 WHERE
+			  STATUS = 'Y'
+	</select>
+	
+	
+	<select id="selectList" resultMap="reviewResultSet">
+		SELECT
+		    R.REVIEW_NO,
+		    C.COURSE_NO AS COURSE_NAME,
+		    USER_NAME,
+		    REVIEW_TITLE,
+		    TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') AS "CREATE_DATE",
+		    COUNT(RC.REPLY_NO) AS COMMENT_COUNT,
+		    R.STATUS,
+		    REVIEW_STAR
+		FROM
+		    REVIEW R
+		JOIN
+		    MEMBER M ON (M.USER_NO = R.USER_NO)
+		JOIN
+		    COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		LEFT JOIN
+		    REVIEW_COMMENT RC ON (R.REVIEW_NO = RC.REVIEW_NO)
+		WHERE
+		    R.STATUS = 'Y'
+		GROUP
+		   BY
+		      R.REVIEW_NO,
+		      C.COURSE_NO,
+		      USER_NAME,
+		      REVIEW_TITLE, 
+		      R.CREATE_DATE, 
+		      R.STATUS, 
+		      REVIEW_STAR
+		 ORDER
+		    BY
+		      R.REVIEW_NO DESC
+	</select>
+	
+	<select id="searchCount" parameterType="map" resultType="_int">
+		SELECT
+		      COUNT(*)
+		  FROM
+		      REVIEW R
+		  JOIN
+		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		 WHERE
+		      R.STATUS = 'Y'
+		 <if test="condition == 'title'">
+		   AND REVIEW_TITLE
+		 </if>
+		 <if test="condition == 'course'">
+		   AND C.COURSE_NO
+		 </if>
+		      LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="search" parameterType="map" resultMap="reviewResultSet">
+		SELECT
+		      R.REVIEW_NO,
+		      C.COURSE_NO AS COURSE_NAME,
+		      M.USER_NAME,
+		      R.REVIEW_TITLE,
+		      TO_CHAR(R.CREATE_DATE, 'YY.MM.DD') as CREATE_DATE,
+		      R.COUNT,
+		      R.STATUS,
+		      R.REVIEW_STAR
+		  FROM
+		      REVIEW R
+		  JOIN
+		      MEMBER M ON (M.USER_NO = R.USER_NO)
+		  JOIN
+		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		 WHERE
+		 	  R.STATUS = 'Y'
+		 <if test="condition == 'title'">
+		   AND R.REVIEW_TITLE
+		 </if>
+		 <if test="condition == 'course'">
+		   AND C.COURSE_NO
+		 </if>
+		      LIKE '%' || #{keyword} || '%'
+		 ORDER
+		    BY
+		      R.REVIEW_NO DESC
+	</select>
+	
+	<update id="increaseCount" parameterType="_int">
+		UPDATE
+		      REVIEW
+		   SET
+		      COUNT = COUNT + 1
+		 WHERE
+		      REVIEW_NO = #{reviewNo}
+		   AND
+		      STATUS = 'Y'
+	</update>
+	
+	<select id="selectReview" parameterType="_int" resultMap="reviewResultSet">
+		SELECT
+		      R.REVIEW_NO,
+		      C.COURSE_NO AS COURSE_NAME,
+		      USER_NAME,
+		      REVIEW_TITLE,
+		      REVIEW_CONTENT,
+		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
+		      COUNT,
+		      R.STATUS,
+		      REVIEW_STAR
+		  FROM
+		      REVIEW R
+		  JOIN
+		      MEMBER M ON (M.USER_NO = R.USER_NO)
+		  JOIN
+		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		 WHERE
+		      R.REVIEW_NO = #{reviewNo}
+		 ORDER
+		    BY
+		      R.REVIEW_NO DESC
+	</select>
+	
+	<!-- 댓글 -->
+	<select id="selectComment" resultMap="reviewCommentResultSet" parameterType="_int">
+		SELECT
+		      REPLY_NO,
+		      REVIEW_NO,
+		      REPLY_CONTENT,
+		      RC.STATUS AS STATUS,
+		      TO_CHAR (RC.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
+		      M.USER_NAME AS USER_NAME
+		  FROM
+		      REVIEW_COMMENT RC
+		  JOIN
+		      MEMBER M ON (RC.USER_NO = M.USER_NO)
+		 WHERE
+		      RC.STATUS = 'Y'
+		   AND
+		      REVIEW_NO = #{reviewNo}
+		 ORDER
+		    BY
+		      REPLY_NO DESC
+	</select>
+
+	<insert id="insertComment" parameterType="reviewComment">
+		INSERT
+		  INTO
+		      REVIEW_COMMENT
+		      (
+		      REPLY_NO,
+		      REVIEW_NO,
+		      REPLY_CONTENT,
+		      USER_NO
+		      )
+		VALUES
+		      (
+		      SEQ_REVIEW_COMMENT_NO.NEXTVAL,
+		      #{reviewNo},
+		      #{commentContent},
+		      #{userNo}
+		      )
+	</insert>
+	
+	
+	<select id="selectReviewImgs" parameterType="_int" resultMap="reviewImgResultSet">
+		SELECT
+		      REVIEW_TITLE,
+		      CHANGE_NAME
+		  FROM
+		      REVIEW_IMG RI
+		  JOIN
+		      REVIEW R ON (R.REVIEW_NO = RI.REVIEW_NO)
+		 WHERE
+		      R.REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<select id="selectCommentCount" resultMap="reviewCommentResultSet">
+		SELECT
+		    R.REVIEW_NO,
+		    R.REVIEW_TITLE,
+		    COUNT(C.REPLY_NO) AS COMMENT_COUNT
+		FROM
+		    REVIEW R
+		LEFT JOIN
+		    REVIEW_COMMENT C ON (R.REVIEW_NO = C.REVIEW_NO)
+		GROUP BY
+		    R.REVIEW_NO, R.REVIEW_TITLE
+	</select>
+
+
+</mapper>

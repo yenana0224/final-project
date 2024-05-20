@@ -152,7 +152,7 @@
         </div>
 
         <div class="detail_btn_box" align="center">
-            <a class="hdmy_detail_btn noticeListBtn"">목록</a>
+            <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.status == 'A'}">
 	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
@@ -169,7 +169,7 @@
 
 
 	$(function(){
-		$('.noticeListBtn').click(function(){
+		$('.detailBtn').click(function(){
 			location.href='${ path }/list.notice?page=1';
 		});
 	})

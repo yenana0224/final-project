@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 상세</title>
+<title>혼디모영!</title>
 <style>
     /* content */
     #container{
@@ -174,7 +174,7 @@
     }
 
     .hdmy-table_mid{
-        width: 110px;
+        width: 120px;
         text-align: center;
     }
     
@@ -215,28 +215,36 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">  <!-- 전체 박스 -->
-        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영</a></div>
+        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🧡 </a></div>
 
         <div class="hdmy_search">
-            <form action="#" class="hdmy_searchForm">
-                <select name="search" class="hdmy_search_select">
+            <form action="search.cmp" method="get" class="hdmy_searchForm">
+                <select name="condition" class="hdmy_search_select">
                     <option value="title">제목</option>
                     <option value="course">코스</option>
                 </select>
-                <input type="text" class="hdmy_search_input" placeholder="검색어를 입력해 주세요.">
+                <input type="text" name="keyword" value="${requestScope.keyword}" class="hdmy_search_input" placeholder="검색어를 입력해 주세요.">
                 <button type="submit" class="hdmy_search_btn">검색</button>
             </form>
         </div>
+        
+        <c:if test="${ not empty condition }">
+        	<script>
+        		$(function(){
+        			$('.hdmy_search option[value=${condition}]').attr('selected', true);
+        		})
+        	</script>
+        </c:if>
 
         <div class="hdmy-board">
             <div class="hdmy-board_top">
                 <div class="hdmy-board_top-align">
                 	<a class="sortCompanionList" href="companion">전체</a> | 
-					<a class="sortCompanion" href="sort.companion">모집중</a> 
+					<a class="sortCompanion" href="sort.cmp">모집중</a> 
                 </div>
                 
                 <c:if test="${ !empty loginUser }">
-                	<div class="hdmy-board_top-btn"><button class="hdmy-btn">글쓰기</button></div>
+                	<div class="hdmy-board_top-btn"><button class="hdmy-btn" onclick="insertCompanion();">글쓰기</button></div>
                 </c:if>
             </div>
 
@@ -265,17 +273,19 @@
                             <th class="hdmy-table_small">작성자</th>
                             <th class="hdmy-table_small">인원</th>
                             <th class="hdmy-table_small">상태</th>
+                            <th class="hdmy-table_small">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
+                    
                     	<c:forEach var="companion" items="${ companion }">
 	                        <tr class="list">
+		    					<td style="display:none">${ companion.companionNo }</td>
 	                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
 	                            <td class="hdmy-table_small">${ companion.courseName }</td>
-	                            <td>${ companion.companionTitle }<a href="companionDetail">디테일</a></td>
+	                            <td>${ companion.companionTitle }</td>
 	                            <td class="hdmy-table_small">${ companion.userName }</td>
 	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
-	                            
 	                            <c:choose>
 	                            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
 	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
@@ -284,6 +294,7 @@
 	                            		<td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
 	                            	</c:otherwise>
 	                            </c:choose>
+	                            <td class="hdmy-table_small">${ companion.count}</td>
 	                        </tr>
                         </c:forEach>
                     </tbody>
@@ -291,84 +302,72 @@
             </div>
         </div> <!-- hdmy-board -->
         
-        <div class="hdmy-board_page"> <!-- 페이징바 -->
+        <div class="hdmy-board_page" id="pagination"> <!-- 페이징바-->
 			<ul class="pagination">
-    			<c:choose>
-              		<c:when test="${ not empty pageInfo.endPage }">
-              			<c:choose>
-              				<c:when test="${ pageInfo.currentPage eq 1 }">
-              					<li class="page-item disabled"><a class="page-link"> < </a></li>
-              				</c:when>
-							<c:otherwise>
-					  			<li class="page-item"><a class="page-link" href="companion?page=${ pageInfo.currentPage - 1 }"> < </a></li>
-					  		</c:otherwise>
-              			</c:choose>
-              				
-              			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-						<c:choose>
-							<c:when test="${ p eq pageInfo.currentPage }">
-								<li class="page-item active"><a class="page-link" href="companion?page=${ p }">${ p }</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="companion?page=${ p }">${ p }</a></li>
-							</c:otherwise>
-						</c:choose>
-						</c:forEach>
-						
-						<c:choose>
-							<c:when test="${ pageInfo.currentPage lt pageInfo.maxPage }">
-								<li class="page-item"><a class="page-link" href="companion?page=${ pageInfo.currentPage + 1 }"> > </a></li>
-							</c:when>
-						    <c:otherwise>
-						        <li class="page-item disabled"><a class="page-link"> > </a></li>
-						    </c:otherwise>
-						</c:choose>
-              		</c:when>
-              			
-              		<c:otherwise>
-					    <c:choose>
-					        <c:when test="${ sortPage.currentPage eq 1 }">
-					            <li class="page-item disabled"><a class="page-link"> < </a></li>
-					        </c:when>
-					        <c:otherwise>
-					            <li class="page-item"><a class="page-link" href="sort.companion?page=${ sortPage.currentPage - 1 }"> < </a></li>
-					        </c:otherwise>
-					    </c:choose>
-							<c:forEach begin="${sortPage.startPage}" end="${sortPage.endPage}" var="p">
-						    <c:choose>
-						        <c:when test="${p eq sortPage.currentPage}">
-						            <li class="page-item active"><a class="page-link" href="sort.companion?page=${p}">${p}</a></li>
-						        </c:when>
-						        <c:otherwise>
-						            <li class="page-item"><a class="page-link" href="sort.companion?page=${p}">${p}</a></li>
-						        </c:otherwise>
-						    </c:choose>
-						</c:forEach>
-					    <c:choose>
-					        <c:when test="${ sortPage.currentPage lt sortPage.maxPage }">
-					            <li class="page-item"><a class="page-link" href="sort.companion?page=${ sortPage.currentPage + 1 }"> > </a></li>
-					        </c:when>
-					        <c:otherwise>
-					            <li class="page-item disabled"><a class="page-link"> > </a></li>
-					        </c:otherwise>
-					    </c:choose>
-              		</c:otherwise>
-              	</c:choose>
+				<c:choose>
+				    <c:when test="${not empty pageInfo.endPage}">
+				        <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="p">
+				            <c:choose>
+				                <c:when test="${p eq pageInfo.currentPage}">
+				                    <li class="page-item active"><a class="page-link" href="companion?page=${p}">${p}</a></li>
+				                </c:when>
+				                <c:otherwise>
+				                    <li class="page-item"><a class="page-link" href="companion?page=${p}">${p}</a></li>
+				                </c:otherwise>
+				            </c:choose>
+				        </c:forEach>
+				    </c:when>
+				    
+		            <c:when test="${not empty condition}">
+		                <c:forEach begin="${searchPage.startPage}" end="${searchPage.endPage}" var="p">
+		                    <c:choose>
+		                        <c:when test="${p eq searchPage.currentPage}">
+		                            <li class="page-item active"><a class="page-link" href="search.cmp?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <li class="page-item"><a class="page-link" href="search.cmp?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
+		                        </c:otherwise>
+		                    </c:choose>
+		                </c:forEach>
+		            </c:when>
+				            
+				    <c:otherwise>
+				        <c:forEach begin="${sortPage.startPage}" end="${sortPage.endPage}" var="p">
+				            <c:choose>
+				                <c:when test="${p eq sortPage.currentPage}">
+				                    <li class="page-item active"><a class="page-link" href="sort.cmp?page=${p}">${p}</a></li>
+				                </c:when>
+				                <c:otherwise>
+				                    <li class="page-item"><a class="page-link" href="sort.cmp?page=${p}">${p}</a></li>
+				                </c:otherwise>
+				            </c:choose>
+				        </c:forEach>
+				    </c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
+	
 
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+    	$(function(){
+    		$('.table-hover > tbody > tr').click(function(){
+    			location.href = 'detail.cmp?companionNo='+$(this).children().eq(0).text();
+    		});
+    	});
+    	
+		function insertCompanion(){
+			location.href = '${ path }/enrollForm.cmp';
+		}
+		
 		$(function(){
-		    // 모집중 링크 클릭 시 실행되는 함수
 		    $(document).on('click', '.sortCompanion', function(){
 		        $.ajax({
 		            url: 'companions',
 		            type: 'get',
 		            success: function(result){
-		                // 기존 tbody 내용 삭제
 		                $('.table-hover tbody').empty();
 		                
 		                let value = '';
@@ -389,6 +388,7 @@
 		        });
 		    });
 		});
+	
 	</script>
 
 
