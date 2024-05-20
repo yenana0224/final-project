@@ -328,8 +328,18 @@
         </div>
         
         <div class="detail_reply_box">
-			<div class="comment_write"><textarea class="commentContent" name="commentContent"></textarea></div>    
-			<button class="comment_btn" onclick="addComment();">등록</button> 	
+			<div class="comment_write">
+			<c:choose>
+				<c:when test="${ empty loginUser }">
+					<textarea class="commentContent" name="commentContent" style="color: #777;" readonly>로그인 후 작성 가능합니다.</textarea>
+					<button class="comment_btn" onclick="addComment();" disabled>등록</button> 	
+				</c:when>
+				<c:otherwise>
+					<textarea class="commentContent" name="commentContent"></textarea>
+					<button class="comment_btn" onclick="addComment();">등록</button> 	
+				</c:otherwise>
+			</c:choose>
+			</div>    
         </div>
         
          <!-- 댓글 박스 -->
@@ -375,7 +385,7 @@
 						console.log(result);
 						
 						if(result == 'success'){
-							$('.write_content').val('');
+							$('.commentContent').val('');
 							selectComment();
 						};
 					}

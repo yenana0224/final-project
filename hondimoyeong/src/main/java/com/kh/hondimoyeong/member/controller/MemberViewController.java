@@ -68,6 +68,11 @@ public class MemberViewController {
 	}
 	
 	
+	@RequestMapping("list.customerView")
+	public String selectAll() {
+		return "member/customerList";
+	}
+	
 	
 	
 	

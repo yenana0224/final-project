@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
 import com.kh.hondimoyeong.review.model.vo.ReviewImg;
@@ -31,5 +32,11 @@ public interface ReviewService {
 	List<ReviewComment> selectCommentCount();
 
 	int insert(Review review);
+
+	int insertImg(ReviewImg reviewImg);
+
+	List<Course> selectCourse(Course course);
+
+
 
 }

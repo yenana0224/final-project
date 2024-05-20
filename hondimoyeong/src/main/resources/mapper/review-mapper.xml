@@ -35,7 +35,11 @@
 		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="ORIGIN_NAME" property="originName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
-		<result column="FILE_LEVEL" property="fileLevel"/>
+	</resultMap>
+	
+	<resultMap type="course" id="courseResultSet">
+		<result column="COURSE_INDEX" property="courseIndex"/> <!-- 코스 시퀀스 번호 -->
+		<result column="COURSE_NO" property="courseNo"/> <!-- 1코스, 2코스 ... 코스 이름 -->
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -47,36 +51,50 @@
 			  STATUS = 'Y'
 	</select>
 	
+	<select id="selectCourse" resultMap="courseResultSet">
+		SELECT
+			  COURSE_INDEX,
+			  COURSE_NO
+		  FROM
+		  	  COURSE
+	</select>
+	
 	
 	<select id="selectList" resultMap="reviewResultSet">
 		SELECT
-		    R.REVIEW_NO,
-		    C.COURSE_NO AS COURSE_NAME,
-		    USER_NAME,
-		    REVIEW_TITLE,
-		    TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') AS "CREATE_DATE",
-		    COUNT(RC.REPLY_NO) AS COMMENT_COUNT,
-		    R.STATUS,
-		    REVIEW_STAR
-		FROM
-		    REVIEW R
-		JOIN
-		    MEMBER M ON (M.USER_NO = R.USER_NO)
-		JOIN
-		    COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
-		LEFT JOIN
-		    REVIEW_COMMENT RC ON (R.REVIEW_NO = RC.REVIEW_NO)
-		WHERE
-		    R.STATUS = 'Y'
-		GROUP
-		   BY
+		      R.REVIEW_NO,
+		      C.COURSE_NO AS COURSE_NAME,
+		      USER_NAME,
+		      REVIEW_TITLE,
+		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') AS "CREATE_DATE",
+		      COUNT(RC.REPLY_NO) AS COMMENT_COUNT,
+		      R.STATUS,
+		      REVIEW_STAR,
+		      CHANGE_NAME
+		  FROM
+		      REVIEW R
+		  JOIN
+		      MEMBER M ON (M.USER_NO = R.USER_NO)
+		  JOIN
+		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+		  LEFT
+		  JOIN
+		      REVIEW_IMG RI ON (RI.REVIEW_NO = R.REVIEW_NO) 
+		  LEFT
+		  JOIN
+		      REVIEW_COMMENT RC ON (R.REVIEW_NO = RC.REVIEW_NO)
+		 WHERE
+		      R.STATUS = 'Y'
+		 GROUP
+		    BY
 		      R.REVIEW_NO,
 		      C.COURSE_NO,
 		      USER_NAME,
 		      REVIEW_TITLE, 
 		      R.CREATE_DATE, 
 		      R.STATUS, 
-		      REVIEW_STAR
+		      REVIEW_STAR,
+		      CHANGE_NAME
 		 ORDER
 		    BY
 		      R.REVIEW_NO DESC
@@ -231,6 +249,53 @@
 		GROUP BY
 		    R.REVIEW_NO, R.REVIEW_TITLE
 	</select>
+	
+	<insert id="insert" parameterType="review">
+	    <selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
+	        SELECT SEQ_REVIEW_NO.NEXTVAL AS reviewNo FROM dual
+	    </selectKey>
+	    INSERT
+	      INTO
+	      	  REVIEW
+	      	  (
+	          REVIEW_NO, 
+	          COURSE_NO, 
+	          REVIEW_TITLE, 
+	          REVIEW_CONTENT,
+	          REVIEW_STAR, 
+	          USER_NO
+	    	  )
+	    VALUES
+	    	  (
+	          #{reviewNo}, 
+	          #{courseNo},
+	          #{reviewTitle}, 
+	          #{reviewContent}, 
+	          #{reviewStar}, 
+	          #{userNo}
+	    	  )
+	</insert>
+
+	
+	
+	<insert id="insertImg" parameterType="reviewImg">
+		INSERT
+		  INTO
+		  	  REVIEW_IMG
+		  	  (
+		  	  REVIEW_IMG_NO, 
+		  	  REVIEW_NO, 
+		  	  ORIGIN_NAME, 
+		  	  CHANGE_NAME
+		  	  )
+		VALUES
+			  (
+			  SEQ_REVIEW_IMG_NO.NEXTVAL, 
+			  #{reviewNo},
+			  #{originName},
+			  #{changeName}
+			  )
+	</insert>
 
 
 </mapper>

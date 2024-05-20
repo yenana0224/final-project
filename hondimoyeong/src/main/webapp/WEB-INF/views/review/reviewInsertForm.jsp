@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,46 +50,40 @@
 	    font-size: 14px;
 	}
 	
-	.input_title{
+	.title_inp{
 	    width: 650px;
-	    height: 35px;
-	    padding: 7px;
-	    border-radius: 10px;
-	    border: 1px solid #b1b1b1;
-	}
-	
-	.hdmy_input{
-	    width: 650px;
-	    height: 35px;
-	    padding: 7px;
-	    border-radius: 10px;
 	    font-size: 15px;
-	    border: 1px solid #b1b1b1;
 	}
 	
-	.date_input, .course_input, .people_input{
+	.title_inp, .date_inp, .course_inp, .people_inp, .content_inp{
+		height: 40px;
+		border: 1px solid #b1b1b1;
+		outline:none;
+		border-radius: 10px;
+		font-size: 15px;
+		color: #292929;
+		padding: 10px;
+	}
+	
+	.date_inp, .course_inp, .people_inp{
 	    width: 150px;
-	    height: 35px;
-	    padding: 7px;
 	    font-size: 15px;
-	    border-radius: 10px;
-	    border: 1px solid #b1b1b1;
 	}
-	
-	.input_info{
+
+	.people_info{
 	    color: #292929;
 	    padding-left: 10px;
-	    text-decoration: none;
-	    line-height: 0px;
 	}
 	
-	.input_content{
+	.people_info:hover{
+		text-decoration: none;
+		color: #292929;
+	}
+	
+	.content_inp{
 	    width: 650px;
 	    height: 400px;
 	    resize: none;
-	    border-radius: 10px;
-	    padding: 7px;
-	    border: 1px solid #b1b1b1;
 	}
 	
 	/* 등록 취소 버튼 */
@@ -157,91 +155,74 @@
         <div class="notice_insert_title"><span>리뷰 작성</span></div>
 
         <div class="insert_box">
-            <form action="insert.notice" method="post" id="myform">
+            <form action="insert.rvw" method="post" id="myform" enctype="multipart/form-data">
+            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+            	
 				<table class="tb_input">
 					<tbody>
                         <tr>
 							<th>* 코스</th>
 							<td>
-                                <select name="course" class="course_input">
-                                    <option value="">1코스</option>
-                                    <option value="">1-1코스</option>
-                                    <option value="">2코스</option>
-                                    <option value="">3코스-A</option>
-                                    <option value="">3코스-B</option>
-                                    <option value="">4코스</option>
-                                    <option value="">5코스</option>
-                                    <option value="">6코스</option>
-                                    <option value="">7코스</option>
-                                    <option value="">7-1코스</option>
-                                    <option value="">8코스</option>
-                                    <option value="">9코스</option>
-                                    <option value="">10코스</option>
-                                    <option value="">10-1코스</option>
-                                    <option value="">11코스</option>
-                                    <option value="">12코스</option>
-                                    <option value="">13코스</option>
-                                    <option value="">14코스</option>
-                                    <option value="">14-1코스</option>
-                                    <option value="">15코스-A</option>
-                                    <option value="">15코스-B</option>
-                                    <option value="">16코스</option>
-                                    <option value="">17코스</option>
-                                    <option value="">18코스</option>
-                                    <option value="">18-1코스</option>
-                                    <option value="">18-2코스</option>
-                                    <option value="">19코스</option>
-                                    <option value="">20코스</option>
-                                    <option value="">21코스</option>
+                                <select name="courseNo" class="course_inp">
+                                <c:forEach var="c" items="${ courseList }">
+                                	<option value="${ c.courseIndex }">
+                                		${ c.courseNo }
+                                	</option>
+                                </c:forEach>
                                 </select>
                             </td>
 						</tr>
                         <tr>
-                            <tr>
-                                <th>* 별점</th>
-                                <td>
-                                    <fieldset>
-                                        <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                                            for="rate1">★</label>
-                                        <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                                            for="rate2">★</label>
-                                        <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                                            for="rate3">★</label>
-                                        <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                                            for="rate4">★</label>
-                                        <input type="radio" name="reviewStar" value="1" id="rate5"><label
-                                            for="rate5">★</label>
-                                    </fieldset>
-                                </td>
-                            </tr>
+                            <th>* 별점</th>
+                            <td>
+                                <fieldset>
+                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                        for="rate1">★</label>
+                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                        for="rate2">★</label>
+                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                        for="rate3">★</label>
+                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                        for="rate4">★</label>
+                                    <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                                        for="rate5">★</label>
+                                </fieldset>
+                            </td>
+                        </tr>
                         <tr>
 							<th>* 제목</th>
-							<td><input type="text" name="title" class="hdmy_input"/></td>
+							<td><input type="text" name="reviewTitle" class="title_inp"/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="input_content" name="content">
+							<td><textarea class="content_inp" name="reviewContent">
                             </textarea>
                             </td>
 						</tr>
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="upfile" id="file" style="padding-right: 35px;">
-                                <input type="file" name="upfile" id="file">
+                                <input type="file" name="upfiles" id="file1" style="padding-right: 35px;">
+                                <input type="file" name="upfiles" id="file2">
                             </td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn">등록</button>
-                    <button class="hdmy_detail_btn" type="submit">취소</button>
+                    <button class="hdmy_detail_btn" type="submit">수정</button>
+                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
     </div>
 	
 	<jsp:include page="../common/footer.jsp"/>
+	
+    <script>
+    	 function backPage(){
+    		 loaction.href = '${path}/companion';
+    	 }
+    </script>
 
 </body>
 </html>

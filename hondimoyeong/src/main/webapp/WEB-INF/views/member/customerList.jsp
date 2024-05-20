@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,6 @@
 
     <style>
             div{
-                /* border : 1px solid red;  */
                 box-sizing : border-box;
                 background-color: #ffffff;
             }          
@@ -119,7 +119,7 @@
                 display: inline-block; 
                 margin-left: 660px; 
                 position: absolute;
-                top: 150px; 
+                top: 160px; 
                 left: 2%; 
                 /* border : 1px solid red; */
             }
@@ -134,7 +134,7 @@
                 border: 0;
             }
 
-            #find { /*검색창*/
+            #searchTitle { /*검색창*/
               width: 300px;
               height: 37px;
               border-radius: 15px;
@@ -147,9 +147,9 @@
             #searchBox{
               width: 790px;
               height: 60px;
-              padding-left: 200px;
+              padding-left: 150px;
               margin-top: 5px;
-              margin-bottom: 40px;
+              margin-bottom: 50px;
               /* border: 1px solid rgb(228, 73, 248); */
             }
             .searchBtn{
@@ -161,8 +161,17 @@
                 font-weight: bold;
                 font-size: 14px;
                 border: 0;
-                padding-top: 5px;
+                padding-top: 3px;
             }
+            #category{ /*카테고리*/
+                border: 1px solid rgb(212, 212, 212);
+                border-radius: 15px;
+                width: 100px;
+                height: 37px;
+                font-size: 15px;
+                color: #727272;
+                padding-left: 7px;
+            }            
 
 
 
@@ -178,86 +187,108 @@
             <div id="titleBox">내 글 목록</div>
             <div id="detailBox">
               <div id="searchBox">
-              <input type="search" id="find">
-              <button class="searchBtn" type="button">검색</button>
+
+				    <select name="category" id="category">
+				    	<option value="0">전체</option>
+				        <option value="1">문의</option>
+				        <option value="2">신고</option>
+				    </select>
+				    <input type="search" id="searchTitle" name="searchTitle">
+				    <button class="searchBtn" onclick="customerSearch(1)">검색</button>
               </div>
               <div id="btnBox">
-                <div class="box1"><button class="mnbtn" onclick="location.href='boardEnrollForm';">글쓰기</button></div>
+                <div class="box1"><button class="mnbtn" onclick="location.href='customerEnrollForm';">글쓰기</button></div>
               </div>
                 <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>카테고리</th>
+                        <th width="80px;">번호</th>
+                        <th width="100px;">카테고리</th>
                         <th>제목</th>
-                        <th>날짜</th>
+                        <th width="120px;">작성자</th>
+                        <th width="130px;">날짜</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>문의</td>
-                        <td>문의인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>신고</td>
-                        <td>신고인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>문의</td>
-                        <td>문의인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>신고</td>
-                        <td>신고인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>문의</td>
-                        <td>문의인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>신고</td>
-                        <td>신고인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>문의</td>
-                        <td>문의인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>신고</td>
-                        <td>신고인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>문의</td>
-                        <td>문의인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
-                      <tr>
-                        <td>신고</td>
-                        <td>신고인데용</td>
-                        <td>2024-05-13</td>
-                      </tr>
+                    <tbody id="tbody">
+            	
                     </tbody>
                   </table>
-                <!--페이지 숫자-->
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"> < </a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#"> > </a></li>
-                  </ul>                 
+					<!--페이지 숫자-->
+					<div id="pagingArea">
+					    <ul class="pagination">
+							
+					    </ul>               
+				   </div>
                 </div>
             </div>
         </div>
 	<jsp:include page="../common/footer.jsp"/>
 
 
+	<script>
+		$(document).ready(function() {
+ 			customerSearch();
+ 			
+ 		    $('#category').on('change', function() {
+ 		        customerSearch(1);
+ 		    });
+ 			
+ 		    $('#searchTitle').on('keypress', function(e) {
+ 		        if (e.which == 13) {   
+ 		        	e.preventDefault();   
+ 		        	customerSearch(1);  
+ 		        }
+ 		    });
+ 		});
+	
+		function customerSearch(currentPage) {
+ 			
+ 			$.ajax({
+				url : 'list.customerData',
+				data : {
+						page : currentPage,
+						category : $('#category').val(),
+						searchTitle : $('#searchTitle').val(),
+					   },
+				type : 'get',
+				success : function(result){
+		            let customers = result.customer;  
+		            let tbodyHtml = '';  
+		            customers.forEach(function(customer) {
+			                tbodyHtml += '<tr>' +
+			                    '<td>' + customer.customerNo + '</td>' +
+			                    '<td>' + (customer.categoryNo === 1 ? '문의' : '신고') + '</td>' +
+			                    '<td>' + customer.customerTitle + '</td>' +
+			                    '<td>' + customer.userName + '</td>' +  
+			                    '<td>' + customer.createDate + '</td>' +
+			                    '</tr>';
+		            });
+		            $('#tbody').empty();
+		            $('#tbody').html(tbodyHtml);  
+		            let pageInfo = result.pageInfo;
+		            var pagination = $('.pagination');
+		            pagination.empty();	 
+		            if (pageInfo.currentPage > 1) {
+		                pagination.append('<li class="page-item"><a class="page-link" href="#" onclick="customerSearch(' + (pageInfo.currentPage - 1) + '); return false;">&lt;</a></li>');
+		            }
+		            for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+		                var activeClass = pageInfo.currentPage === i ? 'active' : '';
+		                pagination.append('<li class="page-item ' + activeClass + '"><a class="page-link" href="#" onclick="customerSearch(' + i + '); return false;">' + i + '</a></li>');
+		            }
+		            if (pageInfo.currentPage < pageInfo.maxPage) {
+		                pagination.append('<li class="page-item"><a class="page-link" href="#" onclick="customerSearch(' + (pageInfo.currentPage + 1) + '); return false;">&gt;</a></li>');
+		            }
+				}
+    		});
+ 			
+ 			
+
+ 			
+
+ 		}
+	</script>
+ 		
+ 		
+ 		
 </body>
 </html>
