@@ -15,6 +15,5 @@ public class ReviewImg {
 	private int reviewNo;
 	private String originName;
 	private String changeName;
-	private int fileLevel;
 
 }

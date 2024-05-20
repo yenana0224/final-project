@@ -159,6 +159,13 @@
     
     .commentCount{
     	color: #FF9843;
+    	font-weight: bold;
+    }
+    
+    .commentCount:hover{
+    	text-decoration: none;
+    	color: #FF9843;
+    	font-weight: bold;
     }
     
     .star{
@@ -259,7 +266,15 @@
 	                        <td class="hdmy-table_mid star" data-rating="${r.reviewStar}"></td>
 	                        <td class="hdmy-table_small">${r.userName}</td>
 	                        <td class="hdmy-table_small">${r.createDate}</td>
-	                        <td class="hdmy-table_small">📂</td>
+	                        <c:choose>
+	                        	<c:when test="${empty r.changeName}">
+	                       			<td class="hdmy-table_small"> </td>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                       			<td class="hdmy-table_small"> 🍊 </td>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                        
                     	</tr>
                     </c:forEach>
                 </tbody>

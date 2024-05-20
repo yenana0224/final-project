@@ -23,6 +23,7 @@
  		
  		<typeAlias type="com.kh.hondimoyeong.experience.model.vo.Experience" alias="experience"/>
  		
+ 		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Customer" alias="customer" />
  	</typeAliases>
 
 	<mappers>
@@ -32,6 +33,7 @@
 		<mapper resource="mapper/companion-mapper.xml"/>
 		<mapper resource="mapper/experience-mapper.xml"/>
 		<mapper resource="mapper/review-mapper.xml"/>
+		<mapper resource="mapper/customer-mapper.xml"/>
 	</mappers>
  	
  </configuration>
