@@ -20,6 +20,12 @@ public class ReserveServiceImpl  implements ReserveService{
 	public int insertReserve(Experience experience) {
 		return reserveRepository.insertReserve(sqlSession, experience);
 	}
+
+	@Override
+	public int insertHan(Experience experience) {
+		return reserveRepository.insertHan(sqlSession, experience);
+	}
+	
 	
 	
 
