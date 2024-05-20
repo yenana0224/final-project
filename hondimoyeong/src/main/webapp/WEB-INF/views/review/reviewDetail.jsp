@@ -259,31 +259,31 @@
     }
     
     /* 별점*/
-#myform fieldset{
-    display: inline-block;
-    direction: rtl;
-    border:0;
-}
-#myform fieldset legend{
-    text-align: right;
-}
-#myform input[type=radio]{
-    display: none;
-}
-#myform label{
-    font-size: 26px;
-    color: transparent;
-    text-shadow: 0 0 0 #f0f0f0;
-}
-#myform label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform label:hover ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-#myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
+	#myform fieldset{
+	    display: inline-block;
+	    direction: rtl;
+	    border:0;
+	}
+	#myform fieldset legend{
+	    text-align: right;
+	}
+	#myform input[type=radio]{
+	    display: none;
+	}
+	#myform label{
+	    font-size: 26px;
+	    color: transparent;
+	    text-shadow: 0 0 0 #f0f0f0;
+	}
+	#myform label:hover{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	#myform label:hover ~ label{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	#myform input[type=radio]:checked ~ label{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
 
 
 </style>
@@ -311,22 +311,6 @@
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
                 <div class="detail_right_star">
-                <!-- 아아 
-				 	<form class="mb-3" name="myform" id="myform" method="post">
-					<fieldset>
-						<input type="radio" name="reviewStar" value="5" id="rate1"><label
-							for="rate1">★</label>
-						<input type="radio" name="reviewStar" value="4" id="rate2"><label
-							for="rate2">★</label>
-						<input type="radio" name="reviewStar" value="3" id="rate3"><label
-							for="rate3">★</label>
-						<input type="radio" name="reviewStar" value="2" id="rate4"><label
-							for="rate4">★</label>
-						<input type="radio" name="reviewStar" value="1" id="rate5"><label
-							for="rate5">★</label>
-					</fieldset>
-					</form>	
-				 -->
                 ${review.reviewStar}
                 </div>
             </div>
