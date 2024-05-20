@@ -70,7 +70,6 @@ public class ReviewController {
 		} else {
 			mv.addObject("errorMsg", "리뷰 찾을 수 없음").setViewName("common/errorPage");
 		}
-		
 		return mv;
 	}
 	
@@ -109,34 +108,34 @@ public class ReviewController {
 	                     HttpSession session,
 	                     Model model) {
 	    
-	    if(reviewService.insert(review) > 0) { // 리뷰 삽입
-	        // 리뷰가 삽입된 후에 리뷰 번호를 가져옴
-	        int reviewNo = review.getReviewNo();
-	        
-	        // 파일 첨부
+	    // 리뷰를 삽입하고 리뷰 번호를 얻습니다.
+	    int reviewNo = reviewService.insertAndGetReviewNo(review);
+	    
+	    // 리뷰 번호를 확인하고 파일을 첨부합니다.
+	    if (reviewNo > 0) { // 리뷰가 삽입되었을 경우
 	        for (MultipartFile upfile : upfiles) {
 	            if (!upfile.getOriginalFilename().equals("")) {
 	                // 파일 첨부시
 	                String originalFilename = upfile.getOriginalFilename();
-
 	                String changeName = saveFile(upfile, session);
 
-	                // REVIEW_IMG 테이블에 파일 정보
+	                // REVIEW_IMG 테이블에 파일 정보 삽입
 	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo); // REVIEW_NO 설정
-	                reviewImg.setOriginName(originalFilename); // ORIGIN_NAME 설정
-	                reviewImg.setChangeName(changeName); // CHANGE_NAME 설정
-	                reviewService.insertImg(reviewImg); // REVIEW_IMG 테이블에 삽입
+	                reviewImg.setReviewNo(reviewNo); // 리뷰 번호 설정
+	                reviewImg.setOriginName(originalFilename); // 원본 파일명 설정
+	                reviewImg.setChangeName(changeName); // 변경된 파일명 설정
+	                reviewService.insertImg(reviewImg); // 리뷰 이미지 삽입
 	            }
 	        }
-	        
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";
-	    } else {
+	    } else { // 리뷰 삽입 실패
 	        model.addAttribute("errorMsg", "작성 실패");
 	        return "common/errorPage";
 	    }
 	}
+
+
 
 	// 파일 따로 빼두기
 	public String saveFile(MultipartFile upfile, HttpSession session) {

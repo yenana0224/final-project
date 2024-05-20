@@ -93,6 +93,13 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.selectCourse(sqlSession, course);
 	}
 
+	@Override
+	public int insertAndGetReviewNo(Review review) {
+	    reviewRepository.insertAndGetReviewNo(sqlSession, review);
+	    return review.getReviewNo();
+	}
+
+
 
 
 
