@@ -50,7 +50,7 @@
                 width: 90px;
                 height: 90px;
                 /* border : 1px solid rgb(0, 225, 255);  */
-                margin-right: 17px;
+                margin-right: 40px;
             }
 
             #idBox{
@@ -86,7 +86,7 @@
             #buttonBox {
                 width: 720px;
                 height: 45px;
-                padding-left: 15px;
+                padding-left: 20px;
                 line-height: 40px;
                 margin-top: 10px;
                 /* border : 1px solid rgb(255, 94, 0);  */
@@ -98,7 +98,7 @@
                 height: 40px;
                 text-align: center;
                 line-height: 38px;
-                margin-right: 14px;
+                margin-right: 35px;
                 color: #ffffff;
                 border-radius: 18px;
                 float: left;
@@ -131,15 +131,13 @@
                     <img class="icon-box" src="resources/image/icon3.png">
                     <img class="icon-box" src="resources/image/icon4.png">
                     <img class="icon-box" src="resources/image/icon5.png">
-                    <img class="icon-box" src="resources/image/icon6.png">
                 </div>
                 <div id="buttonBox">
                     <div id="mypageBtn"><a href="myPageUpdate" id="mypageBtn-font">개인정보수정</a></div>
                     <div id="mypageBtn"><a href="reservationList" id="mypageBtn-font">예매내역</a></div>
-                    <div id="mypageBtn"><a href="list.customerView" id="mypageBtn-font">내가 쓴 글</a></div>
-                    <div id="mypageBtn"><a href="#" id="mypageBtn-font">동행모임</a></div>
-                    <div id="mypageBtn"><a href="#" id="mypageBtn-font">완주한 코스</a></div>
-                    <div id="mypageBtn"><a href="#" id="mypageBtn-font">문의내역</a></div>
+                    <div id="mypageBtn"><a href="list.customerView" id="mypageBtn-font">문의하기</a></div>
+                    <div id="mypageBtn"><a href="companionInvite" id="mypageBtn-font">동행모임</a></div>
+                    <div id="mypageBtn"><a href="completeCourse" id="mypageBtn-font">완주한 코스</a></div>
                 </div>
             </div>
         </div>
