@@ -20,7 +20,7 @@
 
     #a{
         width: 50%;
-        height: 80%;
+        height: 75%;
         float : left;
         border : 1px solid blue;
     }
@@ -32,7 +32,7 @@
     }
     #b{
         width: 580px;
-        height: 80%;
+        height: 75%;
         float : left;
         border : 1px solid forestgreen;
     }
@@ -59,27 +59,36 @@
 	}
 	
 	#select{
-		width:20%;
+		width:25%;
 		height:10%;
 		float:left;
 	}
 	#d{
-		width:15%;
+		width:25%;
 		height:10%;
 		float:left;
 	}
 	#f{
-		width:15%;
+		width:25%;
 		height:10%;
 		float:left;
 	}
 	
 	#select_wrap{
-		width:15%;
+		width:25%;
 		height:10%;
-		float:left;
+		float:left
 	}
 	
+	#logi{
+		width:70%;
+		height:25%;
+	}
+	#ll{
+		width:20%;
+		height:25%;
+		float:left;
+	}
     
 
 </style>
@@ -177,29 +186,39 @@
 	</div>	
 				
 	<div id="select_wrap">
-           <select onchange="people();" name="cmpaCnt" id="cmpaCnt" class="form-control">
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <option value="4">4</option>
-               <option value="4">4</option>
-           </select>
-           <input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
+		<select onchange="tanpeople();" name="cmpaCnt" id="cmpaCnt" class="form-control">
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		</select>
+		<input type="hidden" id="person1-val" name="experiencePeople" value="1"><!-- 5 -->
 	</div>
-			<input type="hidden" id="category" name="category" value="감귤체험"><!-- 6 -->
+		<input type="hidden" id="category" name="category" value="감귤체험"><!-- 6 -->
 	
-	<br><br><br>
-	<c:choose>
-		<c:when test="${ empty sessionScope.loginUser}"><br>
-			<h3>결제를 하기 위해선 로그인 해야 합니다. <a class="btn btn-outline-warning" href="login">로그인하러가기</a></h3>
-		</c:when>
-		<c:otherwise>
-			<button onclick="btn();" type="submit"  id="btn1" class="btn btn-outline-warning">
-				예약하기
-		   </button>
-		</c:otherwise>
-	</c:choose>
 	
+	<div>
+		<c:choose>
+			<c:when test="${ empty sessionScope.loginUser}"><br>
+			<div id="logi">
+				<h3>결제를 하기 위해선 로그인 해야 합니다. <a class="btn btn-outline-warning" href="login">로그인하러가기</a></h3>
+			</div>
+			</c:when>
+			
+			<c:otherwise>
+			<div id="ll">
+			
+				<input type="text" class="form-control" name="price" id="price" value="10000"
+				 style="width:100px; hegith:100px; float:left; readonly">
+				 
+				 <button type="submit"  id="btn1" class="btn btn-outline-warning">
+					<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+				</button>
+			</div>
+				
+			</c:otherwise>
+		</c:choose>
+	</div>
 	</form>
 
 </div>
@@ -224,12 +243,27 @@
 			
 			$('#person1-val').val(people);
 			console.log($('#person1-val').val());
-			
-		
 		
 			});
-		})
-		
+		});
+		function tanpeople(){
+			person = $('#cmpaCnt').children('option:selected').text();
+			console.log(person)
+			
+			if( person == 1){
+				$('#price').val(10000);
+			}
+			else if( person == 2){
+				$('#price').val(20000);
+			}
+			else if(person == 3){
+				$('#price').val(30000);
+			}
+			else{
+				$('#price').val(40000);
+			}
+			
+		}
 		
 		
 	</script>
