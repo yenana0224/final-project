@@ -37,6 +37,11 @@ public class MemberController {
       if(loginUser != null && bcryptPasswordEncoder.matches(member.getUserPwd(), loginUser.getUserPwd())) {
          session.setAttribute("loginUser", loginUser);
          mv.setViewName("redirect:/");
+         
+         if(loginUser.getStatus().equals("A")) {
+				mv.setViewName("common/adminMain");
+         }
+         
       } else {
     	  mv.addObject("errorMsg", "아이디와 비밀번호를 다시 확인해 주세요.").setViewName("member/login");
       }

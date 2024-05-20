@@ -67,9 +67,10 @@
         width: 380px;
         height: 180px;
         background-color: rgba(255, 255, 255, 0.606);
+        border-radius: 30px;
         position: absolute;
         z-index: 10;
-        right : 280px;
+        right : 260px;
         top : 230px;
     }
     
@@ -146,6 +147,7 @@
 
 
     <script>
+    
     	$.ajax({
     		url : 'mainCourse',
     		success : (data) => {
@@ -176,7 +178,7 @@
     			success : (data) => {
     				let content = '';
     				
-    	    		const url = "resources/course/island/"+ (data.courseIndex) +".PNG"
+    	    		const url = "resources/course/island/"+ (data.courseIndex) +".png"
 
     	    		content += '<div id="course-datail">'
     	    				 + '<h4>' + data.courseNo + '</h4>'
@@ -185,7 +187,6 @@
     						 + '<h5>' + data.distance + '</h5>'
     						 + '</div>'
     				
-	    			
     	    		$('#ollemap').html(content + '<img src="'+ url + '">');		 
     			}
 
