@@ -15,6 +15,10 @@
 <body>
 
 
+<div>
+
+</div>
+
 
 
 <script>
@@ -24,6 +28,13 @@
 		url : 'saleMain',
 		success : data =>{
 			console.log('gd')
+			
+			let resultStr = '';
+			for(let i = 0; i < data.length; i++){
+				result + =
+					'<div'
+			}
+			
 			
 		}
 		
