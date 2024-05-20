@@ -14,7 +14,9 @@ public class ReserveRepository {
 	}
 	
 	
-	
+	public int insertHan(SqlSessionTemplate sqlSession, Experience experience) {
+		return sqlSession.insert("experienceMapper.insertHan", experience);
+	}
 	
 	
 	

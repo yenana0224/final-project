@@ -159,6 +159,13 @@
     
     .commentCount{
     	color: #FF9843;
+    	font-weight: bold;
+    }
+    
+    .commentCount:hover{
+    	text-decoration: none;
+    	color: #FF9843;
+    	font-weight: bold;
     }
     
     .star{
@@ -225,7 +232,9 @@
         </c:if>
 
         <div class="cs_board_top">
-            <div class="cs_board_top_btn"><button class="cs_btn">글쓰기</button></div>
+        <c:if test="${!empty loginUser}">
+            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">글쓰기</button></div>
+        </c:if>
         </div>
 
         <div class="review_content">
@@ -257,7 +266,15 @@
 	                        <td class="hdmy-table_mid star" data-rating="${r.reviewStar}"></td>
 	                        <td class="hdmy-table_small">${r.userName}</td>
 	                        <td class="hdmy-table_small">${r.createDate}</td>
-	                        <td class="hdmy-table_small">📂</td>
+	                        <c:choose>
+	                        	<c:when test="${empty r.changeName}">
+	                       			<td class="hdmy-table_small"> </td>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                       			<td class="hdmy-table_small"> 🍊 </td>
+	                        	</c:otherwise>
+	                        </c:choose>
+	                        
                     	</tr>
                     </c:forEach>
                 </tbody>
@@ -299,6 +316,9 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+		function insertReview(){
+			location.href = '${ path }/insertForm.rvw';
+		}
 		// 별점
 	    document.addEventListener("DOMContentLoaded", function () {
 	        var starContainers = document.querySelectorAll('.star');

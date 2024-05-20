@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
+import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.review.model.dao.ReviewRepository;
 import com.kh.hondimoyeong.review.model.vo.Review;
 import com.kh.hondimoyeong.review.model.vo.ReviewComment;
@@ -76,5 +77,23 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewComment> selectCommentCount() {
 		return reviewRepository.selectCommentCount(sqlSession);
 	}
+
+	@Override
+	public int insert(Review review) {
+		return reviewRepository.insert(sqlSession, review);
+	}
+
+	@Override
+	public int insertImg(ReviewImg reviewImg) {
+		return reviewRepository.insertImg(sqlSession, reviewImg);
+	}
+
+	@Override
+	public List<Course> selectCourse(Course course) {
+		return reviewRepository.selectCourse(sqlSession, course);
+	}
+
+
+
 
 }

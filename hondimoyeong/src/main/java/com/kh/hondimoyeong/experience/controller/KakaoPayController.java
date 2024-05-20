@@ -15,6 +15,7 @@ import com.kh.hondimoyeong.experience.model.service.KakaoPayService;
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.KakaoPayVo;
+import com.kh.hondimoyeong.member.model.vo.Member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -45,7 +46,9 @@ public class KakaoPayController {
     public String kakaoPay(Experience experience, Model model, HttpSession session){
         log.info("kakaoPay post.....................");
         
-        experience.setUserNo(1);
+        int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+        
+		experience.setUserNo(userNo);
         
         System.out.println(experience);
         

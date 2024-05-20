@@ -8,4 +8,7 @@ public interface ReserveService {
 	// 결제하기
 	int insertReserve(Experience experience);
 	
+	// 한라산 결제하기(무료)
+	int insertHan(Experience experience);
+	
 }

@@ -27,6 +27,10 @@
 		float : left;
 		margin-right : 15px;
 	}
+	
+	.reservation:hover {
+		cursor : pointer;
+	}
 
 	.reservation > img {
 		width: 200px;
@@ -47,7 +51,7 @@
         width: 920px;
         height: 650px;
         margin: auto;
-        background-image: url(resources/course/island/기본.PNG);
+        background-image: url(resources/course/island/기본.png);
         background-size: cover;
         background-repeat: no-repeat;
         position: relative;
