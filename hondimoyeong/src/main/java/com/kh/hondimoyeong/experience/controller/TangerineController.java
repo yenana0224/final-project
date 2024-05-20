@@ -10,5 +10,10 @@ public class TangerineController {
 	public String tangerine() {
 		return "experience/tangerine";
 	}
+	
+	@GetMapping("tanreserve")
+	public String tanreserve() {
+		return "experience/tanreserve";
+	}
 
 }
