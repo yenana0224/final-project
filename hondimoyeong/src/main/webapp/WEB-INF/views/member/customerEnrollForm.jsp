@@ -218,11 +218,11 @@
                 </div>
                 <div id="box1">
                     <h5>문의 제목</h5>
-                    <input type="text" class="form-control" name="userId">
+                    <input type="text" class="form-control" name="customerTitle">
                 </div>
                 <div id="box2">
                     <h5>문의 내용</h5>
-                    <textarea name="content" id="box3" class="form-control"></textarea>
+                    <textarea id="box3" class="form-control" name="customerContent"></textarea>
                 </div>
                 <div id="box4">
                     <button class="btn-a">등록</button>
