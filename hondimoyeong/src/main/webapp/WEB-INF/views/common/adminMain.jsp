@@ -9,12 +9,12 @@
 <style>
 #all{
 	width:1200px;
-	height:1200px;
+	height:800px;
 	margin:auto
 }
 #area{
 	width:100%;
-	height:100%;
+	height:10%;
 }
 
 th{
@@ -36,35 +36,75 @@ th{
 
 	
 <div id="all">
-<%--
-	<form action="saleMain"></form>
+
+
 	<h2>관리자페이지</h2><br>
 	<h4>결제 내역</h4>
 	<table id="boardList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>글번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                    </tr>
-                </thead>
-                <tbody>
-                
-                	<c:forEach items="${ saleList }" var="board">
-                		<tr>
-                			<td>${ saleList.userName }</td>
-                			<td>${ saleList.experienceDivide }</td>
-                			<td>${ saleList.price }</td>
-                		</tr>
-                	</c:forEach>
-                  
-                </tbody>
-            </table>
-	 --%>
+        <thead>
+            <tr>
+                <th>회원이름</th>
+                <th>구분</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        	<c:forEach items="${ list }" var="saleList">
+        		<tr>
+        			<td>${ saleList.userName }</td>
+        			<td>${ saleList.experienceDivide }</td>
+        			<td>${ saleList.price }</td>
+        		</tr>
+        	</c:forEach>
+          
+        </tbody>
+    </table>
+	 
 	<div id="area"></div>
 	<div id="pagingArea">
+	<ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pageInfo.currentPage eq 1 }">
+                		    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item">
+                    			<a class="page-link" href="saleMain?page=${ pageInfo.currentPage -1}">
+                    				Previous
+                    			</a>
+                    		</li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    
+                    
+                     <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+                   		<li class="page-item"><a class="page-link" href="saleMain?page=${p}">${p}</a></li>
+					</c:forEach>
+                    
+                    
+                    <c:choose>
+                    	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a class="page-link" href="saleMain?page=${ pageInfo.currentPage + 1}">
+                    			Next
+                    		</a>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    
+                 
+                    
+                   
+                   
+                    
+                    
+                </ul>
                
-            </div>
+	</div>
 	
 </div>
 
@@ -74,6 +114,7 @@ th{
 
 
 <script>
+/*
 	window.onload =  function() {
 		$.ajax({
 			url : 'saleMain',
@@ -154,7 +195,7 @@ th{
 	})
 	}
 		
-
+*/
 
 </script>
 
