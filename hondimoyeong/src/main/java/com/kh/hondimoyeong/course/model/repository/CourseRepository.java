@@ -40,4 +40,12 @@ public class CourseRepository {
 	public int updatePhoto(SqlSessionTemplate sqlSession, List<CourseFile> photoList) {
 		return sqlSession.insert("courseMapper.updatePhoto", photoList);
 	}
+	
+	public List<CourseFile> stampList(SqlSessionTemplate sqlSession){
+		return sqlSession.selectList("courseMapper.stampList");
+	}
+	
+	public List<Course> userCourse(SqlSessionTemplate sqlSession, int userNo){
+		return sqlSession.selectList("courseMapper.userCourse", userNo);
+	}
 }
