@@ -103,10 +103,6 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.updateImg(sqlSession, reviewImg);
 	}
 
-	@Override
-	public List<ReviewImg> selectReviewImg(ReviewImg reviewImg) {
-		return reviewRepository.selectReviewImg(sqlSession, reviewImg);
-	}
 
 
 

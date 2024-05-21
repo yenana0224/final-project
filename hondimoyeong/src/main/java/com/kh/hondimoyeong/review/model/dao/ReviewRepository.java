@@ -75,9 +75,6 @@ public class ReviewRepository {
 		return sqlSession.update("reviewMapper.updateImg", reviewImg);
 	}
 
-	public List<ReviewImg> selectReviewImg(SqlSessionTemplate sqlSession, ReviewImg reviewImg) {
-		return sqlSession.selectList("reviewMapper.selectReviewImg", reviewImg);
-	}
 
 
 }

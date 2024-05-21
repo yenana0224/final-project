@@ -152,10 +152,10 @@
 	<jsp:include page="../common/header.jsp"/>
 	
     <div id="container">
-        <div class="notice_insert_title"><span>리뷰 작성</span></div>
+        <div class="notice_insert_title"><span>리뷰 수정</span></div>
 
         <div class="insert_box">
-            <form action="insert.rvw" method="post" id="myform" enctype="multipart/form-data">
+            <form action="update.rvw" method="post" id="myform" enctype="multipart/form-data">
             	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
             	
 				<table class="tb_input">
@@ -201,7 +201,7 @@
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent">${review}</textarea>
+							<td><textarea class="content_inp" name="reviewContent">${reivewImg}</textarea>
                             </td>
 						</tr>
                         <tr>
@@ -215,7 +215,7 @@
 				</table>
                 <div class="detail_btn_box" align="center">
                     <button class="hdmy_detail_btn" type="submit">수정</button>
-                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
+					<button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->
@@ -226,7 +226,7 @@
     <script>
     	
     	function backPage(){
-    		loaction.href = '${path}/companion';
+    		location.href = '${path}/review';
     	}
     	 
     	var receivedStar = parseInt('${review.reviewStar}');

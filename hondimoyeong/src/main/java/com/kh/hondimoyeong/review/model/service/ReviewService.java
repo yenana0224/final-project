@@ -41,7 +41,6 @@ public interface ReviewService {
 
 	int updateImg(ReviewImg reviewImg);
 
-	List<ReviewImg> selectReviewImg(ReviewImg reviewImg);
 
 
 

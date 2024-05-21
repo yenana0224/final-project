@@ -154,41 +154,15 @@ public class ReviewController {
 	}
 	
 	@PostMapping("updateForm.rvw")
-	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course, ReviewImg reviewImg) {
+	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course) {
 		List<Course> courseList = reviewService.selectCourse(course);
-		List<ReviewImg> reviewImgs = reviewService.selectReviewImg(reviewImg);
 		
-		mv.addObject("reivewImg", reviewImgs);
 		mv.addObject("courseList", courseList);
 		mv.addObject(reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
 		return mv;
 	}
-	
-	@PostMapping("update.rvw")
-	public String update(@ModelAttribute Review review, ReviewImg reviewImg, MultipartFile reUpfile, HttpSession session) {
-	    if (!reUpfile.getOriginalFilename().equals("")) {
-	        // 기존 첨부파일 존재 => 삭제
-	        if (reviewImg.getChangeName() != null) {
-	            new File(session.getServletContext().getRealPath(reviewImg.getChangeName())).delete();
-	        }
-	        reviewImg.setOriginName(reUpfile.getOriginalFilename());
-	        reviewImg.setChangeName(saveFile(reUpfile, session));
-	    }
 
-	    if (reviewService.update(review) > 0) {
-	        // REVIEW 테이블 업데이트 성공 시 REVIEW_IMG 테이블 업데이트
-	        if (reviewService.updateImg(reviewImg) > 0) {
-	            session.setAttribute("alertMsg", "수정 완료");
-	            return "redirect:detail.rvw?reviewNo=" + review.getReviewNo();
-	        } else {
-	            session.setAttribute("errorMsg", "REVIEW_IMG 테이블 업데이트 실패");
-	            return "common/errorPage";
-	        }
-	    } else {
-	        session.setAttribute("errorMsg", "REVIEW 테이블 업데이트 실패");
-	        return "common/errorPage";
-	    }
-	}
+
 	
 	/**
 	 * 댓글 ajax

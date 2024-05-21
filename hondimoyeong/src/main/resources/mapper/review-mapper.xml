@@ -60,7 +60,6 @@
 		  	  COURSE
 	</select>
 	
-	
 	<select id="selectList" resultMap="reviewResultSet">
 		SELECT
 		    R.REVIEW_NO,
@@ -176,9 +175,9 @@
 		SELECT
 		      R.REVIEW_NO,
 		      C.COURSE_NO AS COURSE_NAME,
+              R.COURSE_NO,
 		      USER_NAME,
       		  R.USER_NO,
-      		  R.COURSE_NO,
 		      REVIEW_TITLE,
 		      REVIEW_CONTENT,
 		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
