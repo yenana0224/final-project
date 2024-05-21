@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -224,8 +225,20 @@
                 <div id="categoryBox">
                     <h5>선택</h5>
                     <select name="category" id="category">
-                        <option value="1">문의</option>
-                        <option value="2">신고</option>
+                   <c:choose>
+                        <c:when test="${customer.category == 1}">
+                            <option value="1" selected>문의</option>
+                            <option value="2">신고</option>
+                        </c:when>
+                        <c:when test="${customer.category == 2}">
+                            <option value="1">문의</option>
+                            <option value="2" selected>신고</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="1">문의</option>
+                            <option value="2">신고</option>
+                        </c:otherwise>
+                    </c:choose>
                     </select>                    
                 </div>
                 <div id="box1">
