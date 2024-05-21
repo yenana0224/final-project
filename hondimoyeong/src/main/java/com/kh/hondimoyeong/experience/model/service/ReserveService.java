@@ -3,6 +3,7 @@ package com.kh.hondimoyeong.experience.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 
 public interface ReserveService {
@@ -16,5 +17,10 @@ public interface ReserveService {
 	// 매출 전체조회
 	List <Experience> findAll();
 	
+	// 매출 페이징
+	int selectListCount();
 	
+	// 게시글 목록 조회
+	List<Experience> selectList(PageInfo pi);
+
 }

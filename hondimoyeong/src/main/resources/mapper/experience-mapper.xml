@@ -87,13 +87,40 @@
 			FROM
 				EXPERIENCE_RESERVE
 			JOIN
-	    	MEMBER USING(USER_NO)
+	    		MEMBER USING(USER_NO)
+			WHERE
+				STATUS IN ('A', 'C')
+	
+	</select>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT
+				COUNT(*)
+			FROM
+				EXPERIENCE_RESERVE
+			JOIN
+	    		MEMBER USING(USER_NO)
 			WHERE
 				STATUS IN ('A', 'C')
 	
 	</select>
 	
 	
+	<select id="selectList" resultMap="experienceResultSet">
+		SELECT
+				*
+			FROM
+				EXPERIENCE_RESERVE
+			JOIN
+	    		MEMBER USING(USER_NO)
+			WHERE
+				STATUS IN ('A', 'C')
+			ORDER
+			   BY
+			   	EXPERIENCE_NO DESC
+			
+	
+	</select>
 
 
 </mapper>
