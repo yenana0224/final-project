@@ -34,5 +34,9 @@ public class ReserveRepository {
 	public List<Experience> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
 		return sqlSession.selectList("experienceMapper.selectList", null, rowBounds);
 	}
-
+	
+	
+	public Experience selectexperience(SqlSessionTemplate sqlSession, int experienceNo) {
+		return sqlSession.selectOne("experienceMapper.selectexperience", experienceNo);
+	}
 }

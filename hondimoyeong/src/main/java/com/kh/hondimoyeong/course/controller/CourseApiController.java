@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,7 +31,8 @@ public class CourseApiController {
 	private CourseServiceImpl courseService;
 
 	@GetMapping("admin/api/load")
-	public String loadFromApi(Model model) throws IOException, Exception {
+	public String loadFromApi(Model model,
+							  HttpServletResponse response) throws IOException, Exception {
 		
 		String address = "https://api.odcloud.kr/api/15043496/v1/uddi:4fc81f72-5343-4349-93f0-bda60947a923?page=0&perPage=0&returnType=json&serviceKey=V0N5aQoZi3yLUcXkXnicH4TSv4Q%2FJzLOdTPypUpxnL%2Be5yHYcfOJ%2Bma4N21DA6YHMpluBbtS9XXsJR%2BOeYe1lw%3D%3D";
 		
@@ -62,7 +68,17 @@ public class CourseApiController {
 		}
 		
 		courseService.loadFromApi(list);
+		timeCookie(response);
 		
 		return "redirect:/admin/course";
+	}
+	
+	public void timeCookie(HttpServletResponse response) {
+
+		Cookie timeCookie = new Cookie("currentTime", new SimpleDateFormat("yyyy-MM-dd-HH:mm").format(new Date()));
+		timeCookie.setMaxAge(1 * 60 * 60 * 24 * 28);
+		timeCookie.setPath("/");
+		
+		response.addCookie(timeCookie);
 	}
 }
