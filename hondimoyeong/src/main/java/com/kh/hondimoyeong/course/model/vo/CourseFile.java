@@ -11,6 +11,7 @@ public class CourseFile {
 	private int fileNo;
 	private int courseIndex;
 	private String courseNo;
+	private String courseName;
 	private String originName;
 	private String changeName;
 	private int fileLevel;

@@ -14,14 +14,15 @@
 
     <style>
             div{
-                /* border : 1px solid red;  */
+                /*border : 1px solid red;*/
                 box-sizing : border-box;
                 background-color: #ffffff;
+                
             }          
         
             #wrap{
                 width: 1200px;
-                height: 1000px;
+                height: 1400px;
                 margin: 0 auto;
                 position: relative;  
             }
@@ -30,7 +31,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 880px;
+                height: 1250px;
                 margin: 0 auto;
                 margin-top: 150px;
                 /* background-color: #FFF2D7; */
@@ -69,11 +70,12 @@
             #detailBox
             {
                 width: 700px;
-                height:760px;
+                height : 1000px;
                 margin-left: 50px;
                 padding-left: 2px;
                 padding-top: 0px;
                 /* background-color: #FFF2D7; */
+                margin-bottom : 10px;
             }
 
             .background-Box{
@@ -101,24 +103,32 @@
                 font-weight: bold;
             }
 
-
             .map{
                 width: 110px;
-                height: 121px;
+                height: 160px;
                 float: left;
                 margin-left: 25px;
                 margin-top: 5px;
+                margin-bottom : 20px;
             }
 
             .box2{
                 width: 110px;
-                height: 30px;
+                height: 10px;
                 display: inline-block;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
                 text-align: center;
             }
-
+            
+            .box3{
+                width: 110px;
+                height: 11px;
+                display: inline-block;
+                font-size: 12px;
+                text-align: center;
+            }
+            
             /*코스 아이콘*/
             .map > img {
                 opacity: 0.2; /* 투명도 조절 */
@@ -135,17 +145,17 @@
             <img class="icon-Img" src="resources/image/mypageIcon.png">
             
             <div id="titleBox">완주한 코스</div>
+            
             <div id="detailBox">
 	            <c:forEach var="course" items="${list}">
 					 <div class="map">
 					 	<img id="${course.courseIndex}" src="${course.changeName}">
 	                    <div class="box2">${course.courseNo}</div>
+	                    <div class="box3">${course.courseName}</div>
 	                </div>           
 	            </c:forEach> 
             </div>
-            
-            
-            
+    
             <script>
 
             	/*사용자가 리뷰를 작성한 코스만 진하게*/
@@ -155,14 +165,13 @@
             			userNo : ${sessionScope.loginUser.userNo}
             		},
             		success : (data) => {
-            			
            				for(let i in data){
            					const id = '#' + data[i].courseIndex;
            					$(id).css('opacity', '1');
 
            				}
             		}
-            	})
+            	});
             
             </script>
             

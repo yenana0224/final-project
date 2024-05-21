@@ -18,6 +18,7 @@
 	<resultMap type="courseFile" id="courseFileResultSet">
 		<result column="FILE_NO" property="fileNo" />
 		<result column="COURSE_NO" property="courseNo" />
+		<result column="COURSE_NAME" property="courseName" />
 		<result column="COURSE_INDEX" property="courseIndex" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
@@ -220,6 +221,7 @@
 	SELECT
 	    F.COURSE_INDEX,
 	    COURSE_NO,
+	    COURSE_NAME,
 	    CHANGE_NAME
 	FROM
 	    COURSE_FILE F
