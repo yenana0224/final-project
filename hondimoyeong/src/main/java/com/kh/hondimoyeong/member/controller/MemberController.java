@@ -39,7 +39,11 @@ public class MemberController {
          mv.setViewName("redirect:/");
          
          if(loginUser.getStatus().equals("A")) {
-				mv.setViewName("common/adminMain");
+        	 
+        	 
+        	 mv.setViewName("redirect:saleMain");
+        	 
+				//mv.setViewName("common/adminMain");
          }
          
       } else {
