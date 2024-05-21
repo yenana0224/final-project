@@ -170,45 +170,51 @@
                                 	</option>
                                 </c:forEach>
                                 </select>
+                                
+                                   <script>
+                                    $(function(){
+                                        $('select[name="courseNo"]').val("${review.courseNo}");
+                                    });
+							    </script>
                             </td>
 						</tr>
                         <tr>
                             <th>* 별점</th>
                             <td>
                                 <fieldset>
-                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                                        for="rate1">★</label>
-                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                                        for="rate2">★</label>
-                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                                        for="rate3">★</label>
-                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                                        for="rate4">★</label>
                                     <input type="radio" name="reviewStar" value="1" id="rate5"><label
                                         for="rate5">★</label>
+                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                        for="rate4">★</label>
+                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                        for="rate3">★</label>
+                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                        for="rate2">★</label>
+                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                        for="rate1">★</label>
                                 </fieldset>
                             </td>
                         </tr>
                         <tr>
 							<th>* 제목</th>
-							<td><input type="text" name="reviewTitle" class="title_inp"/></td>
+							<td><input type="text" name="reviewTitle" class="title_inp" value="${review.reviewTitle}"/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent"></textarea>
+							<td><textarea class="content_inp" name="reviewContent">${review}</textarea>
                             </td>
 						</tr>
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="upfiles" id="file1" style="padding-right: 35px;">
-                                <input type="file" name="upfiles" id="file2">
+                                <input type="file" name="reUpfile" id="file1" style="padding-right: 35px;">
+                                <input type="file" name="reUpfile" id="file2">
                             </td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">등록</button>
+                    <button class="hdmy_detail_btn" type="submit">수정</button>
                     <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
                 </div>
             </form>
@@ -218,9 +224,13 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
     <script>
-    	 function backPage(){
-    		 loaction.href = '${path}/companion';
-    	 }
+    	
+    	function backPage(){
+    		loaction.href = '${path}/companion';
+    	}
+    	 
+    	var receivedStar = parseInt('${review.reviewStar}');
+    	document.getElementById('rate' + receivedStar).checked = true;
     </script>
 
 </body>

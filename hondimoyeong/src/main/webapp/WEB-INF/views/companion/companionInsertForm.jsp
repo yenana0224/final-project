@@ -151,12 +151,12 @@
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="companionContent">${courseList }</textarea></td>
+							<td><textarea class="content_inp" name="companionContent"></textarea></td>
 						</tr>
 					</tbody>
 				</table>
                 <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">수정</button>
+                    <button class="hdmy_detail_btn" type="submit">등록</button>
                     <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
                 </div>
             </form>

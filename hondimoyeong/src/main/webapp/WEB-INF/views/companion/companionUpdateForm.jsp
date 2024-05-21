@@ -128,7 +128,6 @@
                         <tr>
 							<th>* 코스</th>
 							<td>
-							
                                 <select name="courseNo" class="course_inp">
                                 <c:forEach var="c" items="${ courseList }">
                                 	<option value="${ c.courseIndex }">

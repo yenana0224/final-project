@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -108,34 +109,30 @@ public class ReviewController {
 	                     HttpSession session,
 	                     Model model) {
 	    
-	    // 리뷰를 삽입하고 리뷰 번호를 얻습니다.
-	    int reviewNo = reviewService.insertAndGetReviewNo(review);
-	    
-	    // 리뷰 번호를 확인하고 파일을 첨부합니다.
-	    if (reviewNo > 0) { // 리뷰가 삽입되었을 경우
+		reviewService.insert(review);
+		int reviewNo = review.getReviewNo();
+		
+	    if (reviewNo > 0) { // 리뷰가 등록 될 경우
 	        for (MultipartFile upfile : upfiles) {
-	            if (!upfile.getOriginalFilename().equals("")) {
-	                // 파일 첨부시
+	            if (!upfile.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
 	                String originalFilename = upfile.getOriginalFilename();
 	                String changeName = saveFile(upfile, session);
 
 	                // REVIEW_IMG 테이블에 파일 정보 삽입
 	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo); // 리뷰 번호 설정
-	                reviewImg.setOriginName(originalFilename); // 원본 파일명 설정
-	                reviewImg.setChangeName(changeName); // 변경된 파일명 설정
-	                reviewService.insertImg(reviewImg); // 리뷰 이미지 삽입
+	                reviewImg.setReviewNo(reviewNo);
+	                reviewImg.setOriginName(originalFilename);
+	                reviewImg.setChangeName(changeName);
+	                reviewService.insertImg(reviewImg);
 	            }
 	        }
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";
-	    } else { // 리뷰 삽입 실패
+	    } else { 
 	        model.addAttribute("errorMsg", "작성 실패");
 	        return "common/errorPage";
 	    }
 	}
-
-
 
 	// 파일 따로 빼두기
 	public String saveFile(MultipartFile upfile, HttpSession session) {
@@ -153,10 +150,45 @@ public class ReviewController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		
 		return "resources/reviewFile/" + changeName;
 	}
 	
+	@PostMapping("updateForm.rvw")
+	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course, ReviewImg reviewImg) {
+		List<Course> courseList = reviewService.selectCourse(course);
+		List<ReviewImg> reviewImgs = reviewService.selectReviewImg(reviewImg);
+		
+		mv.addObject("reivewImg", reviewImgs);
+		mv.addObject("courseList", courseList);
+		mv.addObject(reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
+		return mv;
+	}
+	
+	@PostMapping("update.rvw")
+	public String update(@ModelAttribute Review review, ReviewImg reviewImg, MultipartFile reUpfile, HttpSession session) {
+	    if (!reUpfile.getOriginalFilename().equals("")) {
+	        // 기존 첨부파일 존재 => 삭제
+	        if (reviewImg.getChangeName() != null) {
+	            new File(session.getServletContext().getRealPath(reviewImg.getChangeName())).delete();
+	        }
+	        reviewImg.setOriginName(reUpfile.getOriginalFilename());
+	        reviewImg.setChangeName(saveFile(reUpfile, session));
+	    }
+
+	    if (reviewService.update(review) > 0) {
+	        // REVIEW 테이블 업데이트 성공 시 REVIEW_IMG 테이블 업데이트
+	        if (reviewService.updateImg(reviewImg) > 0) {
+	            session.setAttribute("alertMsg", "수정 완료");
+	            return "redirect:detail.rvw?reviewNo=" + review.getReviewNo();
+	        } else {
+	            session.setAttribute("errorMsg", "REVIEW_IMG 테이블 업데이트 실패");
+	            return "common/errorPage";
+	        }
+	    } else {
+	        session.setAttribute("errorMsg", "REVIEW 테이블 업데이트 실패");
+	        return "common/errorPage";
+	    }
+	}
 	
 	/**
 	 * 댓글 ajax
