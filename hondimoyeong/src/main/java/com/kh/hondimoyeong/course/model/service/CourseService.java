@@ -20,4 +20,8 @@ public interface CourseService {
 	int updateDetailMap(CourseFile detailMap);
 	
 	int updatePhoto(List<CourseFile> photoList);
+	
+	List<CourseFile> stampList();
+	
+	List<Course> userCourse(int userNo);
 }

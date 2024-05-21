@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class CourseFile {
 	private int fileNo;
 	private int courseIndex;
+	private String courseNo;
 	private String originName;
 	private String changeName;
 	private int fileLevel;

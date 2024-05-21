@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.kh.hondimoyeong.course.model.service.CourseService;
 
 @Controller
-public class AjaxMainController {
+public class AjaxCourseController {
 	
 	@Autowired
 	private CourseService courseService;
@@ -23,8 +23,13 @@ public class AjaxMainController {
 	@GetMapping(value="selectCourse", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectCourse(int courseIndex) {
-	
 		return new Gson().toJson(courseService.courseDetail(courseIndex));
+	}
+	
+	@GetMapping(value="userCourse", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String userCourse(int userNo) {
+		return new Gson().toJson(courseService.userCourse(userNo));
 	}
 
 }
