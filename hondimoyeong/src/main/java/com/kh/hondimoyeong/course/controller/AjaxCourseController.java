@@ -29,7 +29,6 @@ public class AjaxCourseController {
 	@GetMapping(value="userCourse", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String userCourse(int userNo) {
-		System.out.println(userNo);
 		return new Gson().toJson(courseService.userCourse(userNo));
 	}
 
