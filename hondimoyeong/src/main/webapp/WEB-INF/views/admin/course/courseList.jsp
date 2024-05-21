@@ -38,7 +38,14 @@
 		margin : auto;
 		width: 800px;
 		text-align: right;
-		margin-bottom : 30px;
+		margin-bottom : 20px;
+		height : 50px;
+    }
+    
+    p{
+    	font-size : 12px;
+    	margin-bottom : 8px;
+    	padding-right : 10px;
     }
 
 	a{
@@ -65,6 +72,7 @@
 
 		
 		<div class="btn-area">
+			<p>최근 업데이트 시간 : ${cookie.currentTime.value }</p>
 			<a href="api/load">데이터 가져오기</a>
 		</div>
 
@@ -101,6 +109,7 @@
 		</table>
 	</div>
 	
+		<jsp:include page="../../common/footer.jsp" />
 	
 
 </body>
