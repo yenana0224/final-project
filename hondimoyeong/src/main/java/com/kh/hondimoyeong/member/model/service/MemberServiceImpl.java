@@ -64,7 +64,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.insertCustomer(sqlSession, customer);
 	}
 	
-	
+    @Override
+    public Customer selectCustomerByNo(int customerNo) {
+        return memberRepository.selectCustomerByNo(sqlSession, customerNo);
+    }
 
 	
 

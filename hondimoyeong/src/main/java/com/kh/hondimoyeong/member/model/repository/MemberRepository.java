@@ -61,7 +61,10 @@ public class MemberRepository {
 		return sqlSession.insert("customerMapper.insertCustomer", customer);
 	}
 
-
+	public Customer selectCustomerByNo(SqlSessionTemplate sqlSession, int customerNo) {
+		return sqlSession.selectOne("customerMapper.selectCustomerByNo", customerNo);
+	}
+	
 
 
 

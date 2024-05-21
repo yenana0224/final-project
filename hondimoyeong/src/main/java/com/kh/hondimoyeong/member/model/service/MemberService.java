@@ -25,6 +25,6 @@ public interface MemberService {
 
 	int insertCustomer(Customer customer);
 	
-	
+	Customer selectCustomerByNo(int customerNo);
 	
 }

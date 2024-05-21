@@ -117,8 +117,6 @@ public class MemberController {
 		return jsonResponse;
 	}
 	
-	
-
 
 	@RequestMapping("insert.customer")
 	public String insertCustomer(Customer customer, Model model, HttpSession session) {
@@ -136,7 +134,17 @@ public class MemberController {
 	}
 	
 
-	
+    @RequestMapping("detail.customer")
+    public String detailCustomer(@RequestParam("customerNo") int customerNo, Model model) {
+        Customer customer = memberService.selectCustomerByNo(customerNo);
+        if (customer != null) {
+            model.addAttribute("customer", customer);
+            return "member/customerDetail";
+        } else {
+            model.addAttribute("errorMsg", "게시글 조회 실패.");
+            return "common/errorPage";
+        }
+    }
 
 	
 	

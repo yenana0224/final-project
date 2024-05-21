@@ -72,6 +72,7 @@ public class MemberViewController {
 		return "member/customerEnrollForm";
 	}
 	
+
 	
 	
 	

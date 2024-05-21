@@ -187,7 +187,6 @@
             <div id="titleBox">내 글 목록</div>
             <div id="detailBox">
               <div id="searchBox">
-
 				    <select name="category" id="category">
 				    	<option value="0">전체</option>
 				        <option value="1">문의</option>
@@ -199,7 +198,7 @@
               <div id="btnBox">
                 <div class="box1"><button class="mnbtn" onclick="location.href='customerEnrollForm';">글쓰기</button></div>
               </div>
-                <table class="table table-hover">
+                <table class="table table-hover" id="customerListTable">
                     <thead>
                       <tr>
                         <th width="80px;">번호</th>
@@ -239,6 +238,13 @@
  		        	customerSearch(1);  
  		        }
  		    });
+ 		    
+ 		    // 클릭 이벤트 핸들러 추가
+ 		    $('#customerListTable').on('click', 'tbody tr', function() {
+ 		        var customerNo = $(this).children().eq(0).text();
+ 		        location.href = 'detail.customer?customerNo=' + customerNo;
+ 		    });
+ 		    
  		});
 	
 		function customerSearch(currentPage) {
@@ -257,7 +263,7 @@
 		            customers.forEach(function(customer) {
 			                tbodyHtml += '<tr>' +
 			                    '<td>' + customer.customerNo + '</td>' +
-			                    '<td>' + (customer.categoryNo === 1 ? '문의' : '신고') + '</td>' +
+			                    '<td>' + (customer.category === 1 ? '문의' : '신고') + '</td>' +
 			                    '<td>' + customer.customerTitle + '</td>' +
 			                    '<td>' + customer.userName + '</td>' +  
 			                    '<td>' + customer.createDate + '</td>' +
@@ -280,12 +286,10 @@
 		            }
 				}
     		});
- 			
- 			
-
- 			
 
  		}
+		
+	
 	</script>
  		
  		

@@ -73,5 +73,48 @@
 	        #{userNo}
 	        )
 	</select>
-
+	
+	<select id="selectCustomerByNo" parameterType="int" resultMap="customerResultSet">
+        SELECT 
+            CS_NO, 
+            CS_TITLE, 
+            CS_CONTENT, 
+            CREATE_DATE, 
+            COUNT, 
+            STATUS, 
+            CATEGORY, 
+            USER_NO,
+            (SELECT USER_NAME FROM MEMBER WHERE USER_NO = CUSTOMER_SERVICE.USER_NO) AS USER_NAME
+        FROM
+        	CUSTOMER_SERVICE
+        WHERE
+        	CS_NO = #{customerNo}
+    </select>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 </mapper>
