@@ -59,6 +59,10 @@ public class MemberViewController {
 		return "member/completeCourse";
 	}
 	
+	@RequestMapping("customerEnrollForm")
+	public String customerEnrollForm() {
+		return "member/customerEnrollForm";
+	}
 	
 	
 	

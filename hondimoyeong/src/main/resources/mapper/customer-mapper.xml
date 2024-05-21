@@ -11,7 +11,7 @@
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" 		property="count"/>
 		<result column="STATUS" 	property="status"/>
-		<result column="CATEGORY" 	property="categoryNo"/>
+		<result column="CATEGORY" 	property="category"/>
 		<result column="USER_NO" 	property="userNo"/>
 		<result column="USER_NAME" 	property="userName"/>
 	</resultMap>
@@ -53,6 +53,25 @@
         ORDER BY
             A.CS_NO DESC
 	</select>	
-
 	
+	<select id="insertCustomer" parameterType="customer">
+    INSERT INTO CUSTOMER_SERVICE (
+	        CS_NO, 
+	        CS_TITLE, 
+	        CS_CONTENT, 
+	        CREATE_DATE, 
+	        CATEGORY, 
+	        USER_NO
+	    	) 
+    VALUES 
+	    	(
+	        SEQ_CUSTOMER_SERVICE_NO.NEXTVAL, 
+	        #{customerTitle}, 
+	        #{customerContent}, 
+	        SYSDATE, 
+	        #{category},
+	        #{userNo}
+	        )
+	</select>
+
 </mapper>

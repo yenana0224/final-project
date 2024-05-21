@@ -17,7 +17,7 @@ public class Customer {
 	private String createDate;		// 등록일
 	private int count;				// 조회수
 	private String status;			// 삭제여부('Y' / 'N')
-	private int categoryNo;			// 카테고리(0-전체 / 1-문의 / 2-신고)
+	private int category;			// 카테고리(0-전체 / 1-문의 / 2-신고)
 	private int userNo;				// 회원번호
 	
 	private String userName;		// 회원명

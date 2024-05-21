@@ -23,6 +23,7 @@ public interface MemberService {
 	
 	List<Customer> selectList(PageInfo pi, String category, String keyword, int userNo);	
 
+	int insertCustomer(Customer customer);
 	
 	
 	

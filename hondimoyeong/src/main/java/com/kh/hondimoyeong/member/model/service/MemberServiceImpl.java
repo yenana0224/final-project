@@ -58,6 +58,11 @@ public class MemberServiceImpl implements MemberService {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return memberRepository.selectList(sqlSession, rowBounds, category, keyword, userNo);
 	}
+
+	@Override
+	public int insertCustomer(Customer customer) {
+		return memberRepository.insertCustomer(sqlSession, customer);
+	}
 	
 	
 

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
+import com.kh.hondimoyeong.cs.model.vo.Customer;
 import com.kh.hondimoyeong.member.model.service.MemberService;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
@@ -116,12 +117,27 @@ public class MemberController {
 		return jsonResponse;
 	}
 	
+	
+
+
+	@RequestMapping("insert.customer")
+	public String insertCustomer(Customer customer, Model model, HttpSession session) {
+	    
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		customer.setUserNo(loginUser.getUserNo());
+
+		if(memberService.insertCustomer(customer) > 0) {
+	        session.setAttribute("alertMsg", "게시글 작성 성공~");
+	        return "redirect:list.customerView";
+	    } else {
+	        model.addAttribute("errorMsg", "게시글 작성 실패.");
+	        return "common/errorPage";
+	    }
+	}
+	
 
 	
-	
-	
-	
-	
+
 	
 	
 	
