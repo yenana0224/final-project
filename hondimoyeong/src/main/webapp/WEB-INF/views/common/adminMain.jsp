@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Insert title here</title>
 <style>
 #all{
@@ -22,6 +23,9 @@ th{
 }
 
 </style>
+=======
+<title>관리자페이지</title>
+>>>>>>> 6e198713ef830b33ae704acf34d422e9102aa077
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -30,6 +34,7 @@ th{
 </head>
 <body>
 
+<<<<<<< HEAD
 	<jsp:include page ="../common/header.jsp" />
 	
 <div id="all">
@@ -146,10 +151,32 @@ th{
 					
 					
 				});
+=======
+	<jsp:include page="adminHeader.jsp" />
+
+
+	<div></div>
+
+	<script>
+	
+	
+		$.ajax({
+			url : 'saleMain',
+			success : data =>{
+				console.log('gd')
+				
+				let resultStr = '';
+				for(let i = 0; i < data.length; i++){
+					result + =
+						'<div'
+				}
+				
+>>>>>>> 6e198713ef830b33ae704acf34d422e9102aa077
 				
 			}
 			
 		});
+<<<<<<< HEAD
 		
 		
 		
@@ -175,6 +202,10 @@ th{
 
 	<jsp:include page ="../common/footer.jsp" />
 
+=======
+	
+	</script>
+>>>>>>> 6e198713ef830b33ae704acf34d422e9102aa077
 
 </body>
 </html>

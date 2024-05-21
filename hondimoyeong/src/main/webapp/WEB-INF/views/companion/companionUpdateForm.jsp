@@ -174,7 +174,7 @@
 				</table>
                 <div class="detail_btn_box" align="center">
                     <button class="hdmy_detail_btn" type="submit">등록</button>
-                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
+                    <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
                 </div>
             </form>
         </div> <!-- inset_box -->

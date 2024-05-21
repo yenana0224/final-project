@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +14,15 @@
 
     <style>
             div{
-                /* border : 1px solid red;  */
+                /*border : 1px solid red;*/
                 box-sizing : border-box;
                 background-color: #ffffff;
+                
             }          
         
             #wrap{
                 width: 1200px;
-                height: 1000px;
+                height: 1400px;
                 margin: 0 auto;
                 position: relative;  
             }
@@ -29,7 +31,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 880px;
+                height: 1250px;
                 margin: 0 auto;
                 margin-top: 150px;
                 /* background-color: #FFF2D7; */
@@ -68,11 +70,12 @@
             #detailBox
             {
                 width: 700px;
-                height:760px;
+                height : 1000px;
                 margin-left: 50px;
                 padding-left: 2px;
                 padding-top: 0px;
                 /* background-color: #FFF2D7; */
+                margin-bottom : 10px;
             }
 
             .background-Box{
@@ -84,9 +87,6 @@
                 margin-top: 15px;
                 margin-left: 20px;
             }
-
-
-
 
             .detail{
                 width: 200px;
@@ -103,29 +103,38 @@
                 font-weight: bold;
             }
 
-
             .map{
                 width: 110px;
-                height: 121px;
+                height: 160px;
                 float: left;
                 margin-left: 25px;
                 margin-top: 5px;
+                margin-bottom : 20px;
             }
 
             .box2{
                 width: 110px;
-                height: 30px;
+                height: 10px;
                 display: inline-block;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
                 text-align: center;
             }
-
+            
+            .box3{
+                width: 110px;
+                height: 11px;
+                display: inline-block;
+                font-size: 12px;
+                text-align: center;
+            }
+            
             /*코스 아이콘*/
             .map > img {
                 opacity: 0.2; /* 투명도 조절 */
+                width : 100%;
+                height : 70%;
             }
-
 
     </style>    
 </head>
@@ -134,126 +143,38 @@
     <div id="wrap">
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-
+            
             <div id="titleBox">완주한 코스</div>
+            
             <div id="detailBox">
-                <div class="map">
-                    <img src="resources/image/map_1.png">
-                    <div class="box2">1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_1-1.png">
-                    <div class="box2">1-1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_2.png">
-                    <div class="box2">2코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_3-A.png">
-                    <div class="box2">3코스-A</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_3-B.png">
-                    <div class="box2">3코스-B</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_4.png">
-                    <div class="box2">4코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_5.png">
-                    <div class="box2">5코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_6.png">
-                    <div class="box2">6코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_7.png">
-                    <div class="box2">7코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_7-1.png">
-                    <div class="box2">7-1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_8.png">
-                    <div class="box2">8코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_9.png">
-                    <div class="box2">9코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_10.png">
-                    <div class="box2">10코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_10-1.png">
-                    <div class="box2">10-1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_11.png">
-                    <div class="box2">11코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_12.png">
-                    <div class="box2">12코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_13.png">
-                    <div class="box2">13코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_14.png">
-                    <div class="box2">14코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_14-1.png">
-                    <div class="box2">14-1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_15-A.png">
-                    <div class="box2">15-A코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_15-B.png">
-                    <div class="box2">15-B코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_16.png">
-                    <div class="box2">16코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_17.png">
-                    <div class="box2">17코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_18.png">
-                    <div class="box2">18코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_18-1.png">
-                    <div class="box2">18-1코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_18-2.png" style="margin-left: 22px; margin-top: 27px; margin-bottom: 27px;">
-                    <div class="box2">18-2코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_19.png">
-                    <div class="box2">19코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_20.png">
-                    <div class="box2">20코스</div>
-                </div>
-                <div class="map">
-                    <img src="resources/image/map_21.png">
-                    <div class="box2">21코스</div>
-                </div>
+	            <c:forEach var="course" items="${list}">
+					 <div class="map">
+					 	<img id="${course.courseIndex}" src="${course.changeName}">
+	                    <div class="box2">${course.courseNo}</div>
+	                    <div class="box3">${course.courseName}</div>
+	                </div>           
+	            </c:forEach> 
             </div>
+    
+            <script>
+
+            	/*사용자가 리뷰를 작성한 코스만 진하게*/
+            	$.ajax({
+            		url : 'userCourse',
+            		data : {
+            			userNo : ${sessionScope.loginUser.userNo}
+            		},
+            		success : (data) => {
+           				for(let i in data){
+           					const id = '#' + data[i].courseIndex;
+           					$(id).css('opacity', '1');
+
+           				}
+            		}
+            	});
+            
+            </script>
+            
         </div>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
