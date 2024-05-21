@@ -94,10 +94,15 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int insertAndGetReviewNo(Review review) {
-	    reviewRepository.insertAndGetReviewNo(sqlSession, review);
-	    return review.getReviewNo();
+	public int update(Review review) {
+		return reviewRepository.update(sqlSession, review);
 	}
+
+	@Override
+	public int updateImg(ReviewImg reviewImg) {
+		return reviewRepository.updateImg(sqlSession, reviewImg);
+	}
+
 
 
 

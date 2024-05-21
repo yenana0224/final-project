@@ -60,7 +60,6 @@
 		  	  COURSE
 	</select>
 	
-	
 	<select id="selectList" resultMap="reviewResultSet">
 		SELECT
 		    R.REVIEW_NO,
@@ -176,7 +175,9 @@
 		SELECT
 		      R.REVIEW_NO,
 		      C.COURSE_NO AS COURSE_NAME,
+              R.COURSE_NO,
 		      USER_NAME,
+      		  R.USER_NO,
 		      REVIEW_TITLE,
 		      REVIEW_CONTENT,
 		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
@@ -289,8 +290,6 @@
 	    	  )
 	</insert>
 
-	
-	
 	<insert id="insertImg" parameterType="reviewImg">
 		INSERT
 		  INTO
@@ -310,10 +309,27 @@
 			  )
 	</insert>
 	
-	<select id="selectLastReviewNo" resultType="int">
-    <!-- 가장 최근에 삽입된 리뷰의 번호를 가져오는 쿼리문 -->
-    SELECT SEQ_REVIEW_NO.CURRVAL FROM DUAL
-</select>
+	<update id="update" parameterType="review">
+		UPDATE
+		      REVIEW
+		   SET
+		      COURSE_NO = #{courseNo},
+		      REVIEW_TITLE = #{reviewTitle},
+		      REVIEW_CONTENT = #{reviewContent},
+		      REVIEW_STAR = #{reviewStar}
+		 WHERE
+		      REVIEW_NO = #{reviewNo}
+	</update>
+	
+	<update id="updateImg" parameterType="reviewImg">
+		UPDATE
+		      REVIEW_IMG
+		   SET
+		      ORIGIN_NAME = #{originName},
+		      CHANGE_NAME = #{changeName}
+		 WHERE
+		      REVIEW_NO = #{reviewNo}
+	</update>
 
 
 </mapper>

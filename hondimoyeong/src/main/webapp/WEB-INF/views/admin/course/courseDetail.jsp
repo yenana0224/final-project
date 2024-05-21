@@ -79,6 +79,10 @@
 
 </head>
 <body>
+
+
+	<jsp:include page="../../common/adminHeader.jsp" />
+
     
     <div id="innerOuter">
 

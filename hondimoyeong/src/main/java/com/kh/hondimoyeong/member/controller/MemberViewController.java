@@ -1,10 +1,17 @@
 package com.kh.hondimoyeong.member.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.hondimoyeong.course.model.service.CourseService;
 
 @Controller
 public class MemberViewController {
+	
+	@Autowired
+	private CourseService courseService;
 	
 	// 화면
 	
@@ -55,7 +62,8 @@ public class MemberViewController {
 	}
 	
 	@RequestMapping("completeCourse")
-	public String completeCourse() {
+	public String completeCourse(Model model) {
+		model.addAttribute("list", courseService.stampList());
 		return "member/completeCourse";
 	}
 	

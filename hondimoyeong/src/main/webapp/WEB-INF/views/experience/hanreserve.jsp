@@ -34,7 +34,8 @@
 	<jsp:include page ="../common/header.jsp" />
 	
 	<div class="table" id="table">
-<form>
+	
+		<form method="post" action="hanlasanreserve">
 	
                     <table>
            <colgroup>
@@ -51,7 +52,7 @@
                         	<option value="성판악 코스">성판악 코스</option>
                         	<option value="관음사 코스">관음사 코스</option>
                        </select>
-						<input type="hidden" name="experienceDivide" value=""><!-- 1 -->
+						<input id="course" type="hidden" name="experienceDivide" value=""><!-- 1 -->
                        
                        </div>
                       <!-- <a href="#" class="btn btn-black" data-toggle="modal" data-target="#tambang_info" title="자세히 보기" onclick="detailView();return false;">자세히 보기</a>-->
@@ -78,7 +79,9 @@
                   <option value="8:01 ~ 10:00">8:01 ~ 10:00</option>
                   <option value="10:00~13:00">10:00~13:00</option>
                  </select>
-                 <input type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 3 -->
+                 <input id="time" type="hidden" name="experienceTime" value="종일(09:30 - 18:00)"><!-- 3 -->
+                 <input type="hidden" name="price" id="price" value="0"><!-- 4 -->
+                 
                 </div>
                 
                	 <div>
@@ -87,14 +90,6 @@
                </td>
            </tr>        
            
-           
-           <tr>
-               <th>예약자</th>
-               <td>${ sessionScope.loginUser.memberName }</td>
-           </tr>
-           
-           
-           
 		<c:choose>
 			<c:when test="${ empty sessionScope.loginUser}"><br>
 
@@ -102,7 +97,7 @@
 			<c:otherwise>
 			<tr>
                  <th>예약자</th>
-                 <td>${ sessionScope.loginUser.memberName }</td>
+                 <td>${ sessionScope.loginUser.userName }</td>
             </tr>
 		</c:otherwise>
 		</c:choose>
@@ -146,17 +141,18 @@
        </table>
 		<input type="hidden" id="category" name="category" value="한라산"><!-- 6 -->
        
-       </form>
+       
       <c:choose>
 		<c:when test="${ empty sessionScope.loginUser}"><br>
 			<h3>결제를 하기 위해선 로그인 해야 합니다. <a class="btn btn-outline-warning" href="login">로그인하러가기</a></h3>
 		</c:when>
 		<c:otherwise>
-			<button type="submit"  id="btn1" class="btn btn-outline-warning">
-				<img src="resources/image/kakao.png" style="width:90px; height:30px;">
+			<button onclick="btn();" type="submit"  id="btn1" class="btn btn-outline-warning">
+				예약하기
 		   </button>
 		</c:otherwise>
 	</c:choose>
+	</form>
    </div>
                     
 	
@@ -181,8 +177,22 @@
 		console.log($("#visitTm").children('option:selected').text());
 		console.log($('#cmpaCnt').children('option:selected').text());
 		
+		course = $('#courseSeq').children('option:selected').text();
+		$('#courseSeq').children('option:selected').text(course);
+		
+		time = $('#visitTm').children('option:selected').text();
+		$('#visitTm').children('option:selected').text(time);
+		
 		people = $('#cmpaCnt').children('option:selected').text();
 		$('#cmpaCnt').children('option:selected').text(people);
+		
+		
+		
+		$('#course').val(course);
+		console.log($('#course').val());
+		
+		$('#time').val(time);
+		console.log($('#time').val())
 		
 		$('#person1-val').val(people);
 		console.log($('#person1-val').val());

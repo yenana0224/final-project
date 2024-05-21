@@ -348,14 +348,14 @@
 
         <div class="detail_btn_box" align="center">
             <div class="hdmy_detail_btn detailBtn">목록</div>
-            <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
+            <c:if test="${sessionScope.loginUser.userNo == review.userNo}">
 	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
             </c:if>
         </div>
         
         <form action="" id="postForm" method="post">
-		    <input type="hidden" name="companionNo" value="${companion.companionNo}"/>
+		    <input type="hidden" name="reviewNo" value="${review.reviewNo}"/>
 		</form>
         
     </div>

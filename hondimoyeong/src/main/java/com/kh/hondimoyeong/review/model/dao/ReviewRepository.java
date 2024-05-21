@@ -67,9 +67,14 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectCourse", course);
 	}
 
-	public void insertAndGetReviewNo(SqlSessionTemplate sqlSession, Review review) {
-	    sqlSession.insert("reviewMapper.insertAndGetReviewNo", review);
+	public int update(SqlSessionTemplate sqlSession, Review review) {
+		return sqlSession.update("reviewMapper.update", review);
 	}
+
+	public int updateImg(SqlSessionTemplate sqlSession, ReviewImg reviewImg) {
+		return sqlSession.update("reviewMapper.updateImg", reviewImg);
+	}
+
 
 
 }

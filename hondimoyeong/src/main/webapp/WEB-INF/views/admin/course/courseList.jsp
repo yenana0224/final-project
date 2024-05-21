@@ -56,7 +56,13 @@
 </head>
 <body>
 
+	
+	
+	<jsp:include page="../../common/adminHeader.jsp" />
+	
+
 	<div id="innerOuter">
+
 		
 		<div class="btn-area">
 			<a href="api/load">데이터 가져오기</a>

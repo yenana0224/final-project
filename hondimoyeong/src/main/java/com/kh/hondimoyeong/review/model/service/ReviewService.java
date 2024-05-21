@@ -37,7 +37,10 @@ public interface ReviewService {
 
 	List<Course> selectCourse(Course course);
 
-	int insertAndGetReviewNo(Review review);
+	int update(Review review);
+
+	int updateImg(ReviewImg reviewImg);
+
 
 
 

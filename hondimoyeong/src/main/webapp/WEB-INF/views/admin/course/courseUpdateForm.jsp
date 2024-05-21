@@ -83,6 +83,8 @@
 </head>
 <body>
     
+    	<jsp:include page="../../common/adminHeader.jsp" />
+    	
     <div id="innerOuter">
 
         <h2>관리자페이지/ 올레길</h2>
