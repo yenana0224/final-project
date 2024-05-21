@@ -20,7 +20,10 @@ public interface ReserveService {
 	// 매출 페이징
 	int selectListCount();
 	
-	// 게시글 목록 조회
+	// 체험 목록 조회
 	List<Experience> selectList(PageInfo pi);
+	
+	// 체험 상세 조회
+	Experience selectexperience(int experienceNo);
 
 }

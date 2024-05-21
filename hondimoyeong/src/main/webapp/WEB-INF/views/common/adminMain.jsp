@@ -40,25 +40,29 @@ th{
 
 	<h2>관리자페이지</h2><br>
 	<h4>결제 내역</h4>
+	
 	<table id="boardList" class="table table-hover" align="center">
-        <thead>
-            <tr>
-                <th>회원이름</th>
-                <th>구분</th>
-                <th>가격</th>
-            </tr>
-        </thead>
-        <tbody>
+	        <thead>
+	            <tr>
+	            	<th>번호</th>
+	                <th>회원이름</th>
+	                <th>종류</th>
+	                <th>가격</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        
+	        	<c:forEach items="${ list }" var="saleList">
+	        		<tr>
+	        			<td>${ saleList.experienceNo }</td>
+	        			<td>${ saleList.userName }</td>
+	        			<td>${ saleList.category }</td>
+	        			<td>${ saleList.price }</td>
+	        		</tr>
+	        	</c:forEach>
+	          
+	        </tbody>
         
-        	<c:forEach items="${ list }" var="saleList">
-        		<tr>
-        			<td>${ saleList.userName }</td>
-        			<td>${ saleList.experienceDivide }</td>
-        			<td>${ saleList.price }</td>
-        		</tr>
-        	</c:forEach>
-          
-        </tbody>
     </table>
 	 
 	<div id="area"></div>
@@ -76,9 +80,6 @@ th{
                     		</li>
                     	</c:otherwise>
                     </c:choose>
-                    
-                    
-                    
                      <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
                    		<li class="page-item"><a class="page-link" href="saleMain?page=${p}">${p}</a></li>
 					</c:forEach>
@@ -95,14 +96,8 @@ th{
                     	</c:otherwise>
                     </c:choose>
                     
-                    
-                 
-                    
-                   
-                   
-                    
-                    
                 </ul>
+                 <a>${ex.experienceNo }</a>
                
 	</div>
 	
@@ -114,88 +109,15 @@ th{
 
 
 <script>
-/*
-	window.onload =  function() {
-		$.ajax({
-			url : 'saleMain',
-			success : result => {
-				console.log(result);
-				
-				
-				
-				
-				let resultStr = '';
-				for(let i = 0; i < result.length; i++){
-					//if(i>3)break;
-					resultStr
-					+= '<div id="form">'
-						+ '<table class="table table-bordered">'
-						+ '<thead>'
-						+ '</thead>'
-							+ '<tbody>'
-								+ '<tr>'
-									+ '<th>이름</th>'
-									+ '<td>' + result[i].userName +'</th>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<th>구분</th>'
-									+ '<td>' + result[i].experienceDivide + '</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<th>금액</th>'
-									+ '<td>' + result[i].price + '</td>'
-								+ '</tr>'
-							+ '</tbody>'
-						+ '</table>'
-						+ '<div>'
-				}
-				$('#area').html(resultStr);
-				
-				$.ajax({
-					url : 'salesale',
-					success : data => {
-						console.log(data);
-						let str = '';
-						str
-						 	+= '<ul class="pagination">'
-						 	if(data.currentPage = 1){
-			    		    	str +='<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>'
-						 	}
-						 	else{
-			    			str +='<li class="page-item">'
-			        			+'<a class="page-link" href="salesale?page=' +  data.currentPage -1 + '">'
-			        			+	'Previous'
-			        			+'</a>'
-			        		+'</li>'
-						 	}
-						 	for(let i= data.startPage; i<= data.endPage; i++){
-						 		console.log(i)
-			       				+'<li class="page-item"><a class="page-link" href="salesale?page=' + i + '">' + i + '</a></li>'
-			       					
-						 	}
-						 	
-						 	if(data.currentPage == data.endPage){
-						 		str +='<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>'
-						 	}
-						 	else{
-						 		str += '<a class="page-link" href="salesale?page='+  data.currentPage + 1+'">'
-				        		+	'Next'
-				        		+'</a>'
-				        		+'</li>'
-						 	}
-						+'</ul>'
-						
-						$('#pagingArea').html(str);
-					}
-					
-					
-				});
-
-			}
-	})
-	}
+	$(function(){
 		
-*/
+		$('#boardList > tbody > tr').click(function(){
+			
+			location.href = 'detail.ex?experienceNo=' + $(this).children().eq(0).text();
+			
+		});
+		
+	});
 
 </script>
 

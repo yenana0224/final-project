@@ -47,6 +47,11 @@ public class ReserveServiceImpl  implements ReserveService{
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return reserveRepository.selectList(sqlSession, rowBounds);
 	}
+
+	@Override
+	public Experience selectexperience(int experienceNo) {
+		return reserveRepository.selectexperience(sqlSession, experienceNo);
+	}
 	
 	
 	
