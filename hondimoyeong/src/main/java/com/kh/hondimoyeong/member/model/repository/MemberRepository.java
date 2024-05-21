@@ -56,12 +56,38 @@ public class MemberRepository {
 	    params.put("userNo", userNo);
 		return sqlSession.selectList("customerMapper.selectList", params, rowBounds);
 	}
+	
+	public int insertCustomer(SqlSessionTemplate sqlSession, Customer customer) {
+		return sqlSession.insert("customerMapper.insertCustomer", customer);
+	}
 
 
 
 
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 }

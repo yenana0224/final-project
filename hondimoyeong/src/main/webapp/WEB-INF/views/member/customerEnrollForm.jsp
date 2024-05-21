@@ -110,15 +110,16 @@
                 /* border: 1px solid rgb(0, 163, 204); */
             }
 
-            h5{
+            div > h5{
                 padding-top: 5px;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
             }
 
-            p{
+            div > p{
                 font-size: 14px;
                 margin: 0 auto;
+                font-weight: bold;
             }
 
             div > .form-control{
@@ -208,31 +209,32 @@
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 
             <div id="titleBox">문의하기</div>
-            <div id="detailBox">
-                <div id="categoryBox">
-                    <h5>선택</h5>
-                    <select name="#" id="category">
-                        <option value="">문의</option>
-                        <option value="">신고</option>
-                    </select>                    
-                </div>
-                <div id="box1">
-                    <h5>문의 제목</h5>
-                    <input type="text" class="form-control" name="customerTitle">
-                </div>
-                <div id="box2">
-                    <h5>문의 내용</h5>
-                    <textarea id="box3" class="form-control" name="customerContent"></textarea>
-                </div>
-                <div id="box4">
-                    <button class="btn-a">등록</button>
-                    <button class="btn-b">목록</button>
-                </div>
-            </div>
+            
+			<form id="enrollForm" method="post" action="insert.customer" enctype="multipart/form-data"> 
+			    <div id="detailBox">
+			        <div id="categoryBox">
+			            <p>선택</p>
+			            <select name="category" id="category">
+			                <option value="1">문의</option>
+			                <option value="2">신고</option>
+			            </select>                    
+			        </div>
+			        <div id="box1">
+			            <p>문의 제목</p>
+			            <input type="text" class="form-control" name="customerTitle">
+			        </div>
+			        <div id="box2">
+			            <p>문의 내용</p>
+			            <textarea id="box3" class="form-control" name="customerContent"></textarea>
+			        </div>
+			        <div id="box4">
+			            <button type="submit" class="btn-a">등록</button>
+			            <button type="button" class="btn-b" onclick="location.href='list.customerView';">목록</button>
+			        </div>
+			    </div>
+			</form>
         </div>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
-
-
 </body>
 </html>
