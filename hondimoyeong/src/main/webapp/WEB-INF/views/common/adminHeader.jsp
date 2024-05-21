@@ -12,7 +12,6 @@
         *{
             box-sizing: border-box;
             text-decoration: none;
-            color : white;
             margin : 0;
             padding : 0;
         }
@@ -93,11 +92,11 @@
 		    <div id="header">
 		        <h1>관리자페이지</h1>
 		        <div id="btn-area">
-		            <a id="toMain">메인이동</a>
+		            <a id="toMain" href="/hondimoyeong">메인이동</a>
 		        </div>
 		        <div id="menubar">
 		            <div class="menu">
-		                <a href="#">올레길</a>
+		                <a href="admin/course">올레길</a>
 		            </div>
 		            <div class="menu">
 		                <a href="#">게시글</a>
