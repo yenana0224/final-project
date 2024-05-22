@@ -19,6 +19,7 @@
 		<result column="STATUS" property="status"/>
 		<result column="COMPANION_PEOPLE" property="companionPeople"/>
 		<result column="COMPANION_NUM" property="companionNum"/>
+		<result column="REPLY_COUNT" property="replyCount"/>
 	</resultMap>
 	
 	<resultMap type="course" id="courseResultSet">
@@ -26,6 +27,16 @@
 		<result column="COURSE_NO" property="courseNo"/> <!-- 1코스, 2코스 ... 코스 이름 -->
 	</resultMap>
 
+	<resultMap type="companionReply" id="companionReplyResultSet">
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COMPANION_NO" property="companionNo"/>
+		<result column="STATUS" property="status"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="REPLY_COUNT" property="replyCount"/>
+	</resultMap>
 
 	<select id="selectListCount" resultType="_int">
 		SELECT
@@ -57,6 +68,7 @@
 		      A.COUNT,
 		      A.STATUS AS STATUS,
 		      A.COMPANION_PEOPLE,
+		      (SELECT COUNT(*) FROM COMPANION_REPLY CR WHERE A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
 		      COUNT(B.USER_NO) AS COMPANION_NUM
 		  FROM
 		      COMPANION A
@@ -326,7 +338,47 @@
 		     A.COMPANION_DATE DESC
 	</select>
 	
-
+	
+	<select id="selectReply" resultMap="companionReplyResultSet" parameterType="_int">
+		SELECT
+		      REPLY_NO,
+		      COMPANION_NO,
+		      REPLY_CONTENT,
+		      CR.STATUS AS STATUS,
+		      TO_CHAR (CR.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
+		      M.USER_NAME AS USER_NAME
+		  FROM
+		      COMPANION_REPLY CR
+		  JOIN
+		      MEMBER M ON (CR.USER_NO = M.USER_NO)
+		 WHERE
+		      CR.STATUS = 'Y'
+		   AND
+		      COMPANION_NO = #{companionNo}
+		 ORDER
+		    BY
+		      REPLY_NO DESC
+	</select>
+	
+	
+	<insert id="insertReply" parameterType="companionReply">
+		INSERT
+		  INTO
+		      COMPANION_REPLY
+		      (
+		      REPLY_NO, 
+		      REPLY_CONTENT, 
+		      COMPANION_NO, 
+		      USER_NO
+		      )
+	    VALUES
+	   		  (
+	   		  SEQ_COMPANION_REPLY_NO.NEXTVAL, 
+	   		  #{replyContent}, 
+	   		  #{companionNo}, 
+	   		  #{userNo}
+	   		  )
+	</insert>
 	
 	
 </mapper>

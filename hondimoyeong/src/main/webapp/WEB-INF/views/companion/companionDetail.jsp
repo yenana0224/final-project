@@ -126,17 +126,51 @@
         font-weight: bold;
         padding-top: 20px;
         padding-bottom: 20px;
-        /* border-bottom: 1px solid lightgray; */
+        border-bottom: 1px solid lightgray;
         background-color: #ececec;
         padding-left: 20px;
-        margin-bottom: 10px;
-        border-radius: 0px;
+        margin-bottom: 20px;
+    }
+        
+    .comment_write{
+    	width:1200px;
+    }
+    
+    .commentContent{
+    	width: 1090px;
+    	height: 90px;
+    	resize: none;
+    	border: 1px solid lightgray;
+    	border-radius: 10px;
+    	padding: 10px;
+    	outline: none;
+    	float: left;
+    	margin-right: 20px;
+    }
+
+    .comment_btn{
+    	width:90px;
+    	height: 90px;
+    	text-align: center;
+    	line-height: 85px;
+    	float:left;
+    	background-color: #FF9843;
+    	color: #fff;
+    	border-radius: 10px;
+    	font-weight: bold;
+    	border: none;
     }
 
     .detail_reply{
         width: 1200px;
         height: auto;
         margin: 0 auto;
+    }
+    
+    .detail_reply_box{
+    	width: 1200px;
+    	height: 110px;
+    	border-bottom: 1px solid lightgray;
     }
 
     .detail_reply_content{
@@ -149,7 +183,6 @@
 
     .detail_reply_left{
         width: 1100px;
-        padding-top: 15px;
         padding-bottom: 10px;
         float: left;
     }
@@ -158,6 +191,7 @@
         font-size: 17px;
         font-weight: bold;
         margin-bottom: 10px;
+        margin-top: 15px;
     }
 
     .detail_reply_p{
@@ -242,38 +276,26 @@
         </div>
 
         <div class="detail_reply_title">
-            <div class="detail_reply_top"><a>댓글 [2]</a></div>
+            <div class="detail_reply_top"><a>댓글 [<span id="rcount"></span>]</a></div>
         </div>
+        
+        <div class="detail_reply_box">
+			<div class="comment_write">
+			<c:choose>
+				<c:when test="${ empty loginUser }">
+					<textarea class="commentContent" name="commentContent" style="color: #777;" readonly>로그인 후 작성 가능합니다.</textarea>
+					<button class="comment_btn" onclick="addComment();" disabled>등록</button> 	
+				</c:when>
+				<c:otherwise>
+					<textarea class="commentContent" name="commentContent"></textarea>
+					<button class="comment_btn" onclick="addComment();">등록</button> 	
+				</c:otherwise>
+			</c:choose>
+			</div>    
+        </div>
+        
+         <!-- 댓글 박스 -->
         <div class="detail_reply">
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 빈정박</a></div>
-                    <div class="detail_reply_p"><p>저요! 혹시 점심 메뉴는 뭔가요?</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
-
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 희주봉</a></div>
-                    <div class="detail_reply_p"><p>뭐 드시고 싶으세요? 맞춰드립니다~!</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
-
-            <div class="detail_reply_content"> <!-- 댓글 내용 박스 -->
-                <div class="detail_reply_left"> <!-- 왼쪽(작성자, 내용) -->
-                    <div class="detail_reply_write"><a>🍊 나유김</a></div>
-                    <div class="detail_reply_p"><p>저도 일정 맞는데 같이 가고싶어요! 신청했습니다!</p></div>
-                </div>
-                <div class="detail_reply_right">
-                    <div class="detail_reply_data"><a>2024.05.11</a></div>
-                </div>
-            </div>
         </div>
 
         <div class="detail_btn_box" align="center">
@@ -308,6 +330,55 @@
 				$('#postForm').attr('action', 'delete.cmp').submit();
 			}
 		}
+		
+		function addComment(){
+			$.ajax({
+				url: 'reply',
+				type: 'post',
+				data: {
+					companionNo : ${companion.companionNo},
+					replyContent : $('.commentContent').val(),
+					userNo: '${sessionScope.loginUser.userNo}',
+					userName : '${sessionScope.loginUser.userName}'
+				},
+				success: function(result){
+					console.log(result);
+					
+					if(result == 'success'){
+						$('.commentContent').val('');
+						selectComment();
+					};
+				}
+			});
+		}
+		
+		function selectComment(){
+			$.ajax({
+				url: 'reply',
+				type: 'get',
+				data : {companionNo : ${companion.companionNo}},
+				success: function(result){
+					let resultStr = '';
+					for(let i in result){
+						resultStr += '<div class="detail_reply_content">'
+								   + '<div class="detail_reply_left">'
+	                    		   + '<div class="detail_reply_write"><a>🍊 ' + result[i].userName + '</a></div>'
+	                    		   + '<div class="detail_reply_p"><p>' + result[i].replyContent + '</p></div>'
+	                			   + '</div>'
+	                			   + '<div class="detail_reply_right">'
+	                			   + '<div class="detail_reply_data"><a>' + result[i].createDate + '</a></div>'
+	                			   + '</div></div>';
+					}
+					$('.detail_reply').html(resultStr);
+					$('#rcount').text(result.length);
+	
+				}
+			});
+		};
+		
+		$(function(){
+			selectComment();
+		});
 	</script>
 
 

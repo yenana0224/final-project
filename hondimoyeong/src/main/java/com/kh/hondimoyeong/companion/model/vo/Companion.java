@@ -23,7 +23,8 @@ public class Companion {
 	private int count;
 	private String status;
 	private int companionPeople;
-	
+	private int replyCount;
+
 	private int companionNum; // 신청인원
 
 }

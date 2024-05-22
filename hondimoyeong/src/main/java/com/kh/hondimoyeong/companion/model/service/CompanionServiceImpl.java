@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.companion.model.dao.CompanionRepository;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
 
@@ -100,6 +101,16 @@ public class CompanionServiceImpl implements CompanionService {
 	@Override
 	public List<Course> selectCourse(Course course) {
 		return companionRepository.selectCourse(sqlSession, course);
+	}
+
+	@Override
+	public List<CompanionReply> selectReply(int companionNo) {
+		return companionRepository.selectReply(sqlSession, companionNo);
+	}
+
+	@Override
+	public int insertReply(CompanionReply companionReply) {
+		return companionRepository.insertReply(sqlSession, companionReply);
 	}
 
 	
