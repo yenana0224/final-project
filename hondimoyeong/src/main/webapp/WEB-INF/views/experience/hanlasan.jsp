@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +13,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+
+#allform{
+	width:1200px;
+	height : 1000px;
+	margin : auto;
+	border:1px solid green;
+	
+}
+
 #hanlasanimg{
-	width : 1200px;
-	height : 800px;
+	width : 100%;
+	height : 80%;
 	background-image : url('resources/image/한라산.webp');
 	background-repeat : no-repeat;
 	margin : auto;
@@ -45,9 +56,31 @@
 	background-color: #36f;
 }
 	
-	
-	
+#one{
+	widht:100%;
+	height:200px;
 }
+
+#one > div > h3{
+	padding-left:10px;
+	padding-top:10px;
+	width:30%;
+	float:left
+}
+
+#btn1 {
+	float: right;
+	margin-right:10px;
+	margin-top:10px;
+}	
+
+#btn2 {
+	float: right;
+	margin-right:10px;
+	margin-top:10px;
+}	
+	
+
 
 </style>
 </head>
@@ -55,9 +88,9 @@
 
 	<jsp:include page ="../common/header.jsp" />
 	
-	
-	<div id="hanlasanimg">
-		<div  id="mainimg">
+	<div id="allform">
+		<div id="hanlasanimg">
+			<div  id="mainimg">
 				<div id="main1">
 					<h3>한라산</h3><br>
 					<b>
@@ -78,7 +111,101 @@
 					<br>
 				</div>
 			</div> 
+		</div>
+		
+		<div id="one">
+			<div>
+				<h3>한줄리뷰</h3>
+				<c:if test="${ not empty sessionScope.loginUser && not empty sessionScope.experience }">
+					<button class="btn btn-outline-info" id="btn1" data-toggle="modal" data-target="#add">
+						글쓰기
+					</button>
+				</c:if>
+				<table>
+					<thead>
+						<tr>
+							<th>아이디</th>
+							<th>내용</th>
+							<th>카테고리</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>					
+					</tbody>
+				</table>
+							
+			</div>
+			
+			
+		</div>
+	
+	
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 비밀번호 변경 모달 -->
+	<div class="modal" id="add">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">한줄리뷰 작성</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
+	      <div class="modal-body">
+			
+		  	<form action="exriview" method="post">
+		  	
+		  	  <div class="select">
+		  	  	<label>카테고리</label>                                        
+				<select name="courseSeq" id="courseSeq" onchange="divide();" class="form-control">
+				 	<option value="한라산">한라산</option>
+				</select>
+					<input id="course" type="hidden" name="category" value="한라산"><!-- 1 -->
+			  </div>
+		  	  <br>
+			  <div class="form-group">
+			    <label for="memberPwd">한줄리뷰</label>
+			    <input type="text" name="experienceContent" class="form-control" placeholder="리뷰를 입력해주세요" required>
+			  </div>
+			  
+			<button id="btn2">작성</button>			  
+			  
+			  
+	    	 </form>
+	    	</div>
+	    	 
+		</div>
+	  </div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 

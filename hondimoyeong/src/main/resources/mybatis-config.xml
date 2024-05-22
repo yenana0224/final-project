@@ -24,6 +24,8 @@
  		<typeAlias type="com.kh.hondimoyeong.experience.model.vo.Experience" alias="experience"/>
  		
  		<typeAlias type="com.kh.hondimoyeong.cs.model.vo.Customer" alias="customer" />
+ 		
+ 		<typeAlias type="com.kh.hondimoyeong.experience.model.vo.Exreview" alias="exreview"/>
  	</typeAliases>
 
 	<mappers>

@@ -1,5 +1,7 @@
 package com.kh.hondimoyeong.experience.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
+import com.kh.hondimoyeong.experience.model.vo.Exreview;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
 @Controller
@@ -20,7 +23,33 @@ public class HanlasanController {
 	private  ReserveService reserveService;
 	
 	@RequestMapping("hanlasan")
-	public String hanlasan(){
+	public String hanlasan(HttpSession session){
+
+		if(!(session.getAttribute("loginUser")== null)) {
+		
+			int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+			//System.out.println(userNo);
+			
+			
+			if(userNo > 0) {
+				List<Experience> experience = reserveService.excheck(userNo);
+				//System.out.println(experience);
+				
+				if(!(experience == null)) {
+					session.setAttribute("experience", experience);
+				}
+			}
+		}
+		
+		//
+		
+		List<Exreview> review = reserveService.review();
+		System.out.println(review);
+		
+		if(!(review == null)) {
+			session.setAttribute("review", review);
+		}
+		
 		return "experience/hanlasan";
 	}
 	
@@ -41,13 +70,41 @@ public class HanlasanController {
 
 		experience.setUserNo(userNo);
 		
-		System.out.println(experience);
+		//System.out.println(experience);
 		
 		reserveService.insertHan(experience);
 		
 		model.addAttribute("ex", experience);
 		
 		return "experience/kakaoSuccess";
+	}
+	
+	@PostMapping("exriview")
+	public String exriview(Exreview exreview, HttpSession session) {
+		
+		
+//		((Experience)session.getAttribute("experience")).getExperienceNo();
+//		for(Experience ex : (int)(Experience)session.getAttribute("experience") ) {
+//		
+//		}
+//		
+		//System.out.println( "dddd" +  ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo());
+		
+		
+		int experienceNo = ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo();
+		
+		exreview.setExperienceNo(experienceNo);
+		
+		System.out.println(exreview);
+		
+		int exre = reserveService.insertreview(exreview);
+		//session.setAttribute("exriview", exreview);
+		
+		//System.out.println(exre);
+		
+		System.out.println(exre);
+		
+		return "experience/hanlasan";
 	}
 	 
 	
