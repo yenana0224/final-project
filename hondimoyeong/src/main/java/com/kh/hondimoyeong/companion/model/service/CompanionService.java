@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
 public interface CompanionService {
@@ -46,6 +47,10 @@ public interface CompanionService {
 	int myRequestCount(int userNo);
 	
 	List<Companion> myRequest(int userNo, PageInfo pi);
+
+	List<CompanionReply> selectReply(int companionNo);
+
+	int insertReply(CompanionReply companionReply);
 
 
 }

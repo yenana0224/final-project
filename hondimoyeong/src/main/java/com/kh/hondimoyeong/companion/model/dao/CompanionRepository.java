@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
 @Repository
@@ -79,6 +80,14 @@ public class CompanionRepository {
 	
 	public List<Companion> myRequest(SqlSessionTemplate sqlSession, int userNo, RowBounds rowBounds){
 		return sqlSession.selectList("companionMapper.myRequest", userNo, rowBounds);
+	}
+
+	public List<CompanionReply> selectReply(SqlSessionTemplate sqlSession, int companionNo) {
+		return sqlSession.selectList("companionMapper.selectReply", companionNo);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, CompanionReply companionReply) {
+		return sqlSession.insert("companionMapper.insertReply", companionReply);
 	}
 
 }
