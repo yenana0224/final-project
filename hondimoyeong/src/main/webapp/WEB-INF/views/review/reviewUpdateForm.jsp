@@ -232,6 +232,8 @@
     	 
     	var receivedStar = parseInt('${review.reviewStar}');
     	document.getElementById('rate' + receivedStar).checked = true;
+    	
+
     </script>
 
 </body>

@@ -60,6 +60,15 @@
 		  	  COURSE
 	</select>
 	
+	<select id="selectReviewImg" resultMap="reviewImgResultSet">
+		SELECT
+		      REVIEW_NO,
+		      ORIGIN_NAME,
+		      CHANGE_NAME
+		  FROM
+		      REVIEW_IMG
+	</select>
+	
 	<select id="selectList" resultMap="reviewResultSet">
 		SELECT
 		    R.REVIEW_NO,

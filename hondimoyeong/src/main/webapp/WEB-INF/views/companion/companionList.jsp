@@ -215,7 +215,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">  <!-- 전체 박스 -->
-        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🧡 </a></div>
+        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🍊 </a></div>
 
         <div class="hdmy_search">
             <form action="search.cmp" method="get" class="hdmy_searchForm">
