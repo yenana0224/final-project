@@ -114,23 +114,38 @@
                 border-radius: 10px !important;
             }
             #btnBox{
-                width: 100px;
+                width: 190px;
                 height: 40px;
                 display: inline-block; 
-                margin-left: 660px; 
+                margin-left: 585px; 
+                margin-top:10px;
                 position: absolute;
                 top: 160px; 
                 left: 2%; 
                 /* border : 1px solid red; */
             }
             .mnbtn{
-                width: 85px;
+                width: 80px;
                 height: 38px;
                 border-radius: 15px;
                 background-color: #FF9843; 
                 color: #ffffff;
                 font-weight: bold;
                 font-size: 14px;
+                border: 0;
+                margin-right: 12px;
+                line-height: 38px;
+                float: left;
+            }
+            .btn-b{
+                width: 80px;
+                height: 38px;
+                border-radius: 15px;
+                background-color: #9e9e9e; 
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 38px;
                 border: 0;
             }
 
@@ -197,6 +212,8 @@
               </div>
               <div id="btnBox">
                 <div class="box1"><button class="mnbtn" onclick="location.href='customerEnrollForm';">글쓰기</button></div>
+                <div class="box1"><button class="btn-b" onclick="location.href='myPage';">목록</button></div>
+              
               </div>
                 <table class="table table-hover" id="customerListTable">
                     <thead>
