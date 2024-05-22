@@ -28,7 +28,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 660px;
+                height: 720px;
                 margin: 0 auto;
                 margin-top: 200px;
                 border-radius: 20px;
@@ -117,6 +117,21 @@
                 margin: 0 auto;
             }
 
+            #btnBox{
+                width: 80px;
+                height: 40px;
+                margin-left: 400px;
+            }
+            .btn-b{
+                width: 60px;
+                height: 35px;
+                background-color: #9e9e9e;
+                border: 0;
+                border-radius: 10px;
+                margin-bottom: 4px;
+                color: #ffffff;
+                font-size: 12px;
+            }			
 
     </style>    
 </head>
@@ -128,6 +143,9 @@
 
             <div id="titleBox">예매내역</div>
             <div id="detailBox">
+ 	            <div id="btnBox">
+                    <button class="btn-b" onclick="location.href='myPage';">목록</button>
+                </div>
                 <div class="background-Box">
                     <div class="imgBox">
                       <img src="#">  
