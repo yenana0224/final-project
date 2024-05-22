@@ -41,6 +41,7 @@ public interface ReviewService {
 
 	int updateImg(ReviewImg reviewImg);
 
+	ReviewImg getReviewImgByReviewNo(int reviewNo);
 
 
 

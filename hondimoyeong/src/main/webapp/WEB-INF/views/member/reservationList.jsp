@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,20 +18,20 @@
                 background-color: #ffffff;
             }          
         
-            #wrap{
+            #wrap{ 
                 width: 1200px;
-                height: 800px;
+                height: 1000px;
                 margin: 0 auto;
-                position: relative;  
+                position: relative;
             }
 
 
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 660px;
+                height: 900px;
                 margin: 0 auto;
-                margin-top: 200px;
+                margin-top: 150px;
                 border-radius: 20px;
                 border : 4px solid #FF9843; 
                 position: relative; 
@@ -43,8 +44,8 @@
                 height: 150px;
                 background-color: transparent;
                 position: absolute; 
-                top: -130px; 
-                left: 2%; 
+                top: -130px;
+                left: 2%;
             }
 
             /*타이틀 박스*/
@@ -54,7 +55,7 @@
                 height: 50px;
                 margin-top: 30px;
                 margin-left: 50px;
-                text-align: center; /
+                text-align: center;
                 line-height: 50px;
                 font-size: 20px;
                 font-weight: bold;
@@ -63,61 +64,78 @@
             /*내용 박스*/
             #detailBox
             {
-                width: 700px;
-                height: 540px;
-                margin-left: 50px;
-                padding-left: 110px;
-                /* background-color: #FFF2D7; */
-                /* border: 1px solid rgb(0, 88, 204); */
+                width: 790px;
+                height: 660px;
+                margin-top: 50px;
+                margin-left: 2px;
+                padding-top: 25px;
             }
            
-            /*-------------------------------------------------------------------------*/
 
-            .background-Box{
-                width: 450px;
-                height: 120px;
-                padding-top: 10px;
-                background-color: #f7d3a0;
+            .mnbtn{
+                width: 130px;
+                height: 40px;
                 border-radius: 10px;
-                margin-top: 15px;
-                margin-left: 20px;
-            }
-
-            .imgBox{
-                width: 100px;
-                height: 100px;
-                margin-left: 30px;
-                margin-right: 30px;
-                float: left;
-                background-color: #f7d3a0;
-                /* border: 1px solid rgb(170, 0, 204); */
-            }
-
-            .imgBox > img{
-                width: 100px;
-                height: 100px;
-            }
-
-            .detail{
-                width: 250px;
-                height: 100px;
-                float: left;
-                background-color: #f7d3a0;
-                /* border: 1px solid rgb(0, 163, 204); */
-            }
-
-            div > h5{
-                padding-top: 5px;
-                font-size: 16px;
+                background-color: #FF9843; 
+                color: #ffffff;
                 font-weight: bold;
-            }
-
-            div > p{
                 font-size: 14px;
-                margin: 0 auto;
+                border: 0;
             }
 
+            tr > th{
+                background-color: #fee2bd; 
+                text-align: center;
+            }
+            td{
+                text-align: center;
+            }
 
+            .pagination {
+                width:fit-content;
+                margin: 0 auto;
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+            
+            .page-item.active .page-link {
+                background-color: #FF9843 !important;
+                border: 1px solid #FF9843 !important;
+                color: #FFFFFF !important;
+                border-radius: 10px;
+            }
+            
+            .page-link {
+                color: #292929 !important;
+                border-radius: 10px;
+                margin-right: 10px;
+            }
+            
+            .page-item:last-child .page-link, .page-item:first-child .page-link {
+                border-radius: 10px !important;
+            }
+            #btnBox{
+                width: 80px;
+                height: 40px;
+                display: inline-block; 
+                margin-left: 660px; 
+                position: absolute;
+                top: 95px; 
+                left: 2%; 
+                /* border : 1px solid red; */
+            }
+
+            .btn-b{
+                width: 80px;
+                height: 38px;
+                border-radius: 15px;
+                background-color: #9e9e9e; 
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 38px;
+                border: 0;
+            }
     </style>    
 </head>
 <body>
@@ -128,55 +146,37 @@
 
             <div id="titleBox">예매내역</div>
             <div id="detailBox">
-                <div class="background-Box">
-                    <div class="imgBox">
-                      <img src="#">  
-                    </div>
-                    <div class="detail">
-                        <h5>아쿠아플라넷</h5>
-                        <p>날짜 : 2024-06-10</p>
-                        <p>시간 : 11:00</p>
-                        <p>인원 : 2명</p>
-                    </div>
-                </div>
-                <div class="background-Box">
-                    <div class="imgBox">
-                      <img src="#">  
-                    </div>
-                    <div class="detail">
-                        <h5>아쿠아플라넷</h5>
-                        <p>날짜 : 2024-06-10</p>
-                        <p>시간 : 11:00</p>
-                        <p>인원 : 2명</p>
-                    </div>
-                </div>
-                <div class="background-Box">
-                    <div class="imgBox">
-                      <img src="#">  
-                    </div>
-                    <div class="detail">
-                        <h5>아쿠아플라넷</h5>
-                        <p>날짜 : 2024-06-10</p>
-                        <p>시간 : 11:00</p>
-                        <p>인원 : 2명</p>
-                    </div>
-                </div>                
-                <div class="background-Box">
-                    <div class="imgBox">
-                      <img src="#">  
-                    </div>
-                    <div class="detail">
-                        <h5>아쿠아플라넷</h5>
-                        <p>날짜 : 2024-06-10</p>
-                        <p>시간 : 11:00</p>
-                        <p>인원 : 2명</p>
-                    </div>
+              <div id="btnBox">
+                <button class="btn-b" onclick="location.href='myPage';">목록</button>
+              </div>
+                <table class="table table-hover" id="customerListTable">
+                    <thead>
+                      <tr>
+                        <th width="200px;">체험명</th>
+                        <th width="120px;">날짜</th>
+                        <th width="120px;">시간</th>
+                        <th width="150px;">내용</th>
+                        <th width="120px;">인원</th>
+                        <th width="120px;">가격</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                  </table>
+					<!--페이지 숫자-->
+					<div id="pagingArea">
+					    <ul class="pagination">
+                            
+							
+					    </ul>               
+				   </div>
                 </div>
             </div>
         </div>
-    </div>
 	<jsp:include page="../common/footer.jsp"/>
-
-
+		
+ 		
+ 		
 </body>
-</html>
+</html></html>

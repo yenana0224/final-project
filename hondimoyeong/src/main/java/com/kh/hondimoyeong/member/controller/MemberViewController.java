@@ -72,9 +72,11 @@ public class MemberViewController {
 		return "member/customerEnrollForm";
 	}
 	
-
 	
-	
+	@RequestMapping("list.reservationListView")
+	public String reservationSelectAll() {
+		return "member/reservationList";
+	}
 	
 	
 	

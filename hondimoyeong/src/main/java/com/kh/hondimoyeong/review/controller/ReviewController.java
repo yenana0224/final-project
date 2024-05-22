@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -104,21 +105,36 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("insert.rvw")
-	public String insert(Review review,
-	                     @RequestParam("upfiles") MultipartFile[] upfiles,
+	public String insert(@ModelAttribute Review review,
+	                     @RequestParam("upfiles1") MultipartFile[] upfiles1,
+	                     @RequestParam("upfiles2") MultipartFile[] upfiles2,
 	                     HttpSession session,
 	                     Model model) {
 	    
-		reviewService.insert(review);
-		int reviewNo = review.getReviewNo();
-		
+	    reviewService.insert(review);
+	    int reviewNo = review.getReviewNo();
+	    
 	    if (reviewNo > 0) { // 리뷰가 등록 될 경우
-	        for (MultipartFile upfile : upfiles) {
-	            if (!upfile.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
+	        for (MultipartFile upfile : upfiles1) {
+	            if (!upfile.getOriginalFilename().equals("")) { // 첫 번째 첨부파일이 있을 경우
 	                String originalFilename = upfile.getOriginalFilename();
 	                String changeName = saveFile(upfile, session);
 
-	                // REVIEW_IMG 테이블에 파일 정보 삽입
+	                // REVIEW_IMG 테이블에 첫 번째 파일 정보 삽입
+	                ReviewImg reviewImg = new ReviewImg();
+	                reviewImg.setReviewNo(reviewNo);
+	                reviewImg.setOriginName(originalFilename);
+	                reviewImg.setChangeName(changeName);
+	                reviewService.insertImg(reviewImg);
+	            }
+	        }
+
+	        for (MultipartFile upfile : upfiles2) {
+	            if (!upfile.getOriginalFilename().equals("")) { // 두 번째 첨부파일이 있을 경우
+	                String originalFilename = upfile.getOriginalFilename();
+	                String changeName = saveFile(upfile, session);
+
+	                // REVIEW_IMG 테이블에 두 번째 파일 정보 삽입
 	                ReviewImg reviewImg = new ReviewImg();
 	                reviewImg.setReviewNo(reviewNo);
 	                reviewImg.setOriginName(originalFilename);
@@ -133,24 +149,82 @@ public class ReviewController {
 	        return "common/errorPage";
 	    }
 	}
+	
+  
+	@RequestMapping("update.rvw")
+	public String update(Review review, ReviewImg reviewImg,
+	                     @RequestParam("reUpfile1") MultipartFile[] reUpfiles1,
+	                     @RequestParam("reUpfile2") MultipartFile[] reUpfiles2,
+	                     HttpSession session,
+	                     Model model) {
+	    reviewService.update(review); // 기존 리뷰 업데이트
 
-	// 파일 따로 빼두기
+	    int reviewNo = review.getReviewNo();
+
+	    if (reviewNo > 0) { // 리뷰가 수정 될 경우
+	        // 기존 이미지 삭제
+	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	        for (ReviewImg img : existingImages) {
+	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	        }
+
+	        // 첫 번째 첨부파일
+	        if (reUpfiles1 != null) {
+	            for (MultipartFile reUpfile1 : reUpfiles1) {
+	                if (!reUpfile1.isEmpty()) { // 첨부파일이 있을 경우
+	                    String originalFilename = reUpfile1.getOriginalFilename();
+	                    String changeName = saveFile(reUpfile1, session);
+
+	                    // REVIEW_IMG 테이블에 이미지 정보 추가
+	                    ReviewImg reviewImg1 = new ReviewImg();
+	                    reviewImg1.setReviewNo(reviewNo);
+	                    reviewImg1.setOriginName(originalFilename);
+	                    reviewImg1.setChangeName(changeName);
+	                    reviewService.updateImg(reviewImg1);
+	                }
+	            }
+	        }
+
+	        // 두 번째 첨부파일
+	        if (reUpfiles2 != null) {
+	            for (MultipartFile reUpfile2 : reUpfiles2) {
+	                if (!reUpfile2.isEmpty()) { // 첨부파일이 있을 경우
+	                    String originalFilename = reUpfile2.getOriginalFilename();
+	                    String changeName = saveFile(reUpfile2, session);
+
+	                    // REVIEW_IMG 테이블에 이미지 정보 추가
+	                    ReviewImg reviewImg2 = new ReviewImg();
+	                    reviewImg2.setReviewNo(reviewNo);
+	                    reviewImg2.setOriginName(originalFilename);
+	                    reviewImg2.setChangeName(changeName);
+	                    reviewService.updateImg(reviewImg2);
+	                }
+	            }
+	        }
+
+	        session.setAttribute("alertMsg", "게시글 수정 성공!");
+	        return "redirect:detail.rvw?reviewNo=" + reviewNo; // 수정된 리뷰 상세 페이지로 이동
+	    } else {
+	        model.addAttribute("errorMsg", "수정 실패");
+	        return "common/errorPage";
+	    }
+	}
+
 	public String saveFile(MultipartFile upfile, HttpSession session) {
-		String originName = upfile.getOriginalFilename();
-		String ext = originName.substring(originName.lastIndexOf("."));
-		String currentTime = new SimpleDateFormat("yyMMddHHmmss").format(new Date());
-		int ranNum = (int)Math.random() * 90000 + 10000;
-		String changeName = currentTime + ranNum + ext;
-		String savePath = session.getServletContext().getRealPath("/resources/reviewFile/");
-		
-			try {
-				upfile.transferTo(new File(savePath + changeName));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		return "resources/reviewFile/" + changeName;
+	    String originName = upfile.getOriginalFilename();
+	    String ext = originName.substring(originName.lastIndexOf("."));
+	    String uuid = UUID.randomUUID().toString(); // UUID 생성
+	    String changeName = uuid + ext; // UUID와 파일 확장자를 결합하여 고유한 파일 이름 생성
+	    String savePath = session.getServletContext().getRealPath("/resources/reviewFile/");
+	    
+	    try {
+	        upfile.transferTo(new File(savePath + changeName));
+	    } catch (IllegalStateException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return "resources/reviewFile/" + changeName;
 	}
 	
 	@PostMapping("updateForm.rvw")

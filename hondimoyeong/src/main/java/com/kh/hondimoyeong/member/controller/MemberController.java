@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +32,7 @@ public class MemberController {
    private BCryptPasswordEncoder bcryptPasswordEncoder; 
    
    
-   @RequestMapping("login.member")
+   @PostMapping("login.member")
    public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
       Member loginUser = memberService.login(member);
       
@@ -53,13 +54,13 @@ public class MemberController {
       return mv;
    }
    
-	@RequestMapping("logout.member")
+	@GetMapping("logout.member")
 	public String logoutMember(HttpSession session) {
 		session.removeAttribute("loginUser");
 		return "redirect:/";
 	}   
 	
-	@RequestMapping("insert.member")
+	@PostMapping("insert.member")
 	public ModelAndView insertMember(Member member, ModelAndView mv, HttpSession session) {
 		String encPwd = bcryptPasswordEncoder.encode(member.getUserPwd());
 		member.setUserPwd(encPwd);
@@ -76,7 +77,7 @@ public class MemberController {
 		return memberService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
 	
-	@RequestMapping("update.member")
+	@PostMapping("update.member")
 	public String update(Member member, Model model, HttpSession session) {
 		if(memberService.update(member) > 0) {
 			session.setAttribute("loginUser", memberService.login(member));
@@ -88,7 +89,7 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping("delete.member")
+	@PostMapping("delete.member")
 	public String delete(String userPwd, HttpSession session) {
 		
 		Member loginUser = ((Member)session.getAttribute("loginUser"));
@@ -109,7 +110,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "list.customerData", produces = "application/json; charset=UTF-8")
+	@GetMapping(value = "list.customerData", produces = "application/json; charset=UTF-8")
 	public String selectAll(@RequestParam(value = "page", defaultValue = "1") int page, String category, String searchTitle, HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		PageInfo pi = Pagination.getPageInfo(memberService.selectListCount(category, searchTitle, loginUser.getUserNo()), page, 10, 10);
@@ -122,7 +123,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping("insert.customer")
+	@PostMapping("insert.customer")
 	public String insertCustomer(Customer customer, Model model, HttpSession session) {
 	    
 		Member loginUser = (Member) session.getAttribute("loginUser");
@@ -138,7 +139,7 @@ public class MemberController {
 	}
 	
 
-    @RequestMapping("detail.customer")
+    @GetMapping("detail.customer")
     public String detailCustomer(@RequestParam("customerNo") int customerNo, Model model) {
         Customer customer = memberService.selectCustomerByNo(customerNo);
         if (customer != null) {
@@ -152,6 +153,19 @@ public class MemberController {
 
 	
 	
+	
+	@ResponseBody
+	@GetMapping(value = "list.reservationData", produces = "application/json; charset=UTF-8")
+	public String reservationSelectAll(@RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		PageInfo pi = Pagination.getPageInfo(memberService.reservationSelectListCount(loginUser.getUserNo()), page, 10, 10);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("experience", memberService.reservationSelectList(pi, loginUser.getUserNo()));
+		map.put("pageInfo", pi);
+		Gson gson = new Gson();
+		String jsonResponse = gson.toJson(map);
+		return jsonResponse;
+	}
 	
 	
 	
