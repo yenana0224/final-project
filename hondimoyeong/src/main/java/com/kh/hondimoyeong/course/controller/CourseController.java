@@ -28,7 +28,6 @@ public class CourseController {
 								Model model) {
 		model.addAttribute("course", courseService.courseDetail(courseIndex));
 		model.addAttribute("list", courseService.allCourseList());
-		model.addAttribute("url", "//dapi.kakao.com/v2/maps/sdk.js?appkey="+serviceKey);
 		
 		return "course/courseDetail";
 	}

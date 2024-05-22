@@ -35,7 +35,7 @@ th{
 
 
 
-			<jsp:include page="../common/adminHeader.jsp"/>
+			<jsp:include page="adminHeader.jsp"/>
 		
 		
 	
