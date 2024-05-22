@@ -103,6 +103,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.updateImg(sqlSession, reviewImg);
 	}
 
+	@Override
+	public ReviewImg getReviewImgByReviewNo(int reviewNo) {
+		return reviewRepository.getReviewImgByReviewNo(sqlSession, reviewNo);
+	}
+
 
 
 

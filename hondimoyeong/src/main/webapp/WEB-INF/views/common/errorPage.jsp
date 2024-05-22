@@ -5,12 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	.errorMsg{
+		text-align:center;
+	}
+</style>
 </head>
 <body>
 
 	<jsp:include page ="header.jsp" />
 		
-		<h1>${ errorMsg }</h1>
+		<h1 id="errorMsg">${ errorMsg }</h1>
 
 	<jsp:include page ="footer.jsp" />
 

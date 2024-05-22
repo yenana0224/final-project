@@ -75,6 +75,10 @@ public class ReviewRepository {
 		return sqlSession.update("reviewMapper.updateImg", reviewImg);
 	}
 
+	public ReviewImg getReviewImgByReviewNo(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.getReviewImgByReviewNo", reviewNo);
+	}
+
 
 
 }

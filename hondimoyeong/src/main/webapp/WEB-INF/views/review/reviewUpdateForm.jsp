@@ -157,6 +157,7 @@
         <div class="insert_box">
             <form action="update.rvw" method="post" id="myform" enctype="multipart/form-data">
             	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+            	<input type="hidden" name="reviewNo" value="${review.reviewNo}">
             	
 				<table class="tb_input">
 					<tbody>
@@ -197,18 +198,18 @@
                         </tr>
                         <tr>
 							<th>* 제목</th>
-							<td><input type="text" name="reviewTitle" class="title_inp" value="${review.reviewTitle}"/></td>
+							<td><input type="text" name="reviewTitle" class="title_inp" value="${review.reviewTitle}" required/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent">${reivewImg}</textarea>
+							<td><textarea class="content_inp" name="reviewContent" required>${review.reviewContent}</textarea>
                             </td>
 						</tr>
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="reUpfile" id="file1" style="padding-right: 35px;">
-                                <input type="file" name="reUpfile" id="file2">
+                                <input type="file" name="reUpfile1" id="file1" style="padding-right: 35px;">
+								<input type="file" name="reUpfile2" id="file2">
                             </td>
 						</tr>
 					</tbody>
