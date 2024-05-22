@@ -136,7 +136,7 @@
                     <div id="mypageBtn"><a href="myPageUpdate" id="mypageBtn-font">개인정보수정</a></div>
                     <div id="mypageBtn"><a href="reservationList" id="mypageBtn-font">예매내역</a></div>
                     <div id="mypageBtn"><a href="list.customerView" id="mypageBtn-font">문의하기</a></div>
-                    <div id="mypageBtn"><a href="companionInvite" id="mypageBtn-font">동행모임</a></div>
+                    <div id="mypageBtn"><a href="companionInvite?page=" id="mypageBtn-font">동행모임</a></div>
                     <div id="mypageBtn"><a href="completeCourse" id="mypageBtn-font">완주한 코스</a></div>
                 </div>
             </div>

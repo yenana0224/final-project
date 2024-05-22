@@ -38,6 +38,14 @@ public interface CompanionService {
 	int delete(int companionNo);
 
 	List<Course> selectCourse(Course course);
+	
+	int myListCount(int userNo);
+	
+	List<Companion> myList(int userNo, PageInfo pi);
+	
+	int myRequestCount(int userNo);
+	
+	List<Companion> myRequest(int userNo, PageInfo pi);
 
 
 }

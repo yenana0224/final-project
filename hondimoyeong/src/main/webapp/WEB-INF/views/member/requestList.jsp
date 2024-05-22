@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>동행신청 내역</title>
+    <title>나의 신청 내역</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -218,14 +218,30 @@
     
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-			<a href="myRequest?page="> 나의 신청내역 보기 </a>
+			<a href="companionInvite?page="> 내가 쓴 동행 게시글 보기 </a>
 			
-            <div id="titleBox">내가 쓴 동행 게시글</div>
+            <div id="titleBox">나의 신청 내역</div>
             <div class="detailBox">
+            
+            <c:choose>
+            	<c:when test="${ not empty list }">
+            	</c:when>
+            	<c:otherwise>
+            		<div class="background-Box">
+            			<div class="box2">신청내역이 없습니다 </div>
+            		</div>
+            	</c:otherwise>
+            </c:choose>
             
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
-	            	    <div class="acompany-btn">신청확인</div>
+	            	    <div class="acompany-btn">
+	            	    	<c:choose>
+	            	    		<c:when test="${board.status eq 'N'}"> 신청중  </c:when>
+	            	    		<c:when test="${board.status eq 'A'}"> 참여  </c:when>
+	            	    		<c:when test="${board.status eq 'C'}"> 취소  </c:when>
+	            	    	</c:choose>
+	            	    </div>
 	            		<div class="box2">제목 : ${board.companionTitle} </div>
 	            		<div class="box3"> ${board.courseName} 날짜 : ${board.companionDate} 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
