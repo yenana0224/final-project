@@ -64,7 +64,10 @@ public class AdminController {
 		return mv;
 	}
 
-
+	@GetMapping("adminPage")
+	public String adminPage() {
+		return "common/adminMain";
+	}
 	
 	
 	

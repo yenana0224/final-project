@@ -23,7 +23,7 @@
 	
 	.reservation {
 		width : 250px;
-		height : 250px;
+		height : 50px;
 		float : left;
 		margin-right : 15px;
 	}
@@ -38,6 +38,26 @@
 		display: table-cell;
 		margin:auto;
 		border-radius: 100px;
+	}
+	
+	.reservation > label{
+		font-size:30px;
+		margin:auto;
+	}
+	
+	#han{
+		padding-left:80px;
+		color:#976841;
+	}
+	
+	#aqua{
+		padding-left:10px;
+		color:#36f;
+	}
+	
+	#gul{
+		padding-left:80px;
+		color:#fc6701;
 	}
 
 	#jeju-island{
@@ -108,6 +128,8 @@
         background-color: #ff9843;
         border : none;
     }
+    
+    
 
 </style>
 </head>
@@ -118,16 +140,18 @@
 	<jsp:include page ="WEB-INF/views/common/header.jsp" />
 	
 	<div id="innerOuter">
-	
 		<div id="ex">
 		    <div class="reservation">
-		   		<img src="resources/image/han.jpg" onclick="location.href='hanlasan'">
+		   		<img onclick="location.href='hanlasan'" src="resources/image/han.jpg">
+		   		<label id="han">한라산</label>
 		    </div>
 		    <div class="reservation">
-		    	<img onclick="location.href='aqua'"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaKUXqbAlMJq-P1psHmMJ1KoEuZSfoDNSyQ&s">
+		    	<img onclick="location.href='aqua'"src="resources/image/아쿠아리움.png">
+		    	<label id="aqua">제주 아쿠아플라넷</label>
 		    </div>
 		    <div class="reservation">
 		   		<img onclick="location.href='tangerine'"src="resources/image/tangerine.jpg"/>
+		   		<label id="gul">감귤체험</label>
 		    </div>
 		 </div>
 		 
@@ -147,6 +171,7 @@
 
 
     <script>
+   
     
     	$.ajax({
     		url : 'mainCourse',

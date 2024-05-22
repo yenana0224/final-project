@@ -34,6 +34,10 @@ th{
 <body>
 
 
+
+			<jsp:include page="../common/adminHeader.jsp"/>
+		
+		
 	
 <div id="all">
 
@@ -124,7 +128,6 @@ th{
 
 	<jsp:include page ="../common/footer.jsp" />
 
-	
 
 </body>
 </html>
