@@ -191,18 +191,18 @@
                         </tr>
                         <tr>
 							<th>* 제목</th>
-							<td><input type="text" name="reviewTitle" class="title_inp"/></td>
+							<td><input type="text" name="reviewTitle" class="title_inp" required/></td>
 						</tr>
 						<tr>
 							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent"></textarea>
+							<td><textarea class="content_inp" name="reviewContent" required></textarea>
                             </td>
 						</tr>
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-                                <input type="file" name="upfiles" id="file1" style="padding-right: 35px;">
-                                <input type="file" name="upfiles" id="file2">
+								<input type="file" name="upfiles1" id="file1" style="padding-right: 35px;">
+								<input type="file" name="upfiles2" id="file2">
                             </td>
 						</tr>
 					</tbody>
