@@ -330,6 +330,15 @@
 		 WHERE
 		      REVIEW_NO = #{reviewNo}
 	</update>
+	
+	
+	<select id="getReviewImgByReviewNo" parameterType="_int" resultType="reviewImg">
+		SELECT *
+		  FROM
+		      REVIEW_IMG
+		 WHERE
+		      REVIEW_NO = #{reviewNo}
+	</select>
 
 
 </mapper>

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
@@ -22,8 +21,6 @@ import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
 import com.kh.hondimoyeong.course.model.vo.Course;
-import com.kh.hondimoyeong.review.model.vo.Review;
-import com.kh.hondimoyeong.review.model.vo.ReviewImg;
 
 import lombok.extern.slf4j.Slf4j;
 
