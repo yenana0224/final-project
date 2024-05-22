@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.cs.model.vo.Customer;
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
 public interface MemberService {
@@ -27,4 +28,8 @@ public interface MemberService {
 	
 	Customer selectCustomerByNo(int customerNo);
 	
+	//총개수
+	int reservationSelectListCount(int userNo);
+	//목록
+	List<Experience> reservationSelectList(PageInfo pi, int userNo);
 }

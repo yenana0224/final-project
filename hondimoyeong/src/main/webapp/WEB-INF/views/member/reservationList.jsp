@@ -161,14 +161,7 @@
                       </tr>
                     </thead>
                     <tbody id="tbody">
-                        <tr>
-                            <td>한라산</td>
-                            <td>2024-05-31</td>
-                            <td>10:00~13:00</td>
-                            <td>성판악 코스</td>
-                            <td>3명</td>
-                            <td>3,000</td>
-                          </tr>
+
                     </tbody>
                   </table>
 					<!--페이지 숫자-->
