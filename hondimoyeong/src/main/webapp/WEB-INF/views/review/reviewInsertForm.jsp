@@ -151,70 +151,79 @@
 
 	<jsp:include page="../common/header.jsp"/>
 	
-    <div id="container">
-        <div class="notice_insert_title"><span>리뷰 작성</span></div>
-
-        <div class="insert_box">
-            <form action="insert.rvw" method="post" id="myform" enctype="multipart/form-data">
-            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
-            	
-				<table class="tb_input">
-					<tbody>
-                        <tr>
-							<th>* 코스</th>
-							<td>
-                                <select name="courseNo" class="course_inp">
-                                <c:forEach var="c" items="${ courseList }">
-                                	<option value="${ c.courseIndex }">
-                                		${ c.courseNo }
-                                	</option>
-                                </c:forEach>
-                                </select>
-                            </td>
-						</tr>
-                        <tr>
-                            <th>* 별점</th>
-                            <td>
-                                <fieldset>
-                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                                        for="rate1">★</label>
-                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                                        for="rate2">★</label>
-                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                                        for="rate3">★</label>
-                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                                        for="rate4">★</label>
-                                    <input type="radio" name="reviewStar" value="1" id="rate5"><label
-                                        for="rate5">★</label>
-                                </fieldset>
-                            </td>
-                        </tr>
-                        <tr>
-							<th>* 제목</th>
-							<td><input type="text" name="reviewTitle" class="title_inp" required/></td>
-						</tr>
-						<tr>
-							<th>* 내용</th>
-							<td><textarea class="content_inp" name="reviewContent" required></textarea>
-                            </td>
-						</tr>
-                        <tr>
-							<th>* 첨부파일</th>
-							<td>
-								<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;">
-								<input type="file" name="upfiles2" id="upfiles2">
-                            </td>
-						</tr>
-					</tbody>
-				</table>
-                <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">등록</button>
-                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
-                </div>
-            </form>
-        </div> <!-- inset_box -->
-    </div>
-	
+	<c:choose>
+		<c:when test="${empty loginUser}">
+			<script>
+				alert('회원만 작성 가능합니다.');
+				location.href = '${ path }/review';
+			</script>
+		</c:when>
+		<c:otherwise>
+		    <div id="container">
+		        <div class="notice_insert_title"><span>리뷰 작성</span></div>
+		
+		        <div class="insert_box">
+		            <form action="insert.rvw" method="post" id="myform" enctype="multipart/form-data">
+		            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+		            	
+						<table class="tb_input">
+							<tbody>
+		                        <tr>
+									<th>* 코스</th>
+									<td>
+		                                <select name="courseNo" class="course_inp">
+		                                <c:forEach var="c" items="${ courseList }">
+		                                	<option value="${ c.courseIndex }">
+		                                		${ c.courseNo }
+		                                	</option>
+		                                </c:forEach>
+		                                </select>
+		                            </td>
+								</tr>
+		                        <tr>
+		                            <th>* 별점</th>
+		                            <td>
+		                                <fieldset>
+		                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
+		                                        for="rate1">★</label>
+		                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
+		                                        for="rate2">★</label>
+		                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
+		                                        for="rate3">★</label>
+		                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
+		                                        for="rate4">★</label>
+		                                    <input type="radio" name="reviewStar" value="1" id="rate5"><label
+		                                        for="rate5">★</label>
+		                                </fieldset>
+		                            </td>
+		                        </tr>
+		                        <tr>
+									<th>* 제목</th>
+									<td><input type="text" name="reviewTitle" class="title_inp" required/></td>
+								</tr>
+								<tr>
+									<th>* 내용</th>
+									<td><textarea class="content_inp" name="reviewContent" required></textarea>
+		                            </td>
+								</tr>
+		                        <tr>
+									<th>* 첨부파일</th>
+									<td>
+										<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;">
+										<input type="file" name="upfiles2" id="upfiles2">
+		                            </td>
+								</tr>
+							</tbody>
+						</table>
+		                <div class="detail_btn_box" align="center">
+		                    <button class="hdmy_detail_btn" type="submit">등록</button>
+		                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
+		                </div>
+		            </form>
+		        </div> <!-- inset_box -->
+		    </div>
+		</c:otherwise>
+	</c:choose>
 	<jsp:include page="../common/footer.jsp"/>
 	
     <script>
