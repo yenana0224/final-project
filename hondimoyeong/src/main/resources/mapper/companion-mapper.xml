@@ -20,6 +20,7 @@
 		<result column="COMPANION_PEOPLE" property="companionPeople"/>
 		<result column="COMPANION_NUM" property="companionNum"/>
 		<result column="REPLY_COUNT" property="replyCount"/>
+		<result column="ROUTE_IMG" property="routeImg"/>
 	</resultMap>
 	
 	<resultMap type="course" id="courseResultSet">
@@ -191,18 +192,23 @@
 		      A.COUNT,
 		      A.STATUS AS STATUS,
 		      A.COMPANION_PEOPLE,
-		      COUNT(B.USER_NO) AS COMPANION_NUM
+		      COUNT(B.USER_NO) AS COMPANION_NUM,
+		      CHANGE_NAME AS ROUTE_IMG
 		  FROM
 		      COMPANION A
 		  JOIN
 		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
 		  JOIN
 		      MEMBER M ON (M.USER_NO = A.USER_NO)
+		  JOIN
+		      COURSE_FILE CF ON (CF.COURSE_INDEX = A.COURSE_NO)
 		  LEFT
 		  JOIN
 		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
 		 WHERE
 		      A.COMPANION_NO = #{companionNo}
+		   AND
+		      CF.FILE_LEVEL = 4
 		 GROUP
 		    BY
 		      A.COMPANION_NO,
@@ -216,7 +222,8 @@
 		      A.CREATE_DATE,
 		      A.COUNT,
 		      A.STATUS,
-		      A.COMPANION_PEOPLE
+		      A.COMPANION_PEOPLE,
+		      CHANGE_NAME
 		ORDER
 		   BY
 		     A.COMPANION_DATE DESC
