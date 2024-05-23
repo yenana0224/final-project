@@ -157,6 +157,8 @@ public class ReviewController {
 	                     @RequestParam("reUpfile2") MultipartFile[] reUpfiles2,
 	                     HttpSession session,
 	                     Model model) {
+		
+		
 	    reviewService.update(review); // 기존 리뷰 업데이트
 
 	    int reviewNo = review.getReviewNo();
@@ -237,7 +239,20 @@ public class ReviewController {
 		return mv;
 	}
 
-
+	@RequestMapping("delete.rvw")
+	public String delete(int reviewNo, HttpSession session, String filePath) {
+		if(reviewService.delete(reviewNo) > 0) {
+	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	        for (ReviewImg img : existingImages) {
+	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	        }
+			session.setAttribute("alertMsg", "삭제 성공");
+			return "redirect:review";
+		} else {
+			session.setAttribute("alertMsg", "삭제 실패");
+			return "redirect:review";
+		}
+	}
 	
 	/**
 	 * 댓글 ajax

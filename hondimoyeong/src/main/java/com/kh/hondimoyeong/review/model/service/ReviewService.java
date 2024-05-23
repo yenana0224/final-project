@@ -43,6 +43,8 @@ public interface ReviewService {
 
 	ReviewImg getReviewImgByReviewNo(int reviewNo);
 
+	int delete(int reviewNo);
+
 
 
 }
