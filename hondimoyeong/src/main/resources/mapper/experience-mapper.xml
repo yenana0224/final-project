@@ -16,6 +16,16 @@
       <result column="USER_NAME" property="userName" />
       
    </resultMap>
+      <resultMap type="exreview" id="exrevieweResultSet">
+      <result column="EXPERIENCE_REVIEW_NO" property="experienceRevieweNo" />
+      <result column="EXPERIENCE_NO" property="experienceNo" />
+      <result column="CATEGORY" property="category" />
+      <result column="EXPERIENCE_CONTENT" property="experienceContent" />
+   </resultMap>
+   
+   
+   
+   
 
 	<insert id="insertReserve" parameterType="experience">
 		INSERT
@@ -152,8 +162,62 @@
 	    		MEMBER USING(USER_NO)
 			WHERE
 				EXPERIENCE_NO = #{experienceNo}
+	</select>
 	
+	<select id="excheck" parameterType="_int" resultMap="experienceResultSet">
+		SELECT
+				EXPERIENCE_NO,
+		        CATEGORY,
+		        EXPERIENCE_DATE,
+		        EXPERIENCE_TIME,
+		        EXPERIENCE_DIVIDE,
+		        PRICE,
+		        EXPERIENCE_PEOPLE,
+		        USER_NO,
+		        USER_NAME
+			FROM
+				EXPERIENCE_RESERVE
+			JOIN
+	    		MEMBER USING(USER_NO)
+			WHERE
+				USER_NO = #{userNo}
+	</select>
 	
+	<insert id="insertreview" parameterType="exreview" >
+		INSERT
+			INTO
+				EXPERIENCE_REVIEW
+				(
+				EXPERIENCE_REVIEW_NO,
+				EXPERIENCE_NO,
+				CATEGORY,
+				EXPERIENCE_CONTENT
+				)
+				VALUES
+				(
+				SEQ_EXPERIENCE_REVIEW_NO.NEXTVAL,
+				#{experienceNo},
+				#{category},
+				#{experienceContent}
+				)
+	</insert>
+	
+	<select id="review" resultMap="exrevieweResultSet">
+		SELECT
+				EXPERIENCE_REVIEW_NO,
+				EXPERIENCE_NO,
+				CATEGORY,
+				EXPERIENCE_CONTENT,
+				USER_ID
+			FROM
+				EXPERIENCE_REVIEW
+			JOIN
+				EXPERIENCE USING(EXPERIENCE_NO)
+			JOIN
+				MEMBER USING(USER_NO)
+			
+				
+				<!-- 여기 기간 조건 -->
 	</select>
 	
 	

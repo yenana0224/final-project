@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
 @Repository
@@ -63,6 +64,30 @@ public class CompanionRepository {
 
 	public List<Course> selectCourse(SqlSessionTemplate sqlSession, Course course) {
 		return sqlSession.selectList("companionMapper.selectCourse", course);
+	}
+	
+	public int myListCount(SqlSessionTemplate sqlSession, int userNo){
+		return sqlSession.selectOne("companionMapper.myListCount", userNo);
+	}
+	
+	public List<Companion> myList(SqlSessionTemplate sqlSession, int userNo, RowBounds rowBounds){
+		return sqlSession.selectList("companionMapper.myList", userNo, rowBounds);
+	}
+	
+	public int myRequestCount(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("companionMapper.myRequestCount", userNo);
+	}
+	
+	public List<Companion> myRequest(SqlSessionTemplate sqlSession, int userNo, RowBounds rowBounds){
+		return sqlSession.selectList("companionMapper.myRequest", userNo, rowBounds);
+	}
+
+	public List<CompanionReply> selectReply(SqlSessionTemplate sqlSession, int companionNo) {
+		return sqlSession.selectList("companionMapper.selectReply", companionNo);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, CompanionReply companionReply) {
+		return sqlSession.insert("companionMapper.insertReply", companionReply);
 	}
 
 }

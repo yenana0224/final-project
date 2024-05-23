@@ -79,6 +79,10 @@ public class ReviewRepository {
 		return sqlSession.selectOne("reviewMapper.getReviewImgByReviewNo", reviewNo);
 	}
 
+	public int delete(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("reviewMapper.delete", reviewNo);
+	}
+
 
 
 }

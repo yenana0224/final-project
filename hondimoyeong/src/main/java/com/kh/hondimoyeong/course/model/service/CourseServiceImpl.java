@@ -10,15 +10,15 @@ import com.kh.hondimoyeong.course.model.repository.CourseRepository;
 import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
-@Service
-public class CourseServiceImpl implements CourseService{
+import lombok.RequiredArgsConstructor;
 
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+@Service
+@RequiredArgsConstructor
+public class CourseServiceImpl implements CourseService{
 	
-	@Autowired
-	private CourseRepository courseRepository;
-	
+	private final CourseRepository courseRepository;
+	private final SqlSessionTemplate sqlSession;
+
 	@Override
 	public List<Course> allCourseList() {
 		return courseRepository.allCourseList(sqlSession);

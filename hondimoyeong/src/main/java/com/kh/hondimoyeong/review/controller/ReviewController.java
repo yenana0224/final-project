@@ -157,6 +157,8 @@ public class ReviewController {
 	                     @RequestParam("reUpfile2") MultipartFile[] reUpfiles2,
 	                     HttpSession session,
 	                     Model model) {
+		
+		
 	    reviewService.update(review); // 기존 리뷰 업데이트
 
 	    int reviewNo = review.getReviewNo();
@@ -171,7 +173,7 @@ public class ReviewController {
 	        // 첫 번째 첨부파일
 	        if (reUpfiles1 != null) {
 	            for (MultipartFile reUpfile1 : reUpfiles1) {
-	                if (!reUpfile1.isEmpty()) { // 첨부파일이 있을 경우
+	                if (!reUpfile1.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
 	                    String originalFilename = reUpfile1.getOriginalFilename();
 	                    String changeName = saveFile(reUpfile1, session);
 
@@ -181,6 +183,7 @@ public class ReviewController {
 	                    reviewImg1.setOriginName(originalFilename);
 	                    reviewImg1.setChangeName(changeName);
 	                    reviewService.updateImg(reviewImg1);
+	                    System.out.println("1번" + changeName);
 	                }
 	            }
 	        }
@@ -188,7 +191,7 @@ public class ReviewController {
 	        // 두 번째 첨부파일
 	        if (reUpfiles2 != null) {
 	            for (MultipartFile reUpfile2 : reUpfiles2) {
-	                if (!reUpfile2.isEmpty()) { // 첨부파일이 있을 경우
+	                if (!reUpfile2.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
 	                    String originalFilename = reUpfile2.getOriginalFilename();
 	                    String changeName = saveFile(reUpfile2, session);
 
@@ -198,10 +201,11 @@ public class ReviewController {
 	                    reviewImg2.setOriginName(originalFilename);
 	                    reviewImg2.setChangeName(changeName);
 	                    reviewService.updateImg(reviewImg2);
+	                    System.out.println("2번" + changeName);
 	                }
 	            }
 	        }
-
+	        
 	        session.setAttribute("alertMsg", "게시글 수정 성공!");
 	        return "redirect:detail.rvw?reviewNo=" + reviewNo; // 수정된 리뷰 상세 페이지로 이동
 	    } else {
@@ -236,7 +240,20 @@ public class ReviewController {
 		return mv;
 	}
 
-
+	@RequestMapping("delete.rvw")
+	public String delete(int reviewNo, HttpSession session, String filePath) {
+		if(reviewService.delete(reviewNo) > 0) {
+	        List<ReviewImg> existingImages = reviewService.selectReviewImgs(reviewNo);
+	        for (ReviewImg img : existingImages) {
+	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+	        }
+			session.setAttribute("alertMsg", "삭제 성공");
+			return "redirect:review";
+		} else {
+			session.setAttribute("alertMsg", "삭제 실패");
+			return "redirect:review";
+		}
+	}
 	
 	/**
 	 * 댓글 ajax
