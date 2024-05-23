@@ -10,28 +10,97 @@
 <title>이벤트</title>
 
 <style>
-	/* 컨텐트 */
-	#container{
-	    width: 1200px;
-	    margin: 0 auto;
-	}
+    /* content */
+    #container{
+        width: 1200px;
+        height: auto;
+        margin: 0 auto;
+    }
 	
-	.event_title{
-	    width: 1200px;
-	    text-align: center;
-	    margin-bottom: 40px;
-	}
+    .review_title{
+        width: 1200px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
 
-	.event_title_a{
-	    font-size: 35px;
-	    font-weight: bold;
-	    color: #272727;
-	}
-	
-	.event_title_a:hover{
-	    color: #FF9843;
-	    text-decoration: none;
-	}
+    .review_title_a{
+        font-size: 35px;
+        font-weight: bold;
+        color: #272727;
+    }
+
+    .review_title_a:hover{
+        color: #FF9843;
+        text-decoration: none;
+    }
+    
+        .review_search{
+        width: 1200px;
+        margin-bottom: 30px;
+    }
+
+    .review_searchForm{
+        width: 620px;
+        margin: 0 auto;
+    }
+
+    .review_search_select{
+        width: 100px;
+        height: 45px;
+        text-align: center;
+        border: 1px solid #afafaf;
+        margin: 0 auto;
+        font-size: 15px;
+        border-radius: 20px;
+    }
+
+    .review_search_input{
+        width: 400px;
+        height: 45px;
+        border: 1px solid #afafaf;
+        margin-left: 10px;
+        padding-left: 10px;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+
+    .review_search_btn{
+        width: 80px;
+        height: 45px;
+        border: none;
+        background-color: #FF9843;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    /* 글쓰기 버튼 */
+    .cs_board_top{
+        width: 1200px;
+        height: 42px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .cs_board_top_btn{
+        width: 100px;
+        float: right;
+    }
+
+    .cs_btn{
+        width: 80px;
+        height: 45px;
+        border: none;
+        background-color: #FF9843;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
 
 	.list-area{
 		text-align: center;
@@ -110,17 +179,45 @@
 	<jsp:include page="../common/header.jsp"/>
 	
     <div id="container">
-        <div class="event_title"><a class="event_title_a" href="review">혼디모영 리뷰</a></div>
+        <div class="review_title"><a class="review_title_a" href="review">리뷰 게시판</a></div>
 
+        <div class="review_search">
+            <form action="search.test" class="review_searchForm">
+                <select name="condition" class="review_search_select">
+                    <option value="title">제목</option>
+                    <option value="course">코스</option>
+                </select>
+                <input type="text" name="keyword" value="${requestScope.keyword}" class="review_search_input" placeholder="검색어를 입력해 주세요.">
+                <button type="submit" class="review_search_btn">검색</button>
+            </form>
+        </div>
+        <c:if test="${ not empty condition }">
+        	<script>
+        		$(function(){
+        			$('.review_search option[value=${condition}]').attr('selected', true);
+        		})
+        	</script>
+        </c:if>
+
+        <div class="cs_board_top">
+        <c:if test="${!empty loginUser}">
+            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">글쓰기</button></div>
+        </c:if>
+        </div>
+        
+        
         <div class="list-area">
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/aqua.jpg" class="eventImg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 리뷰다람쥐~</a> <a href="detail.ev">디테일</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
+        
+        	<c:forEach var="r" items="${review}">
+            	<div class="event" align="center">
+	                <input type="hidden" value="" />
+	                <img src="resources/image/aqua.jpg" class="eventImg" />
+	                <p>
+	                <a class="eventTitle">어쩌고 저쩌고 리뷰다람쥐~</a> <a href="detail.ev">디테일</a> <br><br>
+	                <label>조회수</label> : <span>0</span>
+	                </p>
+	            </div>
+        	</c:forEach>
 
             <div class="event" align="center">
                 <input type="hidden" value="" />

@@ -204,7 +204,7 @@
                         </ul>
                     </li>
                     <li><a href="event">이벤트</a></li>
-                    <li><a href="review">리뷰</a></li>
+                    <li><a href="test">리뷰</a></li>
                 </ul>
             </div>
         </div>

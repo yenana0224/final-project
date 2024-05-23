@@ -37,20 +37,71 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService reviewService;
-	
-	@RequestMapping("test")
-	public String testReview() {
-		return "review/reviewListTest";
-	}
-	
+
 	/**
 	 * 
 	 * @param page
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("review")
-	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
+//	@RequestMapping("review")
+//	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
+//		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 10, 5);
+//		
+//		List<ReviewComment> comment = reviewService.selectCommentCount();
+//		
+//		model.addAttribute("comment", comment);
+//		model.addAttribute("review", reviewService.selectList(pi));
+//		model.addAttribute("pageInfo", pi);
+//		return "review/reviewList";
+//	}
+//	
+//	@RequestMapping("detail.rvw")
+//	public ModelAndView detail(int reviewNo, ModelAndView mv) {
+//		
+//		Review review = reviewService.selectReview(reviewNo);
+//		if(review != null) {
+//			List<ReviewImg> reviewImgs = reviewService.selectReviewImgs(reviewNo);
+//			review.setReviewImgs(reviewImgs);
+//			
+//			if(reviewService.increaseCount(reviewNo) > 0) {
+//				mv.addObject("review", review).setViewName("review/reviewDetail");
+//			} else {
+//				mv.addObject("errorMsg", "조회 실패").setViewName("common/errorPage");
+//			}
+//		} else {
+//			mv.addObject("errorMsg", "리뷰 찾을 수 없음").setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}
+//	
+//	@RequestMapping("search.rvw")
+//	public String search(@RequestParam(value="keyword") String keyword,
+//						 @RequestParam(value="condition") String condition,
+//						 @RequestParam Map<String, String> map,
+//						 @RequestParam(value="page", defaultValue="1") int page, Model model) {
+//		
+//		Map<String, String> searchMap = new HashMap<String, String>();
+//		searchMap.put("condition", condition);
+//		searchMap.put("keyword", keyword);
+//		
+//		int totalCount = reviewService.searchCount(searchMap);
+//		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
+//		List<Review> review = reviewService.search(searchMap, pi);
+//		
+//		model.addAttribute("keyword", keyword);
+//		model.addAttribute("condition", condition);
+//		model.addAttribute("review", review);
+//		model.addAttribute("searchPage", pi);
+//		
+//		return "review/reviewList";
+//	}
+//	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////// 테스트 중 /////////////////////////////////////
+	@RequestMapping("test")
+	public String selectList2(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 10, 5);
 		
 		List<ReviewComment> comment = reviewService.selectCommentCount();
@@ -58,11 +109,11 @@ public class ReviewController {
 		model.addAttribute("comment", comment);
 		model.addAttribute("review", reviewService.selectList(pi));
 		model.addAttribute("pageInfo", pi);
-		return "review/reviewList";
+		return "review/reviewListTest";
 	}
 	
-	@RequestMapping("detail.rvw")
-	public ModelAndView detail(int reviewNo, ModelAndView mv) {
+	@RequestMapping("detail.test")
+	public ModelAndView detail2(int reviewNo, ModelAndView mv) {
 		
 		Review review = reviewService.selectReview(reviewNo);
 		if(review != null) {
@@ -80,8 +131,8 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping("search.rvw")
-	public String search(@RequestParam(value="keyword") String keyword,
+	@RequestMapping("search.test")
+	public String search2(@RequestParam(value="keyword") String keyword,
 						 @RequestParam(value="condition") String condition,
 						 @RequestParam Map<String, String> map,
 						 @RequestParam(value="page", defaultValue="1") int page, Model model) {
@@ -99,8 +150,12 @@ public class ReviewController {
 		model.addAttribute("review", review);
 		model.addAttribute("searchPage", pi);
 		
-		return "review/reviewList";
+		return "review/reviewListTest";
 	}
+	
+	///////////////////////////////// 테스트 중 /////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////
+	
 	
 	@RequestMapping("insertForm.rvw")
 	public String insertForm(Model model, Course course) {
