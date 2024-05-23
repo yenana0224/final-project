@@ -16,15 +16,15 @@
 
 #allform{
 	width:1200px;
-	height : 1000px;
+	height : 1200px;
 	margin : auto;
 	border:1px solid green;
 	
 }
 
 #hanlasanimg{
-	width : 100%;
-	height : 80%;
+	width : 1200px;
+	height : 800px;
 	background-image : url('resources/image/한라산.webp');
 	background-repeat : no-repeat;
 	margin : auto;
@@ -121,7 +121,7 @@
 						글쓰기
 					</button>
 				</c:if>
-				<table>
+				<table id="boardList" class="table table-hover" align="center">
 					<thead>
 						<tr>
 							<th>아이디</th>
@@ -130,11 +130,13 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${ review }" var="review">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>${ review.userId }</td>
+							<td>${ review.experienceContent }</td>
+							<td>${ review.experienceCategory }</td>
 						</tr>					
+					</c:forEach>
 					</tbody>
 				</table>
 							
@@ -147,17 +149,7 @@
 	</div>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<!-- 비밀번호 변경 모달 -->
 	<div class="modal" id="add">
 	  <div class="modal-dialog">
@@ -172,14 +164,14 @@
 	      <!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
 	      <div class="modal-body">
 			
-		  	<form action="exriview" method="post">
+		  	<form action="exreview" method="post">
 		  	
 		  	  <div class="select">
 		  	  	<label>카테고리</label>                                        
 				<select name="courseSeq" id="courseSeq" onchange="divide();" class="form-control">
 				 	<option value="한라산">한라산</option>
 				</select>
-					<input id="course" type="hidden" name="category" value="한라산"><!-- 1 -->
+					<input id="course" type="hidden" name="experienceCategory" value="한라산"><!-- 1 -->
 			  </div>
 		  	  <br>
 			  <div class="form-group">
