@@ -276,7 +276,7 @@
 	                	</div>
 	            	</c:when>
 	            	<c:otherwise>
-		                <div class="detail_right_btn"><button class="detail_btn">신청하기</button></div>
+		                <div class="detail_right_btn"><button class="detail_btn" onclick="connect();">신청하기</button></div>
 	            	</c:otherwise>
 	            </c:choose>
             </div>
@@ -326,12 +326,12 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+		// 목록, 수정, 삭제
 		$(function(){
 			$('.detailBtn').click(function(){
 				location.href='${ path }/companion?page=1';
 			});
 		});
-		
 		
 		function postSubmit(num){
 			if(num == 0){
@@ -342,6 +342,7 @@
 			}
 		}
 		
+		// 댓글
 		function addComment(){
 			$.ajax({
 				url: 'reply',
@@ -390,6 +391,10 @@
 		$(function(){
 			selectComment();
 		});
+		
+		// 신청 버튼
+		var 
+		
 	</script>
 
 

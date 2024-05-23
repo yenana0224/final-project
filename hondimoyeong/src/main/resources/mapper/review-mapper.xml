@@ -18,6 +18,7 @@
 		<result column="USER_NAME" property="userName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="COMMENT_COUNT" property="commentCount"/>
+		<result column="ROUTE_IMG" property="routeImg"/>
 	</resultMap>
 	
 	<resultMap type="reviewComment" id="reviewCommentResultSet">
@@ -191,15 +192,20 @@
 		      TO_CHAR (R.CREATE_DATE, 'YY.MM.DD') as "CREATE_DATE",
 		      R.COUNT AS COUNT,
 		      R.STATUS,
-		      REVIEW_STAR
+		      REVIEW_STAR,
+              CHANGE_NAME AS ROUTE_IMG
 		  FROM
 		      REVIEW R
 		  JOIN
 		      MEMBER M ON (M.USER_NO = R.USER_NO)
 		  JOIN
 		      COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
+          JOIN
+              COURSE_FILE CF ON (R.COURSE_NO = CF.COURSE_INDEX)
 		 WHERE
 		      R.REVIEW_NO = #{reviewNo}
+           AND
+              CF.FILE_LEVEL = 4
 		 ORDER
 		    BY
 		      R.REVIEW_NO DESC
