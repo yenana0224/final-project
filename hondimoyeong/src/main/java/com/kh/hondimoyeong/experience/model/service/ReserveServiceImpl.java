@@ -1,6 +1,5 @@
 package com.kh.hondimoyeong.experience.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.experience.model.dao.ReserveRepository;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
+import com.kh.hondimoyeong.experience.model.vo.Exreview;
 
 @Service
 public class ReserveServiceImpl  implements ReserveService{
@@ -52,7 +52,21 @@ public class ReserveServiceImpl  implements ReserveService{
 	public Experience selectexperience(int experienceNo) {
 		return reserveRepository.selectexperience(sqlSession, experienceNo);
 	}
-	
+
+	@Override
+	public List<Experience> excheck(int userNo) {
+		return reserveRepository.excheck(sqlSession, userNo);
+	}
+
+	@Override
+	public int insertreview(Exreview Exreview) {
+		return reserveRepository.insertreview(sqlSession, Exreview);
+	}
+
+	@Override
+	public List<Exreview> review() {
+		return reserveRepository.review(sqlSession);
+	}
 	
 	
 

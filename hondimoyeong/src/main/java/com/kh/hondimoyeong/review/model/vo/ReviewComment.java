@@ -18,7 +18,6 @@ public class ReviewComment {
 	private String createDate;
 	private int userNo;
 	private String userName;
-	private int commentCount;
 	
 
 }

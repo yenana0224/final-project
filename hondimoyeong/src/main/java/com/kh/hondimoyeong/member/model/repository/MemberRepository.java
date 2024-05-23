@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.cs.model.vo.Customer;
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
 @Repository
@@ -68,7 +69,17 @@ public class MemberRepository {
 
 
 
-	
+	public int reservationSelectListCount(SqlSessionTemplate sqlSession, int userNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+	    params.put("userNo", userNo);
+		return sqlSession.selectOne("experienceMapper.reservationSelectListCount", params); 
+	}	
+
+	public List<Experience> reservationSelectList(SqlSessionTemplate sqlSession, RowBounds rowBounds, int userNo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+	    params.put("userNo", userNo);
+		return sqlSession.selectList("customerMapper.selectList", params, rowBounds);
+	}
 	
 	
 	

@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
 import com.kh.hondimoyeong.companion.model.vo.Companion;
+import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
 import lombok.extern.slf4j.Slf4j;
@@ -136,6 +139,17 @@ public class CompanionController {
 		
 		return "companion/companionList";
 	}
+
+	// 댓글
+	@ResponseBody
+	@GetMapping(value="reply", produces="application/json; charset=UTF-8")
+	public String selectReply(int companionNo) {
+		return new Gson().toJson(companionService.selectReply(companionNo));
+	}
 	
-	
+	@ResponseBody
+	@PostMapping("reply")
+	public String ajaxInsertReply(CompanionReply companionReply) {
+		return companionService.insertReply(companionReply) > 0 ? "success" : "fail";
+	}
 }

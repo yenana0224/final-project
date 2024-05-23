@@ -1,6 +1,5 @@
 package com.kh.hondimoyeong.experience.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -8,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hondimoyeong.experience.model.vo.Experience;
+import com.kh.hondimoyeong.experience.model.vo.Exreview;
 
 @Repository
 public class ReserveRepository {
@@ -39,4 +39,18 @@ public class ReserveRepository {
 	public Experience selectexperience(SqlSessionTemplate sqlSession, int experienceNo) {
 		return sqlSession.selectOne("experienceMapper.selectexperience", experienceNo);
 	}
+	
+	
+	public List<Experience> excheck(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectList("experienceMapper.excheck", userNo);
+	}
+	
+	public int insertreview(SqlSessionTemplate sqlSession, Exreview exreview){
+		return sqlSession.insert("experienceMapper.insertreview", exreview);
+	}
+	
+	public List<Exreview> review(SqlSessionTemplate sqlSession){
+		return sqlSession.selectList("experienceMapper.review");
+	}
+	
 }

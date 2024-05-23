@@ -1,10 +1,10 @@
 package com.kh.hondimoyeong.experience.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
+import com.kh.hondimoyeong.experience.model.vo.Exreview;
 
 public interface ReserveService {
 
@@ -26,4 +26,14 @@ public interface ReserveService {
 	// 체험 상세 조회
 	Experience selectexperience(int experienceNo);
 
+	// 체험 예매내역 존재유무 확인
+	List<Experience> excheck(int userNo);
+	
+	// 한줄리뷰쓰기 & 확인용
+	int insertreview(Exreview exriview);
+	
+	// 체험 리뷰 select
+	List<Exreview> review();
+	
+	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.cs.model.vo.Customer;
+import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.member.model.repository.MemberRepository;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
@@ -68,6 +69,18 @@ public class MemberServiceImpl implements MemberService {
     public Customer selectCustomerByNo(int customerNo) {
         return memberRepository.selectCustomerByNo(sqlSession, customerNo);
     }
+
+	@Override
+	public int reservationSelectListCount(int userNo) {
+		return memberRepository.reservationSelectListCount(sqlSession, userNo);
+	}
+
+	@Override
+	public List<Experience> reservationSelectList(PageInfo pi, int userNo) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return memberRepository.reservationSelectList(sqlSession, rowBounds, userNo);
+	}
 
 	
 

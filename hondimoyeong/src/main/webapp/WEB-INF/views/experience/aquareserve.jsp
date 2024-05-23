@@ -113,34 +113,6 @@
 
 	<jsp:include page ="../common/header.jsp" />
 	
-	<%-- 
-	<c:choose>
-		<c:when test="${ empty sessionScope.loginuser }">
-			
-		</c:when>
-		<c:otherwise>
-		
-		</c:otherwise>	
-	</c:choose>
-	
-	
-	
-<body>
-    <div>
-        <input type="datetime-local" id="dateTimeLocal">
-    </div>
-
-    <script>
-        let dateElement = document.getElementById('dateTimeLocal');
-        let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -7);
-        dateElement.value = date;
-        dateElement.setAttribute("min", date);
-    </script>
-</body>--%>
-
-
-	
-	
 	<div id="reserve">
 		<div id="a">
 			<h1>제주입장권</h1>

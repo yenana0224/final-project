@@ -178,6 +178,17 @@
         text-align: center;
     }
     
+    .commentCount{
+    	color: #FF9843;
+    	font-weight: bold;
+    }
+    
+    .commentCount:hover{
+    	text-decoration: none;
+    	color: #FF9843;
+    	font-weight: bold;
+    }
+    
     /* 페이징바 */
     .hdmy-board_page{
     	width: 1200px;
@@ -215,7 +226,7 @@
 <jsp:include page="../common/header.jsp"/>
 
     <div id="container">  <!-- 전체 박스 -->
-        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🧡 </a></div>
+        <div class="hdmy_title"><a class="hdmy_title_a" href="companion">혼디모영 🍊 </a></div>
 
         <div class="hdmy_search">
             <form action="search.cmp" method="get" class="hdmy_searchForm">
@@ -283,7 +294,14 @@
 		    					<td style="display:none">${ companion.companionNo }</td>
 	                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
 	                            <td class="hdmy-table_small">${ companion.courseName }</td>
-	                            <td>${ companion.companionTitle }</td>
+	                            <c:choose>
+	                            	<c:when test="${ companion.replyCount == 0 }">
+	                            		<td>${companion.companionTitle}</td>
+	                            	</c:when>
+	                            	<c:otherwise>
+			                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a></td>
+	                            	</c:otherwise>
+	                            </c:choose>
 	                            <td class="hdmy-table_small">${ companion.userName }</td>
 	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
 	                            <c:choose>
