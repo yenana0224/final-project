@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 리뷰</title>
+<title>리뷰</title>
 
 <style>
     /* content */
@@ -16,7 +16,7 @@
         height: auto;
         margin: 0 auto;
     }
-
+	
     .review_title{
         width: 1200px;
         text-align: center;
@@ -33,7 +33,7 @@
         color: #FF9843;
         text-decoration: none;
     }
-
+    
     .review_search{
         width: 1200px;
         margin-bottom: 30px;
@@ -78,8 +78,8 @@
 
     /* 글쓰기 버튼 */
     .cs_board_top{
-        width: 1200px;
-        height: 42px;
+        width: 1140px;
+        height: 52px;
         margin: 0 auto;
         margin-bottom: 10px;
     }
@@ -102,77 +102,103 @@
         margin-bottom: 15px;
     }
 
-    .review_content{
-        width: 1200px;
-        margin: 0 auto;
-    }
+	.list-area {
+	    display: flex;
+	    flex-wrap: wrap;
+	    justify-content: center;
+	}
+	
+	.review_box {
+	    border: 1px solid lightgray;
+	    border-radius: 20px;
+	    width: 340px;
+	    height: 500px;
+	    margin: 25px;
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    justify-content: space-between;
+	}
+	
+	.thumbNail {
+	    width: 280px;
+	    height: 180px;
+	    border-radius: 20px;
+	    border: 1px solid #e1e1e1;
+	}
+	
+	.thumbNail:hover{
+		cursor: pointer;
+	    opacity: 0.8;
+	}
+	
+	.img_box, .box_title, .box_info {
+	    width: 340px;
+	}
+	
+	.box_title{
+	    font-size: 18px;
+	    font-weight: bold;
+	    border-bottom: 1px solid #e1e1e1;
+	    padding: 15px 15px;
+	}
+	
+	.box_title:hover{
+		color: #FF9843;
+	}
+	
+	.box_info {
+		padding-top: 10px;
+	    padding-left: 20px;
+	    padding-bottom: 15px;
+	}
+	
+	.review_box:hover {
+	    cursor: pointer;
+	    opacity: 0.9;
+	}
+	
+	.eventTitle {
+	    width: 340px;
+	    margin: 0 auto;
+	    font-size: 17px;
+	    font-weight: bold;
+	    color: #272727;
+	    text-align: center;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    border-bottom: 1px solid lightgray;
+	}
+	
+	.eventTitle:hover {
+	    text-decoration: none;
+	    color: #FF9843;
+	}
+	
+	.box_course {
+	    width: 300px;
+	    font-size: 20px;
+	    font-weight: bold;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    border-bottom: 1px solid lightgray;
+	}
+	
+	.box_star {
+	    font-size: 25px;
+	    padding: 10px 0px;
+	    color: #FF9843;
+	}
+	
+	.box_write, .box_count, .box_comment, .box_date {
+	    width: 150px;
+	    display: block;
+	    text-align: center;
+	    padding: 10px;
+	    float: left;
+	}
 
-    .review_page{
-        width: 1200px;
-        margin: 0 auto;
-    }
-
-    .hdmy-board_page{
-        width: 1200px;
-        margin: 0 auto;
-    }
-
-    .btn-outline-secondary{
-        width: 40px;
-        height: 40px;
-        border: none;
-        background-color: #ffebdb;
-        color: #272727;
-        border-radius: 10px;
-    }
-
-    .btn-outline-secondary:hover{
-        background-color: #FF9843;
-    }
-
-    .table-hover tbody {
-        border-bottom: 1px solid lightgray;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    .table-hover thead th{
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .table-hover tbody tr{
-        line-height: 30px;
-    }
-
-    .hdmy-table_small{
-        width: 80px;
-        text-align: center;
-    }
-
-    .hdmy-table_mid{
-        width: 130px;
-        text-align: center;
-    }
-    
-    .commentCount{
-    	color: #FF9843;
-    	font-weight: bold;
-    }
-    
-    .commentCount:hover{
-    	text-decoration: none;
-    	color: #FF9843;
-    	font-weight: bold;
-    }
-    
-    .star{
-    	color: #FF9843;
-    }
-    
-    /* 페이징바 */
+	    /* 페이징바 */
     .hdmy-board_page{
     	width: 1200px;
     }
@@ -203,13 +229,13 @@
      	border-radius: 10px !important;
      }
      
+	
 </style>
-    
 </head>
 <body>
 
-<jsp:include page="../common/header.jsp"/>
-
+	<jsp:include page="../common/header.jsp"/>
+	
     <div id="container">
         <div class="review_title"><a class="review_title_a" href="review">리뷰 게시판</a></div>
 
@@ -233,86 +259,62 @@
 
         <div class="cs_board_top">
         <c:if test="${!empty loginUser}">
-            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">글쓰기</button></div>
+            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">리뷰 등록</button></div>
         </c:if>
         </div>
+        
+        <div class="list-area">
+        
+        	<c:forEach var="r" items="${review}">
+	            <div class="review_box" align="center">
+	                <input type="hidden" value="${r.reviewNo}" />
+	                <div class="box_course">${r.courseName}</div>
+	                <div class="box_star" data-rating="${r.reviewStar}">${r.reviewStar}</div>
+	                <div class="img_box"><img src="${r.changeName}" class="thumbNail"/></div>
+	                <div class="box_title">${r.reviewTitle}</div>
+	                <div class="box_info">
+	                    <div class="box_write"><a>작성자 : ${r.userName}</a></div>
+	                    <div class="box_count"><a>조회수 : ${r.count}</a></div>
+	                    <div class="box_comment"><a>댓글 : ${r.commentCount}개</a></div>
+	                    <div class="box_date"><a>24.05.23</a></div>
+	                </div>
+	            </div>
+        	</c:forEach>
 
-        <div class="review_content">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="hdmy-table_small">번호</th>
-                        <th class="hdmy-table_small">코스</th>
-                        <th>제목 <a href="test">테스트</a></th>
-                        <th class="hdmy-table_mid">별점</th>
-                        <th class="hdmy-table_small">작성자</th>
-                        <th class="hdmy-table_small">날짜</th>
-                        <th class="hdmy-table_small">사진</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="r" items="${review}">
-                    	<tr class="list">
-	                        <td class="hdmy-table_small">${r.reviewNo}</td>
-	                        <td class="hdmy-table_small">${r.courseName}</td>
-					        <c:choose>
-					            <c:when test="${r.commentCount == 0}">
-					                <td>${r.reviewTitle}</td>
-					            </c:when>
-					            <c:otherwise>
-					                <td>${r.reviewTitle} <a class="commentCount">[${r.commentCount}]</a></td>
-					            </c:otherwise>
-					        </c:choose>
-	                        <td class="hdmy-table_mid star" data-rating="${r.reviewStar}"></td>
-	                        <td class="hdmy-table_small">${r.userName}</td>
-	                        <td class="hdmy-table_small">${r.createDate}</td>
-	                        <c:choose>
-	                        	<c:when test="${empty r.changeName}">
-	                       			<td class="hdmy-table_small"> </td>
-	                        	</c:when>
-	                        	<c:otherwise>
-	                       			<td class="hdmy-table_small"> 🍊 </td>
-	                        	</c:otherwise>
-	                        </c:choose>
-	                        
-                    	</tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+        
+			<div class="hdmy-board_page" id="pagination">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${ not empty condition }">
+							<c:forEach begin="${searchPage.startPage}" end="${searchPage.endPage}" var="p">
+			                    <c:choose>
+			                        <c:when test="${p eq searchPage.currentPage}">
+			                            <li class="page-item active"><a class="page-link" href="search.rvw?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
+			                        </c:when>
+			                        <c:otherwise>
+			                            <li class="page-item"><a class="page-link" href="search.rvw?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
+			                        </c:otherwise>
+			                    </c:choose>
+			            	</c:forEach>
+					    </c:when>
+					    <c:otherwise>
+					        <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="p">
+					            <c:choose>
+					                <c:when test="${p eq pageInfo.currentPage}">
+					                    <li class="page-item active"><a class="page-link" href="review?page=${p}">${p}</a></li>
+					                </c:when>
+					                <c:otherwise>
+					                    <li class="page-item"><a class="page-link" href="review?page=${p}">${p}</a></li>
+					                </c:otherwise>
+					            </c:choose>
+					        </c:forEach>
+					    </c:otherwise>
+					</c:choose>
+				</ul>
+	        </div>
         </div>
-        <div class="hdmy-board_page" id="pagination">
-			<ul class="pagination">
-				<c:choose>
-					<c:when test="${ not empty condition }">
-						<c:forEach begin="${searchPage.startPage}" end="${searchPage.endPage}" var="p">
-		                    <c:choose>
-		                        <c:when test="${p eq searchPage.currentPage}">
-		                            <li class="page-item active"><a class="page-link" href="search.rvw?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
-		                        </c:when>
-		                        <c:otherwise>
-		                            <li class="page-item"><a class="page-link" href="search.rvw?page=${p}&condition=${condition}&keyword=${keyword}">${p}</a></li>
-		                        </c:otherwise>
-		                    </c:choose>
-		            	</c:forEach>
-				    </c:when>
-				    <c:otherwise>
-				        <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="p">
-				            <c:choose>
-				                <c:when test="${p eq pageInfo.currentPage}">
-				                    <li class="page-item active"><a class="page-link" href="review?page=${p}">${p}</a></li>
-				                </c:when>
-				                <c:otherwise>
-				                    <li class="page-item"><a class="page-link" href="review?page=${p}">${p}</a></li>
-				                </c:otherwise>
-				            </c:choose>
-				        </c:forEach>
-				    </c:otherwise>
-				</c:choose>
-			</ul>
-        </div>
-
-    </div> <!-- container -->
-
+    </div> <!-- container-->
+	
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
@@ -320,25 +322,29 @@
 			location.href = '${ path }/insertForm.rvw';
 		}
 		// 별점
-	    document.addEventListener("DOMContentLoaded", function () {
-	        var starContainers = document.querySelectorAll('.star');
-	        starContainers.forEach(function (container) {
-	            var rating = container.getAttribute('data-rating');
-	            var starsHTML = '';
-	            for (var i = 0; i < rating; i++) {
-	                starsHTML += '★';
-	            }
-	            container.innerHTML = starsHTML;
-	        });
-	    });
+		document.addEventListener("DOMContentLoaded", function () {
+		    var starContainers = document.querySelectorAll('.box_star');
+		    starContainers.forEach(function (container) {
+		        var rating = container.getAttribute('data-rating');
+		        var starsHTML = '';
+		        for (var i = 0; i < rating; i++) {
+		            starsHTML += '★';
+		        }
+		        container.innerHTML = starsHTML;
+		    });
+		});
 	    
 		// 상세보기
-		$(function(){
-			$('.table-hover > tbody > tr').click(function(){
-				location.href = 'detail.rvw?reviewNo='+$(this).children().eq(0).text();
-			});
-		});
+		$(() => {
+			    $('.review_box').click(function() {
+			        const reviewNo = $(this).find('input[type="hidden"]').val();
+			        location.href = '${path}/detail.rvw?reviewNo=' + reviewNo;
+			    })
+			})
+				
+
 	</script>
+
 
 </body>
 </html>

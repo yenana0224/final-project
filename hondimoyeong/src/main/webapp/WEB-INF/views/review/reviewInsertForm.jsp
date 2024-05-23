@@ -201,8 +201,8 @@
                         <tr>
 							<th>* 첨부파일</th>
 							<td>
-								<input type="file" name="upfiles1" id="file1" style="padding-right: 35px;">
-								<input type="file" name="upfiles2" id="file2">
+								<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;">
+								<input type="file" name="upfiles2" id="upfiles2">
                             </td>
 						</tr>
 					</tbody>

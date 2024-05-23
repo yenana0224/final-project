@@ -19,6 +19,7 @@
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="COMMENT_COUNT" property="commentCount"/>
 		<result column="ROUTE_IMG" property="routeImg"/>
+		<result column="CHANGE_NAME" property="changeName"/>
 	</resultMap>
 	
 	<resultMap type="reviewComment" id="reviewCommentResultSet">
@@ -37,6 +38,7 @@
 		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="ORIGIN_NAME" property="originName"/>
 		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
 	</resultMap>
 	
 	<resultMap type="course" id="courseResultSet">
@@ -81,7 +83,7 @@
 		    (SELECT COUNT(*) FROM REVIEW_COMMENT RC WHERE R.REVIEW_NO = RC.REVIEW_NO) AS COMMENT_COUNT,
 		    R.STATUS,
 		    REVIEW_STAR,
-		    LISTAGG(CHANGE_NAME, ', ') WITHIN GROUP (ORDER BY RI.REVIEW_IMG_NO) AS CHANGE_NAME
+		    RI.CHANGE_NAME AS CHANGE_NAME
 		FROM
 		    REVIEW R
 		JOIN
@@ -89,7 +91,7 @@
 		JOIN
 		    COURSE C ON (R.COURSE_NO = C.COURSE_INDEX)
 		LEFT JOIN
-		    REVIEW_IMG RI ON (RI.REVIEW_NO = R.REVIEW_NO) 
+		    REVIEW_IMG RI ON (RI.REVIEW_NO = R.REVIEW_NO AND RI.FILE_LEVEL = 1) 
 		WHERE
 		    R.STATUS = 'Y'
 		GROUP BY
@@ -100,7 +102,8 @@
 		    R.CREATE_DATE, 
 		    R.COUNT,
 		    R.STATUS, 
-		    REVIEW_STAR
+		    REVIEW_STAR,
+		    RI.CHANGE_NAME
 		ORDER BY
 		    R.REVIEW_NO DESC
 	</select>
@@ -312,14 +315,16 @@
 		  	  REVIEW_IMG_NO, 
 		  	  REVIEW_NO, 
 		  	  ORIGIN_NAME, 
-		  	  CHANGE_NAME
+		  	  CHANGE_NAME,
+		  	  FILE_LEVEL
 		  	  )
 		VALUES
 			  (
 			  SEQ_REVIEW_IMG_NO.NEXTVAL, 
 			  #{reviewNo},
 			  #{originName},
-			  #{changeName}
+			  #{changeName},
+			  #{fileLevel}
 			  )
 	</insert>
 	
@@ -336,15 +341,21 @@
 	</update>
 	
 	<update id="updateImg" parameterType="reviewImg">
-		UPDATE
-		      REVIEW_IMG
-		   SET
-		      ORIGIN_NAME = #{originName},
-		      CHANGE_NAME = #{changeName}
-		 WHERE
-		      REVIEW_NO = #{reviewNo}
+	    UPDATE
+	        REVIEW_IMG
+	    SET
+	        ORIGIN_NAME = #{originName},
+	        CHANGE_NAME = #{changeName}
+	    WHERE
+	        REVIEW_NO = #{reviewNo}
+	        <if test="fileLevel == 1">
+	            AND FILE_LEVEL = 1
+	        </if>
+	        <if test="fileLevel == 2">
+	            AND FILE_LEVEL = 2
+	        </if>
 	</update>
-	
+		
 	
 	<select id="getReviewImgByReviewNo" parameterType="_int" resultType="reviewImg">
 		SELECT *
