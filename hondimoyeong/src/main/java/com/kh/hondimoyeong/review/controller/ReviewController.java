@@ -38,6 +38,11 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	@RequestMapping("test")
+	public String testReview() {
+		return "review/reviewListTest";
+	}
+	
 	/**
 	 * 
 	 * @param page

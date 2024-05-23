@@ -38,7 +38,7 @@
 	}
 
 	.event{
-	    border: 1px solid #e1e1e1;
+	    border: 1px solid lightgray;
 	    border-radius: 20px;
 	    width: 340px;
 	    padding: 12px;
@@ -110,14 +110,14 @@
 	<jsp:include page="../common/header.jsp"/>
 	
     <div id="container">
-        <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
+        <div class="event_title"><a class="event_title_a" href="review">혼디모영 리뷰</a></div>
 
         <div class="list-area">
             <div class="event" align="center">
                 <input type="hidden" value="" />
                 <img src="resources/image/aqua.jpg" class="eventImg" />
                 <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트다람쥐~</a> <a href="detail.ev">디테일</a> <br><br>
+                <a class="eventTitle">어쩌고 저쩌고 리뷰다람쥐~</a> <a href="detail.ev">디테일</a> <br><br>
                 <label>조회수</label> : <span>0</span>
                 </p>
             </div>
@@ -126,7 +126,7 @@
                 <input type="hidden" value="" />
                 <img src="resources/image/감귤체험.jpg" />
                 <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트지렁이~</a> <br><br>
+                <a class="eventTitle">어쩌고 저쩌고 리뷰지렁이~</a> <br><br>
                 <label>조회수</label> : <span>0</span>
                 </p>
             </div>
@@ -135,7 +135,7 @@
                 <input type="hidden" value="" />
                 <img src="resources/image/tangerine.jpg" />
                 <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트다용가리~</a> <br><br>
+                <a class="eventTitle">어쩌고 저쩌고 리뷰다용가리~</a> <br><br>
                 <label>조회수</label> : <span>0</span>
                 </p>
             </div>
