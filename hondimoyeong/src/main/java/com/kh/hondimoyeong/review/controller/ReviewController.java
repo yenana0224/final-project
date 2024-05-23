@@ -200,11 +200,9 @@ public class ReviewController {
 	                    reviewImg2.setChangeName(changeName);
 	                    reviewService.updateImg(reviewImg2);
 	                    System.out.println("2번" + changeName);
-
 	                }
 	            }
 	        }
-
 	        session.setAttribute("alertMsg", "게시글 수정 성공!");
 	        return "redirect:detail.rvw?reviewNo=" + reviewNo; // 수정된 리뷰 상세 페이지로 이동
 	    } else {
