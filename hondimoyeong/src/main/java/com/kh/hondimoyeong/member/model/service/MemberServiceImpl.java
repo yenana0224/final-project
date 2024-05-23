@@ -70,17 +70,17 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.selectCustomerByNo(sqlSession, customerNo);
     }
 
-	@Override
-	public int reservationSelectListCount(int userNo) {
-		return memberRepository.reservationSelectListCount(sqlSession, userNo);
-	}
+    @Override
+    public int reservationSelectListCount(int userNo) {
+        return memberRepository.reservationSelectListCount(sqlSession, userNo);
+    }
 
-	@Override
-	public List<Experience> reservationSelectList(PageInfo pi, int userNo) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return memberRepository.reservationSelectList(sqlSession, rowBounds, userNo);
-	}
+    @Override
+    public List<Experience> reservationSelectList(PageInfo pi, int userNo) {
+        int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+        RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+        return memberRepository.reservationSelectList(sqlSession, rowBounds, userNo);
+    }
 
 	
 

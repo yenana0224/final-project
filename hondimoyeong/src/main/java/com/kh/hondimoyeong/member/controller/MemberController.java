@@ -154,18 +154,19 @@ public class MemberController {
 	
 	
 	
-	@ResponseBody
-	@GetMapping(value = "list.reservationData", produces = "application/json; charset=UTF-8")
-	public String reservationSelectAll(@RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		PageInfo pi = Pagination.getPageInfo(memberService.reservationSelectListCount(loginUser.getUserNo()), page, 10, 10);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("experience", memberService.reservationSelectList(pi, loginUser.getUserNo()));
-		map.put("pageInfo", pi);
-		Gson gson = new Gson();
-		String jsonResponse = gson.toJson(map);
-		return jsonResponse;
-	}
+    @ResponseBody
+    @GetMapping(value = "list.reservationData", produces = "application/json; charset=UTF-8")
+    public String reservationSelectAll(@RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        PageInfo pi = Pagination.getPageInfo(memberService.reservationSelectListCount(loginUser.getUserNo()), page, 10, 10);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("experience", memberService.reservationSelectList(pi, loginUser.getUserNo()));
+        map.put("pageInfo", pi);
+        Gson gson = new Gson();
+        String jsonResponse = gson.toJson(map);
+        return jsonResponse;
+    }
+
 	
 	
 	

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +23,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.kh.hondimoyeong.course.model.service.CourseServiceImpl;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class CourseApiController {
 	
-	@Autowired
-	private CourseServiceImpl courseService;
+	private final CourseServiceImpl courseService;
 
 	@GetMapping("admin/api/load")
 	public String loadFromApi(Model model,

@@ -70,15 +70,15 @@ public class MemberRepository {
 
 
 	public int reservationSelectListCount(SqlSessionTemplate sqlSession, int userNo) {
-		Map<String, Object> params = new HashMap<String, Object>();
+	    Map<String, Object> params = new HashMap<String, Object>();
 	    params.put("userNo", userNo);
-		return sqlSession.selectOne("experienceMapper.reservationSelectListCount", params); 
-	}	
+	    return sqlSession.selectOne("experienceMapper.reservationSelectListCount", params); 
+	}
 
 	public List<Experience> reservationSelectList(SqlSessionTemplate sqlSession, RowBounds rowBounds, int userNo) {
-		Map<String, Object> params = new HashMap<String, Object>();
+	    Map<String, Object> params = new HashMap<String, Object>();
 	    params.put("userNo", userNo);
-		return sqlSession.selectList("customerMapper.selectList", params, rowBounds);
+	    return sqlSession.selectList("experienceMapper.reservationSelectList", params, rowBounds);
 	}
 	
 	

@@ -108,6 +108,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.getReviewImgByReviewNo(sqlSession, reviewNo);
 	}
 
+	@Override
+	public int delete(int reviewNo) {
+		return reviewRepository.delete(sqlSession, reviewNo);
+	}
+
 
 
 

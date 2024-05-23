@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
         
             #wrap{
                 width: 1200px;
-                height: 800px;
+                height: 900px;
                 margin: 0 auto;
                 position: relative;  
             }
@@ -28,7 +29,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 660px;
+                height: 700px;
                 margin: 0 auto;
                 margin-top: 200px;
                 border-radius: 20px;
@@ -62,22 +63,22 @@
             }
 
 
-            #detailBox
+            .detailBox
             {
                 width: 700px;
-                height: 540px;
+                height: 550px;
                 margin-left: 50px;
-                padding-left: 110px;
             }
            
             .background-Box{
-                width: 450px;
+                width: 650px;
                 height: 80px;
                 padding-top: 8px;
                 background-color: #f7d3a0;
                 border-radius: 10px;
                 margin-top: 15px;
-                margin-left: 20px;
+                margin-left : 20px;
+                
             }
 
             .box1{
@@ -87,8 +88,6 @@
                 float: left;
                 background-color: #f7d3a0;
             }
-
-
 
             .detail{
                 width: 200px;
@@ -105,18 +104,38 @@
             }
 
             .box2 {
+            	width : 400px;
                 padding-top: 5px;
                 font-size: 16px;
                 font-weight: bold;
                 background-color: #f7d3a0;
                 margin-top: 1px;
+                padding-left : 20px;
             }
 
             .box3 {
+           	 	width : 400px;
                 padding-top: 5px;
                 font-size: 14px;
-                margin: 0 auto;
+                margin: 0;
                 background-color: #f7d3a0;
+                padding-left : 20px;
+            }
+            
+            .acompany-btn{
+            	width : 100px;
+            	height : 50px;
+            	float : right;
+            	margin-top : 5px;
+            	margin-right : 30px;
+            	border-radius : 10px;
+            	text-align : center;
+            	padding-top : 10px;
+            	vertical-align : middle;
+            }
+            
+            .acompany-btn:hover{
+            	cursor : pointer;
             }
 
             .btnBox{
@@ -126,6 +145,7 @@
                 background-color: #f7d3a0;
                 margin-left: 40px;
                 margin-top: 3px;
+
             }
 
             .btn-y{
@@ -153,11 +173,13 @@
 
             .box4 {
                 width: 450px;
-                height: 60px;
-                padding-top: 8px;
+                height: 40px;
+                padding-top: 20px;
                 border-radius: 10px;
-                margin-top: 15px;
                 margin-left: 20px;
+                margin : auto;
+                padding-left : 80px;
+                margin-top : 30px;
             }
 
 
@@ -174,10 +196,14 @@
             }
             
             .page-link {
+            	width : 40px;
+            	height : 40px;
+            	float : left;
                 color: #292929 !important;
                 border-radius: 10px;
                 margin-right: 10px;
                 border: 1px solid #9e9e9e;
+                text-align : center;
             }
             
             .page-item:last-child .page-link, .page-item:first-child .page-link {
@@ -189,101 +215,46 @@
 <body>
     <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
+    
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
-
-            <div id="titleBox">동행신청 내역</div>
-            <div id="detailBox">
-                <div class="background-Box">
-                    <div class="box1">
-                      <div class="box2">이름</div>
-                      <div class="box2">연락처</div>
-                    </div>
-                    <div class="detail">
-                        <div class="box3">빈정박</div>
-                        <div class="box3">010-1234-5678</div>
-                    </div>
-                    <div class="btnBox">
-                        <button class="btn-y">수락</button>
-                        <button class="btn-n">거절</button>
-                    </div>
-                </div>
-
-                <div class="background-Box">
-                    <div class="box1">
-                      <div class="box2">이름</div>
-                      <div class="box2">연락처</div>
-                    </div>
-                    <div class="detail">
-                        <div class="box3">빈정박</div>
-                        <div class="box3">010-1234-5678</div>
-                    </div>
-                    <div class="btnBox">
-                        <button class="btn-y">수락</button>
-                        <button class="btn-n">거절</button>
-                    </div>
-                </div>
-
-                <div class="background-Box">
-                    <div class="box1">
-                      <div class="box2">이름</div>
-                      <div class="box2">연락처</div>
-                    </div>
-                    <div class="detail">
-                        <div class="box3">빈정박</div>
-                        <div class="box3">010-1234-5678</div>
-                    </div>
-                    <div class="btnBox">
-                        <button class="btn-y">수락</button>
-                        <button class="btn-n">거절</button>
-                    </div>
-                </div>
-
-                <div class="background-Box">
-                    <div class="box1">
-                      <div class="box2">이름</div>
-                      <div class="box2">연락처</div>
-                    </div>
-                    <div class="detail">
-                        <div class="box3">빈정박</div>
-                        <div class="box3">010-1234-5678</div>
-                    </div>
-                    <div class="btnBox">
-                        <button class="btn-y">수락</button>
-                        <button class="btn-n">거절</button>
-                    </div>
-                </div>
-
-                <div class="background-Box">
-                    <div class="box1">
-                      <div class="box2">이름</div>
-                      <div class="box2">연락처</div>
-                    </div>
-                    <div class="detail">
-                        <div class="box3">빈정박</div>
-                        <div class="box3">010-1234-5678</div>
-                    </div>
-                    <div class="btnBox">
-                        <button class="btn-y">수락</button>
-                        <button class="btn-n">거절</button>
-                    </div>
-                </div>
-
-                <div class="box4">
-                    <!--페이지 숫자-->
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#"> < </a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#"> > </a></li>
-                    </ul>                 
-                </div>
-                
- 
+			<a href="myRequest?page="> 나의 신청내역 보기 </a>
+			
+            <div id="titleBox">내가 쓴 동행 게시글</div>
+            <div class="detailBox">
+            
+	            <c:forEach var="board" items="${list}">
+	            	<div class="background-Box">
+	            	    <div class="acompany-btn">신청확인</div>
+	            		<div class="box2">제목 : ${board.companionTitle} </div>
+	            		<div class="box3"> ${board.courseName} 날짜 : ${board.companionDate} 인원 : ${board.companionNum}/${board.companionPeople }</div>
+	            	</div>
+	            </c:forEach>
+	            
+	            <div class="box4"> 
+		            <c:if test="${pageInfo.currentPage gt 1}">
+		            	<a class="page-link" href="#"> < </a>
+		            </c:if>
+		            <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
+		            	<c:choose>
+							<c:when test="${pageInfo.currentPage ne i }">
+								<a class="page-link" href="#"> ${i} </a>
+							</c:when>    
+							<c:otherwise>
+								<a class="page-link" href="#">${i}</a>
+							</c:otherwise>        	
+		            	</c:choose>
+		            </c:forEach>
+		            <c:if test="${pageInfo.currentPage ne pageInfo.maxPage}">
+		            	<a class="page-link" href="#"> > </a>
+		            </c:if>	
+	            </div>
             </div>
+            
         </div>
     </div>
+    
+    
 	<jsp:include page="../common/footer.jsp"/>
 
 

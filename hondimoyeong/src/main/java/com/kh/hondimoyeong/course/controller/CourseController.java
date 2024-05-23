@@ -1,6 +1,5 @@
 package com.kh.hondimoyeong.course.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hondimoyeong.course.model.service.CourseService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class CourseController {
 	
 	private String serviceKey = "8fb9d532bba6f497bc125efc82a1127e";
 	
-	@Autowired
-	private CourseService courseService;
+	private final CourseService courseService;
 	
 	@GetMapping("courses")
 	public ModelAndView CourseMain(ModelAndView mv) {
