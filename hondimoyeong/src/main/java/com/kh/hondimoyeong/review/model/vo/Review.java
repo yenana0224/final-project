@@ -24,6 +24,7 @@ public class Review {
 	private int reviewStar;
 	private int userNo;
 	private String userName;
+	private String routeImg;
 	
 	private String changeName;
 	private int commentCount;

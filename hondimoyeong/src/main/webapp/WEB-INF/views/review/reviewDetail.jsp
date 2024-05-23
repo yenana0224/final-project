@@ -298,7 +298,7 @@
         <div class="detail_course">${review.courseName}</div>
 
         <div class="detail_courseImg">
-            <img src="https://contents.ollepass.org/static/homepage/trail/img/road/road_01_imgmap_pc_2024.jpg" alt="" class="courseImg">
+            <img src="${review.routeImg}" alt="" class="courseImg">
         </div>
         
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->

@@ -243,7 +243,7 @@
                     <tr>
                         <th class="hdmy-table_small">번호</th>
                         <th class="hdmy-table_small">코스</th>
-                        <th>제목</th>
+                        <th>제목 <a href="test">테스트</a></th>
                         <th class="hdmy-table_mid">별점</th>
                         <th class="hdmy-table_small">작성자</th>
                         <th class="hdmy-table_small">날짜</th>

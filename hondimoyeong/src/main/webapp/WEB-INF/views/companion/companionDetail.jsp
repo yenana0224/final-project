@@ -255,19 +255,30 @@
         </div>
 
         <div class="detail_courseImg">
-            <img src="https://contents.ollepass.org/static/homepage/trail/img/road/road_01_imgmap_pc_2024.jpg" alt="" class="courseImg">
+            <img src="${companion.routeImg}" alt="" class="courseImg">
         </div>
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
             <div class="detail_box_left"> <!-- 제목, 작성자 감싸는 div -->
                 <div class="detail_title"><span>${companion.companionTitle}</span></div>
                 <div class="detail_info">
-                    <div class="detail_info1"><a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a></div>
+                    <div class="detail_info1">
+                    	<a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a>
+                    </div>
                 </div>
             </div>
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
-                <div class="detail_right_btn"><button class="detail_btn">신청하기</button></div>
+	            <c:choose>
+	            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
+	                	<div class="detail_right_btn">
+	                		<button class="detail_btn" disabled style="background-color: grey;">마감</button>
+	                	</div>
+	            	</c:when>
+	            	<c:otherwise>
+		                <div class="detail_right_btn"><button class="detail_btn" onclick="connect();">신청하기</button></div>
+	            	</c:otherwise>
+	            </c:choose>
             </div>
         </div>
 
@@ -315,12 +326,12 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+		// 목록, 수정, 삭제
 		$(function(){
 			$('.detailBtn').click(function(){
 				location.href='${ path }/companion?page=1';
 			});
 		});
-		
 		
 		function postSubmit(num){
 			if(num == 0){
@@ -331,6 +342,7 @@
 			}
 		}
 		
+		// 댓글
 		function addComment(){
 			$.ajax({
 				url: 'reply',
@@ -379,6 +391,9 @@
 		$(function(){
 			selectComment();
 		});
+		
+		// 신청 버튼
+		
 	</script>
 
 

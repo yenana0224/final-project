@@ -11,7 +11,9 @@ public class Exreview {
 	
 	private int experienceRevieweNo;
 	private int experienceNo;
-	private String category;
+	private String experienceCategory;
 	private String experienceContent;
+	private int userNo;
+	private String userId;
 	
 }
