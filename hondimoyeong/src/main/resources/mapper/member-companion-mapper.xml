@@ -98,4 +98,31 @@
      		   
 	</select>
 	
+	<insert id="accompanyRequest" parameterType="hashmap">
+		INSERT
+		  INTO
+		      COMPANION_BRIDGE
+		VALUES
+		     (
+		     SEQ_COMPANION_BRIDGE_NO.NEXTVAL,
+		     #{companionNo},
+		     #{userNo},
+		     'N'
+		     )
+	</insert>
+	
+	<select id="appliList" parameterType="_int" resultType="companionMember">
+	SELECT
+			USER_NAME userName,
+		    B.STATUS
+		FROM
+			COMPANION_BRIDGE B
+		JOIN
+			MEMBER M ON (B.USER_NO = M.USER_NO)
+		WHERE
+			COMPANION_NO = (SELECT COMPANION_NO FROM COMPANION_BRIDGE WHERE USER_NO = 3 AND STATUS = 'W')
+		 AND
+		    B.STATUS NOT IN 'W'
+	</select>
+	
 </mapper>

@@ -70,7 +70,7 @@
 		      A.STATUS AS STATUS,
 		      A.COMPANION_PEOPLE,
 		      (SELECT COUNT(*) FROM COMPANION_REPLY CR WHERE A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
-		      COUNT(B.USER_NO) AS COMPANION_NUM
+		      (SELECT COUNT(USER_NO)FROM COMPANION_BRIDGE WHERE STATUS NOT IN ('N', 'C')) AS COMPANION_NUM
 		  FROM
 		      COMPANION A
 		  JOIN
@@ -387,6 +387,25 @@
 	   		  #{companionNo}, 
 	   		  #{userNo}
 	   		  )
+	</insert>
+	
+	<insert id="insertBridge" parameterType="companion">
+	INSERT
+	  INTO
+	      COMPANION_BRIDGE
+		  (
+	      COMPANION_BRIDGE_NO,
+	      COMPANION_NO,
+	      USER_NO,
+	      STATUS
+	      )
+	VALUES
+	     (
+	     SEQ_COMPANION_BRIDGE_NO.NEXTVAL,
+	     SEQ_COMPANION_NO.CURRVAL,
+	     #{userNo},
+	     'W'
+	     )
 	</insert>
 	
 	

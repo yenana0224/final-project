@@ -73,5 +73,9 @@ public class CompanionRepository {
 	public int insertReply(SqlSessionTemplate sqlSession, CompanionReply companionReply) {
 		return sqlSession.insert("companionMapper.insertReply", companionReply);
 	}
+	
+	public int insertBridge(SqlSessionTemplate sqlSession, Companion companion) {
+		return sqlSession.insert("companionMapper.insertBridge", companion);
+	}
 
 }

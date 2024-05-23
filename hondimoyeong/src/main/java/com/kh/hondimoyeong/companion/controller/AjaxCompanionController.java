@@ -21,13 +21,7 @@ public class AjaxCompanionController {
 		return new Gson().toJson(companionService.sortCompanions());
 	}
 	
-	@ResponseBody
-	@GetMapping(value="/acompany", produces="application/json; charset=UTF-8")
-	public String accompanyList(int companionNo) {
-		companionService.accompanyList(companionNo);
-		
-		return "";
-	}
+
 
 }
 

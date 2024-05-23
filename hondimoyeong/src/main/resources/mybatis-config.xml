@@ -21,6 +21,7 @@
  		<typeAlias type="com.kh.hondimoyeong.review.model.vo.ReviewImg" alias="reviewImg" />
  		
  		<typeAlias type="com.kh.hondimoyeong.member.model.vo.Member" alias="member"/>
+ 		<typeAlias type="com.kh.hondimoyeong.member.model.vo.CompanionMember" alias="companionMember"/>
  		
  		<typeAlias type="com.kh.hondimoyeong.experience.model.vo.Experience" alias="experience"/>
  		

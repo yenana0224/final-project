@@ -73,7 +73,14 @@ public class CompanionServiceImpl implements CompanionService {
 
 	@Override
 	public int insert(Companion companion) {
-		return companionRepository.insert(sqlSession, companion);
+		
+		int result = 1;
+
+		if(companionRepository.insert(sqlSession, companion) > 0) {
+			result = result * companionRepository.insertBridge(sqlSession, companion);
+		}
+
+		return result;
 	}
 
 	@Override

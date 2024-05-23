@@ -137,50 +137,57 @@
             .acompany-btn:hover{
             	cursor : pointer;
             }
-
-            .btnBox{
-                width: 100px;
-                height: 60px;
-                float: left;
-                background-color: #f7d3a0;
-                margin-left: 40px;
-                margin-top: 3px;
-
-            }
-
-            .btn-y{
-                width: 60px;
-                height: 28px;
-                background-color: #FF9843;
-                border: 0;
-                border-radius: 10px;
-                margin-bottom: 4px;
-                color: #ffffff;
-                font-size: 12px;
-            }
-
-            .btn-n{
-                width: 60px;
-                height: 28px;
-                background-color: #9e9e9e;
-                border: 0;
-                border-radius: 10px;
-                margin-bottom: 4px;
-                color: #ffffff;
-                font-size: 12px;
-            }
-
-
-            .box4 {
-                width: 450px;
-                height: 40px;
-                padding-top: 20px;
-                border-radius: 10px;
-                margin-left: 20px;
-                margin : auto;
-                padding-left : 80px;
-                margin-top : 30px;
-            }
+            
+            
+	        .box4 {
+	            width: 400px;
+	            height: 100px;
+	            border-radius: 10px;
+	            margin-left: 20px;
+	            margin : auto;
+	            border : 1px solid #f7d3a0;
+	            margin-bottom: 10px;
+	        }
+	
+	        .status-area{
+	            margin: 5px 0px 5px 20px;
+	            width: 100px;
+	            height: 25px;
+	            border-radius: 10px;
+	            background-color: #f7d3a0;
+	            color : black;
+	            font-weight: bold;
+	            text-align: center;
+	        }
+	
+	        .userInfo{
+	            margin: 5px 0px 0px 20px;
+	            font-size: 20px;
+	        }
+	
+	        .btn-area{
+	            margin-bottom: 5px;
+	            text-align: right;
+	        }
+	
+	        .status{
+	            margin-right : 10px;
+	            width: 50px;
+	            height: 25px;
+	            border-radius: 10px;
+	            color : black;
+	            font-weight: bold;
+	            text-align: center;
+	            border : none;
+	        }
+	
+	        .yes{
+	            background-color: #f7d3a0;
+	        }
+	
+	        .no {
+	            background-color : lightgray;
+	        }
 
 
             .pagination {
@@ -226,11 +233,36 @@
             
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
-	            	    <div class="acompany-btn" id="${board.companionNo }">신청확인</div>
+	            	    <div class="acompany-btn" id="${board.companionNo }" data-toggle="modal" data-target="#myModal">신청확인</div>
 	            		<div class="box2">제목 : ${board.companionTitle} </div>
 	            		<div class="box3"> ${board.courseName} | 날짜 : ${board.companionDate} | 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
 	            </c:forEach>
+	            
+	              <!-- The Modal -->
+				  <div class="modal" id="myModal">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				      
+				        <!-- Modal Header -->
+				        <div class="modal-header">
+				          <h4 class="modal-title">신청자 목록 확인</h4>
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        </div>
+				        
+				        <!-- Modal body -->
+				        <div class="modal-body">
+				          
+				        </div>
+				        
+				        <!-- Modal footer -->
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				        </div>
+				        
+				      </div>
+				    </div>
+				  </div>
 	            
 	            <div class="box4"> 
 		            <c:if test="${pageInfo.currentPage gt 1}">
@@ -261,7 +293,31 @@
 	        		url : 'companions/acompany',
 	        		data : {companionNo : $(this).attr('id')},
 	        		success : (data) => {
-	        			console.log(data);
+	        			//console.log(data);
+	        			let user = '';
+	        			let status = '';
+	        			
+	        			for(let i in data){
+	        				
+	        				if(data[i].status == 'N') status = '신청중'
+	        				else if(data[i].statuse == 'A') status = '참여'
+	        				else status = '취소'
+	        				
+		        			user += '<div class="box4">'
+		        		          +	  '<div class="status-area">'
+		        		          +		status
+		        		          +	  '</div>'
+		        		          +   '<div class="userInfo">'
+		        		          + 	data[i].userName
+		        		          +   '</div>'
+		        		          +   '<div class="btn-area">'
+		        		          +     '<button class="status yes">수락</button>'
+		        		          +     '<button class="status no">거절</button>'  
+		        		          +   '</div>'
+		        		    	  + '</div>'
+	        			}
+
+	        			$('.modal-body').html(user);
 	        		}
 	        		
 	        	})

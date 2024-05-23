@@ -8,7 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>혼디모영 : ${ companion.companionTitle }</title>
-
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
 <style>
     /* content */
     #container{
@@ -276,7 +277,9 @@
 	                	</div>
 	            	</c:when>
 	            	<c:otherwise>
-		                <div class="detail_right_btn"><button class="detail_btn" onclick="connect();">신청하기</button></div>
+		                <div class="detail_right_btn">
+		                	<button class="detail_btn" onclick="connect();">신청하기</button>
+		                </div>
 	            	</c:otherwise>
 	            </c:choose>
             </div>
@@ -393,6 +396,20 @@
 		});
 		
 		// 신청 버튼
+		function connect(){
+			
+			$.ajax({
+				url : 'accompanyRequest',
+				data : {
+					userNo : ${sessionScope.loginUser.userNo},
+					companionNo : ${companion.companionNo}
+					},
+				success : (data) => {
+					alert(data);
+				}
+			})
+		}
+		
 		
 	</script>
 
