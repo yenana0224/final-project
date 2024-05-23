@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +21,13 @@ import com.kh.hondimoyeong.course.model.service.CourseServiceImpl;
 import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class AdminCourseController {
-	
-	@Autowired
-	private CourseServiceImpl courseService;
+
+	private final CourseServiceImpl courseService;
 	
 	@GetMapping("admin/course")
 	public String allCourseList(Model model) {
@@ -83,15 +84,11 @@ public class AdminCourseController {
 				courseService.updateDetailMap(detailMapImg);
 			}
 			
-			//System.out.println(photo);
-			
-			
 			List<CourseFile> photoList = new ArrayList<CourseFile>();
 			
 			for(int i = 0; i < photo.size(); i++) {
 				
 				if(!photo.get(i).getOriginalFilename().equals("")) {
-					//System.out.println(photo.get(i).getOriginalFilename());
 					CourseFile photoImg = new CourseFile();
 					photoImg.setCourseIndex(courseIndex);
 					photoImg.setOriginName(photo.get(i).getOriginalFilename());

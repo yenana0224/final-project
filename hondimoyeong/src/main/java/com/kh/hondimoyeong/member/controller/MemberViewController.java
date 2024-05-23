@@ -1,21 +1,22 @@
 package com.kh.hondimoyeong.member.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.hondimoyeong.companion.model.service.MemberCompanionService;
 import com.kh.hondimoyeong.course.model.service.CourseService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class MemberViewController {
 	
-	@Autowired
-	private CourseService courseService;
+	private final CourseService courseService;
+	private final MemberCompanionService companionService;
 	
 	// 화면
-	
-	
 	@RequestMapping("login")
 	public String login() {
 		return "member/login";
@@ -57,7 +58,10 @@ public class MemberViewController {
 	}
 	
 	@RequestMapping("companionInvite")
-	public String companionInvite() {
+	public String companionInvite(int userNo, 
+								  Model model) {
+		model.addAttribute("list", companionService.myList(userNo));
+		
 		return "member/companionInvite";
 	}
 	
