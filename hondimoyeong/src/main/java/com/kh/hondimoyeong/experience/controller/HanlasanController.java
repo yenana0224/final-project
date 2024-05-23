@@ -33,7 +33,7 @@ public class HanlasanController {
 			
 			if(userNo > 0) {
 				List<Experience> experience = reserveService.excheck(userNo);
-				//System.out.println(experience);
+				System.out.println(experience);
 				
 				if(!(experience == null)) {
 					session.setAttribute("experience", experience);
@@ -41,14 +41,10 @@ public class HanlasanController {
 			}
 		}
 		
-		//
-		
+		// 체험리뷰 전부 조회
 		List<Exreview> review = reserveService.review();
-		System.out.println(review);
-		
-		if(!(review == null)) {
-			session.setAttribute("review", review);
-		}
+		System.out.println("흠 " + review);
+		session.setAttribute("review", review);
 		
 		return "experience/hanlasan";
 	}
@@ -79,7 +75,7 @@ public class HanlasanController {
 		return "experience/kakaoSuccess";
 	}
 	
-	@PostMapping("exriview")
+	@PostMapping("exreview")
 	public String exriview(Exreview exreview, HttpSession session) {
 		
 		
@@ -95,14 +91,14 @@ public class HanlasanController {
 		
 		exreview.setExperienceNo(experienceNo);
 		
-		System.out.println(exreview);
+		//System.out.println(exreview);
 		
 		int exre = reserveService.insertreview(exreview);
 		//session.setAttribute("exriview", exreview);
 		
 		//System.out.println(exre);
 		
-		System.out.println(exre);
+		//System.out.println(exre);
 		
 		return "experience/hanlasan";
 	}

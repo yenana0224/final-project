@@ -4,23 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="experienceMapper">
 
-   <resultMap type="experience" id="experienceResultSet">
-      <result column="EXPERIENCE_NO" property="experienceNo" />
-      <result column="CATEGORY" property="category" />
-      <result column="EXPERIENCE_DATE" property="experienceDate" />
-      <result column="EXPERIENCE_TIME" property="experienceTime" />
-      <result column="EXPERIENCE_DIVIDE" property="experienceDivide" />
-      <result column="PRICE" property="price" />
-      <result column="EXPERIENCE_PEOPLE" property="experiencePeople" />
-      <result column="USER_NO" property="userNo" />
-      <result column="USER_NAME" property="userName" />
-      
-   </resultMap>
-      <resultMap type="exreview" id="exrevieweResultSet">
+	<resultMap type="experience" id="experienceResultSet">
+		<result column="EXPERIENCE_NO" property="experienceNo" />
+		<result column="CATEGORY" property="category" />
+		<result column="EXPERIENCE_DATE" property="experienceDate" />
+		<result column="EXPERIENCE_TIME" property="experienceTime" />
+		<result column="EXPERIENCE_DIVIDE" property="experienceDivide" />
+		<result column="PRICE" property="price" />
+		<result column="EXPERIENCE_PEOPLE" property="experiencePeople" />
+		<result column="USER_NO" property="userNo" />
+		<result column="USER_NAME" property="userName" />
+ 	</resultMap>
+ 	
+	<resultMap type="exreview" id="exrevieweResultSet">
       <result column="EXPERIENCE_REVIEW_NO" property="experienceRevieweNo" />
       <result column="EXPERIENCE_NO" property="experienceNo" />
-      <result column="CATEGORY" property="category" />
+      <result column="EXPERIENCE_CATEGORY" property="experienceCategory" />
       <result column="EXPERIENCE_CONTENT" property="experienceContent" />
+      <result column="USER_NO" property="userNo" />
+      <result column="USER_ID" property="userId" />
    </resultMap>
    
    
@@ -181,6 +183,9 @@
 	    		MEMBER USING(USER_NO)
 			WHERE
 				USER_NO = #{userNo}
+			AND
+               TO_DATE(EXPERIENCE_DATE) &lt; TO_DATE(SYSDATE)
+			
 	</select>
 	
 	<insert id="insertreview" parameterType="exreview" >
@@ -190,14 +195,14 @@
 				(
 				EXPERIENCE_REVIEW_NO,
 				EXPERIENCE_NO,
-				CATEGORY,
+				EXPERIENCE_CATEGORY,
 				EXPERIENCE_CONTENT
 				)
 				VALUES
 				(
 				SEQ_EXPERIENCE_REVIEW_NO.NEXTVAL,
 				#{experienceNo},
-				#{category},
+				#{experienceCategory},
 				#{experienceContent}
 				)
 	</insert>
@@ -206,19 +211,23 @@
 		SELECT
 				EXPERIENCE_REVIEW_NO,
 				EXPERIENCE_NO,
-				CATEGORY,
+				EXPERIENCE_CATEGORY,
 				EXPERIENCE_CONTENT,
+				USER_NO,
 				USER_ID
 			FROM
 				EXPERIENCE_REVIEW
 			JOIN
-				EXPERIENCE USING(EXPERIENCE_NO)
+				EXPERIENCE_RESERVE USING(EXPERIENCE_NO)
 			JOIN
 				MEMBER USING(USER_NO)
 			
-				
-				<!-- 여기 기간 조건 -->
 	</select>
+	
+	
+	
+	
+	
 	
 	
 	
