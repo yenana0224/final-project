@@ -40,14 +40,6 @@ public interface CompanionService {
 
 	List<Course> selectCourse(Course course);
 	
-	int myListCount(int userNo);
-	
-	List<Companion> myList(int userNo, PageInfo pi);
-	
-	int myRequestCount(int userNo);
-	
-	List<Companion> myRequest(int userNo, PageInfo pi);
-
 	List<CompanionReply> selectReply(int companionNo);
 
 	int insertReply(CompanionReply companionReply);

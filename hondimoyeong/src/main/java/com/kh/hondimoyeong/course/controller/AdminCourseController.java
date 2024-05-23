@@ -9,11 +9,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,19 +24,20 @@ import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
+@RequestMapping("admin/course")
 @RequiredArgsConstructor
 public class AdminCourseController {
 
 	private final CourseServiceImpl courseService;
 	
-	@GetMapping("admin/course")
-	public String allCourseList(Model model) {
-		model.addAttribute("list", courseService.allCourseList());
-		return "admin/course/courseList";
+	@GetMapping()
+	public ModelAndView allCourseList(ModelAndView mv) {
+		mv.addObject("list", courseService.allCourseList()).setViewName("admin/course/courseList");
+		return mv;
 	}
 	
-	@GetMapping("admin/course/{courseIndex}")
+	@GetMapping("/{courseIndex}")
 	public ModelAndView courseDetail(@PathVariable int courseIndex,
 									 ModelAndView mv) {
 		
@@ -43,7 +45,7 @@ public class AdminCourseController {
 		return mv;
 	}
 	
-	@GetMapping("admin/course/update/{courseIndex}")
+	@GetMapping("/update/{courseIndex}")
 	public String courseUpdateForm(@PathVariable int courseIndex,
 									Model model) {
 		
@@ -52,7 +54,7 @@ public class AdminCourseController {
 		return "admin/course/courseUpdateForm";
 	}
 	
-	@PostMapping("admin/course/update/updateCourse")
+	@PostMapping("/update/updateCourse")
 	public String courseUpdate(Course course,
 							   MultipartFile stamp,
 							   MultipartFile detailMap,

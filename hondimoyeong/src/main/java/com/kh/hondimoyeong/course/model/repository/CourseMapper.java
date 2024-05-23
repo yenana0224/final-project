@@ -10,7 +10,7 @@ import com.kh.hondimoyeong.course.model.vo.CourseFile;
 @Mapper
 public interface CourseMapper {
 
-	List<Course> allCourse();
+	List<Course> allCourseList();
 	
 	int loadFromApi(List<Course> list);
 	

@@ -9,7 +9,7 @@ import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
 
-
+/*
 @Repository
 public class CourseRepository {
 	
@@ -49,3 +49,4 @@ public class CourseRepository {
 		return sqlSession.selectList("courseMapper.userCourse", userNo);
 	}
 }
+*/

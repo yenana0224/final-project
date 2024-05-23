@@ -65,22 +65,6 @@ public class CompanionRepository {
 	public List<Course> selectCourse(SqlSessionTemplate sqlSession, Course course) {
 		return sqlSession.selectList("companionMapper.selectCourse", course);
 	}
-	
-	public int myListCount(SqlSessionTemplate sqlSession, int userNo){
-		return sqlSession.selectOne("companionMapper.myListCount", userNo);
-	}
-	
-	public List<Companion> myList(SqlSessionTemplate sqlSession, int userNo, RowBounds rowBounds){
-		return sqlSession.selectList("companionMapper.myList", userNo, rowBounds);
-	}
-	
-	public int myRequestCount(SqlSessionTemplate sqlSession, int userNo) {
-		return sqlSession.selectOne("companionMapper.myRequestCount", userNo);
-	}
-	
-	public List<Companion> myRequest(SqlSessionTemplate sqlSession, int userNo, RowBounds rowBounds){
-		return sqlSession.selectList("companionMapper.myRequest", userNo, rowBounds);
-	}
 
 	public List<CompanionReply> selectReply(SqlSessionTemplate sqlSession, int companionNo) {
 		return sqlSession.selectList("companionMapper.selectReply", companionNo);

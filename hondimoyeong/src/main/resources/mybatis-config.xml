@@ -33,6 +33,7 @@
 		<mapper resource="mapper/course-mapper.xml"/>
 		<mapper resource="mapper/notice-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>		
+		<mapper resource="mapper/member-companion-mapper.xml"/>	
 		<mapper resource="mapper/companion-mapper.xml"/>
 		<mapper resource="mapper/experience-mapper.xml"/>
 		<mapper resource="mapper/review-mapper.xml"/>

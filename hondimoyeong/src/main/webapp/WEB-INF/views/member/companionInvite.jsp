@@ -187,13 +187,14 @@
                 width:fit-content;
                 margin: 0 auto;
             }
-            
-            .page-item.active .page-link {
+          
+            .active {
                 background-color: #FF9843 !important;
                 border: 1px solid #FF9843 !important;
                 color: #FFFFFF !important;
                 border-radius: 10px;
             }
+
             
             .page-link {
             	width : 40px;
@@ -225,33 +226,51 @@
             
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
-	            	    <div class="acompany-btn">신청확인</div>
+	            	    <div class="acompany-btn" id="${board.companionNo }">신청확인</div>
 	            		<div class="box2">제목 : ${board.companionTitle} </div>
-	            		<div class="box3"> ${board.courseName} 날짜 : ${board.companionDate} 인원 : ${board.companionNum}/${board.companionPeople }</div>
+	            		<div class="box3"> ${board.courseName} | 날짜 : ${board.companionDate} | 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
 	            </c:forEach>
 	            
 	            <div class="box4"> 
 		            <c:if test="${pageInfo.currentPage gt 1}">
-		            	<a class="page-link" href="#"> < </a>
+		            	<a class="page-link" href="companionInvite?page=${pageInfo.currentPage - 1}"> < </a>
 		            </c:if>
 		            <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
 		            	<c:choose>
 							<c:when test="${pageInfo.currentPage ne i }">
-								<a class="page-link" href="#"> ${i} </a>
+								<a class="page-link" href="companionInvite?page=${i}"> ${i} </a>
 							</c:when>    
 							<c:otherwise>
-								<a class="page-link" href="#">${i}</a>
+								<a class="page-link active" href="companionInvite?page=${i}">${i}</a>
 							</c:otherwise>        	
 		            	</c:choose>
 		            </c:forEach>
-		            <c:if test="${pageInfo.currentPage ne pageInfo.maxPage}">
-		            	<a class="page-link" href="#"> > </a>
+		            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
+		            	<a class="page-link" href="companionInvite?page=${pageInfo.currentPage +1 }"> > </a>
 		            </c:if>	
 	            </div>
             </div>
-            
         </div>
+        
+        <script>
+        
+	        $(document).on('click', '.acompany-btn', function() {
+	        	
+	        	$.ajax({
+	        		url : 'companions/acompany',
+	        		data : {companionNo : $(this).attr('id')},
+	        		success : (data) => {
+	        			console.log(data);
+	        		}
+	        		
+	        	})
+	        })
+	        
+	        
+
+        </script>
+        
     </div>
     
     

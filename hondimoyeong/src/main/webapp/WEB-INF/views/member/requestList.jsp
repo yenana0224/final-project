@@ -249,20 +249,20 @@
 	            
 	            <div class="box4"> 
 		            <c:if test="${pageInfo.currentPage gt 1}">
-		            	<a class="page-link" href="#"> < </a>
+		            	<a class="page-link" href="myRequest?page=${i - 1}"> < </a>
 		            </c:if>
 		            <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
 		            	<c:choose>
 							<c:when test="${pageInfo.currentPage ne i }">
-								<a class="page-link" href="#"> ${i} </a>
+								<a class="page-link" href="myRequest?page=${i}"> ${i} </a>
 							</c:when>    
 							<c:otherwise>
-								<a class="page-link" href="#">${i}</a>
+								<a class="page-link active" href="#">${i}</a>
 							</c:otherwise>        	
 		            	</c:choose>
 		            </c:forEach>
-		            <c:if test="${pageInfo.currentPage ne pageInfo.maxPage}">
-		            	<a class="page-link" href="#"> > </a>
+		            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
+		            	<a class="page-link" href="myRequest?page=${i + 1}"> > </a>
 		            </c:if>	
 	            </div>
             </div>

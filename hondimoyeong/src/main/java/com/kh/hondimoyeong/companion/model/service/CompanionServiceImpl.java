@@ -103,32 +103,6 @@ public class CompanionServiceImpl implements CompanionService {
 		return companionRepository.selectCourse(sqlSession, course);
 	}
 
-	@Override
-	public int myListCount(int userNo) {
-		return companionRepository.myListCount(sqlSession, userNo);
-	}
-
-	@Override
-	public List<Companion> myList(int userNo, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return companionRepository.myList(sqlSession, userNo, rowBounds);
-	}
-
-	@Override
-	public int myRequestCount(int userNo) {
-		return companionRepository.myRequestCount(sqlSession, userNo);
-	}
-
-	@Override
-	public List<Companion> myRequest(int userNo, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return companionRepository.myRequest(sqlSession, userNo, rowBounds);
-	}
-
-	
-	
 	public List<CompanionReply> selectReply(int companionNo) {
 		return companionRepository.selectReply(sqlSession, companionNo);
 	}

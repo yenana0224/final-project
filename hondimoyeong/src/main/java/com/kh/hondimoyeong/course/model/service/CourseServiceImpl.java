@@ -3,10 +3,9 @@ package com.kh.hondimoyeong.course.model.service;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.hondimoyeong.course.model.repository.CourseRepository;
+import com.kh.hondimoyeong.course.model.repository.CourseMapper;
 import com.kh.hondimoyeong.course.model.vo.Course;
 import com.kh.hondimoyeong.course.model.vo.CourseFile;
 
@@ -16,52 +15,51 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService{
 	
-	private final CourseRepository courseRepository;
-	private final SqlSessionTemplate sqlSession;
+	private final CourseMapper courseMapper;
 
 	@Override
 	public List<Course> allCourseList() {
-		return courseRepository.allCourseList(sqlSession);
+		return courseMapper.allCourseList();
 	}
 
 	@Override
 	public int loadFromApi(List<Course> list) {
-		return courseRepository.loadFromApi(sqlSession, list);
+		return courseMapper.loadFromApi(list);
 	}
 
 	@Override
 	public Course courseDetail(int courseIndex) {
-		return courseRepository.courseDetail(sqlSession, courseIndex);
+		return courseMapper.courseDetail(courseIndex);
 	}
 
 	@Override
 	public int updateCourse(Course course) {
-		return courseRepository.updateCourse(sqlSession, course);
+		return courseMapper.updateCourse(course);
 	}
 
 	@Override
 	public int updateStamp(CourseFile stamp) {
-		return courseRepository.updateStamp(sqlSession, stamp);
+		return courseMapper.updateStamp(stamp);
 	}
 
 	@Override
 	public int updateDetailMap(CourseFile detailMap) {
-		return courseRepository.updateDetailMap(sqlSession, detailMap);
+		return courseMapper.updateDetailMap(detailMap);
 	}
 
 	@Override
 	public int updatePhoto(List<CourseFile> photoList) {
-		return courseRepository.updatePhoto(sqlSession, photoList);
+		return courseMapper.updatePhoto(photoList);
 	}
 
 	@Override
 	public List<CourseFile> stampList() {
-		return courseRepository.stampList(sqlSession);
+		return courseMapper.stampList();
 	}
 
 	@Override
 	public List<Course> userCourse(int userNo) {
-		return courseRepository.userCourse(sqlSession, userNo);
+		return courseMapper.userCourse(userNo);
 	}
 	
 	
