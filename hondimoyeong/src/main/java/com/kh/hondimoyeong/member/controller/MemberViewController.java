@@ -9,22 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.hondimoyeong.companion.model.service.MemberCompanionService;
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.companion.model.service.CompanionService;
 import com.kh.hondimoyeong.course.model.service.CourseService;
 import com.kh.hondimoyeong.member.model.vo.Member;
 
-import lombok.RequiredArgsConstructor;
-
 @Controller
-@RequiredArgsConstructor
 public class MemberViewController {
 	
-	private final CourseService courseService;
-	private final MemberCompanionService companionService;
-	
+	@Autowired
+	private CourseService courseService;
 	@Autowired
 	private CompanionService companionService;
 	
