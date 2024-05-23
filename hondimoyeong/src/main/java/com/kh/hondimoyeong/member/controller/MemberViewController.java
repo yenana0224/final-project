@@ -20,13 +20,10 @@ public class MemberViewController {
 	
 	@Autowired
 	private CourseService courseService;
-	
 	@Autowired
 	private CompanionService companionService;
 	
 	// 화면
-	
-	
 	@RequestMapping("login")
 	public String login() {
 		return "member/login";
