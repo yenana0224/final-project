@@ -262,12 +262,23 @@
             <div class="detail_box_left"> <!-- 제목, 작성자 감싸는 div -->
                 <div class="detail_title"><span>${companion.companionTitle}</span></div>
                 <div class="detail_info">
-                    <div class="detail_info1"><a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a></div>
+                    <div class="detail_info1">
+                    	<a>작성자 : ${companion.userName} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${companion.count}</a>
+                    </div>
                 </div>
             </div>
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
-                <div class="detail_right_btn"><button class="detail_btn">신청하기</button></div>
+	            <c:choose>
+	            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
+	                	<div class="detail_right_btn">
+	                		<button class="detail_btn" disabled style="background-color: grey;">마감</button>
+	                	</div>
+	            	</c:when>
+	            	<c:otherwise>
+		                <div class="detail_right_btn"><button class="detail_btn">신청하기</button></div>
+	            	</c:otherwise>
+	            </c:choose>
             </div>
         </div>
 
