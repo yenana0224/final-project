@@ -187,8 +187,13 @@
                 color: #727272;
                 padding-left: 7px;
             }            
-
-
+		    #customerListTable tbody td {
+		        font-size: 14px;
+		    }
+   		    #customerListTable th {
+		        font-size: 15px;
+		        font-weight: bold;
+		    }
 
 
     </style>    

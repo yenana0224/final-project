@@ -159,30 +159,34 @@
 	
 	
 	
-	
-	<select id="reservationSelectListCount" resultType="_int">
-		SELECT 
-			COUNT(*) 
-		FROM 
-			EXPERIENCE_RESERVE
+		
+	<select id="reservationSelectListCount" resultType="int">
+	    SELECT 
+	    		COUNT(*) 
+	      FROM 
+	    		EXPERIENCE_RESERVE
+	     WHERE 
+	    		USER_NO = #{userNo}
 	</select>
 	
 	
-	<select id="reservationSelectList">
-		SELECT
-		    EXPERIENCE_NO,
-		    CATEGORY,
-		    EXPERIENCE_DATE,
-		    EXPERIENCE_TIME,
-		    EXPERIENCE_DIVIDE,
-		    PRICE,
-		    EXPERIENCE_PEOPLE,
-		    USER_NO
-		FROM
-		    EXPERIENCE_RESERVE
-		WHERE
-		    USER_NO = #{userNo}
+	<select id="reservationSelectList" resultMap="experienceResultSet">
+	    SELECT
+	        EXPERIENCE_NO,
+	        CATEGORY,
+	        EXPERIENCE_DATE,
+	        EXPERIENCE_TIME,
+	        EXPERIENCE_DIVIDE,
+	        PRICE,
+	        EXPERIENCE_PEOPLE,
+	        USER_NO
+	    FROM
+	        EXPERIENCE_RESERVE
+	    WHERE
+	        USER_NO = #{userNo}
+	    ORDER 
+	       BY
+	        EXPERIENCE_DATE DESC
 	</select>
-
 
 </mapper>
