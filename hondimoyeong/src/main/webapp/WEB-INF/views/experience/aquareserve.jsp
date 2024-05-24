@@ -196,6 +196,16 @@
 	let num = 1;
 	let price = $('#aquaprice').children('#span1').text();
 	
+	window.onload = function(){
+		if ($('#aquaprice').children('#span1').text() == 36000 ) {
+			 $('#sub').attr("disabled", true);	 
+		}
+		else if($('#aquaprice').children('#span1').text() < 36000){
+			$('#btn1').attr("disabled", true);
+		}
+		
+	}
+	
 	
 	$(function(){
 		$('#btn1').click(() => {
@@ -225,10 +235,7 @@
 			
 			});
 		})
-	
-	
-		
-		
+
 		
 		$('#sub').click(function(){
 			//var num = $('#aquaprice').children('#span1').text();
@@ -238,11 +245,14 @@
 			document.getElementById("span1").textContent = newPrice;
 			document.getElementById("person1").textContent = newperson
 			
+			console.log("dfdf" + $('#aquaprice').children('#span1').text())
+			
 			
 			num = $('#aquaprice').children('#person1').text();
 			$('#aquaprice').children('#person1').text(num);
 			
 			$('#person1-val').val(Number(num));
+			
 			console.log($('#person1-val').val());
 			
 			
@@ -251,25 +261,20 @@
 			
 			$('#price').val(Number(price));
 			
+			console.log($('#price').val());
 			
-			console.log($('#price').val())
+			if ($('#aquaprice').children('#span1').text() == 36000 ) {
+				 $('#sub').attr("disabled",true);
+			}
 			
-			 if (newPrice <= 36000 ) {
-			        newPrice = 36000;
-			        document.getElementById("person1").textContent = 1;
-			    }
-
-			    // 새로운 값을 HTML 요소에 업데이트
-			    $('#aquaprice').children('#span1').text(newPrice);
-			    $('#aquaprice').children('#person1').text(newPerson);
-
-			    // 숨겨진 입력 필드 업데이트
-			    $('#person1-val').val(newPerson);
-			    $('#price').val(newPrice);
+			if ($('#aquaprice').children('#span1').text() < 36000 ) {
+				
+				$('#sub').removeAttr('disabled');
+			
+			}
 			
 			
-			
-						
+					
 		});
 		
 		$('#add').click(function(){
@@ -294,6 +299,18 @@
 			
 			
 			//console.log($('#price').val())
+			
+			if ($('#aquaprice').children('#span1').text() != 36000 ) {
+				
+				$('#sub').removeAttr('disabled');
+			
+			}
+			
+			
+			console.log($('#person1-val').val());
+			console.log($('#price').val())
+			
+			
 			
 			
 			

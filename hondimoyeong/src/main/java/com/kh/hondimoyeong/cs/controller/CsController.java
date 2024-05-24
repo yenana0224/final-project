@@ -69,7 +69,7 @@ public class CsController {
 		}
 	}
 	
-	@PostMapping("updateForm.notice")
+	@GetMapping("updateForm.notice")
 	public ModelAndView updateForm(int noticeNo, ModelAndView mv) {
 		mv.addObject("notice", noticeService.selectNotice(noticeNo)).setViewName("cs/noticeUpdateForm");
 		return mv;

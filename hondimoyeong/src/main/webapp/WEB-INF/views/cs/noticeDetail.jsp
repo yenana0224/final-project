@@ -134,6 +134,7 @@
     <div id="container">
 
         <div class="cs_title"><a class="cs_title_a">고객센터</a></div>
+        <input type="hidden" value="${notice.noticeNo}" name="userNo" />
 
         <div class="cs_menu" align="center">
             <button class="cs_menu_notice" onclick="noticeList();">공지사항</button>
@@ -154,14 +155,15 @@
         <div class="detail_btn_box" align="center">
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.status == 'A'}">
-	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+	            <!-- <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a> -->
+	            <a class="hdmy_detail_btn" href="updateForm.notice?noticeNo=${notice.noticeNo}">수정z</a>
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
             </c:if>
         </div>
-        
+        <!-- 
 		<form action="" id="postForm" method="post">
 		    <input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
-		</form>
+		</form> -->
     </div> <!-- container 끝 -->
 <jsp:include page="../common/footer.jsp"/>
 

@@ -6,16 +6,17 @@
 <head>
 <meta charset="UTF-8">
     <title>동행신청 내역</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+ 	
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
     <style>
             div{
                 box-sizing : border-box;
-                background-color: #ffffff;
+                margin : 0;
+                padding : 0
             }          
         
             #wrap{
@@ -62,7 +63,6 @@
 
             }
 
-
             .detailBox
             {
                 width: 700px;
@@ -70,7 +70,7 @@
                 margin-left: 50px;
             }
            
-            .background-Box{
+			.background-Box{
                 width: 650px;
                 height: 80px;
                 padding-top: 8px;
@@ -121,6 +121,7 @@
                 background-color: #f7d3a0;
                 padding-left : 20px;
             }
+
             
             .acompany-btn{
             	width : 100px;
@@ -132,14 +133,14 @@
             	text-align : center;
             	padding-top : 10px;
             	vertical-align : middle;
+            	background-color : white;
             }
             
             .acompany-btn:hover{
             	cursor : pointer;
             }
             
-            
-	        .box4 {
+           .box4 {
 	            width: 400px;
 	            height: 100px;
 	            border-radius: 10px;
@@ -148,7 +149,8 @@
 	            border : 1px solid #f7d3a0;
 	            margin-bottom: 10px;
 	        }
-	
+
+	        
 	        .status-area{
 	            margin: 5px 0px 5px 20px;
 	            width: 100px;
@@ -159,7 +161,7 @@
 	            font-weight: bold;
 	            text-align: center;
 	        }
-	
+
 	        .userInfo{
 	            margin: 5px 0px 0px 20px;
 	            font-size: 20px;
@@ -180,6 +182,7 @@
 	            text-align: center;
 	            border : none;
 	        }
+	        
 	
 	        .yes{
 	            background-color: #f7d3a0;
@@ -189,20 +192,18 @@
 	            background-color : lightgray;
 	        }
 
-
-            .pagination {
+	        .pagination {
                 width:fit-content;
                 margin: 0 auto;
             }
-          
-            .active {
+
+           .active {
                 background-color: #FF9843 !important;
                 border: 1px solid #FF9843 !important;
                 color: #FFFFFF !important;
                 border-radius: 10px;
             }
 
-            
             .page-link {
             	width : 40px;
             	height : 40px;
@@ -218,6 +219,7 @@
                 border-radius: 10px !important;
             }
 
+
     </style>    
 </head>
 <body>
@@ -227,10 +229,9 @@
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 			<a href="myRequest?page="> 나의 신청내역 보기 </a>
-			
+
             <div id="titleBox">내가 쓴 동행 게시글</div>
             <div class="detailBox">
-            
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
 	            	    <div class="acompany-btn" id="${board.companionNo }" data-toggle="modal" data-target="#myModal">신청확인</div>
@@ -238,32 +239,7 @@
 	            		<div class="box3"> ${board.courseName} | 날짜 : ${board.companionDate} | 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
 	            </c:forEach>
-	            
-	              <!-- The Modal -->
-				  <div class="modal" id="myModal">
-				    <div class="modal-dialog">
-				      <div class="modal-content">
-				      
-				        <!-- Modal Header -->
-				        <div class="modal-header">
-				          <h4 class="modal-title">신청자 목록 확인</h4>
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        </div>
-				        
-				        <!-- Modal body -->
-				        <div class="modal-body">
-				          
-				        </div>
-				        
-				        <!-- Modal footer -->
-				        <div class="modal-footer">
-				          <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-				        </div>
-				        
-				      </div>
-				    </div>
-				  </div>
-	            
+
 	            <div class="box4"> 
 		            <c:if test="${pageInfo.currentPage gt 1}">
 		            	<a class="page-link" href="companionInvite?page=${pageInfo.currentPage - 1}"> < </a>
@@ -283,7 +259,34 @@
 		            </c:if>	
 	            </div>
             </div>
+
         </div>
+        
+        <!-- The Modal -->
+	  <div class="modal" id="myModal">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	      
+	        <!-- Modal Header -->
+  		   <div class="modal-header">
+	          <h4 class="modal-title">신청자 목록 확인</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body">
+	          
+	        </div>
+	        
+	        <!-- Modal footer -->
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+	        </div>
+	        
+	      </div>
+	    </div>
+	  </div>  
+	            
         
         <script>
         
@@ -299,32 +302,94 @@
 	        			
 	        			for(let i in data){
 	        				
-	        				if(data[i].status == 'N') status = '신청중'
-	        				else if(data[i].statuse == 'A') status = '참여'
-	        				else status = '취소'
-	        				
-		        			user += '<div class="box4">'
-		        		          +	  '<div class="status-area">'
-		        		          +		status
-		        		          +	  '</div>'
-		        		          +   '<div class="userInfo">'
-		        		          + 	data[i].userName
-		        		          +   '</div>'
-		        		          +   '<div class="btn-area">'
-		        		          +     '<button class="status yes">수락</button>'
-		        		          +     '<button class="status no">거절</button>'  
-		        		          +   '</div>'
-		        		    	  + '</div>'
-	        			}
+	        				if(data[i].status == 'N') {
+	        					status = '신청중';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          +   '<div class="btn-area">'
+		  		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
+		  		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
+		  		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
+		  		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
+		  		        		          +   '</div>'
+		  		        		    	  + '</div>'
+	        				} else if (data[i].status == 'A' ) {
+	        					status = '참여';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          + '</div>'
+		  		        		          
+	        				} else {
+	        					status = '취소';
+	        					
+	        					user += '<div class="box4">'
+	  		        		          +	  '<div class="status-area">'
+	  		        		          +		status
+	  		        		          +	  '</div>'
+	  		        		          +   '<div class="userInfo">'
+	  		        		          + 	data[i].userName
+	  		        		          +   '</div>'  
+	  		        		          + '</div>'  
+	        				}
 
 	        			$('.modal-body').html(user);
+	        			}
 	        		}
 	        		
-	        	})
+	        	});
+	        	
 	        })
 	        
-	        
-
+        </script>
+        
+        <script>
+        
+        	function permission(){
+        		
+        		const user = $('.userNo').attr('id');
+        		const companion = $('.companionNo').attr('id');
+        		
+        		$.ajax({
+        			url : 'permission',
+        			data : {
+        				userNo : user,
+        				companionNo : companion
+        			},
+        			success : (data) => {
+        				console.log(data);
+        			}
+        		})
+        	}
+        	
+        	function rejection(){
+        		
+        		const user = $('.userNo').attr('id');
+        		const companion = $('.companionNo').attr('id');
+        		
+        		$.ajax({
+        			url : 'rejection',
+        			data : {
+        				userNo : user,
+        				companionNo : companion
+        			},
+        			success : (data) => {
+        				console.log(data);
+        			}
+        		})
+        	}
+        
         </script>
         
     </div>

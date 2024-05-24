@@ -78,7 +78,7 @@ public class HanlasanController {
 		return "experience/kakaoSuccess";
 	}
 	
-	@PostMapping("exreview")
+	@PostMapping("exreviewh")
 	public String exriview(Exreview exreview, HttpSession session) {
 		
 		System.out.println("쓴리뷰" + exreview);
@@ -90,9 +90,10 @@ public class HanlasanController {
 		
 		int exre = reserveService.insertreview(exreview);
 		
-		session.setAttribute("alert", "작성완료");
-		
-		return "redirect:";
+		if(exre > 0) {
+			session.setAttribute("alertMsg", "작성되었습니다!");
+		}
+		return "redirect:hanlasan";
 	}
 	 
 	

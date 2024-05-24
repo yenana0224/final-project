@@ -17,8 +17,13 @@ public interface MemberCompanionService {
 	
 	List<Companion> myRequest(int userNo, PageInfo pi);
 	
-	List<CompanionMember> appliList(int companionNo);
+	List<CompanionMember> appliList(HashMap<String, Integer>data);
 	
 	int accompanyRequest(HashMap<String, Integer>data);
+	
+	int alram(int userNo);
 
+	int memberPermission(HashMap<String, Integer>data);
+	
+	int memberRejection(HashMap<String, Integer>data);
 }
