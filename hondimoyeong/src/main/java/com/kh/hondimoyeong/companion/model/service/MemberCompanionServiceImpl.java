@@ -53,4 +53,11 @@ public class MemberCompanionServiceImpl implements MemberCompanionService {
 		return companionMapper.accompanyRequest(data);
 	}
 
+	@Override
+	public int alram(int userNo) {
+		return companionMapper.alram(userNo);
+	}
+	
+	
+
 }

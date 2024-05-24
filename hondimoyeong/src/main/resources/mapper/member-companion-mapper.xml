@@ -120,9 +120,32 @@
 		JOIN
 			MEMBER M ON (B.USER_NO = M.USER_NO)
 		WHERE
-			COMPANION_NO = (SELECT COMPANION_NO FROM COMPANION_BRIDGE WHERE USER_NO = 3 AND STATUS = 'W')
+			COMPANION_NO = (SELECT COMPANION_NO FROM COMPANION_BRIDGE WHERE USER_NO = #{userNo} AND STATUS = 'W')
 		 AND
 		    B.STATUS NOT IN 'W'
 	</select>
+	
+	<select id="alram" parameterType="_int" resultType="_int">
+	SELECT
+	    COUNT(B.USER_NO)
+	 FROM
+	     COMPANION_BRIDGE B
+	 JOIN
+	     (SELECT
+	          COMPANION_NO,
+	          USER_NO,
+	          STATUS
+	     FROM
+	          COMPANION_BRIDGE
+	    WHERE
+	          USER_NO = #{userNo}
+	      AND
+	          STATUS = 'W') A ON (B.COMPANION_NO = A.COMPANION_NO)
+	WHERE
+	     B.STATUS = 'N'
+
+	</select>
+	
+	
 	
 </mapper>

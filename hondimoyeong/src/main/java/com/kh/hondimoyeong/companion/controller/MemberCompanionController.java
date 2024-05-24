@@ -66,13 +66,8 @@ public class MemberCompanionController {
 		System.out.println(MemberCompanionService.myRequest(userNo, pi));
 		return "member/requestList";
 	}
-	
-	@ResponseBody
-	@GetMapping(value="companions/acompany", produces="application/json; charset=UTF-8")
-	public String accompanyList(int companionNo) {
 
-		return new Gson().toJson(MemberCompanionService.appliList(companionNo));
-	}
+	
 	
 
 }

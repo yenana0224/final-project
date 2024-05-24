@@ -38,6 +38,7 @@
         .header_top_menu{
             width: 1200px;
             height: 30px;
+            
         }
         
         .header_menubar{
@@ -139,6 +140,23 @@
             height: auto;
             background-color: rgba(255, 255, 255, 0.815);
         }
+        
+        #alram-area {
+        	display : inline-block;
+        	width : 20px;
+        	height : 20px;
+        	background-color : red;
+        	color : white;
+        	font-size : 12px;
+        	font-weight : bold;
+        	text-align : center;
+        	border : 1px solid red;
+        	border-radius : 100px;
+        }
+        
+        #alram-area:hover{
+        	cursor : pointer;
+        }
     
     </style>
 </head>
@@ -167,6 +185,9 @@
 				    <c:otherwise>
 				        <!-- 로그인 후 -->
 				        <div class="header_menubar">
+				        	
+				        	<span id="alram-area" onclick="location.href='companionInvite?page='"> </span>
+				        	
 					        <label><b style="color:#FF9843">${ sessionScope.loginUser.userName }</b>님 환영합니다!</label> 
 
 					        <c:choose>
@@ -180,6 +201,7 @@
 					        </c:choose>
 					        <a href="list.notice">고객센터</a>
 					        <a href="logout.member">로그아웃</a>
+				        	
 						</div>
            		 	</c:otherwise>
                 </c:choose>              
@@ -209,6 +231,26 @@
             </div>
         </div>
     </div> <!-- header 끝 -->
+    
+    <script>
+
+    	$.ajax({
+    		url : 'alram',
+    		data : {userNo : ${sessionScope.loginUser.userNo} },
+    		success : (data) => {
+    			
+    			if(data != '0' ){
+	    			$('#alram-area').html('<span>' + data +'</span>');				
+    			} else {
+    				$('#alram-area').css('background-color', 'white');
+    				$('#alram-area').css('border', 'white');
+    			}
+    			
+    		}
+    		
+    	})
+
+    </script>
     
 </body>
 </html>

@@ -20,5 +20,7 @@ public interface MemberCompanionService {
 	List<CompanionMember> appliList(int companionNo);
 	
 	int accompanyRequest(HashMap<String, Integer>data);
+	
+	int alram(int userNo);
 
 }
