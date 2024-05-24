@@ -75,11 +75,10 @@ public class CompanionServiceImpl implements CompanionService {
 	public int insert(Companion companion) {
 		
 		int result = 1;
-
 		if(companionRepository.insert(sqlSession, companion) > 0) {
 			result = result * companionRepository.insertBridge(sqlSession, companion);
 		}
-
+		
 		return result;
 	}
 

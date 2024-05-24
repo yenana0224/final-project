@@ -23,4 +23,6 @@ public interface MemberCompanionMapper {
 	int accompanyRequest(HashMap<String, Integer>data);
 	
 	List<CompanionMember> appliList(int companionNo);
+	
+	int alram(int userNo);
 }
