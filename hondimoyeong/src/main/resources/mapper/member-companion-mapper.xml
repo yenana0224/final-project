@@ -41,13 +41,13 @@
 		    COMPANION_TITLE,
 		    COMPANION_PEOPLE,
 		    (SELECT
-		          COUNT(*)
+		          COUNT(USER_NO)
 		       FROM
 		          COMPANION_BRIDGE B
 		     WHERE
 		          B.COMPANION_NO = P.COMPANION_NO
 		       AND
-		          STATUS = 'A') COMPANION_NUM
+		          STATUS IN ('A', 'W')) COMPANION_NUM
 	  FROM
 	      COMPANION P
 	  JOIN
@@ -111,18 +111,31 @@
 		     )
 	</insert>
 	
-	<select id="appliList" parameterType="_int" resultType="companionMember">
-	SELECT
-			USER_NAME userName,
-		    B.STATUS
-		FROM
-			COMPANION_BRIDGE B
-		JOIN
-			MEMBER M ON (B.USER_NO = M.USER_NO)
+	<select id="appliList" parameterType="hashmap" resultType="companionMember">
+		SELECT
+	         B.COMPANION_NO companionNo,
+	         B.USER_NO userNo,
+	         USER_NAME userName,
+	         B.STATUS
+		 FROM
+		     COMPANION_BRIDGE B
+	     JOIN
+			 MEMBER M ON (B.USER_NO = M.USER_NO)    
+		 JOIN
+		     (SELECT
+		          COMPANION_NO,
+		          USER_NO,
+		          STATUS
+		     FROM
+		          COMPANION_BRIDGE
+		    WHERE
+		          USER_NO = #{userNo}
+		      AND
+		          STATUS = 'W') A ON (B.COMPANION_NO = A.COMPANION_NO)
 		WHERE
-			COMPANION_NO = (SELECT COMPANION_NO FROM COMPANION_BRIDGE WHERE USER_NO = #{userNo} AND STATUS = 'W')
-		 AND
-		    B.STATUS NOT IN 'W'
+		     B.STATUS NOT IN 'W'
+	     AND
+	        B.COMPANION_NO = #{companionNo}
 	</select>
 	
 	<select id="alram" parameterType="_int" resultType="_int">
@@ -145,6 +158,28 @@
 	     B.STATUS = 'N'
 
 	</select>
+	
+	<update id="memberPermission" parameterType="hashMap">
+	UPDATE
+	      COMPANION_BRIDGE
+	  SET
+	     STATUS = 'A'
+	WHERE
+	     COMPANION_NO = #{companionNo}
+	  AND
+	     USER_NO = #{userNo}
+	</update>
+	
+		<update id="memberRejection" parameterType="hashMap">
+	UPDATE
+	      COMPANION_BRIDGE
+	  SET
+	     STATUS = 'C'
+	WHERE
+	     COMPANION_NO = #{companionNo}
+	  AND
+	     USER_NO = #{userNo}
+	</update>
 	
 	
 	

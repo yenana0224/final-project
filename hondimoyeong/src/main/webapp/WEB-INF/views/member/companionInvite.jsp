@@ -8,9 +8,10 @@
     <title>동행신청 내역</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
             div{
@@ -245,9 +246,9 @@
 				      <div class="modal-content">
 				      
 				        <!-- Modal Header -->
-				        <div class="modal-header">
+     				    <div class="modal-header">
 				          <h4 class="modal-title">신청자 목록 확인</h4>
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <button type="button" class="close" data-dismiss="modal">×</button>
 				        </div>
 				        
 				        <!-- Modal body -->
@@ -300,7 +301,7 @@
 	        			for(let i in data){
 	        				
 	        				if(data[i].status == 'N') status = '신청중'
-	        				else if(data[i].statuse == 'A') status = '참여'
+	        				else if(data[i].status == 'A') status = '참여'
 	        				else status = '취소'
 	        				
 		        			user += '<div class="box4">'
@@ -311,8 +312,10 @@
 		        		          + 	data[i].userName
 		        		          +   '</div>'
 		        		          +   '<div class="btn-area">'
-		        		          +     '<button class="status yes">수락</button>'
-		        		          +     '<button class="status no">거절</button>'  
+		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
+		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
+		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
+		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
 		        		          +   '</div>'
 		        		    	  + '</div>'
 	        			}
@@ -323,8 +326,44 @@
 	        	})
 	        })
 	        
-	        
-
+        </script>
+        
+        <script>
+        
+        	function permission(){
+        		
+        		const user = $('.userNo').attr('id');
+        		const companion = $('.companionNo').attr('id');
+        		
+        		$.ajax({
+        			url : 'permission',
+        			data : {
+        				userNo : user,
+        				companionNo : companion
+        			},
+        			success : (data) => {
+        				console.log(data);
+        			}
+        		})
+        	}
+        	
+        	function rejection(){
+        		
+        		const user = $('.userNo').attr('id');
+        		const companion = $('.companionNo').attr('id');
+        		
+        		$.ajax({
+        			url : 'rejection',
+        			data : {
+        				userNo : user,
+        				companionNo : companion
+        			},
+        			success : (data) => {
+        				console.log(data);
+        			}
+        		})
+        	}
+        
         </script>
         
     </div>
