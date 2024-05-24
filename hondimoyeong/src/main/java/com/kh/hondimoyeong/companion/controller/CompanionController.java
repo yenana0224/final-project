@@ -25,16 +25,16 @@ import com.kh.hondimoyeong.companion.model.vo.Companion;
 import com.kh.hondimoyeong.companion.model.vo.CompanionReply;
 import com.kh.hondimoyeong.course.model.vo.Course;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@Slf4j
+@RequiredArgsConstructor
 public class CompanionController {
 	
 	@Autowired
 	private CompanionService companionService;
 	
-	@RequestMapping("companion")
+	@GetMapping("companion")
 	public String selectAll(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		
 		PageInfo pi = Pagination.getPageInfo(companionService.selectListCount(), page, 10, 5);
@@ -44,7 +44,7 @@ public class CompanionController {
 		return "companion/companionList";
 	}
 	
-	@RequestMapping("sort.cmp")
+	@GetMapping("sort.cmp")
 	public String sortCompanion(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		
 		int totalCount = companionService.sortCompanionCount();
@@ -57,7 +57,7 @@ public class CompanionController {
 		return "companion/companionList";
 	}
 	
-	@RequestMapping("detail.cmp")
+	@GetMapping("detail.cmp")
 	public ModelAndView detail(int companionNo, ModelAndView mv) {
 		
 		if(companionService.increaseCount(companionNo) > 0) {
@@ -68,14 +68,14 @@ public class CompanionController {
 		return mv;
 	}
 	
-	@RequestMapping("enrollForm.cmp")
+	@GetMapping("enrollForm.cmp")
 	public String enrollForm(Model model, Course course) {
 		List<Course> courseList = companionService.selectCourse(course);
 		model.addAttribute("courseList", courseList);
 		return "companion/companionInsertForm";
 	}
 	
-	@RequestMapping("insert.cmp")
+	@GetMapping("insert.cmp")
 	public String insert(Companion companion, HttpSession session, Model model) {
 		
 		if(companionService.insert(companion) > 0) {
@@ -107,7 +107,7 @@ public class CompanionController {
 		}
 	}
 	
-	@RequestMapping("delete.cmp")
+	@GetMapping("delete.cmp")
 	public String delete(@ModelAttribute Companion companion, int companionNo, HttpSession session) {
 		if(companionService.delete(companionNo) > 0) {
 			session.setAttribute("alertMsg", "모집글이 삭제되었습니다.");
