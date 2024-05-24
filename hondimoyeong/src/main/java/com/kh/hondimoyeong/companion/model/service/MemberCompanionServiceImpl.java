@@ -44,8 +44,8 @@ public class MemberCompanionServiceImpl implements MemberCompanionService {
 	}
 
 	@Override
-	public List<CompanionMember> appliList(int companionNo) {
-		return companionMapper.appliList(companionNo);
+	public List<CompanionMember> appliList(HashMap<String, Integer>data) {
+		return companionMapper.appliList(data);
 	}
 
 	@Override
@@ -57,6 +57,17 @@ public class MemberCompanionServiceImpl implements MemberCompanionService {
 	public int alram(int userNo) {
 		return companionMapper.alram(userNo);
 	}
+
+	@Override
+	public int memberPermission(HashMap<String, Integer> data) {
+		return companionMapper.memberPermission(data);
+	}
+
+	@Override
+	public int memberRejection(HashMap<String, Integer> data) {
+		return companionMapper.memberRejection(data);
+	}
+	
 	
 	
 

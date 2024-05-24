@@ -13,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class CompanionMember {
 	
+	private int companionNo;
 	private int userNo;
 	private String userName;
 	private String status;
