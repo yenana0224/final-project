@@ -82,6 +82,9 @@ public class MemberRepository {
 	}
 	
 	
+	public int updateCustomer(SqlSessionTemplate sqlSession, Customer customer) {
+		return sqlSession.update("customerMapper.updateCustomer", customer);
+	}
 	
 	
 	
