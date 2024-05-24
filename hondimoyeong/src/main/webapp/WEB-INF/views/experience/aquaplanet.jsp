@@ -109,7 +109,7 @@
 				</div>
 			</div> 
 		</div>
-		
+		<br>
 		
 		<div id="one">
 			<div>
@@ -128,7 +128,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${ reviewa }" var="review">
+					<c:forEach items="${ reviewa }" var="review" end="4">
 						<tr>
 							<td>${ review.userId }</td>
 							<td>${ review.experienceContent }</td>
@@ -155,7 +155,7 @@
 	      <!-- body -->
 	      <div class="modal-body">
 			
-		  	<form action="exreview" method="post">
+		  	<form action="exreviewa" method="post">
 		  	
 		  	  <div class="select">
 		  	  	<label>카테고리</label>                                        

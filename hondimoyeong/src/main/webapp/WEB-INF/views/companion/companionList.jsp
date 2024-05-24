@@ -382,6 +382,7 @@
 		
 		$(function(){
 		    $(document).on('click', '.sortCompanion', function(){
+		    	$('.sortCompanion').css('color', 'red');
 		        $.ajax({
 		            url: 'companions',
 		            type: 'get',
