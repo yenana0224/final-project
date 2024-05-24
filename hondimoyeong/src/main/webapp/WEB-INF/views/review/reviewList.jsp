@@ -264,24 +264,32 @@
         </div>
         
         <div class="list-area">
-        
-        	<c:forEach var="r" items="${review}">
-	            <div class="review_box" align="center">
-	                <input type="hidden" value="${r.reviewNo}" />
-	                <div class="box_course">${r.courseName}</div>
-	                <div class="box_star" data-rating="${r.reviewStar}">${r.reviewStar}</div>
-	                <div class="img_box"><img src="${r.changeName}" class="thumbNail"/></div>
-	                <div class="box_title">${r.reviewTitle}</div>
-	                <div class="box_info">
-	                    <div class="box_write"><a>작성자 : ${r.userName}</a></div>
-	                    <div class="box_count"><a>조회수 : ${r.count}</a></div>
-	                    <div class="box_comment"><a>댓글 : ${r.commentCount}개</a></div>
-	                    <div class="box_date"><a>24.05.23</a></div>
-	                </div>
-	            </div>
-        	</c:forEach>
-
-        
+	        <c:choose>
+		      	<c:when test="${empty review }">
+		      		<thead>
+		      			<tr>
+		      				<th style="text-align:center; "><b>검색 결과가 없습니다.</b></th>
+		      			</tr>
+		      		</thead>
+		      	</c:when>
+		      	<c:otherwise>
+		        	<c:forEach var="r" items="${review}">
+			            <div class="review_box" align="center">
+			                <input type="hidden" value="${r.reviewNo}" />
+			                <div class="box_course">${r.courseName}</div>
+			                <div class="box_star" data-rating="${r.reviewStar}">${r.reviewStar}</div>
+			                <div class="img_box"><img src="${r.changeName}" class="thumbNail"/></div>
+			                <div class="box_title">${r.reviewTitle}</div>
+			                <div class="box_info">
+			                    <div class="box_write"><a>작성자 : ${r.userName}</a></div>
+			                    <div class="box_count"><a>조회수 : ${r.count}</a></div>
+			                    <div class="box_comment"><a>댓글 : ${r.commentCount}개</a></div>
+			                    <div class="box_date"><a>24.05.23</a></div>
+			                </div>
+			            </div>
+		        	</c:forEach>
+		        </c:otherwise>
+	        </c:choose>
 			<div class="hdmy-board_page" id="pagination">
 				<ul class="pagination">
 					<c:choose>

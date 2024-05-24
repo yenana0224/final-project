@@ -278,7 +278,14 @@
 	            	</c:when>
 	            	<c:otherwise>
 		                <div class="detail_right_btn">
-		                	<button class="detail_btn" onclick="connect();">신청하기</button>
+		                <c:choose>
+		                	<c:when test="${empty loginUser}">
+			                	<button class="detail_btn" onclick="noConnect();">신청하기</button>
+		                	</c:when>
+		                	<c:otherwise>
+			                	<button class="detail_btn" onclick="connect();">신청하기</button>
+		                	</c:otherwise>
+		                </c:choose>
 		                </div>
 	            	</c:otherwise>
 	            </c:choose>
@@ -329,6 +336,12 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+	
+	function noConnect(){
+		alert('로그인이 필요한 서비스 입니다.');
+		location.href='${path}/login';
+	}
+	
 	// 목록, 수정, 삭제
 	$(function(){
 		$('.detailBtn').click(function(){
