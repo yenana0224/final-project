@@ -71,7 +71,7 @@
 		color: #FF9843;
 	}
 	
-	    /* 페이징바 */
+	/* 페이징바 */
     .hdmy-board_page{
     	width: 1200px;
     }
