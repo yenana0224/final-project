@@ -154,16 +154,8 @@
                         <tr>
 							<th>* 모집 인원</th>
 							<td>
-							<c:choose>
-								<c:when test="${companion.companionNum ge companion.companionPeople}">
-									<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required disabled/>
-									<a class="people_info">인원 마감 된 신청글이라 수정이 불가능 합니다.</a>
-								</c:when>
-								<c:otherwise>
-									<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required/>
-	                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
-								</c:otherwise>
-							</c:choose>
+								<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required/>
+		                        <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
                             </td>
 						</tr>
                         <tr>
