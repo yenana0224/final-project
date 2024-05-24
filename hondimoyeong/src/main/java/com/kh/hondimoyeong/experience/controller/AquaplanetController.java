@@ -1,15 +1,53 @@
 package com.kh.hondimoyeong.experience.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.hondimoyeong.experience.model.service.ReserveService;
+import com.kh.hondimoyeong.experience.model.vo.Experience;
+import com.kh.hondimoyeong.experience.model.vo.Exreview;
+import com.kh.hondimoyeong.member.model.vo.Member;
+
 @Controller
 public class AquaplanetController {
 	
+	@Autowired
+	private  ReserveService reserveService;
+	
 	@RequestMapping("aqua")
-	public String aqua() {
+	public String aqua(HttpSession session) {
+		
+		if(!(session.getAttribute("loginUser")== null)) {
+			
+			int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+			//System.out.println(userNo);
+			
+			
+			if(userNo > 0) {
+				List<Experience> experience = reserveService.excheck(userNo);
+				System.out.println(experience);
+				
+				if(!(experience == null)) {
+					session.setAttribute("experience", experience);
+				}
+			}
+		}
+		
+		// 한라산 리뷰 전부 조회
+		Exreview exreview = new Exreview();
+		
+		exreview.setExperienceCategory("아쿠아리움");
+		List<Exreview> review = reserveService.review(exreview);
+		System.out.println("흠 " + review);
+		session.setAttribute("reviewa", review);
+		
 		return "experience/aquaplanet";
 	}
 	

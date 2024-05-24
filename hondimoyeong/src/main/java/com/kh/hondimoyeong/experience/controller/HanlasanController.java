@@ -15,6 +15,7 @@ import com.kh.hondimoyeong.experience.model.service.ReserveService;
 import com.kh.hondimoyeong.experience.model.vo.Experience;
 import com.kh.hondimoyeong.experience.model.vo.Exreview;
 import com.kh.hondimoyeong.member.model.vo.Member;
+import com.kh.hondimoyeong.review.model.vo.Review;
 
 @Controller
 public class HanlasanController {
@@ -41,10 +42,12 @@ public class HanlasanController {
 			}
 		}
 		
-		// 체험리뷰 전부 조회
-		List<Exreview> review = reserveService.review();
+		// 한라산 리뷰 전부 조회
+		Exreview exreview = new Exreview();
+		exreview.setExperienceCategory("한라산");
+		List<Exreview> review = reserveService.review(exreview);
 		System.out.println("흠 " + review);
-		session.setAttribute("review", review);
+		session.setAttribute("reviewh", review);
 		
 		return "experience/hanlasan";
 	}
@@ -78,29 +81,18 @@ public class HanlasanController {
 	@PostMapping("exreview")
 	public String exriview(Exreview exreview, HttpSession session) {
 		
-		
-//		((Experience)session.getAttribute("experience")).getExperienceNo();
-//		for(Experience ex : (int)(Experience)session.getAttribute("experience") ) {
-//		
-//		}
-//		
-		//System.out.println( "dddd" +  ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo());
-		
+		System.out.println("쓴리뷰" + exreview);
 		
 		int experienceNo = ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo();
 		
 		exreview.setExperienceNo(experienceNo);
 		
-		//System.out.println(exreview);
 		
 		int exre = reserveService.insertreview(exreview);
-		//session.setAttribute("exriview", exreview);
 		
-		//System.out.println(exre);
+		session.setAttribute("alert", "작성완료");
 		
-		//System.out.println(exre);
-		
-		return "experience/hanlasan";
+		return "redirect:";
 	}
 	 
 	

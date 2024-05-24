@@ -64,8 +64,8 @@ public class ReserveServiceImpl  implements ReserveService{
 	}
 
 	@Override
-	public List<Exreview> review() {
-		return reserveRepository.review(sqlSession);
+	public List<Exreview> review(Exreview exreview) {
+		return reserveRepository.review(sqlSession, exreview);
 	}
 	
 	
