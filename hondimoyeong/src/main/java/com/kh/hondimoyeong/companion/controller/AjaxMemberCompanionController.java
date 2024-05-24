@@ -40,24 +40,22 @@ public class AjaxMemberCompanionController {
 		return MemberCompanionService.alram(userNo);
 	}
 	
-	@ResponseBody
 	@GetMapping(value="permission", produces="application/json; charset=UTF-8")
-	public int memberPermission(int userNo, int companionNo) {
+	public String memberPermission(int userNo, int companionNo) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
 		
-		return MemberCompanionService.memberPermission(data);
+		return "redirct:companionInvite";
 	}
 	
-	@ResponseBody
 	@GetMapping(value="rejection", produces="application/json; charset=UTF-8")
-	public int memberRejection(int userNo, int companionNo) {
+	public String memberRejection(int userNo, int companionNo) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
 		
-		return MemberCompanionService.memberRejection(data);
+		return "redirct:companionInvite";
 	}
 	
 
