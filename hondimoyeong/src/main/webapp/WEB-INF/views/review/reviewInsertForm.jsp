@@ -86,6 +86,12 @@
 	    resize: none;
 	}
 	
+	.file_label{
+		font-size: 15px;
+		color: #777;
+		float: right;
+	}
+	
 	/* 등록 취소 버튼 */
 	.detail_btn_box{
 	    width: 800px;
@@ -209,7 +215,12 @@
 		                        <tr>
 									<th>* 첨부파일</th>
 									<td>
-										<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;">
+										<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;"> <span class="file_label">* 썸네일로 등록 되는 이미지 입니다.</span>
+		                            </td>
+								</tr>
+		                        <tr>
+									<th>* 첨부파일</th>
+									<td>
 										<input type="file" name="upfiles2" id="upfiles2">
 		                            </td>
 								</tr>
@@ -217,7 +228,7 @@
 						</table>
 		                <div class="detail_btn_box" align="center">
 		                    <button class="hdmy_detail_btn" type="submit">등록</button>
-		                    <button class="hdmy_detail_btn" onclick="backPage();">취소</button>
+		                    <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
 		                </div>
 		            </form>
 		        </div> <!-- inset_box -->
@@ -228,7 +239,7 @@
 	
     <script>
     	 function backPage(){
-    		 loaction.href = '${path}/companion';
+    		 location.href = '${path}/review';
     	 }
     </script>
 

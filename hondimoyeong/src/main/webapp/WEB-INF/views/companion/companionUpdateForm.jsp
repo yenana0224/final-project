@@ -155,7 +155,7 @@
 							<th>* 모집 인원</th>
 							<td>
 								<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required/>
-                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
+		                        <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
                             </td>
 						</tr>
                         <tr>
