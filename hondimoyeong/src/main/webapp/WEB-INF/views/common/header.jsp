@@ -143,7 +143,7 @@
         
         #alram-area {
         	display : inline-block;
-        	width : 20px;
+        	width : 100px;
         	height : 20px;
         	background-color : red;
         	color : white;
@@ -240,7 +240,7 @@
     		success : (data) => {
     			
     			if(data != '0' ){
-	    			$('#alram-area').html('<span>' + data +'</span>');				
+	    			$('#alram-area').html('<span> 새로운 신청확인 </span>');				
     			} else {
     				$('#alram-area').css('background-color', 'white');
     				$('#alram-area').css('border', 'white');

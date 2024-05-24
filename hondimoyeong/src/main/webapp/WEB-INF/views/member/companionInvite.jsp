@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
     <title>동행신청 내역</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -226,12 +226,14 @@
     <div id="wrap">
     
         <div id="content">
+
+        
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 			<a href="myRequest?page="> 나의 신청내역 보기 </a>
-			
+
             <div id="titleBox">내가 쓴 동행 게시글</div>
             <div class="detailBox">
-            
+            <div class="container">
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
 	            	    <div class="acompany-btn" id="${board.companionNo }" data-toggle="modal" data-target="#myModal">신청확인</div>
@@ -239,7 +241,7 @@
 	            		<div class="box3"> ${board.courseName} | 날짜 : ${board.companionDate} | 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
 	            </c:forEach>
-	            
+
 	              <!-- The Modal -->
 				  <div class="modal" id="myModal">
 				    <div class="modal-dialog">
@@ -264,6 +266,8 @@
 				      </div>
 				    </div>
 				  </div>
+				  
+			   </div>	  
 	            
 	            <div class="box4"> 
 		            <c:if test="${pageInfo.currentPage gt 1}">
@@ -284,6 +288,7 @@
 		            </c:if>	
 	            </div>
             </div>
+
         </div>
         
         <script>
@@ -300,30 +305,54 @@
 	        			
 	        			for(let i in data){
 	        				
-	        				if(data[i].status == 'N') status = '신청중'
-	        				else if(data[i].status == 'A') status = '참여'
-	        				else status = '취소'
-	        				
-		        			user += '<div class="box4">'
-		        		          +	  '<div class="status-area">'
-		        		          +		status
-		        		          +	  '</div>'
-		        		          +   '<div class="userInfo">'
-		        		          + 	data[i].userName
-		        		          +   '</div>'
-		        		          +   '<div class="btn-area">'
-		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
-		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
-		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
-		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
-		        		          +   '</div>'
-		        		    	  + '</div>'
-	        			}
+	        				if(data[i].status == 'N') {
+	        					status = '신청중';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          +   '<div class="btn-area">'
+		  		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
+		  		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
+		  		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
+		  		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
+		  		        		          +   '</div>'
+		  		        		    	  + '</div>'
+	        				} else if (data[i].status == 'A' ) {
+	        					status = '참여';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          + '</div>'
+		  		        		          
+	        				} else {
+	        					status = '취소';
+	        					
+	        					user += '<div class="box4">'
+	  		        		          +	  '<div class="status-area">'
+	  		        		          +		status
+	  		        		          +	  '</div>'
+	  		        		          +   '<div class="userInfo">'
+	  		        		          + 	data[i].userName
+	  		        		          +   '</div>'  
+	  		        		          + '</div>'  
+	        				}
 
 	        			$('.modal-body').html(user);
+	        			}
 	        		}
 	        		
-	        	})
+	        	});
+	        	
 	        })
 	        
         </script>
