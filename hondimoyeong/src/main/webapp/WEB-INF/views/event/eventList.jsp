@@ -38,7 +38,7 @@
 	}
 
 	.event{
-	    border: 1px solid lightgray;
+	    border: 1px solid #e1e1e1;
 	    border-radius: 20px;
 	    width: 340px;
 	    padding: 12px;
@@ -56,7 +56,7 @@
 	
 	.event:hover{
 		cursor: pointer;
-	    opacity: 0.7;
+	    opacity: 0.9;
 	}
 	
 	.eventTitle{
@@ -68,7 +68,7 @@
 	
 	.eventTitle:hover{
 		text-decoration: none;
-		color: #777;
+		color: #FF9843;
 	}
 	
 	    /* 페이징바 */

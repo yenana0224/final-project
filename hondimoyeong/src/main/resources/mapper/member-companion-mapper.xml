@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kh.hondimoyeong.companion.model.dao.MemberCompanionMapper">
+  
+  	<resultMap type="companion" id="companionResultSet">
+		<result column="COMPANION_NO" property="companionNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="COURSE_NO" property="courseNo"/>
+		<result column="COURSE_NANE" property="courseName"/>
+		<result column="COMPANION_DATE" property="companionDate"/>
+		<result column="COMPANION_TITLE" property="companionTitle"/>
+		<result column="COMPANION_CONTENT" property="companionContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="COMPANION_PEOPLE" property="companionPeople"/>
+		<result column="COMPANION_NUM" property="companionNum"/>
+		<result column="REPLY_COUNT" property="replyCount"/>
+	</resultMap>
+  
+  	<select id="myListCount" parameterType="_int" resultType="_int">
+	SELECT
+		  COUNT(*)
+	  FROM
+	  	  COMPANION
+	 WHERE
+	 	  USER_NO = #{userNo}
+	   AND
+	   	  STATUS = 'Y'	  	  
+	</select>
+	
+	<select id="myList" parameterType="_int" resultMap="companionResultSet">
+	SELECT
+		    COMPANION_NO,
+		    C.COURSE_NO AS COURSE_NANE,
+		    TO_CHAR(COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		    COMPANION_TITLE,
+		    COMPANION_PEOPLE,
+		    (SELECT
+		          COUNT(*)
+		       FROM
+		          COMPANION_BRIDGE B
+		     WHERE
+		          B.COMPANION_NO = P.COMPANION_NO
+		       AND
+		          STATUS = 'A') COMPANION_NUM
+	  FROM
+	      COMPANION P
+	  JOIN
+	      COURSE C ON (P.COURSE_NO = C.COURSE_INDEX)
+	 WHERE
+	      USER_NO = #{userNo}
+	   AND
+	      STATUS = 'Y'
+	 ORDER
+	    BY
+	      P.COMPANION_NO DESC
+	</select>
+	
+	<select id="myRequestCount" parameterType="_int" resultType="_int">
+	SELECT
+	      COUNT(*)
+	 FROM
+	      COMPANION_BRIDGE
+	 WHERE
+	      USER_NO = #{userNo}
+	</select>
+	
+	<select id="myRequest" parameterType="_int"  resultMap="companionResultSet">
+	
+	  SELECT 
+		     P.COMPANION_NO COMPANION_NO,
+		     C.COURSE_NO AS COURSE_NAME,
+		     TO_CHAR(COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		     COMPANION_TITLE,
+		     COMPANION_PEOPLE,
+		     (SELECT
+			          COUNT(*)
+			       FROM
+			          COMPANION_BRIDGE B
+			     WHERE
+			          B.COMPANION_NO = P.COMPANION_NO
+			       AND
+			          STATUS = 'A') COMPANION_NUM,
+		     B.STATUS STATUS
+		 FROM
+		     COMPANION P
+		 JOIN
+		     COURSE C ON (P.COURSE_NO = C.COURSE_INDEX)
+		 JOIN
+		     COMPANION_BRIDGE B ON (P.COMPANION_NO = B.COMPANION_NO)
+		WHERE
+		     B.USER_NO = #{userNo}
+     		   
+	</select>
+	
+	<insert id="accompanyRequest" parameterType="hashmap">
+		INSERT
+		  INTO
+		      COMPANION_BRIDGE
+		VALUES
+		     (
+		     SEQ_COMPANION_BRIDGE_NO.NEXTVAL,
+		     #{companionNo},
+		     #{userNo},
+		     'N'
+		     )
+	</insert>
+	
+	<select id="appliList" parameterType="_int" resultType="companionMember">
+	SELECT
+			USER_NAME userName,
+		    B.STATUS
+		FROM
+			COMPANION_BRIDGE B
+		JOIN
+			MEMBER M ON (B.USER_NO = M.USER_NO)
+		WHERE
+			COMPANION_NO = (SELECT COMPANION_NO FROM COMPANION_BRIDGE WHERE USER_NO = 3 AND STATUS = 'W')
+		 AND
+		    B.STATUS NOT IN 'W'
+	</select>
+	
+</mapper>

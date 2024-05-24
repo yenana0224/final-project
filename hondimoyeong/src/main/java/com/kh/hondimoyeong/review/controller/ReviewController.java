@@ -2,8 +2,7 @@ package com.kh.hondimoyeong.review.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService reviewService;
-	
+
 	/**
 	 * 
 	 * @param page
@@ -46,7 +45,7 @@ public class ReviewController {
 	 */
 	@RequestMapping("review")
 	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
-		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 9, 5);
 		
 		List<ReviewComment> comment = reviewService.selectCommentCount();
 		
@@ -86,7 +85,7 @@ public class ReviewController {
 		searchMap.put("keyword", keyword);
 		
 		int totalCount = reviewService.searchCount(searchMap);
-		PageInfo pi = Pagination.getPageInfo(totalCount, page, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(totalCount, page, 9, 5);
 		List<Review> review = reviewService.search(searchMap, pi);
 		
 		model.addAttribute("keyword", keyword);
@@ -96,6 +95,7 @@ public class ReviewController {
 		
 		return "review/reviewList";
 	}
+	
 	
 	@RequestMapping("insertForm.rvw")
 	public String insertForm(Model model, Course course) {
@@ -115,33 +115,43 @@ public class ReviewController {
 	    int reviewNo = review.getReviewNo();
 	    
 	    if (reviewNo > 0) { // 리뷰가 등록 될 경우
-	        for (MultipartFile upfile : upfiles1) {
-	            if (!upfile.getOriginalFilename().equals("")) { // 첫 번째 첨부파일이 있을 경우
-	                String originalFilename = upfile.getOriginalFilename();
-	                String changeName = saveFile(upfile, session);
-
-	                // REVIEW_IMG 테이블에 첫 번째 파일 정보 삽입
-	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo);
-	                reviewImg.setOriginName(originalFilename);
-	                reviewImg.setChangeName(changeName);
-	                reviewService.insertImg(reviewImg);
+	        List<MultipartFile> allFiles = new ArrayList<MultipartFile>();
+	        
+	        // 첫 번째 파일들의 파일 레벨은 1로 설정
+	        for (MultipartFile file : upfiles1) {
+	            if (!file.isEmpty()) {
+	                allFiles.add(file);
 	            }
 	        }
-
-	        for (MultipartFile upfile : upfiles2) {
-	            if (!upfile.getOriginalFilename().equals("")) { // 두 번째 첨부파일이 있을 경우
-	                String originalFilename = upfile.getOriginalFilename();
-	                String changeName = saveFile(upfile, session);
-
-	                // REVIEW_IMG 테이블에 두 번째 파일 정보 삽입
-	                ReviewImg reviewImg = new ReviewImg();
-	                reviewImg.setReviewNo(reviewNo);
-	                reviewImg.setOriginName(originalFilename);
-	                reviewImg.setChangeName(changeName);
-	                reviewService.insertImg(reviewImg);
+	        
+	        // 두 번째 파일들의 파일 레벨은 2로 설정
+	        for (MultipartFile file : upfiles2) {
+	            if (!file.isEmpty()) {
+	                allFiles.add(file);
 	            }
 	        }
+	        
+	        for (int i = 0; i < allFiles.size(); i++) {
+	            MultipartFile upfile = allFiles.get(i);
+	            String originalFilename = upfile.getOriginalFilename();
+	            String changeName = saveFile(upfile, session);
+	            
+	            // REVIEW_IMG 테이블에 파일 정보 삽입
+	            ReviewImg reviewImg = new ReviewImg();
+	            reviewImg.setReviewNo(reviewNo);
+	            reviewImg.setOriginName(originalFilename);
+	            reviewImg.setChangeName(changeName);
+	            
+	            // 파일 레벨 설정
+	            if (i < upfiles1.length) {
+	                reviewImg.setFileLevel(1); // 첫 번째 파일들의 파일 레벨은 1
+	            } else {
+	                reviewImg.setFileLevel(2); // 두 번째 파일들의 파일 레벨은 2
+	            }
+	            
+	            reviewService.insertImg(reviewImg);
+	        }
+	        
 	        session.setAttribute("alertMsg", "게시글 작성 성공!");
 	        return "redirect:review";
 	    } else { 
@@ -150,16 +160,14 @@ public class ReviewController {
 	    }
 	}
 	
-  
 	@RequestMapping("update.rvw")
-	public String update(Review review, ReviewImg reviewImg,
+	public String update(@ModelAttribute Review review,
 	                     @RequestParam("reUpfile1") MultipartFile[] reUpfiles1,
 	                     @RequestParam("reUpfile2") MultipartFile[] reUpfiles2,
 	                     HttpSession session,
 	                     Model model) {
-		
-		
-	    reviewService.update(review); // 기존 리뷰 업데이트
+	    
+	    reviewService.update(review); // 리뷰 업데이트
 
 	    int reviewNo = review.getReviewNo();
 
@@ -170,49 +178,51 @@ public class ReviewController {
 	            new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
 	        }
 
-	        // 첫 번째 첨부파일
-	        if (reUpfiles1 != null) {
-	            for (MultipartFile reUpfile1 : reUpfiles1) {
-	                if (!reUpfile1.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
-	                    String originalFilename = reUpfile1.getOriginalFilename();
-	                    String changeName = saveFile(reUpfile1, session);
-
-	                    // REVIEW_IMG 테이블에 이미지 정보 추가
-	                    ReviewImg reviewImg1 = new ReviewImg();
-	                    reviewImg1.setReviewNo(reviewNo);
-	                    reviewImg1.setOriginName(originalFilename);
-	                    reviewImg1.setChangeName(changeName);
-	                    reviewService.updateImg(reviewImg1);
-	                    System.out.println("1번" + changeName);
-	                }
-	            }
-	        }
-
-	        // 두 번째 첨부파일
-	        if (reUpfiles2 != null) {
-	            for (MultipartFile reUpfile2 : reUpfiles2) {
-	                if (!reUpfile2.getOriginalFilename().equals("")) { // 첨부파일이 있을 경우
-	                    String originalFilename = reUpfile2.getOriginalFilename();
-	                    String changeName = saveFile(reUpfile2, session);
-
-	                    // REVIEW_IMG 테이블에 이미지 정보 추가
-	                    ReviewImg reviewImg2 = new ReviewImg();
-	                    reviewImg2.setReviewNo(reviewNo);
-	                    reviewImg2.setOriginName(originalFilename);
-	                    reviewImg2.setChangeName(changeName);
-	                    reviewService.updateImg(reviewImg2);
-	                    System.out.println("2번" + changeName);
-	                }
+	        List<MultipartFile> reviewImgs = new ArrayList<MultipartFile>();
+	        
+	        
+	        for (MultipartFile file : reUpfiles1) {
+	            if (!file.isEmpty()) {
+	            	reviewImgs.add(file);
 	            }
 	        }
 	        
+	        for (MultipartFile file : reUpfiles2) {
+	            if (!file.isEmpty()) {
+	            	reviewImgs.add(file);
+	            }
+	        }
+	        
+	        for (int i = 0; i < reviewImgs.size(); i++) {
+	            MultipartFile upfile = reviewImgs.get(i);
+	            String originalFilename = upfile.getOriginalFilename();
+	            String changeName = saveFile(upfile, session);
+	            
+	            // REVIEW_IMG 테이블에 파일 정보 삽입
+	            ReviewImg reviewImg = new ReviewImg();
+	            reviewImg.setReviewNo(reviewNo);
+	            reviewImg.setOriginName(originalFilename);
+	            reviewImg.setChangeName(changeName);
+	            
+	            // 파일 레벨 설정
+	            if (i < reUpfiles1.length) {
+	                reviewImg.setFileLevel(1); // 첫 번째 파일 레벨
+	            } else {
+	                reviewImg.setFileLevel(2); // 두 번째 파일 레벨
+	            }
+	            
+	            reviewService.updateImg(reviewImg);
+	            
+	        }
+	        
 	        session.setAttribute("alertMsg", "게시글 수정 성공!");
-	        return "redirect:detail.rvw?reviewNo=" + reviewNo; // 수정된 리뷰 상세 페이지로 이동
-	    } else {
+	        return "redirect:detail.rvw?reviewNo=" + reviewNo;
+	    } else { 
 	        model.addAttribute("errorMsg", "수정 실패");
 	        return "common/errorPage";
 	    }
 	}
+
 
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 	    String originName = upfile.getOriginalFilename();

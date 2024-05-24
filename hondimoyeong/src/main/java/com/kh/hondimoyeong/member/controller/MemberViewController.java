@@ -64,39 +64,6 @@ public class MemberViewController {
 		return "member/customerList";
 	}
 	
-	@RequestMapping("companionInvite")
-	public String companionInvite(HttpSession session,
-								 @RequestParam(defaultValue="1")int page,
-								  Model model) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int userNo = loginUser.getUserNo();
-
-		PageInfo pi = Pagination.getPageInfo(companionService.myListCount(userNo), page, 5, 5);
-		
-		model.addAttribute("list", companionService.myList(userNo, pi));
-		model.addAttribute("pageInfo", pi);
-
-		//System.out.println(companionService.myList(userNo, pi));
-		
-		return "member/companionInvite";
-	}
-	
-	@GetMapping("myRequest")
-	public String requestList(@RequestParam(defaultValue="1")int page,
-							 HttpSession session,
-							 Model model) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int userNo = loginUser.getUserNo();
-		
-		PageInfo pi = Pagination.getPageInfo(companionService.myRequestCount(userNo), page, 5, 5);
-		
-		model.addAttribute("list", companionService.myRequest(userNo, pi));
-		model.addAttribute("pageInfo", pi);
-		
-		System.out.println(companionService.myRequest(userNo, pi));
-		return "member/requestList";
-	}
-	
 	@RequestMapping("completeCourse")
 	public String completeCourse(Model model) {
 		model.addAttribute("list", courseService.stampList());

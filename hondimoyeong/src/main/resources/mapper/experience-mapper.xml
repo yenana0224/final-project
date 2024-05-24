@@ -240,6 +240,8 @@
 			COUNT(*) 
 		FROM 
 			EXPERIENCE_RESERVE
+        WHERE
+             USER_NO = #{userNo}	
 	</select>
 	
 	
