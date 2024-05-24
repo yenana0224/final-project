@@ -49,8 +49,8 @@ public class ReserveRepository {
 		return sqlSession.insert("experienceMapper.insertreview", exreview);
 	}
 	
-	public List<Exreview> review(SqlSessionTemplate sqlSession){
-		return sqlSession.selectList("experienceMapper.review");
+	public List<Exreview> review(SqlSessionTemplate sqlSession,Exreview exreview){
+		return sqlSession.selectList("experienceMapper.review", exreview);
 	}
 	
 }

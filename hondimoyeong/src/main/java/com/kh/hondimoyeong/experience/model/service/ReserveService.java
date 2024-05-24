@@ -33,7 +33,7 @@ public interface ReserveService {
 	int insertreview(Exreview exriview);
 	
 	// 체험 리뷰 select
-	List<Exreview> review();
+	List<Exreview> review(Exreview exreview);
 	
 	
 }
