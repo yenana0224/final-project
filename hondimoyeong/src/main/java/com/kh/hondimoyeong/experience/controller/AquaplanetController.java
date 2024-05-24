@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.hondimoyeong.experience.model.service.ReserveService;
@@ -63,6 +64,23 @@ public class AquaplanetController {
 		return "experience/aquareserve";
 	}
 	
-	
+	@PostMapping("exreviewa")
+	public String exriview(Exreview exreview, HttpSession session) {
+		
+		System.out.println("쓴리뷰" + exreview);
+		
+		int experienceNo = ((List<Experience>)session.getAttribute("experience")).get(0).getExperienceNo();
+		
+		exreview.setExperienceNo(experienceNo);
+		
+		
+		int exre = reserveService.insertreview(exreview);
+		
+		if(exre > 0) {
+			session.setAttribute("alertMsg", "작성되었습니다!");
+		}
+		
+		return "redirect:aqua";
+	}
 
 }
