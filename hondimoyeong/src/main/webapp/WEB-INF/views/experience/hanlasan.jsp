@@ -106,7 +106,6 @@
 					
 					<form action="hanreserve" method="get">
 						<button class="btn btn-outline-success" style="margin-top:15px">탐방하기</button>
-						<input type="hidden" name="price" id="price" value="36000">
 					</form>
 					<br>
 				</div>
