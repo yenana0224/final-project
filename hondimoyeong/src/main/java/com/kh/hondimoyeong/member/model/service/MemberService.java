@@ -28,8 +28,12 @@ public interface MemberService {
 	
 	Customer selectCustomerByNo(int customerNo);
 	
-	//총개수
 	int reservationSelectListCount(int userNo);
-	//목록
+
 	List<Experience> reservationSelectList(PageInfo pi, int userNo);
+	
+	//게시글 수정
+	int updateCustomer(Customer customer);
+	
+	
 }
