@@ -207,7 +207,7 @@
 				)
 	</insert>
 	
-	<select id="review" resultMap="exrevieweResultSet">
+	<select id="review" parameterType="exreview" resultMap="exrevieweResultSet">
 		SELECT
 				EXPERIENCE_REVIEW_NO,
 				EXPERIENCE_NO,
@@ -221,6 +221,8 @@
 				EXPERIENCE_RESERVE USING(EXPERIENCE_NO)
 			JOIN
 				MEMBER USING(USER_NO)
+			WHERE
+				EXPERIENCE_CATEGORY = #{experienceCategory}
 			
 	</select>
 	

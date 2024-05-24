@@ -121,7 +121,7 @@
 						글쓰기
 					</button>
 				</c:if>
-				<table id="boardList" class="table table-hover" align="center">
+				<table id="boardList" class="table table-hover">
 					<thead>
 						<tr>
 							<th>아이디</th>
@@ -130,7 +130,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${ review }" var="review">
+					<c:forEach items="${ reviewh }" var="review">
 						<tr>
 							<td>${ review.userId }</td>
 							<td>${ review.experienceContent }</td>
@@ -139,18 +139,13 @@
 					</c:forEach>
 					</tbody>
 				</table>
-							
 			</div>
-			
-			
 		</div>
-	
-	
 	</div>
 	
 	
 
-	<!-- 비밀번호 변경 모달 -->
+	<!-- 한줄 리뷰 입력 -->
 	<div class="modal" id="add">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -161,7 +156,7 @@
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	      </div>
 	
-	      <!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
+	      <!-- body -->
 	      <div class="modal-body">
 			
 		  	<form action="exreview" method="post">
@@ -178,13 +173,9 @@
 			    <label for="memberPwd">한줄리뷰</label>
 			    <input type="text" name="experienceContent" class="form-control" placeholder="리뷰를 입력해주세요" required>
 			  </div>
-			  
 			<button id="btn2">작성</button>			  
-			  
-			  
 	    	 </form>
 	    	</div>
-	    	 
 		</div>
 	  </div>
 	</div>
