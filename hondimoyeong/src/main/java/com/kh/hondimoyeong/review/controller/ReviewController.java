@@ -243,10 +243,10 @@ public class ReviewController {
 	
 	@PostMapping("updateForm.rvw")
 	public ModelAndView updateForm(int reviewNo, ModelAndView mv, Course course) {
-		List<Course> courseList = reviewService.selectCourse(course);
 		
+		List<Course> courseList = reviewService.selectCourse(course);
 		mv.addObject("courseList", courseList);
-		mv.addObject(reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
+		mv.addObject("review", reviewService.selectReview(reviewNo)).setViewName("review/reviewUpdateForm");
 		return mv;
 	}
 
