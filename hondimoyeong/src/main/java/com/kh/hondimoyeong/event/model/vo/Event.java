@@ -20,6 +20,7 @@ public class Event {
 	private String status;
 	private int count;
 	private int userNo;
+	
 	private String changeName;
 	private List<EventImg> eventImgs;
 }

@@ -186,7 +186,7 @@
 				        <!-- 로그인 후 -->
 				        <div class="header_menubar">
 				        	
-				        	<span id="alram-area" onclick="location.href='companionInvite?page='"> </span>
+				        	<span id="alram-area" onclick="location.href='${path}/companionInvite?page='"> </span>
 				        	
 					        <label><b style="color:#FF9843">${ sessionScope.loginUser.userName }</b>님 환영합니다!</label> 
 
@@ -235,7 +235,7 @@
     <script>
 
     	$.ajax({
-    		url : 'alram',
+    		url : '${path}/alram',
     		data : {userNo : ${sessionScope.loginUser.userNo} },
     		success : (data) => {
     			

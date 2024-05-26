@@ -60,7 +60,7 @@
 		      E.EVENT_NO,
 		      EVENT_TITLE,
 		      EVENT_CONTENT,
-		      CREATE_DATE,
+		      TO_CHAR(CREATE_DATE, 'YY-MM-DD') CREATE_DATE,
 		      COUNT,
 		      CHANGE_NAME
 		  FROM
@@ -77,13 +77,17 @@
 		      E.EVENT_NO DESC
 	</select>
 
-	<select id="selectEventImg" resultMap="eventImgResultSet">
-	SELECT
-	      EVENT_NO,
-	      ORIGIN_NAME,
-	      CHANGE_NAME
-	  FROM
-	      EVENT_IMG
+	<select id="selectEventImg" parameterType="_int" resultMap="eventImgResultSet">
+		SELECT
+		      EVENT_NO,
+		      ORIGIN_NAME,
+		      CHANGE_NAME
+		  FROM
+		      EVENT_IMG
+		 WHERE
+		      EVENT_NO = #{eventNo}
+		   AND
+		      FILE_LEVEL = 2
 	</select>
 	
 	<update id="increaseCount" parameterType="_int">

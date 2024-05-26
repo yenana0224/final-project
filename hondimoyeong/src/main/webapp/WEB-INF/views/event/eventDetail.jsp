@@ -81,6 +81,7 @@
 	    width: 1200px;
 	    font-size: 25px;
 	    font-weight: bold;
+	    text-align: center;
 	    padding-top: 20px;
 	    padding-bottom: 10px;
 	    border-top: 1px solid lightgray;
@@ -91,8 +92,9 @@
 	}
 	
 	.detail_info1{
-	    width: 230px;
-	    float: left;
+	    width: 200px;
+	    margin: 0 auto;
+	    text-align: center;
 	}
 	
 	.detail_content{
@@ -105,7 +107,14 @@
 	.detail_content_p{
 	    padding-top: 20px;
 	    padding-bottom: 20px;
+	    text-align: center;
 	}
+	
+	.content_img{
+        width: 1200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
 	
 	/* 목록 수정 삭제 버튼 */
 	.detail_btn_box{
@@ -143,14 +152,18 @@
         <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
 
         <div class="detail_box"> <!-- 제목, 작성자 신청버튼 전부 감싸는 div -->
-            <div class="detail_title"><span>이벤트다람쥐~~~~</span></div>
+            <div class="detail_title"><span>${event.eventTitle}</span></div>
+            <input type="hidden" value="${event.userNo}"/>
             <div class="detail_info">
-                <div class="detail_info1"><a>24.05.23 &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : 10</a></div>
+                <div class="detail_info1"><a>${event.createDate} &nbsp;&nbsp;| &nbsp;&nbsp;조회수 : ${event.count}</a></div>
             </div>
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">이벤트 본문 </p> 
+            <p class="detail_content_p">${event.eventContent}</p>
+            <c:if test="${!empty event.changeName}">
+	            <img src="${path}/${event.changeName}" class="content_img"/>
+	        </c:if>
         </div>
 
         <div class="detail_btn_box" align="center">
@@ -164,5 +177,25 @@
 	
 	<jsp:include page="../common/footer.jsp"/>
 
+	<script>
+		$(function(){
+			$('.detailBtn').click(function(){
+				location.href='${ path }/event';
+			});
+		});
+		
+		
+		function postSubmit(num){
+			if(num == 0){
+				$('#postForm').attr('action', 'updateForm.rvw').submit();
+			}
+			else{
+		        let dele = confirm('삭제 하시겠습니까?');
+		        if(dele){
+		            $('#postForm').attr('action', 'delete.rvw').submit();
+		        }
+			}
+		}
+	</script>
 </body>
 </html>
