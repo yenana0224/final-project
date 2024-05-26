@@ -257,11 +257,11 @@
         	</script>
         </c:if>
 
-        <div class="cs_board_top">
         <c:if test="${!empty loginUser}">
-            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">리뷰 등록</button></div>
+	        <div class="cs_board_top">
+	            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertReview();">리뷰 등록</button></div>
+	        </div>
         </c:if>
-        </div>
         
         <div class="list-area">
 	        <c:choose>

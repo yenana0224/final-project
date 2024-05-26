@@ -32,6 +32,33 @@
 	    color: #FF9843;
 	    text-decoration: none;
 	}
+	
+	/* 글쓰기 버튼 */
+    .cs_board_top{
+        width: 1140px;
+        height: 52px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .cs_board_top_btn{
+        width: 100px;
+        float: right;
+    }
+
+    .cs_btn{
+        width: 80px;
+        height: 45px;
+        border: none;
+        background-color: #FF9843;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+	
 
 	.list-area{
 		text-align: center;
@@ -111,6 +138,12 @@
 	
     <div id="container">
         <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
+        
+        <c:if test="${!empty loginUser}">
+	        <div class="cs_board_top">
+	            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertEvent();">작성</button></div>
+	        </div>
+        </c:if>
 
         <div class="list-area">
         	<c:forEach var="e" items="${event}">
