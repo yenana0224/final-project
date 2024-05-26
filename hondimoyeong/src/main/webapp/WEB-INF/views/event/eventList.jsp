@@ -151,8 +151,8 @@
 	                <input type="hidden" value="${e.eventNo}" />
 	                <img src="${e.changeName}" class="eventImg" />
 	                <p>
-	                <a class="eventTitle">${e.eventTitle}</a> <a href="detail.ev">디테일</a> <br><br>
-	                <label>조회수</label> : <span>0</span>
+	                <a class="eventTitle">${e.eventTitle}</a> <br><br>
+	                <label>조회수</label> : <span>${e.count}</span>
 	                </p>
 	            </div>
         	</c:forEach>

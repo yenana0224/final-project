@@ -432,15 +432,15 @@
 		    var currentUrl = window.location.href;
 
 		    if (currentUrl.indexOf("/companion") !== -1) {
-		        $(".sortCompanionList").css("color", "#FF9843"); // 해당 링크의 스타일 변경
+		        $(".sortCompanionList").css("color", "#FF9843");
 		    }
 
 		    if (currentUrl.indexOf("/sort.cmp") !== -1) {
-		        $(".sortCompanion").css("color", "#FF9843"); // 해당 링크의 스타일 변경
+		        $(".sortCompanion").css("color", "#FF9843");
 		    }
 		    
 		    if (currentUrl.indexOf("/search.cmp") !== -1) {
-		        $(".sortCompanionList").css("color", "#FF9843"); // 해당 링크의 스타일 변경
+		        $(".sortCompanionList").css("color", "#FF9843");
 		    }
 		});
 
