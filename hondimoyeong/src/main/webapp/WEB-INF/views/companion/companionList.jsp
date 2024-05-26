@@ -287,7 +287,7 @@
                     	<c:when test="${empty companion }">
                     		<thead>
                     			<tr>
-                    				<th style="text-align:center;">검색 결과가 없습닏</th>
+                    				<th style="text-align:center;">검색 결과가 없습니다.</th>
                     			</tr>
                     		
                     		</thead>

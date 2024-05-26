@@ -322,7 +322,14 @@
         <div class="detail_btn_box" align="center">
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
-	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+            	<c:choose>
+	            	<c:when test="${companion.nowStatus == '마감'}">
+		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
+	            	</c:when>
+	            	<c:otherwise>
+		            	<a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+		            </c:otherwise>
+	            </c:choose>
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
             </c:if>
         </div>
@@ -348,6 +355,10 @@
 			location.href='${ path }/companion?page=1';
 		});
 	});
+	
+	function endAlert(){
+		alert('날짜가 지난 모집글은 수정이 불가능 합니다.')
+	}
 	
 	function postSubmit(num){
 		if(num == 0){
