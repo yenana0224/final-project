@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트 글 작성</title>
+<title>혼디모영 - 이벤트 글 수정</title>
 
 <style>
 	/* 컨텐트 */
@@ -160,39 +160,40 @@
 	<c:choose>
 		<c:when test="${empty loginUser}">
 			<script>
-				alert('관리자만 작성 가능합니다.');
+				alert('관리자만 수정 가능합니다.');
 				location.href = '${ path }/event';
 			</script>
 		</c:when>
 		<c:otherwise>
 		    <div id="container">
-		        <div class="notice_insert_title"><span>이벤트 작성</span></div>
+		        <div class="notice_insert_title"><span>이벤트 수정</span></div>
 		
 		        <div class="insert_box">
-		            <form action="${path}/event/insert" method="post" id="myform" enctype="multipart/form-data">
+		            <form action="${path}/event/update" method="post" id="myform" enctype="multipart/form-data">
 		            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+		            	<input type="hidden" name="eventNo" value="${event.eventNo}">
 		            	
 						<table class="tb_input">
 							<tbody>
 		                        <tr>
 									<th>* 제목</th>
-									<td><input type="text" name="eventTitle" class="title_inp" required/></td>
+									<td><input type="text" name="eventTitle" class="title_inp" value="${event.eventTitle}" required/></td>
 								</tr>
 								<tr>
 									<th>* 내용</th>
-									<td><textarea class="content_inp" name="eventContent" required></textarea>
+									<td><textarea class="content_inp" name="eventContent" required>${event}</textarea>
 		                            </td>
 								</tr>
 		                        <tr>
 									<th>* 첨부파일</th>
 									<td>
-										<input type="file" name="upfiles1" id="upfiles1" style="padding-right: 35px;"> <span class="file_label">* 썸네일로 등록 되는 이미지 입니다.</span>
+										<input type="file" name="reUpfile1" id="upfiles1" style="padding-right: 35px;"> <span class="file_label">* 썸네일로 등록 되는 이미지 입니다.</span>
 		                            </td>
 								</tr>
 		                        <tr>
 									<th>* 첨부파일</th>
 									<td>
-										<input type="file" name="upfiles2" id="upfiles2"> <span class="file_label">* 본문에 등록되는 이미지 입니다.</span>
+										<input type="file" name="reUpfile2" id="upfiles2"> <span class="file_label">* 본문에 등록되는 이미지 입니다.</span>
 		                            </td>
 								</tr>
 							</tbody>

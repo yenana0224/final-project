@@ -54,4 +54,24 @@ public class EventServiceImpl implements EventService {
 	public int insertImg(EventImg eventImg) {
 		return eventMapper.insertImg(eventImg);
 	}
+
+	@Override
+	public int update(Event event) {
+		return eventMapper.update(event);
+	}
+
+	@Override
+	public int updateImg(EventImg eventImg) {
+		return eventMapper.updateImg(eventImg);
+	}
+
+	@Override
+	public List<EventImg> selectEventImgs(int eventNo) {
+		return eventMapper.selectEventImgs(eventNo);
+	}
+
+	@Override
+	public int delete(int eventNo) {
+		return eventMapper.delete(eventNo);
+	}
 }

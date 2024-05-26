@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트</title>
+<title>혼디모영 : ${event.eventTitle}</title>
 
 <style>
 	D
@@ -173,6 +173,10 @@
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
             </c:if>
         </div>
+        
+        <form action="" id="postForm" method="post">
+		    <input type="hidden" name="eventNo" value="${event.eventNo}"/>
+		</form>
     </div> <!-- container-->
 	
 	<jsp:include page="../common/footer.jsp"/>
@@ -187,12 +191,12 @@
 		
 		function postSubmit(num){
 			if(num == 0){
-				$('#postForm').attr('action', 'updateForm.rvw').submit();
+				$('#postForm').attr('action', '${path}/event/updateForm').submit();
 			}
 			else{
 		        let dele = confirm('삭제 하시겠습니까?');
 		        if(dele){
-		            $('#postForm').attr('action', 'delete.rvw').submit();
+		            $('#postForm').attr('action', '${path}/event/delete').submit();
 		        }
 			}
 		}

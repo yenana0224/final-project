@@ -90,6 +90,18 @@
 		      FILE_LEVEL = 2
 	</select>
 	
+	<select id="selectEventImgs" parameterType="_int" resultMap="eventImgResultSet">
+		SELECT
+		      EVENT_TITLE,
+		      CHANGE_NAME
+		  FROM
+		      EVENT_IMG EI
+		  JOIN
+		      EVENT E ON (E.EVENT_NO = EI.EVENT_NO)
+		 WHERE
+		      E.EVENT_NO = #{eventNo}
+	</select>
+	
 	<update id="increaseCount" parameterType="_int">
 		UPDATE
 			  EVENT
@@ -116,7 +128,7 @@
 		  	  )
 		VALUES
 			  (
-			  SEQ_EVENT_NO.NEXTVAL, 
+			  #{eventNo}, 
 			  #{eventTitle},
 			  #{eventContent},
 			  #{userNo}
@@ -143,5 +155,41 @@
 			  #{fileLevel}
 			  )
 	</insert>
+	
+	<update id="update" parameterType="event">
+		UPDATE
+		      EVENT
+		   SET
+		      EVENT_TITLE = #{eventTitle},
+		      EVENT_CONTENT = #{eventContent}
+		 WHERE
+		      EVENT_NO = #{eventNo}
+	</update>
 
+
+	<update id="updateImg" parameterType="eventImg">
+	    UPDATE
+	        EVENT_IMG
+	    SET
+	        ORIGIN_NAME = #{originName},
+	        CHANGE_NAME = #{changeName}
+	    WHERE
+	        EVENT_NO = #{eventNo}
+	        <if test="fileLevel == 1">
+	            AND FILE_LEVEL = 1
+	        </if>
+	        <if test="fileLevel == 2">
+	            AND FILE_LEVEL = 2
+	        </if>
+	</update>
+	
+	<update id="delete" parameterType="event">
+		UPDATE
+			  EVENT
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+			  EVENT_NO = #{eventNo}
+	</update>
+		
 </mapper>

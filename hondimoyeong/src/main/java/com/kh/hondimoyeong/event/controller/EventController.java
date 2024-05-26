@@ -68,6 +68,22 @@ public class EventController {
 		return "event/eventInsertForm";
 	}
 	
+	public String saveFile(MultipartFile upfile, HttpSession session) {
+	    String originName = upfile.getOriginalFilename();
+	    String ext = originName.substring(originName.lastIndexOf("."));
+	    String uuid = UUID.randomUUID().toString(); // UUID 생성
+	    String changeName = uuid + ext; // UUID와 파일 확장자를 결합하여 고유한 파일 이름 생성
+	    String savePath = session.getServletContext().getRealPath("/resources/eventFile/");
+	    
+	    try {
+	        upfile.transferTo(new File(savePath + changeName));
+	    } catch (IllegalStateException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return "resources/eventFile/" + changeName;
+	}
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute Event event,
@@ -119,24 +135,86 @@ public class EventController {
 		}
 	}
 	
-	
-	public String saveFile(MultipartFile upfile, HttpSession session) {
-	    String originName = upfile.getOriginalFilename();
-	    String ext = originName.substring(originName.lastIndexOf("."));
-	    String uuid = UUID.randomUUID().toString(); // UUID 생성
-	    String changeName = uuid + ext; // UUID와 파일 확장자를 결합하여 고유한 파일 이름 생성
-	    String savePath = session.getServletContext().getRealPath("/resources/eventFile/");
-	    
-	    try {
-	        upfile.transferTo(new File(savePath + changeName));
-	    } catch (IllegalStateException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	    return "resources/eventFile/" + changeName;
+	@PostMapping("/updateForm")
+	public ModelAndView updateForm(int eventNo, ModelAndView mv, Event event) {
+		mv.addObject("eventNo", eventNo);
+		mv.addObject("event", eventService.selectEvent(eventNo)).setViewName("event/eventUpdateForm");
+		return mv;
+	}
+
+	@PostMapping("/update")
+	public String update(@ModelAttribute Event event,
+			             @RequestParam("reUpfile1") MultipartFile[] reUpfiles1,
+			             @RequestParam("reUpfile2") MultipartFile[] reUpfiles2,
+			             HttpSession session,
+			             Model model) {
+		
+		eventService.update(event);
+		int eventNo = event.getEventNo();
+		
+		if(eventNo > 0) {
+			List<EventImg> updateImgs = eventService.selectEventImgs(eventNo);
+			for(EventImg img : updateImgs) {
+				new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+			}
+			
+			List<MultipartFile> eventImgs = new ArrayList<MultipartFile>();
+			
+			for(MultipartFile file : reUpfiles1) {
+				if(!file.isEmpty()) {
+					eventImgs.add(file);
+				}
+			}
+			
+			for(MultipartFile file : reUpfiles2) {
+				if(!file.isEmpty()) {
+					eventImgs.add(file);
+				}
+			}
+			
+	        for (int i = 0; i < eventImgs.size(); i++) {
+	            MultipartFile upfile = eventImgs.get(i);
+	            String originalFilename = upfile.getOriginalFilename();
+	            String changeName = saveFile(upfile, session);
+	            
+	            // REVIEW_IMG 테이블에 파일 정보 삽입
+	            EventImg eventImg = new EventImg();
+	            eventImg.setEventNo(eventNo);
+	            eventImg.setOriginName(originalFilename);
+	            eventImg.setChangeName(changeName);
+	            
+	            // 파일 레벨 설정
+	            if (i < reUpfiles1.length) {
+	            	eventImg.setFileLevel(1); // 첫 번째 파일 레벨
+	            } else {
+	            	eventImg.setFileLevel(2); // 두 번째 파일 레벨
+	            }
+	            
+	            eventService.updateImg(eventImg);
+	        }
+			session.setAttribute("alertMsg", "수정 성공");
+			return "redirect:/event/" + eventNo;
+		} else {
+			System.out.println(event);
+			model.addAttribute("errorMsg", "수정 실패");
+			return "common/errorPage";
+		}
 	}
 	
+	@PostMapping("/delete")
+	public String delete(int eventNo, HttpSession session, String filePath) {
+		if(eventService.delete(eventNo) > 0) {
+			List<EventImg> eventImgs = eventService.selectEventImgs(eventNo);
+			for(EventImg img : eventImgs) {
+				new File(session.getServletContext().getRealPath(img.getChangeName())).delete();
+			}
+			session.setAttribute("alertMsg", "삭제 성공");
+			return "redirect:/event";
+		} else {
+			session.setAttribute("alertMsg", "삭제 실패");
+			return "redirect:/event";
+		}
+	}
 	
 	
 	

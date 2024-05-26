@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트</title>
+<title>혼디모영 - 이벤트</title>
 
 <style>
 	/* 컨텐트 */

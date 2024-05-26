@@ -25,4 +25,12 @@ public interface EventMapper {
 
 	int insertImg(EventImg eventImg);
 
+	int update(Event event);
+
+	int updateImg(EventImg eventImg);
+
+	List<EventImg> selectEventImgs(int eventNo);
+
+	int delete(int eventNo);
+
 }
