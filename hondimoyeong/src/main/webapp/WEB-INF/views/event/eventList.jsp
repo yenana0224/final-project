@@ -113,70 +113,32 @@
         <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
 
         <div class="list-area">
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/aqua.jpg" class="eventImg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트다람쥐~</a> <a href="detail.ev">디테일</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
-
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/감귤체험.jpg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트지렁이~</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
-
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/tangerine.jpg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 이벤트다용가리~</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
-
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/han2.jpg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 오케이승철~</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
-
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/han.jpg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 희주봉주희~~</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
-
-            <div class="event" align="center">
-                <input type="hidden" value="" />
-                <img src="resources/image/aqua.jpg" />
-                <p>
-                <a class="eventTitle">어쩌고 저쩌고 한라봉주희~</a> <br><br>
-                <label>조회수</label> : <span>0</span>
-                </p>
-            </div>
+        	<c:forEach var="e" items="${event}">
+	            <div class="event" align="center">
+	                <input type="hidden" value="" />
+	                <img src="${e.changeName}" class="eventImg" />
+	                <p>
+	                <a class="eventTitle">${e.eventTitle}</a> <a href="detail.ev">디테일</a> <br><br>
+	                <label>조회수</label> : <span>0</span>
+	                </p>
+	            </div>
+        	</c:forEach>
         </div>
         
-                <div class="hdmy-board_page" id="pagination">
-			<ul class="pagination">
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-			</ul>
-        </div>
+			<div class="hdmy-board_page" id="pagination">
+				<ul class="pagination">
+			        <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="p">
+			            <c:choose>
+			                <c:when test="${p eq pageInfo.currentPage}">
+			                    <li class="page-item active"><a class="page-link" href="event?page=${p}">${p}</a></li>
+			                </c:when>
+			                <c:otherwise>
+			                    <li class="page-item"><a class="page-link" href="event?page=${p}">${p}</a></li>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
+				</ul>
+	        </div>
     </div> <!-- container-->
 	
 	<jsp:include page="../common/footer.jsp"/>
