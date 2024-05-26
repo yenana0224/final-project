@@ -58,14 +58,14 @@
 	</select>
 	
 	<update id="increaseCount" parameterType="_int">
-	UPDATE
-	      COMPANION
-	   SET
-	      COUNT = COUNT + 1
-	 WHERE
-	      COMPANION_NO = #{companionNo}
-	   AND
-	      STATUS = 'Y'
+		UPDATE
+		      COMPANION
+		   SET
+		      COUNT = COUNT + 1
+		 WHERE
+		      COMPANION_NO = #{companionNo}
+		   AND
+		      STATUS = 'Y'
 	</update>
 	
 	<select id="selectAll" resultMap="companionResultSet">
@@ -80,7 +80,12 @@
 		      A.COUNT,
 		      A.STATUS AS STATUS,
 		      A.COMPANION_PEOPLE,
-		      (SELECT COUNT(*) FROM COMPANION_REPLY CR WHERE A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
+		      (SELECT
+		      	     COUNT(*)
+		         FROM
+		      		 COMPANION_REPLY CR
+		        WHERE
+		       	     A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
 		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
 		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
 		  FROM
@@ -114,70 +119,82 @@
 	<!-- 정렬 -->
 	<select id="sortCompanionCount" resultType="_int">
 		SELECT
-		    COUNT (*) AS SORT_COMPANION_COUNT
-		FROM (
-		    SELECT
-		        A.COMPANION_NO,
-		        A.COMPANION_PEOPLE,
-		        COUNT(B.USER_NO) AS COMPANION_NUM,
-		        DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
-		    FROM
-		        COMPANION A
-		    LEFT JOIN
-		        COMPANION_BRIDGE B ON A.COMPANION_NO = B.COMPANION_NO
-		    WHERE
-		        A.STATUS = 'Y' -- 모집 중인 것만 필터링
-		        AND A.COMPANION_DATE >= TRUNC(SYSDATE)
-		    GROUP BY
-		        A.COMPANION_NO,
-		        A.COMPANION_PEOPLE,
-		        A.COMPANION_DATE
-		    HAVING
-		        COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) <![CDATA[<]]> A.COMPANION_PEOPLE -1
-		)
+		      COUNT (*) AS SORT_COMPANION_COUNT
+		  FROM
+		  	  (
+		      SELECT
+		      A.COMPANION_NO,
+		      A.COMPANION_PEOPLE,
+		      COUNT(B.USER_NO) AS COMPANION_NUM,
+		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
+		  FROM
+		      COMPANION A
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON A.COMPANION_NO = B.COMPANION_NO
+		 WHERE
+		      A.STATUS = 'Y'
+		   AND
+		   	  A.COMPANION_DATE >= TRUNC(SYSDATE)
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      A.COMPANION_PEOPLE,
+		      A.COMPANION_DATE
+		HAVING
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) <![CDATA[<]]> A.COMPANION_PEOPLE -1
+			  )
 	</select>
 	
 	<select id="sortCompanions" resultMap="companionResultSet">
 		SELECT
-		    A.COMPANION_NO AS COMPANION_NO,
-		    M.USER_NAME,
-		    C.COURSE_NO AS COURSE_NANE,
-		    TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
-		    A.COMPANION_TITLE,
-		    A.COMPANION_CONTENT,
-		    TO_CHAR(A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
-		    A.COUNT,
-		    A.STATUS AS STATUS,
-		    A.COMPANION_PEOPLE,
-		    (SELECT COUNT(*) FROM COMPANION_REPLY CR WHERE A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
-		    COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
-		    DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
-		FROM
-		    COMPANION A
-		JOIN
-		    COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
-		JOIN
-		    MEMBER M USING (USER_NO)
-		LEFT JOIN
-		    COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
-		WHERE
-		    A.STATUS = 'Y'
-		    AND A.COMPANION_DATE <![CDATA[>=]]> TRUNC(SYSDATE)
-		GROUP BY
-		    A.COMPANION_NO,
-		    M.USER_NAME,
-		    C.COURSE_NO,
-		    A.COMPANION_DATE,
-		    A.COMPANION_TITLE,
-		    A.COMPANION_CONTENT,
-		    A.CREATE_DATE,
-		    A.COUNT,
-		    A.STATUS,
-		    A.COMPANION_PEOPLE
+		      A.COMPANION_NO AS COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO AS COURSE_NANE,
+		      TO_CHAR(A.COMPANION_DATE, 'YY.MM.DD (DY)') AS COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      TO_CHAR(A.CREATE_DATE, 'YY/MM/DD') AS CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS AS STATUS,
+		      A.COMPANION_PEOPLE,
+		      (SELECT
+		      		 COUNT(*)
+		      	 FROM
+		      	 	 COMPANION_REPLY CR
+		      	WHERE 
+		      		 A.COMPANION_NO = CR.COMPANION_NO) AS REPLY_COUNT,
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) AS COMPANION_NUM,
+		      DECODE(SIGN(A.COMPANION_DATE - SYSDATE), -1, '마감', '모집 중') AS NOW_STATUS
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+	   	  JOIN
+		      MEMBER M USING (USER_NO)
+		  LEFT
+		  JOIN
+		      COMPANION_BRIDGE B ON (A.COMPANION_NO = B.COMPANION_NO)
+		 WHERE
+		      A.STATUS = 'Y'
+		      AND A.COMPANION_DATE <![CDATA[>=]]> TRUNC(SYSDATE)
+		 GROUP
+		    BY
+		      A.COMPANION_NO,
+		      M.USER_NAME,
+		      C.COURSE_NO,
+		      A.COMPANION_DATE,
+		      A.COMPANION_TITLE,
+		      A.COMPANION_CONTENT,
+		      A.CREATE_DATE,
+		      A.COUNT,
+		      A.STATUS,
+		      A.COMPANION_PEOPLE
 		HAVING
-		    COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) <![CDATA[<]]> A.COMPANION_PEOPLE -1
-		ORDER BY
-		    A.COMPANION_DATE DESC
+		      COUNT(CASE WHEN B.STATUS = 'A' THEN B.USER_NO END) <![CDATA[<]]> A.COMPANION_PEOPLE -1
+		 ORDER
+		    BY
+		      A.COMPANION_DATE DESC
 	</select>
 
 	
@@ -283,21 +300,21 @@
 	</update>
 
 	<select id="searchCount" parameterType="map" resultType="_int">
-	SELECT
-	      COUNT(*)
-	  FROM
-	      COMPANION A
-	  JOIN
-	      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
-	 WHERE
-	      A.STATUS = 'Y'
-	 <if test="condition == 'title'">
-	   AND COMPANION_TITLE
-	 </if>
-	 <if test="condition == 'course'">
-	   AND C.COURSE_NO
-	 </if>
-	      LIKE '%' || #{keyword} || '%'
+		SELECT
+		      COUNT(*)
+		  FROM
+		      COMPANION A
+		  JOIN
+		      COURSE C ON (A.COURSE_NO = C.COURSE_INDEX)
+		 WHERE
+		      A.STATUS = 'Y'
+		 <if test="condition == 'title'">
+		   AND COMPANION_TITLE
+		 </if>
+		 <if test="condition == 'course'">
+		   AND C.COURSE_NO
+		 </if>
+		      LIKE '%' || #{keyword} || '%'
 	</select>
 	
 	<select id="search" parameterType="map" resultMap="companionResultSet">
@@ -349,9 +366,6 @@
 		     A.COMPANION_DATE DESC
 	</select>
 	
-
-
-	
 	<select id="selectReply" resultMap="companionReplyResultSet" parameterType="_int">
 		SELECT
 		      REPLY_NO,
@@ -394,22 +408,22 @@
 	</insert>
 	
 	<insert id="insertBridge" parameterType="companion">
-	INSERT
-	  INTO
-	      COMPANION_BRIDGE
-		  (
-	      COMPANION_BRIDGE_NO,
-	      COMPANION_NO,
-	      USER_NO,
-	      STATUS
-	      )
-	VALUES
-	     (
-	     SEQ_COMPANION_BRIDGE_NO.NEXTVAL,
-	     SEQ_COMPANION_NO.CURRVAL,
-	     #{userNo},
-	     'W'
-	     )
+		INSERT
+		  INTO
+		      COMPANION_BRIDGE
+			  (
+		      COMPANION_BRIDGE_NO,
+		      COMPANION_NO,
+		      USER_NO,
+		      STATUS
+		      )
+		VALUES
+		     (
+		     SEQ_COMPANION_BRIDGE_NO.NEXTVAL,
+		     SEQ_COMPANION_NO.CURRVAL,
+		     #{userNo},
+		     'W'
+		     )
 	</insert>
 	
 	
