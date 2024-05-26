@@ -42,7 +42,7 @@
 
     <div class="footer">
         <div class="footer_img">
-            <img src="resources/image/logo.png" alt="" class="footer_logo">
+            <img src="${ path }/resources/image/logo.png" alt="" class="footer_logo">
         </div>
 
         <div class="footer_content">

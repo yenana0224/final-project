@@ -1,15 +1,20 @@
 package com.kh.hondimoyeong.event.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
 import com.kh.hondimoyeong.common.template.Pagination;
 import com.kh.hondimoyeong.event.model.service.EventService;
+import com.kh.hondimoyeong.event.model.vo.Event;
+import com.kh.hondimoyeong.event.model.vo.EventImg;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,8 +36,22 @@ public class EventController {
 	}
 	
 	@GetMapping("/{eventNo}")
-	public String detailEvent(@PathVariable int eventNo) {
-		return "event/eventDetail";
+	public ModelAndView detailEvent(@PathVariable int eventNo, ModelAndView mv) {
+		
+		Event event = eventService.selectEvent(eventNo);
+		if(event != null) {
+			List<EventImg> eventImgs = eventService.selectEventImg(eventNo);
+			event.setEventImgs(eventImgs);
+			
+			if(eventService.increaseCount(eventNo) > 0) {
+				mv.addObject("event", event).setViewName("event/eventDetail");
+			} else {
+				mv.addObject("errorMsg", "조회 실패").setViewName("common/errorPage");
+			}
+		} else {
+			mv.addObject("errorMsg", "찾을 수 없음").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 }

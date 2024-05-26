@@ -139,7 +139,7 @@
     <div id="container">
         <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
         
-        <c:if test="${!empty loginUser}">
+        <c:if test="${sessionScope.loginUser.status == 'A'}">
 	        <div class="cs_board_top">
 	            <div class="cs_board_top_btn"><button class="cs_btn" onclick="insertEvent();">작성</button></div>
 	        </div>
@@ -148,7 +148,7 @@
         <div class="list-area">
         	<c:forEach var="e" items="${event}">
 	            <div class="event" align="center">
-	                <input type="hidden" value="" />
+	                <input type="hidden" value="${e.eventNo}" />
 	                <img src="${e.changeName}" class="eventImg" />
 	                <p>
 	                <a class="eventTitle">${e.eventTitle}</a> <a href="detail.ev">디테일</a> <br><br>
@@ -175,6 +175,22 @@
     </div> <!-- container-->
 	
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+	function insertEvent(){
+		location.href = '${ path }/insertForm.rvw';
+	}
+	
+	$(() => {
+	    $('.event').click(function() {
+	        const eventNo = $(this).find('input[type="hidden"]').val();
+	        location.href = '${path}/event/' + eventNo;
+	    });
+	});
+
+	
+	
+	</script>
 
 </body>
 </html>

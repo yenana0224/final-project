@@ -177,9 +177,9 @@
 	           		<c:when test="${ empty sessionScope.loginUser }">
 		                <!-- 로그인 전 -->
 		                <div class="header_menubar">
-			                <a href="login">로그인</a>
-			                <a href="insertForm">회원가입</a>
-			                <a href="list.notice">고객센터</a>
+			                <a href="${path}/login">로그인</a>
+			                <a href="${path}/insertForm">회원가입</a>
+			                <a href="${path}/list.notice">고객센터</a>
 		                </div>
 	                </c:when>
 				    <c:otherwise>
@@ -192,15 +192,15 @@
 
 					        <c:choose>
 					            <c:when test="${ sessionScope.loginUser.status == 'A' }">
-					                <a href="adminPage">관리자페이지</a>
+					                <a href="${path}/adminPage">관리자페이지</a>
 					            </c:when>
 					            
 					            <c:when test="${ sessionScope.loginUser.status == 'C' }">
-					                <a href="myPage">마이페이지</a>
+					                <a href="${path}/myPage">마이페이지</a>
 					            </c:when>
 					        </c:choose>
-					        <a href="list.notice">고객센터</a>
-					        <a href="logout.member">로그아웃</a>
+					        <a href="${path}/list.notice">고객센터</a>
+					        <a href="${path}/logout.member">로그아웃</a>
 				        	
 						</div>
            		 	</c:otherwise>
@@ -210,23 +210,23 @@
         <div class="header_mid">
             <div class="header_logo">
             	<a href="${ path }">
-                	<img src="resources/image/logo.png" class="logo">
+                	<img src="${ path }/resources/image/logo.png" class="logo">
                 </a>
             </div>
             
             <div class="header_menu">
                 <ul class="navi">
-                    <li><a href="courses">올레길</a></li>
-                    <li><a href="companion">혼디모영</a></li>
+                    <li><a href="${path}/courses">올레길</a></li>
+                    <li><a href="${path}/companion">혼디모영</a></li>
                     <li><a href="#">프로그램</a>
                         <ul class="submenu"  style="padding-top: 20px;">
-                            <li><a href="tangerine">귤따기 체험</a></li>
-                            <li><a href="hanlasan">한라산 예약</a></li>
-                            <li><a href="aqua">아쿠아리움 예약</a></li>
+                            <li><a href="${path}/tangerine">귤따기 체험</a></li>
+                            <li><a href="${path}/hanlasan">한라산 예약</a></li>
+                            <li><a href="${path}/aqua">아쿠아리움 예약</a></li>
                         </ul>
                     </li>
-                    <li><a href="event">이벤트</a></li>
-                    <li><a href="review">리뷰</a></li>
+                    <li><a href="${path}/event">이벤트</a></li>
+                    <li><a href="${path}/review">리뷰</a></li>
                 </ul>
             </div>
         </div>
