@@ -21,4 +21,8 @@ public interface EventMapper {
 
 	int increaseCount(int eventNo);
 
+	int insert(Event event);
+
+	int insertImg(EventImg eventImg);
+
 }

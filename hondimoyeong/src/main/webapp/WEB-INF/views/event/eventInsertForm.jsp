@@ -161,55 +161,26 @@
 		<c:when test="${empty loginUser}">
 			<script>
 				alert('회원만 작성 가능합니다.');
-				location.href = '${ path }/review';
+				location.href = '${ path }/event';
 			</script>
 		</c:when>
 		<c:otherwise>
 		    <div id="container">
-		        <div class="notice_insert_title"><span>리뷰 작성</span></div>
+		        <div class="notice_insert_title"><span>이벤트 작성</span></div>
 		
 		        <div class="insert_box">
-		            <form action="insert.rvw" method="post" id="myform" enctype="multipart/form-data">
+		            <form action="${path}/event/insert" method="post" id="myform" enctype="multipart/form-data">
 		            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
 		            	
 						<table class="tb_input">
 							<tbody>
 		                        <tr>
-									<th>* 코스</th>
-									<td>
-		                                <select name="courseNo" class="course_inp">
-		                                <c:forEach var="c" items="${ courseList }">
-		                                	<option value="${ c.courseIndex }">
-		                                		${ c.courseNo }
-		                                	</option>
-		                                </c:forEach>
-		                                </select>
-		                            </td>
-								</tr>
-		                        <tr>
-		                            <th>* 별점</th>
-		                            <td>
-		                                <fieldset>
-		                                    <input type="radio" name="reviewStar" value="5" id="rate1"><label
-		                                        for="rate1">★</label>
-		                                    <input type="radio" name="reviewStar" value="4" id="rate2"><label
-		                                        for="rate2">★</label>
-		                                    <input type="radio" name="reviewStar" value="3" id="rate3"><label
-		                                        for="rate3">★</label>
-		                                    <input type="radio" name="reviewStar" value="2" id="rate4"><label
-		                                        for="rate4">★</label>
-		                                    <input type="radio" name="reviewStar" value="1" id="rate5"><label
-		                                        for="rate5">★</label>
-		                                </fieldset>
-		                            </td>
-		                        </tr>
-		                        <tr>
 									<th>* 제목</th>
-									<td><input type="text" name="reviewTitle" class="title_inp" required/></td>
+									<td><input type="text" name="eventTitle" class="title_inp" required/></td>
 								</tr>
 								<tr>
 									<th>* 내용</th>
-									<td><textarea class="content_inp" name="reviewContent" required></textarea>
+									<td><textarea class="content_inp" name="eventContent" required></textarea>
 		                            </td>
 								</tr>
 		                        <tr>
@@ -221,7 +192,7 @@
 		                        <tr>
 									<th>* 첨부파일</th>
 									<td>
-										<input type="file" name="upfiles2" id="upfiles2">
+										<input type="file" name="upfiles2" id="upfiles2"> <span class="file_label">* 본문에 등록되는 이미지 입니다.</span>
 		                            </td>
 								</tr>
 							</tbody>
@@ -239,7 +210,7 @@
 	
     <script>
     	 function backPage(){
-    		 location.href = '${path}/review';
+    		 location.href = '${path}/event';
     	 }
     </script>
 

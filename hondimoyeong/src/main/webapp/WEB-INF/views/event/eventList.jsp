@@ -178,7 +178,7 @@
 	
 	<script>
 	function insertEvent(){
-		location.href = '${ path }/insertForm.rvw';
+		location.href = '${ path }/event/insertForm';
 	}
 	
 	$(() => {

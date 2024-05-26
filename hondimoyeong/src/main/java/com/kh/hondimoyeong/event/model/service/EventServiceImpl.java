@@ -44,4 +44,14 @@ public class EventServiceImpl implements EventService {
 	public int increaseCount(int eventNo) {
 		return eventMapper.increaseCount(eventNo);
 	}
+
+	@Override
+	public int insert(Event event) {
+		return eventMapper.insert(event);
+	}
+
+	@Override
+	public int insertImg(EventImg eventImg) {
+		return eventMapper.insertImg(eventImg);
+	}
 }

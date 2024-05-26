@@ -18,4 +18,8 @@ public interface EventService {
 
 	int increaseCount(int eventNo);
 
+	int insert(Event event);
+
+	int insertImg(EventImg eventImg);
+
 }

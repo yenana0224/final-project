@@ -100,5 +100,48 @@
 		   AND
 		   	  STATUS = 'Y'
 	</update>
+	
+	<insert id="insert" parameterType="event">
+		<selectKey keyProperty="eventNo" resultType="_int" order="BEFORE">
+	        SELECT SEQ_EVENT_NO.NEXTVAL AS eventNo FROM dual
+	    </selectKey>
+		INSERT
+		  INTO
+		  	  EVENT
+		  	  (
+		  	  EVENT_NO, 
+		  	  EVENT_TITLE, 
+		  	  EVENT_CONTENT, 
+		  	  USER_NO
+		  	  )
+		VALUES
+			  (
+			  SEQ_EVENT_NO.NEXTVAL, 
+			  #{eventTitle},
+			  #{eventContent},
+			  #{userNo}
+			  )
+	</insert>
+	
+	<insert id="insertImg" parameterType="eventImg">
+		INSERT
+		  INTO
+		  	  EVENT_IMG
+		  	  (
+		  	  EVENT_IMG_NO, 
+		  	  EVENT_NO, 
+		  	  ORIGIN_NAME, 
+		  	  CHANGE_NAME,
+		  	  FILE_LEVEL
+		  	  )
+		VALUES
+			  (
+			  SEQ_EVENT_IMG_NO.NEXTVAL, 
+			  #{eventNo},
+			  #{originName},
+			  #{changeName},
+			  #{fileLevel}
+			  )
+	</insert>
 
 </mapper>
