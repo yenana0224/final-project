@@ -293,35 +293,35 @@
                     		</thead>
                     	</c:when>
                     	<c:otherwise>
-                    <thead>
-                        <tr>
-                            <th class="hdmy-table_mid">동행 날짜</th>
-                            <th class="hdmy-table_small">코스</th>
-                            <th>제목</th>
-                            <th class="hdmy-table_small">작성자</th>
-                            <th class="hdmy-table_small">인원</th>
-                            <th class="hdmy-table_small">상태</th>
-                            <th class="hdmy-table_small">조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+		                    <thead>
+		                        <tr>
+		                            <th class="hdmy-table_mid">동행 날짜</th>
+		                            <th class="hdmy-table_small">코스</th>
+		                            <th>제목</th>
+		                            <th class="hdmy-table_small">작성자</th>
+		                            <th class="hdmy-table_small">인원</th>
+		                            <th class="hdmy-table_small">상태</th>
+		                            <th class="hdmy-table_small">조회수</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
 	                    	<c:forEach var="companion" items="${ companion }">
 		                        <tr class="list">
 			    					<td style="display:none">${ companion.companionNo }</td>
-		                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
+		                            <td class="hdmy-table_mid" id="companionDate">${ companion.companionDate }</td>
 		                            <td class="hdmy-table_small">${ companion.courseName }</td>
 		                            <c:choose>
 		                            	<c:when test="${ companion.replyCount == 0 }">
 		                            		<td>${companion.companionTitle}</td>
 		                            	</c:when>
 		                            	<c:otherwise>
-				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a></td>
+				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a><a id="test"></a></td>
 		                            	</c:otherwise>
 		                            </c:choose>
 		                            <td class="hdmy-table_small">${ companion.userName }</td>
 		                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
 		                            <c:choose>
-		                            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
+		                            	<c:when test="${ companion.companionNum ge companion.companionPeople or companion.nowStatus == '마감' }">
 		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
 		                            	</c:when>
 		                            	<c:otherwise>
@@ -387,6 +387,9 @@
 
 	<jsp:include page="../common/footer.jsp"/>
 	
+
+	
+	
 	<script>
     	$(function(){
     		$('.table-hover > tbody > tr').click(function(){
@@ -440,6 +443,7 @@
 		        $(".sortCompanionList").css("color", "#FF9843"); // 해당 링크의 스타일 변경
 		    }
 		});
+
 	</script>
 
 

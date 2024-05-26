@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 : ${review.reviewTitle}</title>
+<title>리뷰 - ${review.reviewTitle}</title>
 
 <style>
     /* content */

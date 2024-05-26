@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 : ${event.eventTitle}</title>
+<title>혼디모영 - ${event.eventTitle}</title>
 
 <style>
 	D

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰</title>
+<title>혼디모영 - 리뷰</title>
 
 <style>
     /* content */

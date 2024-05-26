@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>혼디모영 - 혼디모영 글 작성</title>
 
 <style>
 	/* 컨텐트 */

@@ -37,7 +37,6 @@ public class EventController {
 	@GetMapping
 	public String allEvents(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pi = Pagination.getPageInfo(eventService.selectListCount(), page, 9, 5);
-		
 		model.addAttribute("event", eventService.allEvents(pi));
 		model.addAttribute("pageInfo", pi);
 		
