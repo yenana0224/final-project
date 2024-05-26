@@ -143,7 +143,7 @@
                         <tr>
 							<th>* 모집 인원</th>
 							<td><input type="number" min="1" max="10" name="companionPeople" class="people_inp" required/>
-                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a></td>
+                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요. (본인 포함 된 인원수로 선택해 주세요.)</a></td>
 						</tr>
                         <tr>
 							<th>* 제목</th>

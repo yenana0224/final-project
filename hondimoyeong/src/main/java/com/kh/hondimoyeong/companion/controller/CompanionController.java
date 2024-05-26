@@ -75,7 +75,7 @@ public class CompanionController {
 		return "companion/companionInsertForm";
 	}
 	
-	@GetMapping("insert.cmp")
+	@PostMapping("insert.cmp")
 	public String insert(Companion companion, HttpSession session, Model model) {
 		
 		if(companionService.insert(companion) > 0) {
