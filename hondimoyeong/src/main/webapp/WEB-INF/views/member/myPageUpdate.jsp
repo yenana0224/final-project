@@ -106,7 +106,6 @@
             
 
             
-            /*회원가입 버튼 박스*/
             #signupButton    
             {
                 width: 490px;
@@ -117,7 +116,7 @@
                 /* border: 1px solid rgb(204, 0, 160); */
             }                                 
             .btn-a{
-                width: 80px;
+                width: 55px;
                 height: 35px;
                 background-color: #FF9843;
                 border: 0;
@@ -125,12 +124,11 @@
                 margin-top: 10px;
                 color: #ffffff;
                 font-size: 12px;
-                margin-right: 5px;
 
             }
 
             .btn-b{
-                width: 80px;
+                width: 55px;
                 height: 35px;
                 background-color: #9e9e9e;
                 border: 0;
@@ -142,7 +140,7 @@
             }
 
             .btn-c{
-                width: 80px;
+                width: 55px;
                 height: 35px;
                 background-color: #ff7373;
                 border: 0;
@@ -150,9 +148,21 @@
                 margin-top: 10px;
                 color: #ffffff;
                 font-size: 12px;
-                margin-right: 5px;
-
             }
+            
+            
+            .btn-d{
+                width: 85px;
+                height: 35px;
+                background-color: #2C86A2;
+                border: 0;
+                border-radius: 10px;
+                margin-top: 15px;
+                color: #ffffff;
+                font-size: 12px;
+            }
+            
+            
     </style>    
 </head>
 <body>
@@ -164,37 +174,70 @@
             <div id="titleBox">개인정보 수정</div>
             <div id="detailBox">
                 <form action="update.member" method="post">
-	                <div class="input-box"> 
-	                    <p>이름</p>
-	                    <input type="text" class="form-control" name="userName" value="${ sessionScope.loginUser.userName }"> 
-	                </div>
-	                <div class="input-box"> 
-	                    <p>아이디</p>
-	                    <input type="text" class="form-control" name="userId" value="${ sessionScope.loginUser.userId }" readonly>
-	                </div>
-	                <div class="input-box"> 
-	                    <p>이메일</p>
-	                    <input type="text" class="form-control" name="email" value="${ sessionScope.loginUser.email }"> 
-	                </div>
-	                <div class="input-box"> 
-	                    <p>연락처</p>
-	                    <input type="text" class="form-control" name="phone" value="${ sessionScope.loginUser.phone }"> 
-	                </div>
-	                <div class="input-box"> 
-	                    <p>가입일</p>
-	                    <input type="text" class="form-control" name="enrollDate" value="${ sessionScope.loginUser.enrollDate }" readonly> 
-	                </div>
-	                <div id="signupButton">
-	                    <button type="submit" class="btn-a">수정하기</button>
-	                    <button type="button" class="btn-c" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
-	                    <button type="button" class="btn-b" onclick="location.href='myPage';">목록</button>
-	                </div>
+                    <div class="input-box">
+                        <p>이름</p>
+                        <input type="text" class="form-control" name="userName" value="${ sessionScope.loginUser.userName }" maxlength="20">
+                    </div>
+                    <div class="input-box">
+                        <p>아이디</p>
+                        <input type="text" class="form-control" name="userId" value="${ sessionScope.loginUser.userId }" readonly>
+                    </div>
+                    <div class="input-box">
+                        <p>이메일</p>
+                        <input type="text" class="form-control" name="email" value="${ sessionScope.loginUser.email }" maxlength="30">
+                    </div>
+                    <div class="input-box">
+                        <p>연락처</p>
+                        <input type="text" class="form-control" name="phone" value="${ sessionScope.loginUser.phone }" maxlength="11">
+                    </div>
+                    <div class="input-box">
+                        <p>가입일</p>
+                        <input type="text" class="form-control" name="enrollDate" value="${ sessionScope.loginUser.enrollDate }" readonly>
+                    </div>
+                    <div id="signupButton">
+                        <button type="button" class="btn-d" data-toggle="modal" data-target="#updatePwdModal">비밀번호 변경</button>
+                        <button type="submit" class="btn-a">수정</button>
+                        <button type="button" class="btn-c" data-toggle="modal" data-target="#deleteForm">탈퇴</button>
+                        <button type="button" class="btn-b" onclick="location.href='myPage';">목록</button>
+                    </div>
                 </form>
-            </div>               
+            </div>
         </div>
     </div>
-    
-    
+
+    <!-- 비밀번호 변경 버튼 클릭 시 보여질 Modal -->
+    <div class="modal fade" id="updatePwdModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">비밀번호 변경</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form action="updatePwd.member" method="post">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <label for="currentPwd">현재 비밀번호 입력 : </label>
+                        <input type="password" class="form-control" placeholder="현재 비밀번호를 입력해 주세요." id="currentPwd" name="currentPwd" required maxlength="100"> <br>
+
+                        <label for="newPwd">새 비밀번호 입력 : </label>
+                        <input type="password" class="form-control" placeholder="새 비밀번호를 입력해 주세요." id="newPwd" name="newPwd" required maxlength="100"> <br>
+
+                        <label for="checkPwd">새 비밀번호 확인 : </label>
+                        <input type="password" class="form-control" placeholder="다시 한 번 입력해 주세요." id="checkPwd" name="checkPwd" required maxlength="100"> <br>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer" align="center">
+                        <button type="submit" class="btn-d">비밀번호 변경</button>
+                        <input type="hidden" value="${sessionScope.loginUser.userNo}" name="userNo">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- 회원탈퇴 버튼 클릭 시 보여질 Modal -->
     <div class="modal fade" id="deleteForm">
         <div class="modal-dialog modal-sm">
@@ -209,32 +252,22 @@
                 <form action="delete.member" method="post">
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <div align="center">
-			                            탈퇴 후 복구가 불가능합니다. <br>
-			                            정말로 탈퇴 하시겠습니까? <br>
+                        <div align="center" style="color:crimson; font-weight: bold;">
+                            탈퇴 후 복구가 불가능합니다. <br>
+                            정말로 탈퇴 하시겠습니까? <br>
                         </div>
                         <br>
-                            <label for="userPwd">비밀번호 입력 : </label>
-                            <input type="password" class="form-control" placeholder="비밀번호를 입력해 주세요." id="userPwd" name="userPwd"> <br>
+                        <label for="userPwd">비밀번호 입력 : </label>
+                        <input type="password" class="form-control" placeholder="비밀번호를 입력해 주세요." id="userPwd" name="userPwd"> <br>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer" align="center">
-                        <button type="submit" class="btn-c">탈퇴하기</button>
+                        <button type="submit" class="btn-c">확인</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    
-	<jsp:include page="../common/footer.jsp"/>
-	
-	
-
-    
-    
-    
-
-
-
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -226,10 +226,30 @@ public class MemberController {
 	   
 	
 	
-	
-	
-	
-	
+
+
+    @PostMapping("updatePwd.member")
+    public ModelAndView updatePwd(@RequestParam("currentPwd") String currentPwd, @RequestParam("newPwd") String newPwd, ModelAndView mv, HttpSession session) {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+
+        if (bcryptPasswordEncoder.matches(currentPwd, loginUser.getUserPwd())) {
+            String encPwd = bcryptPasswordEncoder.encode(newPwd);
+            loginUser.setUserPwd(encPwd);
+            if (memberService.updatePwd(loginUser) > 0) {
+                session.setAttribute("alertMsg", "비밀번호 변경 성공!");
+                mv.setViewName("redirect:/");
+            } else {
+                mv.addObject("errorMsg", "비밀번호 변경 실패");
+                mv.setViewName("common/errorPage");
+            }
+        } else {
+            mv.addObject("errorMsg", "현재 비밀번호가 일치하지 않습니다.");
+            mv.setViewName("common/errorPage");
+        }
+
+        return mv;
+    }
+
 	
 	
 	

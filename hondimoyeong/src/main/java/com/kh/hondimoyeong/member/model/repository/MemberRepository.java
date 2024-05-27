@@ -105,7 +105,9 @@ public class MemberRepository {
         return sqlSession.selectOne("memberMapper.findId", params);
     }
 	
-	
+    public int updatePwd(SqlSessionTemplate sqlSession, Member member) {
+        return sqlSession.update("memberMapper.updatePwd", member);
+    }
 	
 	
 	

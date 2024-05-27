@@ -107,6 +107,12 @@ public class MemberServiceImpl implements MemberService {
     public String findId(String userName, String phone, String email) {
         return memberRepository.findId(sqlSession, userName, phone, email);
     }
+    
+    
+    @Override
+    public int updatePwd(Member member) {
+        return memberRepository.updatePwd(sqlSession, member);
+    }
 	
 	
 	

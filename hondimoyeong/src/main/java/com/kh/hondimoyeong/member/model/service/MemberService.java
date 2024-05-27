@@ -42,5 +42,12 @@ public interface MemberService {
 	//게시글 삭제
     int deleteCustomer(int customerNo);
 	
+    //아이디찾기
     String findId(String userName, String phone, String email);
+    
+    //비밀번호 변경
+    int updatePwd(Member member);
+    
+    
+    
 }
