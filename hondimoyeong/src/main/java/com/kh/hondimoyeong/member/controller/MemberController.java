@@ -49,7 +49,7 @@ public class MemberController {
          }
          
       } else {
-    	  mv.addObject("errorMsg", "아이디와 비밀번호를 다시 확인해주세요.").setViewName("member/login");
+    	  mv.addObject("errorMsg", "아이디와 비밀번호를 다시 확인해 주세요.").setViewName("member/login");
       }
       return mv;
    }
@@ -118,7 +118,7 @@ public class MemberController {
 				session.setAttribute("alertMsg", "회원 탈퇴가 성공적으로 완료되었습니다.");
 				return "redirect:/";
 			} else {
-				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다. 비밀번호를 확인해주세요.");
+				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다. 비밀번호를 확인해 주세요.");
 				return "common/errorPage";
 			}
 		} else {
@@ -231,10 +231,10 @@ public class MemberController {
             String encPwd = bcryptPasswordEncoder.encode(newPwd);
             loginUser.setUserPwd(encPwd);
             if (memberService.updatePwd(loginUser) > 0) {
-                session.setAttribute("alertMsg", "비밀번호 변경 성공!");
+                session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다!");
                 mv.setViewName("redirect:/");
             } else {
-                mv.addObject("errorMsg", "비밀번호 변경 실패");
+                mv.addObject("errorMsg", "비밀번호 변경에 실패했습니다.");
                 mv.setViewName("common/errorPage");
             }
         } else {

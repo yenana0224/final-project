@@ -129,15 +129,15 @@
             </div>
             <div class="input-box">
                 <p>아이디</p>
-                <input type="text" class="form-control" name="userId">
+                <input type="text" class="form-control" name="userId"  maxlength="15" placeholder="영문, 숫자만 입력해 주세요." oninput="idValidateInput(this)">
             </div>
             <div class="input-box">
                 <p>이름</p>
-                <input type="text" class="form-control" name="userName">
+                <input type="text" class="form-control" name="userName" maxlength="20" oninput="nameValidateInput(this)" placeholder="이름을 입력해 주세요.">
             </div>
             <div class="input-box">
                 <p>이메일</p>
-                <input type="text" class="form-control" name="userEmail">
+                <input type="text" class="form-control" name="userEmail" maxlength="30"  oninput="emailValidateInput(this)" placeholder="이메일을 입력해 주세요.">
             </div>
             <div id="box-button">
                 <button type="submit">비밀번호 찾기</button>
@@ -150,7 +150,19 @@
     
     <jsp:include page="../common/footer.jsp"/>
 
+	<script>
+	    function idValidateInput(input) {
+	        input.value = input.value.replace(/[^a-z0-9]/gi, '');
+	    }
+	    
+	    function nameValidateInput(input) {
+	    	input.value = input.value.replace(/[^ㄱ-힣a-zA-Z]/gi, '');
+	    }
 
+	    function emailValidateInput(input) {
+	    	input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣0-9]/gi, '');
+	    }
+	</script>
 
 </body>
 </html>
