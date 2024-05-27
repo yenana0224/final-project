@@ -46,7 +46,9 @@ public class AjaxMemberCompanionController {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
-		MemberCompanionService.memberPermission(data);
+		if(MemberCompanionService.memberPermission(data)>0) {		System.out.println("신청중");
+};
+		
 		
 		return accompanyList(companionNo, session);
 	}
