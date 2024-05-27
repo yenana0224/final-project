@@ -74,13 +74,6 @@
                 font-weight: bold; 
             }
             
-            a{
-                display: inline-block;
-                margin: 0 auto;
-                text-decoration: none; 
-                color: rgb(0, 0, 0);  
-                font-size: 11px; 
-            }
 
            div > button{
                 width: 260px;

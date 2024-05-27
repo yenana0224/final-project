@@ -240,9 +240,6 @@
             <div id="titleBox">내가 쓴 동행 게시글</div>
             <div class="detailBox">
 
-            
-
-
 	            <c:forEach var="board" items="${list}">
 	            	<div class="background-Box">
 	            	    <div class="acompany-btn" id="${board.companionNo }" data-toggle="modal" data-target="#myModal">신청확인</div>
@@ -326,49 +323,70 @@
 	            
         
         <script>
-        
+
 	        $(document).on('click', '.acompany-btn', function() {
 	        	
 	        	$.ajax({
 	        		url : 'companions/acompany',
 	        		data : {companionNo : $(this).attr('id')},
 	        		success : (data) => {
-	        			//console.log(data);
 	        			let user = '';
 	        			let status = '';
 	        			
 	        			for(let i in data){
 	        				
-	        				if(data[i].status == 'N') status = '신청중'
-	        				else if(data[i].status == 'A') status = '참여'
-	        				else status = '취소'
-	        				
-		        			user += '<div class="box4">'
-		        		          +	  '<div class="status-area">'
-		        		          +		status
-		        		          +	  '</div>'
-		        		          +   '<div class="userInfo">'
-		        		          + 	data[i].userName
-		        		          +   '</div>'
-		        		          +   '<div class="btn-area">'
-		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
-		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
-		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
-		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
-		        		          +   '</div>'
-		        		    	  + '</div>'
-	        			}
+	        				if(data[i].status == 'N') {
+	        					status = '신청중';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          +   '<div class="btn-area">'
+		  		        		          +     '<button class="status yes" onclick="permission();">수락</button>'
+		  		        		          +     '<button class="status no" onclick="rejection();">거절</button>'
+		  		        		          +		'<input type="hidden" class="userNo" id="' + data[i].userNo +'">'
+		  		        		          +		'<input type="hidden" class="companionNo" id="' + data[i].companionNo +'">'
+		  		        		          +   '</div>'
+		  		        		    	  + '</div>'
+	        				} else if (data[i].status == 'A' ) {
+	        					status = '참여';
+	        					
+	        					user += '<div class="box4">'
+		  		        		          +	  '<div class="status-area">'
+		  		        		          +		status
+		  		        		          +	  '</div>'
+		  		        		          +   '<div class="userInfo">'
+		  		        		          + 	data[i].userName
+		  		        		          +   '</div>'  
+		  		        		          + '</div>'
+		  		        		          
+	        				} else {
+	        					status = '취소';
+	        					
+	        					user += '<div class="box4">'
+	  		        		          +	  '<div class="status-area">'
+	  		        		          +		status
+	  		        		          +	  '</div>'
+	  		        		          +   '<div class="userInfo">'
+	  		        		          + 	data[i].userName
+	  		        		          +   '</div>'  
+	  		        		          + '</div>'  
+	        				}
 
 	        			$('.modal-body').html(user);
 	        		}
 	        		
-	        	})
+	        	}
+	        	})		
 	        })
 	        
         </script>
         
         <script>
-        
         	function permission(){
         		
         		const user = $('.userNo').attr('id');

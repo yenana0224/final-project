@@ -45,8 +45,6 @@ public class MemberCompanionController {
 		
 		model.addAttribute("list", MemberCompanionService.myList(userNo, pi));
 		model.addAttribute("pageInfo", pi);
-
-		//System.out.println(companionService.myList(userNo, pi));
 		
 		return "member/companionInvite";
 	}
@@ -63,7 +61,6 @@ public class MemberCompanionController {
 		model.addAttribute("list", MemberCompanionService.myRequest(userNo, pi));
 		model.addAttribute("pageInfo", pi);
 		
-		System.out.println(MemberCompanionService.myRequest(userNo, pi));
 		return "member/requestList";
 	}
 
