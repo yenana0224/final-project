@@ -317,7 +317,7 @@
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">${review.reviewContent}</p>
+            <div class="detail_content_p" style="white-space:pre;">${review.reviewContent}</div>
 	        <c:forEach var="img" items="${review.reviewImgs}">
 	            <img src="${img.changeName}" class="content_img"/>
 			</c:forEach>

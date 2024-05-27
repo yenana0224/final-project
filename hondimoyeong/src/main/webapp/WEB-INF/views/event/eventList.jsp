@@ -75,7 +75,7 @@
 	
 	.event > img{
 	    width: 280px;
-	    height: 180px;
+	    height: 280px;
 	    margin-top: 10px;
 	    margin-bottom: 25px;
 	    border-radius: 20px;

@@ -160,7 +160,7 @@
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">${event.eventContent}</p>
+            <div class="detail_content_p"style="white-space:pre;">${event.eventContent}</div>
             <c:if test="${!empty event.changeName}">
 	            <img src="${path}/${event.changeName}" class="content_img"/>
 	        </c:if>
