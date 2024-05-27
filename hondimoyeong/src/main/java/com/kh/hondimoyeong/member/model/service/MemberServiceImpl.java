@@ -37,6 +37,16 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String checkId) {
 		return memberRepository.idCheck(sqlSession, checkId);
 	}
+	
+    @Override
+    public int emailCheck(String email) {
+        return memberRepository.emailCheck(sqlSession, email);
+    }
+
+    @Override
+    public int phoneCheck(String phone) {
+        return memberRepository.phoneCheck(sqlSession, phone);
+    }
 
 	@Override
 	public int update(Member member) {
@@ -87,6 +97,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.updateCustomer(sqlSession, customer);
 	}
 
-	
 
+    @Override
+    public int deleteCustomer(int customerNo) {
+       return memberRepository.deleteCustomer(sqlSession, customerNo);
+    }
+	
+    @Override
+    public String findId(String userName, String phone, String email) {
+        return memberRepository.findId(sqlSession, userName, phone, email);
+    }
+	
+	
+	
 }

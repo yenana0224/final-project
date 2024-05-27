@@ -102,4 +102,16 @@
     		CS_NO = #{customerNo}
     </select>   
 
+
+    <select id="deleteCustomer" parameterType="_int">
+       UPDATE
+          CUSTOMER_SERVICE
+       SET
+          STATUS = 'N'
+       WHERE
+          CS_NO = #{customerNo}
+    </select>
+
+
+
 </mapper>

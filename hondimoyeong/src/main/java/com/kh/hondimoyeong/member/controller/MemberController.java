@@ -77,6 +77,24 @@ public class MemberController {
 		return memberService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
 	
+	
+    //이메일 중복체크
+    @ResponseBody
+    @GetMapping("emailCheck.member")
+    public String emailCheck(String email) {
+        int count = memberService.emailCheck(email);
+        return count > 0 ? "NNNNN" : "NNNNY";
+    }
+
+    //연락처 중복체크
+    @ResponseBody
+    @GetMapping("phoneCheck.member")
+    public String phoneCheck(String phone) {
+        int count = memberService.phoneCheck(phone);
+        return count > 0 ? "NNNNN" : "NNNNY";
+    }
+
+	
 	@PostMapping("update.member")
 	public String update(Member member, Model model, HttpSession session) {
 		if(memberService.update(member) > 0) {
@@ -171,15 +189,41 @@ public class MemberController {
 	public String updateCustomer(Customer customer, Model model, HttpSession session) {
 		if(memberService.updateCustomer(customer) > 0) {
 			session.setAttribute("alertMsg", "수정에 성공했습니다!");
-			return "redirect:customerDetail";
+			return "redirect:detail.customer?customerNo=" + customer.getCustomerNo();
 		} else { 
 			model.addAttribute("errorMsg", "수정에 실패했습니다.");
 			return "common/errorPage";
 		}
 	}
 	
-	
-	
+
+	@GetMapping("delete.customer")
+    public String deleteCustomer(int customerNo, HttpSession session) {
+       if(memberService.deleteCustomer(customerNo) > 0) {
+          session.setAttribute("alertMsg", "게시물 삭제 성공~");
+          return "redirect:list.customerView";
+       } else {
+          session.setAttribute("alertMsg", "게시물 삭제 실패!");
+          return "common/errorPage";
+       }
+    }
+
+
+    @ResponseBody
+    @PostMapping(value = "findId.member", produces = "application/json; charset=UTF-8")
+    public String findId(String userName, String phone, String email) {
+       HashMap<String, String> map = new HashMap<String, String>();
+       map.put("userId", "아이디를 찾을 수 없습니다.");
+       String userId = memberService.findId(userName, phone, email);
+       if(userId != null) {
+          map.put("userId", userId);
+       }
+       //userId != map.put("userId", null) ? userId : map.put("userId", "아이디를 찾을 수 없습니다.");
+        Gson gson = new Gson();
+        String jsonResponse = gson.toJson(map);
+        return jsonResponse;
+    }
+	   
 	
 	
 	

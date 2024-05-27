@@ -242,7 +242,7 @@
 			            <textarea id="box3" class="form-control" name="customerContent">${customer.customerContent}</textarea>
 			        </div>
 			        <div id="box4">
-			            <button type="submit" class="btn-a">등록</button>
+			            <button type="submit" class="btn-a" >등록</button>
 			            <button type="button" class="btn-b" onclick="location.href='list.customerView';">목록</button>
 			        </div>
 			    </div>
