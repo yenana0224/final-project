@@ -28,6 +28,14 @@ public class MemberRepository {
 		return sqlSession.selectOne("memberMapper.idCheck", checkId);
 	}
 	
+    public int emailCheck(SqlSessionTemplate sqlSession, String email) {
+        return sqlSession.selectOne("memberMapper.emailCheck", email);
+    }
+
+    public int phoneCheck(SqlSessionTemplate sqlSession, String phone) {
+        return sqlSession.selectOne("memberMapper.phoneCheck", phone);
+    }
+	
 	public int update(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.update("memberMapper.update", member);
 	}
@@ -65,9 +73,6 @@ public class MemberRepository {
 	public Customer selectCustomerByNo(SqlSessionTemplate sqlSession, int customerNo) {
 		return sqlSession.selectOne("customerMapper.selectCustomerByNo", customerNo);
 	}
-	
-
-
 
 	public int reservationSelectListCount(SqlSessionTemplate sqlSession, int userNo) {
 	    Map<String, Object> params = new HashMap<String, Object>();
@@ -92,7 +97,13 @@ public class MemberRepository {
 	}
 
 	
-	
+    public String findId(SqlSessionTemplate sqlSession, String userName, String phone, String email) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("userName", userName);
+        params.put("phone", phone);
+        params.put("email", email);
+        return sqlSession.selectOne("memberMapper.findId", params);
+    }
 	
 	
 	
