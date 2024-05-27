@@ -167,7 +167,7 @@
 						<tr>
 							<th>* 내용</th>
 							<td>
-								<textarea class="content_inp" name="companionContent">${companion.companionContent}</textarea>
+								<textarea class="content_inp" name="companionContent">${companion}</textarea>
 							</td>
 						</tr>
 					</tbody>
