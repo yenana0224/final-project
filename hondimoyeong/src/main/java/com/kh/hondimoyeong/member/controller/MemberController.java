@@ -49,7 +49,7 @@ public class MemberController {
          }
          
       } else {
-    	  mv.addObject("errorMsg", "아이디와 비밀번호를 다시 확인해 주세요.").setViewName("member/login");
+    	  mv.addObject("errorMsg", "아이디와 비밀번호를 다시 확인해주세요.").setViewName("member/login");
       }
       return mv;
    }
@@ -115,10 +115,10 @@ public class MemberController {
 		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
 			if(memberService.delete(loginUser) > 0 ) {
 				session.removeAttribute("loginUser");
-				session.setAttribute("alertMsg", "탈퇴성공");
+				session.setAttribute("alertMsg", "회원 탈퇴가 성공적으로 완료되었습니다.");
 				return "redirect:/";
 			} else {
-				session.setAttribute("alertMsg", "탈퇴실패");
+				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다. 비밀번호를 확인해주세요.");
 				return "common/errorPage";
 			}
 		} else {
@@ -148,10 +148,10 @@ public class MemberController {
 		customer.setUserNo(loginUser.getUserNo());
 
 		if(memberService.insertCustomer(customer) > 0) {
-	        session.setAttribute("alertMsg", "게시글 작성 성공~");
+	        session.setAttribute("alertMsg", "게시글 작성에 성공했습니다!");
 	        return "redirect:list.customerView";
 	    } else {
-	        model.addAttribute("errorMsg", "게시글 작성 실패.");
+	        model.addAttribute("errorMsg", "게시글 작성에 실패했습니다.");
 	        return "common/errorPage";
 	    }
 	}
@@ -164,7 +164,7 @@ public class MemberController {
             model.addAttribute("customer", customer);
             return "member/customerDetail";
         } else {
-            model.addAttribute("errorMsg", "게시글 조회 실패.");
+            model.addAttribute("errorMsg", "게시글 조회에 실패했습니다.");
             return "common/errorPage";
         }
     }
@@ -188,10 +188,10 @@ public class MemberController {
 	@PostMapping("update.customer")
 	public String updateCustomer(Customer customer, Model model, HttpSession session) {
 		if(memberService.updateCustomer(customer) > 0) {
-			session.setAttribute("alertMsg", "수정에 성공했습니다!");
+			session.setAttribute("alertMsg", "게시글 수정에 성공했습니다!");
 			return "redirect:detail.customer?customerNo=" + customer.getCustomerNo();
 		} else { 
-			model.addAttribute("errorMsg", "수정에 실패했습니다.");
+			model.addAttribute("errorMsg", "게시글 수정에 실패했습니다.");
 			return "common/errorPage";
 		}
 	}
@@ -200,10 +200,10 @@ public class MemberController {
 	@GetMapping("delete.customer")
     public String deleteCustomer(int customerNo, HttpSession session) {
        if(memberService.deleteCustomer(customerNo) > 0) {
-          session.setAttribute("alertMsg", "게시물 삭제 성공~");
+          session.setAttribute("alertMsg", "게시물 삭제에 성공했습니다!");
           return "redirect:list.customerView";
        } else {
-          session.setAttribute("alertMsg", "게시물 삭제 실패!");
+          session.setAttribute("errorMsg", "게시물 삭제에 실패했습니다.");
           return "common/errorPage";
        }
     }
@@ -218,15 +218,10 @@ public class MemberController {
        if(userId != null) {
           map.put("userId", userId);
        }
-       //userId != map.put("userId", null) ? userId : map.put("userId", "아이디를 찾을 수 없습니다.");
         Gson gson = new Gson();
         String jsonResponse = gson.toJson(map);
         return jsonResponse;
     }
-	   
-	
-	
-
 
     @PostMapping("updatePwd.member")
     public ModelAndView updatePwd(@RequestParam("currentPwd") String currentPwd, @RequestParam("newPwd") String newPwd, ModelAndView mv, HttpSession session) {

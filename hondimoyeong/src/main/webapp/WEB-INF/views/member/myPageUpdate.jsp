@@ -29,7 +29,7 @@
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 580px;
+                height: 635px;
                 margin: 0 auto;
                 margin-top: 200px;
                 /* background-color: #FFF2D7; */
@@ -81,7 +81,7 @@
                 height: 65px;
                 padding-top: 5px;
                 padding-left: 115px;
-
+				margin-top: 10px;
             }
                         
 
@@ -161,7 +161,13 @@
                 color: #ffffff;
                 font-size: 12px;
             }
-            
+            #emailCheckResult, #phoneCheckResult{
+                width: 260px;
+                height: 15px;
+                padding-left: 5px;
+                padding-top: 1px;          
+                font-weight: bold;   
+            }            
             
     </style>    
 </head>
@@ -185,10 +191,12 @@
                     <div class="input-box">
                         <p>이메일</p>
                         <input type="text" class="form-control" name="email" value="${ sessionScope.loginUser.email }" maxlength="30">
+                    	<div id="emailCheckResult" style="font-size:0.7em; display:none;"></div>
                     </div>
                     <div class="input-box">
                         <p>연락처</p>
                         <input type="text" class="form-control" name="phone" value="${ sessionScope.loginUser.phone }" maxlength="11">
+                    	<div id="phoneCheckResult" style="font-size:0.7em; display:none;"></div>
                     </div>
                     <div class="input-box">
                         <p>가입일</p>
@@ -196,7 +204,7 @@
                     </div>
                     <div id="signupButton">
                         <button type="button" class="btn-d" data-toggle="modal" data-target="#updatePwdModal">비밀번호 변경</button>
-                        <button type="submit" class="btn-a">수정</button>
+                        <button type="submit" class="btn-a" id="joinBtn">수정</button>
                         <button type="button" class="btn-c" data-toggle="modal" data-target="#deleteForm">탈퇴</button>
                         <button type="button" class="btn-b" onclick="location.href='myPage';">목록</button>
                     </div>
@@ -253,8 +261,8 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div align="center" style="color:crimson; font-weight: bold;">
-                            탈퇴 후 복구가 불가능합니다. <br>
-                            정말로 탈퇴 하시겠습니까? <br>
+			                            탈퇴 후 복구가 불가능합니다. <br>
+			                            정말로 탈퇴 하시겠습니까? <br>
                         </div>
                         <br>
                         <label for="userPwd">비밀번호 입력 : </label>
@@ -268,6 +276,73 @@
             </div>
         </div>
     </div>
+    
     <jsp:include page="../common/footer.jsp"/>
+
+<script>
+    $(document).ready(function() {
+        const $joinSubmit = $('#joinBtn');
+
+        function validateForm() {
+            const emailValid = $('#emailCheckResult').text() === '사용 가능한 이메일입니다.';
+            const phoneValid = $('#phoneCheckResult').text() === '사용 가능한 연락처입니다.';
+            return emailValid || phoneValid;
+        }
+
+        $('[name="email"]').keyup(function() {
+            if ($(this).val().length > 0) {
+                $.ajax({
+                    url: 'emailCheck.member',
+                    data: { email: $(this).val() },
+                    success: function(result) {
+                        if (result.substr(4) == 'N') {
+                            $('#emailCheckResult').show().css('color', 'crimson').text('이미 사용 중인 이메일입니다.');
+                            $joinSubmit.prop('disabled', true);
+                        } else {
+                            $('#emailCheckResult').show().css('color', '#33b325').text('사용 가능한 이메일입니다.');
+                            $joinSubmit.prop('disabled', !validateForm());
+                        }
+                    },
+                    error: function() {
+                        console.log('이메일 중복체크용 JSJA 통신 실패~');
+                    }
+                });
+            } else {
+                $('#emailCheckResult').hide();
+                $joinSubmit.prop('disabled', true);
+            }
+        });
+
+        $('[name="phone"]').keyup(function() {
+            if ($(this).val().length === 11) {
+                $.ajax({
+                    url: 'phoneCheck.member',
+                    data: { phone: $(this).val() },
+                    success: function(result) {
+                        if (result.substr(4) == 'N') {
+                            $('#phoneCheckResult').show().css('color', 'crimson').text('이미 사용 중인 연락처입니다.');
+                            $joinSubmit.prop('disabled', true);
+                        } else {
+                            $('#phoneCheckResult').show().css('color', '#33b325').text('사용 가능한 연락처입니다.');
+                            $joinSubmit.prop('disabled', !validateForm());
+                        }
+                    },
+                    error: function() {
+                        console.log('연락처 중복체크용 JSJA 통신 실패~');
+                    }
+                });
+            } else if ($(this).val().length === 10) {
+                $('#phoneCheckResult').show().css('color', '#2C73D2').text('연락처는 11자리여야 합니다.');
+                $joinSubmit.prop('disabled', true);
+            } else {
+                $('#phoneCheckResult').hide();
+                $joinSubmit.prop('disabled', true);
+            }
+        });
+    });
+</script>
+
+
+
 </body>
 </html>
