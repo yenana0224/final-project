@@ -17,6 +17,7 @@ public class Experience {
 	private int experiencePeople;
 	private int userNo;
 	private String userName;
+	private String userId;
 	
 
 }

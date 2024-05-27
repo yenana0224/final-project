@@ -320,9 +320,11 @@
 
         <div class="detail_content">
             <div class="detail_content_p">${review.reviewContent}</div>
-	        <c:forEach var="img" items="${review.reviewImgs}">
-	            <img src="${img.changeName}" class="content_img"/>
-			</c:forEach>
+            <c:if test="${!empty review.reviewImgs}">
+		        <c:forEach var="img" items="${review.reviewImgs}">
+		            <img src="${img.changeName}" class="content_img"/>
+				</c:forEach>
+			</c:if>
         </div>
 
         <div class="detail_reply_title">

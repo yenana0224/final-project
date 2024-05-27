@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -34,8 +36,9 @@ public class KakaoPayService {
 
     private Reserve reserve;
     
+    
 
-    public String kakaoPayReady(Experience experience) {
+    public String kakaoPayReady(Experience ex, HttpSession session) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -51,11 +54,11 @@ public class KakaoPayService {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
-        params.put("partner_order_id", "1002"); // 주문 번호
-        params.put("partner_user_id", "gogumaaa"); // 회원 아이디
-        params.put("item_name", experience.getCategory()); // 상품 명 : 카테고리
-        params.put("quantity", String.valueOf(experience.getExperiencePeople())); // 상품 수량
-        params.put("total_amount", experience.getPrice()); // 상품 가격
+        params.put("partner_order_id", String.valueOf(ex.getExperienceNo())); // 주문 번호
+        params.put("partner_user_id", ex.getUserId()); // 회원 아이디
+        params.put("item_name", ex.getCategory()); // 상품 명 : 카테고리
+        params.put("quantity", String.valueOf(ex.getExperiencePeople())); // 상품 수량
+        params.put("total_amount", ex.getPrice()); // 상품 가격
         params.put("tax_free_amount", "100"); // 상품 비과세 금액
         params.put("approval_url", "http://localhost:8024/hondimoyeong/kakaoPaySuccess"); // 성공시 url
         params.put("fail_url", "http://localhost:8024/fail"); // 실패시 url
@@ -71,6 +74,9 @@ public class KakaoPayService {
            
            log.info(""+ reserve);
           // System.out.println(reserve);
+           
+           session.setAttribute("experience", ex);
+           
             
            return reserve.getNext_redirect_pc_url();
         		   
@@ -86,7 +92,7 @@ public class KakaoPayService {
     
     private KakaoPayVo kakaopayVo;
     
-    public KakaoPayVo kakaopayVo(String pg_token) {
+    public KakaoPayVo kakaopayVo(String pg_token, Experience experience) {
     	 RestTemplate restTemplate = new RestTemplate();
          restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
 
@@ -105,8 +111,12 @@ public class KakaoPayService {
          System.out.println(reserve);
          paramss.put("tid", reserve.getTid());
          
-         paramss.put("partner_order_id", "1002"); // 주문 번호
-         paramss.put("partner_user_id", "gogumaaa"); // 회원 아이디
+        System.out.println(experience);
+         
+         //paramss.put("partner_order_id", String.valueOf(((Experience)session.getAttribute("experince")).getExperienceNo())); // 주문 번호
+         //paramss.put("partner_user_id",  ((Experience)session.getAttribute("experince")).getUserId()); // 회원 아이디
+         paramss.put("partner_order_id", String.valueOf(experience.getExperienceNo()));
+         paramss.put("partner_user_id", experience.getUserId());
          paramss.put("pg_token", pg_token);
 //         params.put("total_amount", "20000"); // 상품 가격
 //         params.put("tax_free_amount", "100"); // 상품 비과세 금액
