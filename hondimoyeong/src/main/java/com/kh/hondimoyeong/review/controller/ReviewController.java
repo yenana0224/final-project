@@ -45,7 +45,7 @@ public class ReviewController {
 	 */
 	@RequestMapping("review")
 	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
-		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 9, 5);
+		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 6, 5);
 		
 		List<ReviewComment> comment = reviewService.selectCommentCount();
 		
@@ -85,7 +85,7 @@ public class ReviewController {
 		searchMap.put("keyword", keyword);
 		
 		int totalCount = reviewService.searchCount(searchMap);
-		PageInfo pi = Pagination.getPageInfo(totalCount, page, 9, 5);
+		PageInfo pi = Pagination.getPageInfo(totalCount, page, 6, 5);
 		List<Review> review = reviewService.search(searchMap, pi);
 		
 		model.addAttribute("keyword", keyword);
