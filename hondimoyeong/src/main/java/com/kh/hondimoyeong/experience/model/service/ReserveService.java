@@ -11,6 +11,9 @@ public interface ReserveService {
 	// 결제하기
 	int insertReserve(Experience experience);
 	
+	// 결제된 체험 찾기
+	Experience findEx();
+	
 	// 한라산 결제하기(무료)
 	int insertHan(Experience experience);
 	

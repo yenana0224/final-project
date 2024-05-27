@@ -66,14 +66,23 @@ public class HanlasanController {
 	public String hanlasanreserve(Experience experience, Model model, HttpSession session) {
 		
         int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-
+        String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+        String userName = ((Member)session.getAttribute("loginUser")).getUserName();
+        		
 		experience.setUserNo(userNo);
+		experience.setUserId(userId);
+		experience.setUserName(userName);
 		
-		//System.out.println(experience);
 		
-		reserveService.insertHan(experience);
+		if(reserveService.insertHan(experience) > 0) {
+			
+			Experience ex = reserveService.findEx();
+			model.addAttribute("ex", ex);
+			
+		}
 		
-		model.addAttribute("ex", experience);
+		
+		
 		
 		return "experience/kakaoSuccess";
 	}

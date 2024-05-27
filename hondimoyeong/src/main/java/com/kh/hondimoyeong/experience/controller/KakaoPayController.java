@@ -47,30 +47,45 @@ public class KakaoPayController {
         log.info("kakaoPay post.....................");
         
         int userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+        String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+        String userName = ((Member)session.getAttribute("loginUser")).getUserName();
         
 		experience.setUserNo(userNo);
+		experience.setUserId(userId);
+		experience.setUserName(userName);
         
         System.out.println(experience);
         
+		// INSERT
         reserveService.insertReserve(experience);
         
+        //SESLECT
+        Experience ex = reserveService.findEx();
+        System.out.println("ex : " + ex);
         
-		model.addAttribute("Experience", experience);
         
-        return "redirect:" + kakaoPay.kakaoPayReady(experience);
+        
+		model.addAttribute("Experience", ex);
+        
+        return "redirect:" + kakaoPay.kakaoPayReady(ex, session);
     }
 	
 	@GetMapping("/kakaoPaySuccess")
-    public String kakaoPaySuccess(@RequestParam("pg_token")String pg_token,  Model model) {
+    public String kakaoPaySuccess(@RequestParam("pg_token")String pg_token,  Model model, HttpSession session) {
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         
         
+        System.out.println("컨트롤 ex 2 " + session.getAttribute("experience"));
 
+        Experience experience =  (Experience) session.getAttribute("experience");
+        
         
         model.addAttribute("pg_token", pg_token);
         
-        kakaopayVo = kakaoPay.kakaopayVo(pg_token);
+        kakaopayVo = kakaoPay.kakaopayVo(pg_token, experience);
+        
+        System.out.println(kakaoPay.kakaopayVo(pg_token, experience));
         
         model.addAttribute("info", kakaopayVo);
         

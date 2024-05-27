@@ -25,6 +25,12 @@ public class ReserveServiceImpl  implements ReserveService{
 	public int insertReserve(Experience experience) {
 		return reserveRepository.insertReserve(sqlSession, experience);
 	}
+	
+	@Override
+	public Experience findEx() {
+		// TODO Auto-generated method stub
+		return reserveRepository.findEx(sqlSession);
+	}
 
 	@Override
 	public int insertHan(Experience experience) {
@@ -67,6 +73,8 @@ public class ReserveServiceImpl  implements ReserveService{
 	public List<Exreview> review(Exreview exreview) {
 		return reserveRepository.review(sqlSession, exreview);
 	}
+
+	
 	
 	
 

@@ -14,6 +14,7 @@
 		<result column="EXPERIENCE_PEOPLE" property="experiencePeople" />
 		<result column="USER_NO" property="userNo" />
 		<result column="USER_NAME" property="userName" />
+		<result column="USER_ID" property="userId" />
  	</resultMap>
  	
 	<resultMap type="exreview" id="exrevieweResultSet">
@@ -41,7 +42,8 @@
 		        EXPERIENCE_DIVIDE,
 		        PRICE,
 		        EXPERIENCE_PEOPLE,
-		        USER_NO
+		        USER_NO,
+		        USER_ID
 		        )
 		        VALUES
 		        (
@@ -52,11 +54,39 @@
 		        #{ experienceDivide},
 		        #{ price},
 		        #{ experiencePeople},
-		        #{ userNo}
+		        #{ userNo},
+		        #{ userId }
 		        )
-    
-		
 	</insert>
+	
+	<select id="findEx" resultMap="experienceResultSet">
+		<![CDATA[
+		SELECT
+       *
+        FROM
+        (SELECT
+                    EXPERIENCE_NO,
+                    CATEGORY,
+                    EXPERIENCE_DATE,
+                    EXPERIENCE_TIME,
+                    EXPERIENCE_DIVIDE,
+                    PRICE,
+                    EXPERIENCE_PEOPLE,
+                    USER_NO,
+                    m.USER_ID,
+                    m.USER_NAME
+                FROM 
+                    EXPERIENCE_RESERVE
+                JOIN
+                	MEMBER m
+                	USING(USER_NO)
+                ORDER
+                   BY
+                    EXPERIENCE_NO DESC)
+        WHERE
+            ROWNUM <= 1
+		]]>
+	</select>
 	
 	<insert id="insertHan" parameterType="experience">
 		INSERT
@@ -70,7 +100,8 @@
 		        EXPERIENCE_DIVIDE,
 		        PRICE,
 		        EXPERIENCE_PEOPLE,
-		        USER_NO
+		        USER_NO,
+		        USER_ID
 		        )
 		        VALUES
 		        (
@@ -81,7 +112,8 @@
 		        #{ experienceDivide},
 		        #{ price},
 		        #{ experiencePeople},
-		        #{ userNo}
+		        #{ userNo },
+		        #{ userId }
 		        )
 	</insert>
 	
@@ -209,20 +241,22 @@
 	
 	<select id="review" parameterType="exreview" resultMap="exrevieweResultSet">
 		SELECT
-				EXPERIENCE_REVIEW_NO,
-				EXPERIENCE_NO,
-				EXPERIENCE_CATEGORY,
-				EXPERIENCE_CONTENT,
-				USER_NO,
-				USER_ID
+				erv.EXPERIENCE_REVIEW_NO,
+				erv.EXPERIENCE_NO,
+				erv.EXPERIENCE_CATEGORY,
+				erv.EXPERIENCE_CONTENT,
+				m.USER_NO,
+				ers.USER_ID
 			FROM
-				EXPERIENCE_REVIEW
+				EXPERIENCE_REVIEW erv
 			JOIN
-				EXPERIENCE_RESERVE USING(EXPERIENCE_NO)
+				EXPERIENCE_RESERVE ers
+				on (erv.EXPERIENCE_NO = ers.EXPERIENCE_NO)
 			JOIN
-				MEMBER USING(USER_NO)
+				MEMBER m
+				on (ers.USER_NO = m.USER_NO)
 			WHERE
-				EXPERIENCE_CATEGORY = #{experienceCategory}
+				erv.EXPERIENCE_CATEGORY = #{experienceCategory}
 			
 	</select>
 	
