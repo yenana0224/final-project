@@ -41,21 +41,24 @@
 	}
 	
 	.reservation > label{
-		font-size:30px;
+		font-size:25px;
 		margin:auto;
 	}
 	
 	#han{
-		padding-left:80px;
+		padding-top: 20px;
+		padding-left:90px;
 		color:#976841;
 	}
 	
 	#aqua{
-		padding-left:10px;
+		padding-top: 20px;
+		padding-left:30px;
 		color:#36f;
 	}
 	
 	#gul{
+		padding-top: 20px;
 		padding-left:80px;
 		color:#fc6701;
 	}
