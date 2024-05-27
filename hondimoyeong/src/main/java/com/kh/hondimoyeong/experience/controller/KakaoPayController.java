@@ -85,7 +85,7 @@ public class KakaoPayController {
         
         kakaopayVo = kakaoPay.kakaopayVo(pg_token, experience);
         
-        System.out.println(kakaoPay.kakaopayVo(pg_token, experience));
+        System.out.println(kakaopayVo);
         
         model.addAttribute("info", kakaopayVo);
         
