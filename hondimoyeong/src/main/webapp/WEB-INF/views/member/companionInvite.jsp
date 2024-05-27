@@ -367,8 +367,8 @@
         				userNo : user,
         				companionNo : companion
         			},
-        			success : (data) => {
-        				console.log(data);
+        			success : () => {
+        				location.href="companionInvite";
         			}
         		})
         	}
@@ -384,8 +384,8 @@
         				userNo : user,
         				companionNo : companion
         			},
-        			success : (data) => {
-        				console.log(data);
+        			success : () => {
+        				location.href="companionInvite";
         			}
         		})
         	}
