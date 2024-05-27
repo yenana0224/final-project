@@ -77,6 +77,24 @@ public class MemberController {
 		return memberService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
 	
+	
+    //이메일 중복체크
+    @ResponseBody
+    @GetMapping("emailCheck.member")
+    public String emailCheck(String email) {
+        int count = memberService.emailCheck(email);
+        return count > 0 ? "NNNNN" : "NNNNY";
+    }
+
+    //연락처 중복체크
+    @ResponseBody
+    @GetMapping("phoneCheck.member")
+    public String phoneCheck(String phone) {
+        int count = memberService.phoneCheck(phone);
+        return count > 0 ? "NNNNN" : "NNNNY";
+    }
+
+	
 	@PostMapping("update.member")
 	public String update(Member member, Model model, HttpSession session) {
 		if(memberService.update(member) > 0) {
@@ -191,7 +209,21 @@ public class MemberController {
     }
 
 
-	
+    @ResponseBody
+    @PostMapping(value = "findId.member", produces = "application/json; charset=UTF-8")
+    public String findId(String userName, String phone, String email) {
+       HashMap<String, String> map = new HashMap<String, String>();
+       map.put("userId", "아이디를 찾을 수 없습니다.");
+       String userId = memberService.findId(userName, phone, email);
+       if(userId != null) {
+          map.put("userId", userId);
+       }
+       //userId != map.put("userId", null) ? userId : map.put("userId", "아이디를 찾을 수 없습니다.");
+        Gson gson = new Gson();
+        String jsonResponse = gson.toJson(map);
+        return jsonResponse;
+    }
+	   
 	
 	
 	

@@ -21,7 +21,7 @@
 
             #content{ 
                 width: 400px;
-                height: 400px;
+                height: 440px;
                 margin: 0 auto;
                 margin-top: 100px;
                 background-color: #FFF2D7;
@@ -51,6 +51,8 @@
                 width: 280px;
                 height: 30px;
                 background-color: #FFF2D7;
+                font-size: 14px;
+                font-weight: bold;                 
             }
 
             .inputBox
@@ -66,7 +68,7 @@
                 height: 50px;
                 padding-left: 70px;
                 background-color: #FFF2D7;
-                margin-top: 5px;
+                margin-top: 25px;
             }
 
             #linkBox   
@@ -89,6 +91,8 @@
             p{
                 margin: 0 auto;
                 padding-bottom: 5px;
+                font-size: 14px;
+                font-weight: bold; 
             }
             
             #linkBox > a{
@@ -97,6 +101,7 @@
                 text-decoration: none; 
                 color: #000000;  
                 font-size: 12px; 
+                font-weight: bold; 
             }
 
             #loginButton{

@@ -69,6 +69,27 @@
 		WHERE
 			USER_ID = #{ checkId }
 	</select>
+	
+	<!-- 이메일 중복 체크용 쿼리문 -->	
+   <select id="emailCheck" parameterType="string" resultType="_int">
+       SELECT
+           COUNT(*)
+       FROM
+           MEMBER
+       WHERE
+           EMAIL = #{email}
+   </select>
+
+	<!-- 연락처 중복 체크용 쿼리문 -->   
+   <select id="phoneCheck" parameterType="string" resultType="_int">
+       SELECT
+           COUNT(*)
+       FROM
+           MEMBER
+       WHERE
+           PHONE = #{phone}
+   </select>	
+	
 
 	<!-- 회원정보수정 -->
 	<update id="update" parameterType="member">
@@ -94,7 +115,19 @@
 	</update>	
 	
 	
-	
+   <!-- 아이디찾기 -->
+   <select id="findId" parameterType="member" resultType="string">
+       SELECT 
+          USER_ID
+       FROM 
+          MEMBER
+       WHERE 
+          USER_NAME = #{userName} 
+       AND 
+          PHONE = #{phone}
+       AND 
+          EMAIL = #{email}
+   </select>
 	
 	
 	
