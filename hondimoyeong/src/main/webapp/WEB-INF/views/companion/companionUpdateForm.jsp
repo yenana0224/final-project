@@ -80,6 +80,13 @@
 	    color: #292929;
 	    text-decoration: none;
 	    line-height: 0px;
+	    padding-left: 10px;
+	}
+	
+	.people_info:hover{
+	    color: #292929;
+	    text-decoration: none;
+	    line-height: 0px;
 	}
 	
 	.content_inp{
@@ -155,7 +162,7 @@
 							<th>* 모집 인원</th>
 							<td>
 								<input type="number" min="1" max="10" name="companionPeople" class="people_inp" value="${companion.companionPeople}"required/>
-		                        <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a>
+		                        <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요. (본인 포함 총 인원수 선택)</a>
                             </td>
 						</tr>
                         <tr>
@@ -167,7 +174,7 @@
 						<tr>
 							<th>* 내용</th>
 							<td>
-								<textarea class="content_inp" name="companionContent">${companion}</textarea>
+								<textarea class="content_inp" name="companionContent">${companion.companionContent}</textarea>
 							</td>
 						</tr>
 					</tbody>

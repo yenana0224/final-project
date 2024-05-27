@@ -142,7 +142,7 @@
 	<div id="innerOuter">
 		<div id="ex">
 		    <div class="reservation">
-		   		<img onclick="location.href='hanlasan'" src="resources/image/han.jpg">
+		   		<img onclick="location.href='${path}/hanlasan'" src="resources/image/han.jpg">
 		   		<label id="han">한라산</label>
 		    </div>
 		    <div class="reservation">
