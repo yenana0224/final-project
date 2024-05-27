@@ -87,8 +87,10 @@ public class MemberRepository {
 	}
 	
 	
-	
-	
+    public int deleteCustomer(SqlSessionTemplate sqlSession, int customerNo) {
+	       return sqlSession.delete("customerMapper.deleteCustomer", customerNo);
+	}
+
 	
 	
 	

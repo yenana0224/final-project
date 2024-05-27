@@ -125,27 +125,27 @@
                 /* border : 1px solid red; */
             }
             .mnbtn{
-                width: 80px;
-                height: 38px;
+                width: 60px;
+                height: 35px;
                 border-radius: 15px;
                 background-color: #FF9843; 
                 color: #ffffff;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 12px;
                 border: 0;
-                margin-right: 12px;
-                line-height: 38px;
+                margin-right: 7px;
+                line-height: 35px;
                 float: left;
             }
             .btn-b{
-                width: 80px;
-                height: 38px;
+                width: 60px;
+                height: 35px;
                 border-radius: 15px;
                 background-color: #9e9e9e; 
                 color: #ffffff;
                 font-weight: bold;
-                font-size: 14px;
-                line-height: 38px;
+                font-size: 12px;
+                line-height: 35px;
                 border: 0;
             }
 
@@ -193,6 +193,10 @@
    		    #customerListTable th {
 		        font-size: 15px;
 		        font-weight: bold;
+		    }
+		    
+		    .box1{
+		    	margin-left: 45px;
 		    }
 
 

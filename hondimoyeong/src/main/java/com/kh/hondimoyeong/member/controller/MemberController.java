@@ -171,14 +171,26 @@ public class MemberController {
 	public String updateCustomer(Customer customer, Model model, HttpSession session) {
 		if(memberService.updateCustomer(customer) > 0) {
 			session.setAttribute("alertMsg", "수정에 성공했습니다!");
-			return "redirect:customerDetail";
+			return "redirect:detail.customer?customerNo=" + customer.getCustomerNo();
 		} else { 
 			model.addAttribute("errorMsg", "수정에 실패했습니다.");
 			return "common/errorPage";
 		}
 	}
 	
-	
+
+	@GetMapping("delete.customer")
+    public String deleteCustomer(int customerNo, HttpSession session) {
+       if(memberService.deleteCustomer(customerNo) > 0) {
+          session.setAttribute("alertMsg", "게시물 삭제 성공~");
+          return "redirect:list.customerView";
+       } else {
+          session.setAttribute("alertMsg", "게시물 삭제 실패!");
+          return "common/errorPage";
+       }
+    }
+
+
 	
 	
 	

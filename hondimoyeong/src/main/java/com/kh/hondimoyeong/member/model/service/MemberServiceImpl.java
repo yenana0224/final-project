@@ -87,6 +87,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.updateCustomer(sqlSession, customer);
 	}
 
-	
 
+    @Override
+    public int deleteCustomer(int customerNo) {
+       return memberRepository.deleteCustomer(sqlSession, customerNo);
+    }
+	
+	
+	
+	
+	
 }
