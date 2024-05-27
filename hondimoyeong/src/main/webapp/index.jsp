@@ -17,7 +17,7 @@
 	
 	#ex{
 		width : 800px;
-		height : 250px;
+		height : 350px;
 		margin : auto;
 	}
 	
@@ -46,21 +46,30 @@
 	}
 	
 	#han{
-		padding-top: 20px;
-		padding-left:90px;
-		color:#976841;
+		margin-top: 15px;
+		margin-left:75px;
+		padding: 5px 20px;
+		color:#FFF;
+		background-color: #976841;
+		border-radius: 20px;
 	}
 	
 	#aqua{
-		padding-top: 20px;
-		padding-left:30px;
-		color:#36f;
+		margin-top: 15px;
+		margin-left:40px;
+		color:#FFF;
+		padding: 5px 20px;
+		background-color: #36f;
+		border-radius: 20px;
 	}
 	
 	#gul{
-		padding-top: 20px;
-		padding-left:80px;
-		color:#fc6701;
+		margin-top: 15px;
+		margin-left:65px;
+		color:#FFF;
+		background-color: #FF9843;
+		padding: 5px 20px;
+		border-radius: 20px;
 	}
 
 	#jeju-island{
@@ -115,6 +124,7 @@
     	width : 900px;
         margin: auto;
         margin-bottom : 40px;
+        margin-top: 30px;
     }
 
     h3{
@@ -150,7 +160,7 @@
 		    </div>
 		    <div class="reservation">
 		    	<img onclick="location.href='aqua'"src="resources/image/아쿠아리움.png">
-		    	<label id="aqua">제주 아쿠아플라넷</label>
+		    	<label id="aqua">아쿠아플라넷</label>
 		    </div>
 		    <div class="reservation">
 		   		<img onclick="location.href='tangerine'"src="resources/image/tangerine.jpg"/>
