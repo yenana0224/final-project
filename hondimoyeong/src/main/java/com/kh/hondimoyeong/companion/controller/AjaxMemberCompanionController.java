@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -36,7 +37,7 @@ public class AjaxMemberCompanionController {
 	
 	@ResponseBody
 	@GetMapping(value="alram", produces="application/json; charset=UTF-8")
-	public int alam(int userNo) {
+	public int alram(int userNo) {
 		return MemberCompanionService.alram(userNo);
 	}
 	

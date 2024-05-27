@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>혼디모영 - 리뷰 글 수정</title>
 
 <style>
 	/* 컨텐트 */

@@ -27,5 +27,6 @@ public class Companion {
 
 	private int companionNum; // 신청인원
 	private String routeImg; // 코스별 루트 이미지
+	private String nowStatus;
 
 }

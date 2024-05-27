@@ -153,7 +153,6 @@ public class MemberController {
 
 	
 	
-	
     @ResponseBody
     @GetMapping(value = "list.reservationData", produces = "application/json; charset=UTF-8")
     public String reservationSelectAll(@RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
@@ -167,6 +166,19 @@ public class MemberController {
         return jsonResponse;
     }
 
+	
+	@PostMapping("update.customer")
+	public String updateCustomer(Customer customer, Model model, HttpSession session) {
+		if(memberService.updateCustomer(customer) > 0) {
+			session.setAttribute("alertMsg", "수정에 성공했습니다!");
+			return "redirect:customerDetail";
+		} else { 
+			model.addAttribute("errorMsg", "수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
+	
+	
 	
 	
 	

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.hondimoyeong.event.model.mapper.EventMapper">
+
+	<resultMap type="event" id="eventResultSet">
+		<result column="EVENT_NO" property="eventNo"/>
+		<result column="EVENT_TITLE" property="eventTitle"/>
+		<result column="EVENT_CONTENT" property="eventContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="COUNT" property="count"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+	</resultMap>
+	
+	<resultMap type="eventImg" id="eventImgResultSet">
+		<result column="EVENT_IMG_NO" property="eventImgNo"/>
+		<result column="EVENT_NO" property="eventNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+	</resultMap>
+
+
+	<select id="selectListCount" resultType="_int">
+		SELECT
+		      COUNT(*)
+		  FROM
+		      EVENT
+		 WHERE
+		      STATUS = 'Y'
+	</select>
+
+	<select id="allEvents" resultMap="eventResultSet">
+		SELECT
+		      E.EVENT_NO,
+		      EVENT_TITLE,
+		      EVENT_CONTENT,
+		      CREATE_DATE,
+		      USER_NO,
+		      COUNT,
+		      CHANGE_NAME
+		  FROM
+		      EVENT E
+		  LEFT
+		  JOIN
+		      EVENT_IMG EI ON (E.EVENT_NO = EI.EVENT_NO AND FILE_LEVEL = 1)
+		 WHERE
+		      STATUS = 'Y'
+		 ORDER
+		    BY
+		      E.EVENT_NO DESC
+	</select>
+	
+	<select id="selectEvent" parameterType="_int" resultMap="eventResultSet">
+		SELECT
+		      E.EVENT_NO,
+		      EVENT_TITLE,
+		      EVENT_CONTENT,
+		      TO_CHAR(CREATE_DATE, 'YY-MM-DD') CREATE_DATE,
+		      COUNT,
+		      CHANGE_NAME
+		  FROM
+		      EVENT E
+		  LEFT
+		  JOIN
+		      EVENT_IMG EI ON (E.EVENT_NO = EI.EVENT_NO AND FILE_LEVEL = 2)
+		 WHERE
+		      STATUS = 'Y'
+		   AND
+		      E.EVENT_NO = #{eventNo}
+		 ORDER
+		    BY
+		      E.EVENT_NO DESC
+	</select>
+
+	<select id="selectEventImg" parameterType="_int" resultMap="eventImgResultSet">
+		SELECT
+		      EVENT_NO,
+		      ORIGIN_NAME,
+		      CHANGE_NAME
+		  FROM
+		      EVENT_IMG
+		 WHERE
+		      EVENT_NO = #{eventNo}
+		   AND
+		      FILE_LEVEL = 2
+	</select>
+	
+	<select id="selectEventImgs" parameterType="_int" resultMap="eventImgResultSet">
+		SELECT
+		      EVENT_TITLE,
+		      CHANGE_NAME
+		  FROM
+		      EVENT_IMG EI
+		  JOIN
+		      EVENT E ON (E.EVENT_NO = EI.EVENT_NO)
+		 WHERE
+		      E.EVENT_NO = #{eventNo}
+	</select>
+	
+	<update id="increaseCount" parameterType="_int">
+		UPDATE
+			  EVENT
+		   SET
+		   	  COUNT = COUNT + 1
+		 WHERE
+		 	  EVENT_NO = #{eventNo}
+		   AND
+		   	  STATUS = 'Y'
+	</update>
+	
+	<insert id="insert" parameterType="event">
+		<selectKey keyProperty="eventNo" resultType="_int" order="BEFORE">
+	        SELECT SEQ_EVENT_NO.NEXTVAL AS eventNo FROM dual
+	    </selectKey>
+		INSERT
+		  INTO
+		  	  EVENT
+		  	  (
+		  	  EVENT_NO, 
+		  	  EVENT_TITLE, 
+		  	  EVENT_CONTENT, 
+		  	  USER_NO
+		  	  )
+		VALUES
+			  (
+			  #{eventNo}, 
+			  #{eventTitle},
+			  #{eventContent},
+			  #{userNo}
+			  )
+	</insert>
+	
+	<insert id="insertImg" parameterType="eventImg">
+		INSERT
+		  INTO
+		  	  EVENT_IMG
+		  	  (
+		  	  EVENT_IMG_NO, 
+		  	  EVENT_NO, 
+		  	  ORIGIN_NAME, 
+		  	  CHANGE_NAME,
+		  	  FILE_LEVEL
+		  	  )
+		VALUES
+			  (
+			  SEQ_EVENT_IMG_NO.NEXTVAL, 
+			  #{eventNo},
+			  #{originName},
+			  #{changeName},
+			  #{fileLevel}
+			  )
+	</insert>
+	
+	<update id="update" parameterType="event">
+		UPDATE
+		      EVENT
+		   SET
+		      EVENT_TITLE = #{eventTitle},
+		      EVENT_CONTENT = #{eventContent}
+		 WHERE
+		      EVENT_NO = #{eventNo}
+	</update>
+
+
+	<update id="updateImg" parameterType="eventImg">
+	    UPDATE
+	        EVENT_IMG
+	    SET
+	        ORIGIN_NAME = #{originName},
+	        CHANGE_NAME = #{changeName}
+	    WHERE
+	        EVENT_NO = #{eventNo}
+	        <if test="fileLevel == 1">
+	            AND FILE_LEVEL = 1
+	        </if>
+	        <if test="fileLevel == 2">
+	            AND FILE_LEVEL = 2
+	        </if>
+	</update>
+	
+	<update id="delete" parameterType="event">
+		UPDATE
+			  EVENT
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+			  EVENT_NO = #{eventNo}
+	</update>
+		
+</mapper>

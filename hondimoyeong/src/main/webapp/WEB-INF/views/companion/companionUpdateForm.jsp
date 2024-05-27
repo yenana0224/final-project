@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 수정 : ${companion.companionTitle}</title>
+<title>혼디모영 - 글 수정</title>
 
 <!-- 필수 JS/CSS { -->
 <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />

@@ -91,30 +91,15 @@
         	CS_NO = #{customerNo}
     </select>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    <select id="updateCustomer" parameterType="customer">
+    	UPDATE
+    		CUSTOMER_SERVICE
+    	SET
+    		CATEGORY = #{category},
+    		CS_TITLE = #{customerTitle},
+    		CS_CONTENT = #{customerContent}
+    	WHERE
+    		CS_NO = #{customerNo}
+    </select>   
+
 </mapper>

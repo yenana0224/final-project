@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 : ${ companion.companionTitle }</title>
+<title>혼디모영 - ${ companion.companionTitle }</title>
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fb9d532bba6f497bc125efc82a1127e"></script>
 <style>
@@ -248,9 +248,9 @@
         <div class="detail_top">
             <a>${companion.courseName}</a>/
             <a>동행 날짜 : ${companion.companionDate}</a>/
-            <a>인원 : ${companion.companionNum} / ${companion.companionPeople}
+            <a>인원 : ${companion.companionNum+1} / ${companion.companionPeople}
             [<c:choose>
-            	<c:when test="${ companion.companionNum ge companion.companionPeople }">마감</c:when>
+            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">마감</c:when>
             	<c:otherwise>모집중</c:otherwise>
             </c:choose>]</a>
         </div>
@@ -271,14 +271,21 @@
 
             <div class="detail_box_right"> <!-- 버튼 감싸는 div -->
 	            <c:choose>
-	            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
+	            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
 	                	<div class="detail_right_btn">
 	                		<button class="detail_btn" disabled style="background-color: grey;">마감</button>
 	                	</div>
 	            	</c:when>
 	            	<c:otherwise>
 		                <div class="detail_right_btn">
-		                	<button class="detail_btn" onclick="connect();">신청하기</button>
+		                <c:choose>
+		                	<c:when test="${empty loginUser}">
+			                	<button class="detail_btn" onclick="noConnect();">신청하기</button>
+		                	</c:when>
+		                	<c:otherwise>
+			                	<button class="detail_btn" onclick="connect();">신청하기</button>
+		                	</c:otherwise>
+		                </c:choose>
 		                </div>
 	            	</c:otherwise>
 	            </c:choose>
@@ -315,7 +322,14 @@
         <div class="detail_btn_box" align="center">
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
-	            <a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+            	<c:choose>
+	            	<c:when test="${companion.nowStatus == '마감'}">
+		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
+	            	</c:when>
+	            	<c:otherwise>
+		            	<a class="hdmy_detail_btn" onclick="postSubmit(0);">수정</a>
+		            </c:otherwise>
+	            </c:choose>
 	            <a class="hdmy_detail_btn" onclick="postSubmit(1);">삭제</a>
             </c:if>
         </div>
@@ -329,12 +343,22 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+	
+	function noConnect(){
+		alert('로그인이 필요한 서비스 입니다.');
+		location.href='${path}/login';
+	}
+	
 	// 목록, 수정, 삭제
 	$(function(){
 		$('.detailBtn').click(function(){
 			location.href='${ path }/companion?page=1';
 		});
 	});
+	
+	function endAlert(){
+		alert('날짜가 지난 모집글은 수정이 불가능 합니다.')
+	}
 	
 	function postSubmit(num){
 		if(num == 0){

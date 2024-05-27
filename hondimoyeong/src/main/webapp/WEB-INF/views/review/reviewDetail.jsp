@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 : ${review.reviewTitle}</title>
+<title>리뷰 - ${review.reviewTitle}</title>
 
 <style>
     /* content */
@@ -435,7 +435,7 @@
 			}
 			else{
 		        let dele = confirm('삭제 하시겠습니까?');
-		        if(dele){ // 사용자가 확인을 눌렀을 때만 삭제 작업 실행
+		        if(dele){
 		            $('#postForm').attr('action', 'delete.rvw').submit();
 		        }
 			}

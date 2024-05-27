@@ -88,12 +88,10 @@
         height: 42px;
         float: left;
         line-height: 37px;
-        color: #afafaf;
         padding-left: 10px;
     }
 
     .hdmy-board_top-align a{
-        color: #272727;
         font-size: 15px;
         font-weight: bold;
         text-decoration: none;
@@ -102,6 +100,14 @@
     .hdmy-board_top-align a:hover{
         color: #FF9843;
         text-decoration: none;
+    }
+    
+    .sortCompanionList{
+    	color: #272727;
+    }
+    
+    .sortCompanion{
+    	color: #272727;
     }
 
     .hdmy-board_top-btn{
@@ -276,45 +282,57 @@
             
 				<!-- 전체 목록 -->
                 <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="hdmy-table_mid">동행 날짜</th>
-                            <th class="hdmy-table_small">코스</th>
-                            <th>제목</th>
-                            <th class="hdmy-table_small">작성자</th>
-                            <th class="hdmy-table_small">인원</th>
-                            <th class="hdmy-table_small">상태</th>
-                            <th class="hdmy-table_small">조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
                     
-                    	<c:forEach var="companion" items="${ companion }">
-	                        <tr class="list">
-		    					<td style="display:none">${ companion.companionNo }</td>
-	                            <td class="hdmy-table_mid">${ companion.companionDate }</td>
-	                            <td class="hdmy-table_small">${ companion.courseName }</td>
-	                            <c:choose>
-	                            	<c:when test="${ companion.replyCount == 0 }">
-	                            		<td>${companion.companionTitle}</td>
-	                            	</c:when>
-	                            	<c:otherwise>
-			                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a></td>
-	                            	</c:otherwise>
-	                            </c:choose>
-	                            <td class="hdmy-table_small">${ companion.userName }</td>
-	                            <td class="hdmy-table_small">${ companion.companionNum } / ${ companion.companionPeople }</td>
-	                            <c:choose>
-	                            	<c:when test="${ companion.companionNum ge companion.companionPeople }">
-	                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
-	                            	</c:when>
-	                            	<c:otherwise>
-	                            		<td class="hdmy-table_status" style="color: #FF9843;">모집중</td>
-	                            	</c:otherwise>
-	                            </c:choose>
-	                            <td class="hdmy-table_small">${ companion.count}</td>
-	                        </tr>
-                        </c:forEach>
+                    <c:choose>
+                    	<c:when test="${empty companion }">
+                    		<thead>
+                    			<tr>
+                    				<th style="text-align:center;">검색 결과가 없습니다.</th>
+                    			</tr>
+                    		
+                    		</thead>
+                    	</c:when>
+                    	<c:otherwise>
+		                    <thead>
+		                        <tr>
+		                            <th class="hdmy-table_mid">동행 날짜</th>
+		                            <th class="hdmy-table_small">코스</th>
+		                            <th>제목</th>
+		                            <th class="hdmy-table_small">작성자</th>
+		                            <th class="hdmy-table_small">인원</th>
+		                            <th class="hdmy-table_small">상태</th>
+		                            <th class="hdmy-table_small">조회수</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+	                    	<c:forEach var="companion" items="${ companion }">
+		                        <tr class="list">
+			    					<td style="display:none">${ companion.companionNo }</td>
+		                            <td class="hdmy-table_mid" id="companionDate">${ companion.companionDate }</td>
+		                            <td class="hdmy-table_small">${ companion.courseName }</td>
+		                            <c:choose>
+		                            	<c:when test="${ companion.replyCount == 0 }">
+		                            		<td>${companion.companionTitle}</td>
+		                            	</c:when>
+		                            	<c:otherwise>
+				                            <td>${ companion.companionTitle} <a class="commentCount">[${companion.replyCount}]</a><a id="test"></a></td>
+		                            	</c:otherwise>
+		                            </c:choose>
+		                            <td class="hdmy-table_small">${companion.userName}</td>
+		                            <td class="hdmy-table_small">${companion.companionNum+1} / ${companion.companionPeople}</td>
+		                            <c:choose>
+		                            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
+		                            		<td class="hdmy-table_status" style="color: #292929;">마감</td>
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<td class="hdmy-table_status" style="color: #FF9843;">모집 중</td>
+		                            	</c:otherwise>
+		                            </c:choose>
+		                            <td class="hdmy-table_small">${ companion.count}</td>
+		                        </tr>
+	                        </c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
                     </tbody>
                 </table>
             </div>
@@ -369,6 +387,9 @@
 
 	<jsp:include page="../common/footer.jsp"/>
 	
+
+	
+	
 	<script>
     	$(function(){
     		$('.table-hover > tbody > tr').click(function(){
@@ -382,7 +403,6 @@
 		
 		$(function(){
 		    $(document).on('click', '.sortCompanion', function(){
-		    	$('.sortCompanion').css('color', 'red');
 		        $.ajax({
 		            url: 'companions',
 		            type: 'get',
@@ -408,6 +428,22 @@
 		    });
 		});
 	
+		$(document).ready(function() {
+		    var currentUrl = window.location.href;
+
+		    if (currentUrl.indexOf("/companion") !== -1) {
+		        $(".sortCompanionList").css("color", "#FF9843");
+		    }
+
+		    if (currentUrl.indexOf("/sort.cmp") !== -1) {
+		        $(".sortCompanion").css("color", "#FF9843");
+		    }
+		    
+		    if (currentUrl.indexOf("/search.cmp") !== -1) {
+		        $(".sortCompanionList").css("color", "#FF9843");
+		    }
+		});
+
 	</script>
 
 

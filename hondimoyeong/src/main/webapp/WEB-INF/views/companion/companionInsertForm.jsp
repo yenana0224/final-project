@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>혼디모영 - 혼디모영 글 작성</title>
 
 <style>
 	/* 컨텐트 */
@@ -112,57 +112,65 @@
 <body>
 
 	<jsp:include page="../common/header.jsp"/>
-
-    <div id="container">
-        <div class="notice_insert_title"><span>혼디모영!</span></div>
-
-        <div class="insert_box">
-            <form action="insert.cmp" method="post">
-            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
-				<table class="tb_input">
-					<tbody>
-                        <tr>
-							<th>* 코스</th>
-							<td>
-                                <select name="courseNo" class="course_inp">
-                                <c:forEach var="c" items="${ courseList }">
-                                	<option value="${ c.courseIndex }">
-                                		${ c.courseNo }
-                                	</option>
-                                </c:forEach>
-                                </select>
-                            </td>
-						</tr>
-						<tr>
-							<th>* 동행 날짜</th>
-							<td>
-								<input type="text" name="companionDate" class="datepicker date_inp" placeholder="날짜 선택" required/>
-								<jsp:include page="datepicker.jsp"></jsp:include>
-							</td>
-						</tr>
-                        <tr>
-							<th>* 모집 인원</th>
-							<td><input type="number" min="1" max="10" name="companionPeople" class="people_inp" required/>
-                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요.</a></td>
-						</tr>
-                        <tr>
-							<th>* 제목</th>
-							<td><input type="text" name="companionTitle" class="title_inp" required/></td>
-						</tr>
-						<tr>
-							<th>* 내용</th>
-							<td><textarea class="content_inp" name="companionContent"></textarea></td>
-						</tr>
-					</tbody>
-				</table>
-                <div class="detail_btn_box" align="center">
-                    <button class="hdmy_detail_btn" type="submit">등록</button>
-                    <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
-                </div>
-            </form>
-        </div> <!-- inset_box -->
-    </div>
-    
+	<c:choose>
+		<c:when test="${empty loginUser}">
+			<script>
+				alert('회원만 작성 가능합니다.');
+				location.href = '${ path }/event';
+			</script>
+		</c:when>
+		<c:otherwise>
+		    <div id="container">
+		        <div class="notice_insert_title"><span>혼디모영!</span></div>
+		
+		        <div class="insert_box">
+		            <form action="insert.cmp" method="post">
+		            	<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }"/>
+						<table class="tb_input">
+							<tbody>
+		                        <tr>
+									<th>* 코스</th>
+									<td>
+		                                <select name="courseNo" class="course_inp">
+		                                <c:forEach var="c" items="${ courseList }">
+		                                	<option value="${ c.courseIndex }">
+		                                		${ c.courseNo }
+		                                	</option>
+		                                </c:forEach>
+		                                </select>
+		                            </td>
+								</tr>
+								<tr>
+									<th>* 동행 날짜</th>
+									<td>
+										<input type="text" name="companionDate" class="datepicker date_inp" placeholder="날짜 선택" required/>
+										<jsp:include page="datepicker.jsp"></jsp:include>
+									</td>
+								</tr>
+		                        <tr>
+									<th>* 모집 인원</th>
+									<td><input type="number" min="1" max="10" name="companionPeople" class="people_inp" required/>
+		                                <a class="people_info">* 최소 1명, 최대 10명 선택해 주세요. (본인 포함 된 인원수로 선택해 주세요.)</a></td>
+								</tr>
+		                        <tr>
+									<th>* 제목</th>
+									<td><input type="text" name="companionTitle" class="title_inp" required/></td>
+								</tr>
+								<tr>
+									<th>* 내용</th>
+									<td><textarea class="content_inp" name="companionContent"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+		                <div class="detail_btn_box" align="center">
+		                    <button class="hdmy_detail_btn" type="submit">등록</button>
+		                    <button class="hdmy_detail_btn" type="button" onclick="backPage();">취소</button>
+		                </div>
+		            </form>
+		        </div> <!-- inset_box -->
+		    </div>
+	    </c:otherwise>
+    </c:choose>
     <jsp:include page="../common/footer.jsp"/>
     
     <script>

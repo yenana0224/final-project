@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>상세보기</title>
+    <title>수정</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -21,23 +21,23 @@
         
             #wrap{
                 width: 1200px;
-                height: 1000px;
+                height: 850px;
                 margin: 0 auto;
                 /* border : 1px solid red; */
-                position: relative;  /* 부모 요소의 위치를 기준으로 자식 요소를 배치할 수 있도록 설정 */
+                position: relative;
             }
 
 
             /*마이페이지 전체 박스*/
             #content{ 
                 width: 800px;
-                height: 750px;
+                height: 720px;
                 margin: 0 auto;
-                margin-top: 300px;
+                margin-top: 200px;
                 /* background-color: #FFF2D7; */
                 border-radius: 20px;
                 border : 4px solid #FF9843; 
-                position: relative; /* 자식 요소의 위치를 상대적으로 설정 */
+                position: relative;
             }
 
            
@@ -46,9 +46,9 @@
                 width: 130px;
                 height: 150px;
                 background-color: transparent;
-                position: absolute; /* 부모 요소를 기준으로 배치 */
-                top: -130px; /* 부모 요소의 상단에서 75px 위에 위치 */
-                left: 2%; /*부모 요소의 가운데에 위치 */
+                position: absolute;
+                top: -130px; 
+                left: 2%; 
             }
 
             /*타이틀 박스*/
@@ -58,12 +58,11 @@
                 height: 50px;
                 margin-top: 30px;
                 margin-left: 50px;
-                text-align: center; /* 텍스트 가운데 정렬*/
+                text-align: center;
                 line-height: 50px;
                 font-size: 20px;
                 font-weight: bold;
-                /* background-color: #FFF2D7; */
-                /* border: 1px solid rgb(0, 255, 64); */
+
             }
 
             /*내용 박스*/
@@ -74,8 +73,7 @@
                 margin-left: 50px;
                 padding-left: 110px;
                 margin-top: 30px;
-                /* background-color: #FFF2D7; */
-                /* border: 1px solid rgb(0, 88, 204); */
+
             }
            
             /*-------------------------------------------------------------------------*/
@@ -125,7 +123,7 @@
                 font-weight: bold;
             }
 
-            .form-control{
+            div > .form-control{
                 width: 500px;
                 height: 35px;
                 border: none;
@@ -157,17 +155,17 @@
                 border-radius: 8px;
                 border: 1px solid lightgray;
                 font-size: 15px;
-                color: #727272;
                 padding-left: 7px;
                 padding-top: 7px;
                 resize: none;
+                
             }
 
             #box4{
                 width: 500px;
                 height: 45px;
                 padding-top: 5px;
-                padding-left: 305px;
+                padding-left: 370px;
                 /* border: 1px solid #0087d6; */
             }
             .btn-a{
@@ -192,16 +190,6 @@
                 font-size: 12px;
             }
 
-            .btn-c{
-                width: 60px;
-                height: 35px;
-                background-color: #ff7373;
-                border: 0;
-                border-radius: 10px;
-                margin-bottom: 4px;
-                color: #ffffff;
-                font-size: 12px;
-            }
             #category{ /*카테고리*/
                 border: 1px solid rgb(212, 212, 212);
                 border-radius: 8px;
@@ -212,63 +200,55 @@
                 padding-left: 7px;
             }
 
+
     </style>    
 </head>
 <body>
-    <jsp:include page="../common/header.jsp"/>   
+    <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
         <div id="content">
             <img class="icon-Img" src="resources/image/mypageIcon.png">
 
-            <div id="titleBox">문의내역</div>
-            <div id="detailBox">
-                <div id="categoryBox">
-                    <h5>선택</h5>
-                    <select name="category" id="category">
-                   <c:choose>
-                        <c:when test="${customer.category == 1}">
-                            <option value="1" selected>문의</option>
-                            <option value="2">신고</option>
-                        </c:when>
-                        <c:when test="${customer.category == 2}">
-                            <option value="1">문의</option>
-                            <option value="2" selected>신고</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="1">문의</option>
-                            <option value="2">신고</option>
-                        </c:otherwise>
-                    </c:choose>
-                    </select>                    
-                </div>
-                <div id="box1">
-                    <p>문의 제목</p>
-                    <input type="text" class="form-control" name="userId" readonly value="${customer.customerTitle}">
-                    <input type="hidden" value="${customer.customerNo}" name="customerNo">
-                </div>
-                <div id="box2">
-                    <p>문의 내용</p>
-                    <textarea class="form-control" id="box3" readonly>${customer.customerContent}</textarea>
-                </div>
-                <div id="box4">
-                    <button class="btn-a" onclick="updateForm();">수정</button>
-                    <button class="btn-c">삭제</button>
-                    <button class="btn-b" onclick="location.href='list.customerView';">목록</button>
-                </div>
-            </div>
+            <div id="titleBox">문의글 수정하기</div>
+            
+			<form id="enrollForm" method="post" action="update.customer" enctype="multipart/form-data"> 
+			    <div id="detailBox">
+			        <div id="categoryBox">
+			            <p>선택</p>
+	                    <select name="category" id="category">
+	                   <c:choose>
+	                        <c:when test="${customer.category == 1}">
+	                            <option value="1" selected>문의</option>
+	                            <option value="2">신고</option>
+	                        </c:when>
+	                        <c:when test="${customer.category == 2}">
+	                            <option value="1">문의</option>
+	                            <option value="2" selected>신고</option>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <option value="1">문의</option>
+	                            <option value="2">신고</option>
+	                        </c:otherwise>
+	                    </c:choose>
+                    </select>                  
+			        </div>
+			        <div id="box1">
+			            <p>문의 제목</p>
+			            <input type="text" class="form-control" name="customerTitle" value="${customer.customerTitle}">
+     	                <input type="hidden" value="${customer.customerNo}" name="customerNo">
+			        </div>
+			        <div id="box2">
+			            <p>문의 내용</p>
+			            <textarea id="box3" class="form-control" name="customerContent">${customer.customerContent}</textarea>
+			        </div>
+			        <div id="box4">
+			            <button type="submit" class="btn-a">등록</button>
+			            <button type="button" class="btn-b" onclick="location.href='list.customerView';">목록</button>
+			        </div>
+			    </div>
+			</form>
         </div>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
-
-
-	<script>
-		function updateForm(){
-			location.href='list.customerUpdateForm?customerNo=' + ${customer.customerNo};
-		}
-	
-	
-	</script>
-
-
 </body>
 </html>

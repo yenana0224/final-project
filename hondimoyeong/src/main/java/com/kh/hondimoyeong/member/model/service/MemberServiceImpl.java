@@ -82,6 +82,11 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.reservationSelectList(sqlSession, rowBounds, userNo);
     }
 
+	@Override
+	public int updateCustomer(Customer customer) {
+		return memberRepository.updateCustomer(sqlSession, customer);
+	}
+
 	
 
 }
