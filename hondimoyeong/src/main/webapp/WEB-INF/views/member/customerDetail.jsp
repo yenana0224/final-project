@@ -21,7 +21,7 @@
         
             #wrap{
                 width: 1200px;
-                height: 1000px;
+                height: 880px;
                 margin: 0 auto;
                 /* border : 1px solid red; */
                 position: relative;  /* 부모 요소의 위치를 기준으로 자식 요소를 배치할 수 있도록 설정 */
@@ -33,7 +33,7 @@
                 width: 800px;
                 height: 750px;
                 margin: 0 auto;
-                margin-top: 300px;
+                margin-top: 200px;
                 /* background-color: #FFF2D7; */
                 border-radius: 20px;
                 border : 4px solid #FF9843; 
@@ -252,22 +252,24 @@
                 </div>
                 <div id="box4">
                     <button class="btn-a" onclick="updateForm();">수정</button>
-                    <button class="btn-c">삭제</button>
+                    <button class="btn-c" onclick="deleteCustomer();">삭제</button>
                     <button class="btn-b" onclick="location.href='list.customerView';">목록</button>
                 </div>
             </div>
         </div>
     </div>
-	<jsp:include page="../common/footer.jsp"/>
+   <jsp:include page="../common/footer.jsp"/>
 
 
-	<script>
-		function updateForm(){
-			location.href='list.customerUpdateForm?customerNo=' + ${customer.customerNo};
-		}
-	
-	
-	</script>
+   <script>
+      function updateForm(){
+         location.href='list.customerUpdateForm?customerNo=' + ${customer.customerNo};
+      }
+      
+      function deleteCustomer() {
+         location.href='delete.customer?customerNo=' + ${customer.customerNo};
+      }
+   </script>
 
 
 </body>

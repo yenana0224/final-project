@@ -35,5 +35,7 @@ public interface MemberService {
 	//게시글 수정
 	int updateCustomer(Customer customer);
 	
+	//게시글 삭제
+    int deleteCustomer(int customerNo);
 	
 }
