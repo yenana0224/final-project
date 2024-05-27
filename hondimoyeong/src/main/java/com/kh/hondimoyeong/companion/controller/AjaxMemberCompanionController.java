@@ -42,21 +42,17 @@ public class AjaxMemberCompanionController {
 	}
 	
 	@GetMapping(value="permission", produces="application/json; charset=UTF-8")
-	public String memberPermission(int userNo, int companionNo) {
+	public void memberPermission(int userNo, int companionNo) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
-		
-		return "redirct:companionInvite";
 	}
 	
 	@GetMapping(value="rejection", produces="application/json; charset=UTF-8")
-	public String memberRejection(int userNo, int companionNo) {
+	public void memberRejection(int userNo, int companionNo) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
-		
-		return "redirct:companionInvite";
 	}
 	
 
