@@ -19,7 +19,7 @@
             }  
             #wrap{
                 width: 1200px;
-                height: 600px;
+                height: 500px;
                 margin: 0 auto;
                 position: relative;  
             }
@@ -29,7 +29,7 @@
                 width: 800px;
                 height: 300px;
                 margin: 0 auto;
-                margin-top: 300px;
+                margin-top: 250px;
                 /* background-color: #FFF2D7; */
                 border-radius: 20px;
                 border : 4px solid #FF9843; 

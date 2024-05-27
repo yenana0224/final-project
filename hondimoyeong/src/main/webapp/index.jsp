@@ -17,7 +17,7 @@
 	
 	#ex{
 		width : 800px;
-		height : 250px;
+		height : 350px;
 		margin : auto;
 	}
 	
@@ -41,23 +41,35 @@
 	}
 	
 	.reservation > label{
-		font-size:30px;
+		font-size:25px;
 		margin:auto;
 	}
 	
 	#han{
-		padding-left:80px;
-		color:#976841;
+		margin-top: 15px;
+		margin-left:75px;
+		padding: 5px 20px;
+		color:#FFF;
+		background-color: #976841;
+		border-radius: 20px;
 	}
 	
 	#aqua{
-		padding-left:10px;
-		color:#36f;
+		margin-top: 15px;
+		margin-left:40px;
+		color:#FFF;
+		padding: 5px 20px;
+		background-color: #36f;
+		border-radius: 20px;
 	}
 	
 	#gul{
-		padding-left:80px;
-		color:#fc6701;
+		margin-top: 15px;
+		margin-left:65px;
+		color:#FFF;
+		background-color: #FF9843;
+		padding: 5px 20px;
+		border-radius: 20px;
 	}
 
 	#jeju-island{
@@ -112,6 +124,7 @@
     	width : 900px;
         margin: auto;
         margin-bottom : 40px;
+        margin-top: 30px;
     }
 
     h3{
@@ -142,12 +155,12 @@
 	<div id="innerOuter">
 		<div id="ex">
 		    <div class="reservation">
-		   		<img onclick="location.href='hanlasan'" src="resources/image/han.jpg">
+		   		<img onclick="location.href='${path}/hanlasan'" src="resources/image/han.jpg">
 		   		<label id="han">한라산</label>
 		    </div>
 		    <div class="reservation">
 		    	<img onclick="location.href='aqua'"src="resources/image/아쿠아리움.png">
-		    	<label id="aqua">제주 아쿠아플라넷</label>
+		    	<label id="aqua">아쿠아플라넷</label>
 		    </div>
 		    <div class="reservation">
 		   		<img onclick="location.href='tangerine'"src="resources/image/tangerine.jpg"/>

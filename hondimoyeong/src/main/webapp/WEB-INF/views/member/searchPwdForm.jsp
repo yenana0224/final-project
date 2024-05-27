@@ -21,7 +21,7 @@
 
             #content{ 
                 width: 400px;
-                height: 400px;
+                height: 450px;
                 margin: 0 auto;
                 margin-top: 100px;
                 background-color: #FFF2D7;
@@ -53,7 +53,7 @@
                 height: 50px;
                 padding-left: 70px;
                 background-color: #FFF2D7;
-                margin-top: 7px;
+                margin-top: 25px;
             }
 
 
@@ -70,15 +70,10 @@
             div > p{
                 margin: 0 auto;
                 padding-bottom: 5px;
+                font-size: 14px;
+                font-weight: bold; 
             }
             
-            a{
-                display: inline-block;
-                margin: 0 auto;
-                text-decoration: none; 
-                color: rgb(0, 0, 0);  
-                font-size: 11px; 
-            }
 
            div > button{
                 width: 260px;
@@ -90,9 +85,32 @@
                 cursor: pointer; 
                 font-size: 14px;
                 font-weight: bolder;
-                margin-top: px;
+                margin-top: 3px;
             }
-
+            #linkBox   
+            {
+                width: 390px;
+                height: 30px;
+                padding-left: 120px;
+                background-color: #FFF2D7;
+            }
+            
+            .inputBox > .form-control{
+                width: 260px;
+                height: 36px;
+                border: none;
+                border-radius: 9px;
+                padding-left: 10px;
+                border: 1px solid #e2e2e2;
+            }
+            #linkBox > a{
+                display: inline-block;
+                margin: 0 auto;
+                text-decoration: none; 
+                color: #000000;  
+                font-size: 12px;
+                font-weight: bold; 
+            }
 
 
 
@@ -123,6 +141,9 @@
             </div>
             <div id="box-button">
                 <button type="submit">비밀번호 찾기</button>
+            </div>
+            <div id="linkBox">
+                <a href="insertForm">회원가입</a> | <a href="login">로그인</a> | <a href="searchIdForm">아이디 찾기</a>
             </div>
         </div>
     </div>

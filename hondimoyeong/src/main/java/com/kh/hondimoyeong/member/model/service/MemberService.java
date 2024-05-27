@@ -16,6 +16,10 @@ public interface MemberService {
 
 	int idCheck(String checkId);
 	
+    int emailCheck(String email);
+ 
+    int phoneCheck(String phone);
+
 	int update(Member member);
 	
 	int delete(Member member);
@@ -35,5 +39,8 @@ public interface MemberService {
 	//게시글 수정
 	int updateCustomer(Customer customer);
 	
+	//게시글 삭제
+    int deleteCustomer(int customerNo);
 	
+    String findId(String userName, String phone, String email);
 }

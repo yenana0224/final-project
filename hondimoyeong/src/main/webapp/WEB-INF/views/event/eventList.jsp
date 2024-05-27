@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>혼디모영 - 이벤트</title>
+<title>혼디모영 - 축제/이벤트</title>
 
 <style>
 	/* 컨텐트 */
@@ -75,7 +75,7 @@
 	
 	.event > img{
 	    width: 280px;
-	    height: 180px;
+	    height: 280px;
 	    margin-top: 10px;
 	    margin-bottom: 25px;
 	    border-radius: 20px;
@@ -137,7 +137,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	
     <div id="container">
-        <div class="event_title"><a class="event_title_a" href="review">이벤트</a></div>
+        <div class="event_title"><a class="event_title_a" href="review">축제/이벤트</a></div>
         
         <c:if test="${sessionScope.loginUser.status == 'A'}">
 	        <div class="cs_board_top">

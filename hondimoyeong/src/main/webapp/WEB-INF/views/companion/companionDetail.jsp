@@ -323,7 +323,7 @@
             <a class="hdmy_detail_btn detailBtn">목록</a>
             <c:if test="${sessionScope.loginUser.userNo == companion.userNo}">
             	<c:choose>
-	            	<c:when test="${companion.nowStatus == '마감'}">
+	            	<c:when test="${companion.companionNum+1 ge companion.companionPeople or companion.nowStatus == '마감'}">
 		            	<button class="hdmy_detail_btn" onclick="endAlert();">수정</button>
 	            	</c:when>
 	            	<c:otherwise>
@@ -357,7 +357,7 @@
 	});
 	
 	function endAlert(){
-		alert('날짜가 지난 모집글은 수정이 불가능 합니다.')
+		alert('마감 된 모집글은 수정이 불가능 합니다.')
 	}
 	
 	function postSubmit(num){

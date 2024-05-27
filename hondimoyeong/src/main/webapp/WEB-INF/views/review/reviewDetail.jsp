@@ -129,10 +129,12 @@
         /* border-bottom: 1px solid lightgray; */
     }
 
-    .detail_content_p{
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
+	.detail_content_p{
+		width: 1200px;
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	    white-space:pre-line;
+	}
 
     .content_img{
         width: 1200px;
@@ -317,10 +319,12 @@
         </div>
 
         <div class="detail_content">
-            <p class="detail_content_p">${review.reviewContent}</p>
-	        <c:forEach var="img" items="${review.reviewImgs}">
-	            <img src="${img.changeName}" class="content_img"/>
-			</c:forEach>
+            <div class="detail_content_p">${review.reviewContent}</div>
+            <c:if test="${!empty review.reviewImgs}">
+		        <c:forEach var="img" items="${review.reviewImgs}">
+		            <img src="${img.changeName}" class="content_img"/>
+				</c:forEach>
+			</c:if>
         </div>
 
         <div class="detail_reply_title">

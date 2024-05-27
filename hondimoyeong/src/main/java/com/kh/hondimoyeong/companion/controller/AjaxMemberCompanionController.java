@@ -42,21 +42,25 @@ public class AjaxMemberCompanionController {
 	}
 	
 	@GetMapping(value="permission", produces="application/json; charset=UTF-8")
-	public String memberPermission(int userNo, int companionNo) {
+	public String memberPermission(int userNo, int companionNo, HttpSession session) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
+		if(MemberCompanionService.memberPermission(data)>0) {		System.out.println("신청중");
+};
 		
-		return "redirct:companionInvite";
+		
+		return accompanyList(companionNo, session);
 	}
 	
 	@GetMapping(value="rejection", produces="application/json; charset=UTF-8")
-	public String memberRejection(int userNo, int companionNo) {
+	public String memberRejection(int userNo, int companionNo, HttpSession session) {
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		data.put("userNo", userNo);
 		data.put("companionNo", companionNo);
+		MemberCompanionService.memberRejection(data);
 		
-		return "redirct:companionInvite";
+		return accompanyList(companionNo, session);
 	}
 	
 
