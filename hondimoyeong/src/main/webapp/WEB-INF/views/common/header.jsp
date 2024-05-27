@@ -225,7 +225,7 @@
                             <li><a href="${path}/aqua">아쿠아리움 예약</a></li>
                         </ul>
                     </li>
-                    <li><a href="${path}/event">이벤트</a></li>
+                    <li><a href="${path}/event">축제/이벤트</a></li>
                     <li><a href="${path}/review">리뷰</a></li>
                 </ul>
             </div>
