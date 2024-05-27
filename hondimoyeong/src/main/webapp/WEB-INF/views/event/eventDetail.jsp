@@ -105,9 +105,11 @@
 	}
 	
 	.detail_content_p{
+		width: 1200px;
 	    padding-top: 20px;
 	    padding-bottom: 20px;
 	    text-align: center;
+	    white-space:pre-line;
 	}
 	
 	.content_img{
@@ -160,7 +162,7 @@
         </div>
 
         <div class="detail_content">
-            <div class="detail_content_p"style="white-space:pre;">${event.eventContent}</div>
+            <div class="detail_content_p">${event.eventContent}</div>
             <c:if test="${!empty event.changeName}">
 	            <img src="${path}/${event.changeName}" class="content_img"/>
 	        </c:if>
