@@ -160,7 +160,7 @@
 	    }
 
 	    function emailValidateInput(input) {
-	    	input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣0-9]/gi, '');
+	    	input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣]/gi, '');
 	    }
 	</script>
 
