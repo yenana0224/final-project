@@ -17,7 +17,6 @@
       <result column="USER_CONTENT" property="userContent" />
    </resultMap>
 
-	<!-- 로그인 -->
     <select id="login" parameterType="member" resultMap="memberResultSet">
       SELECT
                USER_NO,
@@ -36,7 +35,6 @@
                 (STATUS = 'A' OR STATUS = 'C')
     </select>
 
-	<!-- 회원가입 -->
 	<insert id="insert" parameterType="member">
 		INSERT
 		  INTO
@@ -60,7 +58,6 @@
 				)
 	</insert>
 
-	<!-- 아이디 중복 체크용 쿼리문 -->
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT
 			COUNT(*)
@@ -70,7 +67,6 @@
 			USER_ID = #{ checkId }
 	</select>
 	
-	<!-- 이메일 중복 체크용 쿼리문 -->	
    <select id="emailCheck" parameterType="string" resultType="_int">
        SELECT
            COUNT(*)
@@ -80,7 +76,6 @@
            EMAIL = #{email}
    </select>
 
-	<!-- 연락처 중복 체크용 쿼리문 -->   
    <select id="phoneCheck" parameterType="string" resultType="_int">
        SELECT
            COUNT(*)
@@ -89,9 +84,7 @@
        WHERE
            PHONE = #{phone}
    </select>	
-	
 
-	<!-- 회원정보수정 -->
 	<update id="update" parameterType="member">
 		UPDATE
 			MEMBER
@@ -103,7 +96,6 @@
 			USER_ID = #{userId}
 	</update>
 	
-	<!-- 회원 탈퇴 관련 쿼리문 -->
 	<update id="delete" parameterType="member">
 		UPDATE
 			MEMBER
@@ -114,8 +106,6 @@
 			USER_ID = #{userId}
 	</update>	
 	
-	
-   <!-- 아이디찾기 -->
    <select id="findId" parameterType="member" resultType="string">
        SELECT 
           USER_ID
@@ -129,12 +119,28 @@
           EMAIL = #{email}
    </select>
 	
+	<select id="updatePwd" parameterType="member">
+		UPDATE
+		    MEMBER
+		SET
+		    USER_PWD = #{userPwd}
+		WHERE
+		    USER_NO = #{userNo}
+	</select>
 	
 	
-	
-	
-	
-	
+   <select id="findPwd" parameterType="member" resultType="_int">
+       SELECT 
+          USER_NO
+       FROM 
+          MEMBER
+       WHERE 
+          USER_ID = #{userId} 
+       AND 
+          USER_NAME = #{userName}
+       AND 
+          EMAIL = #{email}
+   </select>
 	
 	
 	

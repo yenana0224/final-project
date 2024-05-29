@@ -1,4 +1,3 @@
---insertForm
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -119,7 +118,30 @@
                 padding-top: 1px;          
                 font-weight: bold;   
             }
-
+            #linkBox   
+            {
+                width: 390px;
+                height: 30px;
+                padding-left: 155px;
+                background-color: #FFF2D7;
+            }
+            
+            .inputBox > .form-control{
+                width: 260px;
+                height: 36px;
+                border: none;
+                border-radius: 9px;
+                padding-left: 10px;
+                border: 1px solid #e2e2e2;
+            }
+            #linkBox > a{
+                display: inline-block;
+                margin: 0 auto;
+                text-decoration: none; 
+                color: #000000;  
+                font-size: 12px;
+                font-weight: bold; 
+            }
 
     </style>    
 </head>
@@ -136,35 +158,38 @@
             <form action="insert.member" method="post">
                 <div id="idBox">
                     <p>아이디</p>
-                    <input type="text" class="form-control" name="userId" required maxlength="15">
+                    <input type="text" class="form-control" name="userId" required maxlength="15" placeholder="영문, 숫자만 입력해 주세요." oninput="idValidateInput(this)">
                     <div id="checkResult" style="font-size:0.7em; display:none;"></div>
                 </div>
                 <div id="pwBox">
                     <p>비밀번호</p>
-                    <input type="password" class="form-control" name="userPwd" required maxlength="100">
+                    <input type="password" class="form-control" name="userPwd" required maxlength="100" placeholder="비밀번호를 입력해 주세요.">
                 </div>
                 <div id="pwConfirmBox">
                     <p>비밀번호 확인</p>
-                    <input type="password" class="form-control" name="checkPwd" required maxlength="100">
+                    <input type="password" class="form-control" name="checkPwd" required maxlength="100" placeholder="다시 한 번 입력해 주세요.">
                     <div id="pwdCheckResult" style="font-size:0.7em; display:none;"></div>
                 </div>
                 <div id="nameBox">
                     <p>이름</p>
-                    <input type="text" class="form-control" name="userName" required maxlength="20">
+                    <input type="text" class="form-control" name="userName" required maxlength="20" oninput="nameValidateInput(this)" placeholder="이름을 입력해 주세요.">
                 </div>
                 <div id="emailBox">
                     <p>이메일</p>
-                    <input type="text" class="form-control" name="email" required maxlength="30">
+                    <input type="text" class="form-control" name="email" required maxlength="30"  oninput="emailValidateInput(this)" placeholder="이메일을 입력해 주세요.">
                     <div id="emailCheckResult" style="font-size:0.7em; display:none;"></div>
                 </div>
             <div id="phoneBox">
                 <p>연락처</p>
-                <input type="text" class="form-control" name="phone" maxlength="11" required placeholder="숫자만 입력해 주세요." style="font-size: 0.8em;" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                <input type="text" class="form-control" name="phone" maxlength="11" required placeholder="(-)제외 숫자만 입력해 주세요." oninput="phoneValidateInput(this)">
                 <div id="phoneCheckResult" style="font-size:0.7em; display:none;"></div>
             </div>
                 <div id="signupButton">
-                    <button type="submit" id="joinBtn" >가입하기</button>
+                    <button type="submit" id="joinBtn">가입하기</button>
                 </div>
+            <div id="linkBox">
+                <a href="login">로그인</a> | <a href="searchIdForm">아이디 찾기</a> | <a href="searchPwdForm">비밀번호 찾기</a>
+            </div>
             </form>
         </div>
     </div>
@@ -286,6 +311,22 @@
         });
     });
 
+    function idValidateInput(input) {
+        input.value = input.value.replace(/[^a-z0-9]/gi, '');
+    }
+    
+    function phoneValidateInput(input) {
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+    
+    function nameValidateInput(input) {
+    	input.value = input.value.replace(/[^ㄱ-힣a-zA-Z]/gi, '');
+    }
+
+    function emailValidateInput(input) {
+    	input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣]/gi, '');
+    }
+   
     </script>
 
 </body>

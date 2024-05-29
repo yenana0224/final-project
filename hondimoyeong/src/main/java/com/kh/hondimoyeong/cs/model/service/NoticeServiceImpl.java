@@ -3,78 +3,74 @@ package com.kh.hondimoyeong.cs.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hondimoyeong.common.model.vo.PageInfo;
-import com.kh.hondimoyeong.cs.model.dao.NoticeRepository;
+import com.kh.hondimoyeong.cs.model.dao.NoticeMapper;
 import com.kh.hondimoyeong.cs.model.vo.Faq;
 import com.kh.hondimoyeong.cs.model.vo.Notice;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-
-	@Autowired
-	private NoticeRepository noticeRepository;
-	
+	private final NoticeMapper noticeMapper;
 	
 	@Override
 	public int selectListCount() {
-		return noticeRepository.selectListCount(sqlSession);
+		return noticeMapper.selectListCount();
 	}
 
 	@Override
 	public List<Notice> selectList(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return noticeRepository.selectList(sqlSession, rowBounds);
+		return noticeMapper.selectList(rowBounds);
 	}
 
 	@Override
 	public int increaseCount(int noticeNo) {
-		return noticeRepository.increaseCount(sqlSession, noticeNo);
+		return noticeMapper.increaseCount(noticeNo);
 	}
 
 	@Override
 	public Notice selectNotice(int noticeNo) {
-		return noticeRepository.selectNotice(sqlSession, noticeNo);
+		return noticeMapper.selectNotice(noticeNo);
 	}
 
 	@Override
 	public int insert(Notice notice) {
-		return noticeRepository.insert(sqlSession, notice);
+		return noticeMapper.insert(notice);
 	}
 
 	@Override
 	public int update(Notice notice) {
-		return noticeRepository.update(sqlSession, notice);
+		return noticeMapper.update(notice);
 	}
 
 	@Override
 	public int delete(int noticeNo) {
-		return noticeRepository.delete(sqlSession, noticeNo);
+		return noticeMapper.delete(noticeNo);
 	}
 
 	@Override
 	public List<Notice> search(String keyword, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return noticeRepository.search(sqlSession, keyword, rowBounds);
+		return noticeMapper.search(keyword, rowBounds);
 	}
 
 	@Override
 	public int selectSearchCount(String keyword) {
-		return noticeRepository.searchCount(sqlSession, keyword);
+		return noticeMapper.searchCount(keyword);
 	}
 
 	// FAQ
 	@Override
 	public List<Faq> faqList() {
-		return noticeRepository.faqList(sqlSession);
+		return noticeMapper.faqList();
 	}
 
 

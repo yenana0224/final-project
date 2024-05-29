@@ -129,18 +129,18 @@
             </div>
             <div class="input-box">
                 <p>아이디</p>
-                <input type="text" class="form-control" name="userId">
+                <input type="text" class="form-control" id="userId" name="userId"  maxlength="15" placeholder="영문, 숫자만 입력해 주세요." oninput="idValidateInput(this)">
             </div>
             <div class="input-box">
                 <p>이름</p>
-                <input type="text" class="form-control" name="userName">
+                <input type="text" class="form-control" id="userName" name="userName" maxlength="20" oninput="nameValidateInput(this)" placeholder="이름을 입력해 주세요.">
             </div>
             <div class="input-box">
                 <p>이메일</p>
-                <input type="text" class="form-control" name="userEmail">
+                <input type="text" class="form-control" id="email" name="userEmail" maxlength="30"  oninput="emailValidateInput(this)" placeholder="이메일을 입력해 주세요.">
             </div>
             <div id="box-button">
-                <button type="submit">비밀번호 찾기</button>
+                <button id="btn_findPwd" type="submit">비밀번호 찾기</button>
             </div>
             <div id="linkBox">
                 <a href="insertForm">회원가입</a> | <a href="login">로그인</a> | <a href="searchIdForm">아이디 찾기</a>
@@ -150,7 +150,44 @@
     
     <jsp:include page="../common/footer.jsp"/>
 
+   <script>
+      document.getElementById('btn_findPwd').addEventListener('click', function() {
+         findPwd();
+      });
+      
+      function findPwd() {
+            var userId = $('#userId').val();
+            var userName = $('#userName').val();
+            var email = $('#email').val();
 
+            $.ajax({
+                url: 'findPwd.member',
+                type: 'post',
+                data: {
+                   userId: userId,
+                   userName: userName,
+                    email: email
+                },
+                success: function(data) {
+                   alert(data.alertMsg);
+                },
+                error: function(xhr, status, error) {
+                    console.error('에러:', error);
+                }
+            });
+      }
+       function idValidateInput(input) {
+           input.value = input.value.replace(/[^a-z0-9]/gi, '');
+       }
+       
+       function nameValidateInput(input) {
+          input.value = input.value.replace(/[^ㄱ-힣a-zA-Z]/gi, '');
+       }
+
+       function emailValidateInput(input) {
+          input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣]/gi, '');
+       }
+   </script>
 
 </body>
 </html>

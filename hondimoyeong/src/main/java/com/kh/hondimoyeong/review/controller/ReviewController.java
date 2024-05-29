@@ -37,12 +37,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 
-	/**
-	 * 
-	 * @param page
-	 * @param model
-	 * @return
-	 */
+	
 	@RequestMapping("review")
 	public String selectList(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectListCount(), page, 6, 5);
@@ -54,6 +49,29 @@ public class ReviewController {
 		model.addAttribute("pageInfo", pi);
 		return "review/reviewList";
 	}
+	
+	@RequestMapping("search.rvw")
+	public String search(@RequestParam(value="keyword") String keyword,
+			@RequestParam(value="condition") String condition,
+			@RequestParam Map<String, String> map,
+			@RequestParam(value="page", defaultValue="1") int page, Model model) {
+		
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("condition", condition);
+		searchMap.put("keyword", keyword);
+		
+		int totalCount = reviewService.searchCount(searchMap);
+		PageInfo pi = Pagination.getPageInfo(totalCount, page, 6, 5);
+		List<Review> review = reviewService.search(searchMap, pi);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("condition", condition);
+		model.addAttribute("review", review);
+		model.addAttribute("searchPage", pi);
+		
+		return "review/reviewList";
+	}
+	
 	
 	@RequestMapping("detail.rvw")
 	public ModelAndView detail(int reviewNo, ModelAndView mv) {
@@ -72,28 +90,6 @@ public class ReviewController {
 			mv.addObject("errorMsg", "리뷰 찾을 수 없음").setViewName("common/errorPage");
 		}
 		return mv;
-	}
-	
-	@RequestMapping("search.rvw")
-	public String search(@RequestParam(value="keyword") String keyword,
-						 @RequestParam(value="condition") String condition,
-						 @RequestParam Map<String, String> map,
-						 @RequestParam(value="page", defaultValue="1") int page, Model model) {
-		
-		Map<String, String> searchMap = new HashMap<String, String>();
-		searchMap.put("condition", condition);
-		searchMap.put("keyword", keyword);
-		
-		int totalCount = reviewService.searchCount(searchMap);
-		PageInfo pi = Pagination.getPageInfo(totalCount, page, 6, 5);
-		List<Review> review = reviewService.search(searchMap, pi);
-		
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("condition", condition);
-		model.addAttribute("review", review);
-		model.addAttribute("searchPage", pi);
-		
-		return "review/reviewList";
 	}
 	
 	

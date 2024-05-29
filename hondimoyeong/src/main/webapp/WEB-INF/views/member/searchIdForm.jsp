@@ -146,15 +146,15 @@
             </div>
             <div class="input-box">
                 <p>이름</p>
-                <input type="text" class="form-control" id="userName">
+                <input type="text" class="form-control" id="userName" maxlength="20" oninput="nameValidateInput(this)" placeholder="이름을 입력해 주세요.">
             </div>
             <div class="input-box">
                 <p>연락처</p>
-                <input type="text" class="form-control" id="phone"  maxlength="11">
+                <input type="text" class="form-control" id="phone"  maxlength="11" placeholder="(-)제외 숫자만 입력해 주세요." oninput="phoneValidateInput(this)">
             </div>
             <div class="input-box">
                 <p>이메일</p>
-                <input type="text" class="form-control" id="email">
+                <input type="text" class="form-control" id="email" maxlength="30"  oninput="emailValidateInput(this)" placeholder="이메일을 입력해 주세요.">
             </div>
             <div id="box-button">
                 <button type="button" onclick="findId()">아이디 찾기</button>
@@ -225,6 +225,19 @@
             var masked = '**' + username.substring(2);
             return masked;
         }
+        
+        function phoneValidateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+        
+        function nameValidateInput(input) {
+        	input.value = input.value.replace(/[^ㄱ-힣a-zA-Z]/gi, '');
+        }
+
+        function emailValidateInput(input) {
+        	input.value = input.value.replace(/[ \{\}\[\]\/?,;:|\)*~`!^\-_+┼<>\#$%&\'\"\\\(\=\^ㄱ-힣]/gi, '');
+        }
+       
     </script>
 </body>
 </html>

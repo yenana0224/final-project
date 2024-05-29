@@ -132,11 +132,11 @@
             <form action="login.member" method="post">
             <div id="idBox">
                 <div class="fontBox">아이디</div>
-                <div class="inputBox"><input type="text" class="form-control" name="userId"></div>
+                <div class="inputBox"><input type="text" class="form-control" name="userId" maxlength="15" placeholder="영문, 숫자만 입력해 주세요." oninput="idValidateInput(this)"></div>
             </div>
             <div id="pwBox">
                 <div class="fontBox">비밀번호</div>
-                <div class="inputBox"><input type="password" class="form-control" name="userPwd"></div>
+                <div class="inputBox"><input type="password" class="form-control" name="userPwd" maxlength="100" placeholder="비밀번호를 입력해 주세요."></div>
             </div>
             
             
@@ -160,6 +160,10 @@
             if (errorMsg) {
                 alert(errorMsg);
             }
+        }
+        
+        function idValidateInput(input) {
+            input.value = input.value.replace(/[^a-z0-9]/gi, '');
         }
     </script>
 

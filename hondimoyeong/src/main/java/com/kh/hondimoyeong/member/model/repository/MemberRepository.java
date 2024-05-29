@@ -105,11 +105,23 @@ public class MemberRepository {
         return sqlSession.selectOne("memberMapper.findId", params);
     }
 	
+    public int updatePwd(SqlSessionTemplate sqlSession, Member member) {
+        return sqlSession.update("memberMapper.updatePwd", member);
+    }
 	
-	
-	
-	
-	
+    public int findPwd(SqlSessionTemplate sqlSession, String userId, String userName, String email) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("userId", userId);
+        params.put("userName", userName);
+        params.put("email", email);
+        
+        Integer result = sqlSession.selectOne("memberMapper.findPwd", params);
+        if (result == null) {
+            return 0; 
+        }
+        return result;
+    }
+    
 	
 	
 	
