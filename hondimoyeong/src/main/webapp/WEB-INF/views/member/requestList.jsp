@@ -133,10 +133,6 @@
             	padding-top : 10px;
             	vertical-align : middle;
             }
-            
-            .acompany-btn:hover{
-            	cursor : pointer;
-            }
 
             .btnBox{
                 width: 100px;
@@ -209,6 +205,18 @@
             .page-item:last-child .page-link, .page-item:first-child .page-link {
                 border-radius: 10px !important;
             }
+            
+                        
+            #pagingArea{
+            	margin-top : 20px;
+            }
+            
+            .active {
+                background-color: #FF9843 !important;
+                border: 1px solid #FF9843 !important;
+                color: #FFFFFF !important;
+                border-radius: 10px;
+            }
 
     </style>    
 </head>
@@ -246,25 +254,28 @@
 	            		<div class="box3"> ${board.courseName} 날짜 : ${board.companionDate} 인원 : ${board.companionNum}/${board.companionPeople }</div>
 	            	</div>
 	            </c:forEach>
-	            
-	            <div class="box4"> 
-		            <c:if test="${pageInfo.currentPage gt 1}">
-		            	<a class="page-link" href="myRequest?page=${i - 1}"> < </a>
-		            </c:if>
-		            <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
-		            	<c:choose>
-							<c:when test="${pageInfo.currentPage ne i }">
-								<a class="page-link" href="myRequest?page=${i}"> ${i} </a>
-							</c:when>    
-							<c:otherwise>
-								<a class="page-link active" href="#">${i}</a>
-							</c:otherwise>        	
-		            	</c:choose>
-		            </c:forEach>
-		            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
-		            	<a class="page-link" href="myRequest?page=${i + 1}"> > </a>
-		            </c:if>	
-	            </div>
+
+	           <div id="pagingArea">
+	                <ul class="pagination">
+	                	<c:if test="${pageInfo.currentPage gt 1}">
+		            	<li class="page-item"><a class="page-link" href="myRequest?page=${pageInfo.currentPage - 1}"> < </a>
+		            	</c:if>
+		            	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i" step="1">
+			            	<c:choose>
+								<c:when test="${pageInfo.currentPage ne i }">
+									<li class="page-item"><a class="page-link" href="myRequest?page=${i}"> ${i} </a>
+								</c:when>    
+								<c:otherwise>
+									<li class="page-item"><a class="page-link active" href="myRequest?page=${i}">${i}</a>
+								</c:otherwise>        	
+			            	</c:choose>
+		           		</c:forEach>
+			            <c:if test="${not empty list && pageInfo.currentPage ne pageInfo.maxPage}">
+			            	<li class="page-item"><a class="page-link" href="myRequest?page=${pageInfo.currentPage +1 }"> > </a>
+			            </c:if>	
+	                </ul>               
+	            </div>  
+
             </div>
             
         </div>
