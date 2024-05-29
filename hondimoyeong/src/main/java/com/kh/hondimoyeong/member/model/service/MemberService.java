@@ -36,18 +36,15 @@ public interface MemberService {
 
 	List<Experience> reservationSelectList(PageInfo pi, int userNo);
 	
-	//게시글 수정
 	int updateCustomer(Customer customer);
 	
-	//게시글 삭제
     int deleteCustomer(int customerNo);
 	
-    //아이디찾기
     String findId(String userName, String phone, String email);
     
-    //비밀번호 변경
     int updatePwd(Member member);
     
+    int findPwd(String userId, String userName, String email);
     
     
 }

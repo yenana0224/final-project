@@ -97,7 +97,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.updateCustomer(sqlSession, customer);
 	}
 
-
     @Override
     public int deleteCustomer(int customerNo) {
        return memberRepository.deleteCustomer(sqlSession, customerNo);
@@ -108,12 +107,15 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findId(sqlSession, userName, phone, email);
     }
     
-    
     @Override
     public int updatePwd(Member member) {
         return memberRepository.updatePwd(sqlSession, member);
     }
 	
-	
+    @Override
+    public int findPwd(String userId, String userPwd, String email) {
+        return memberRepository.findPwd(sqlSession, userId, userPwd, email);
+    }
+    
 	
 }
